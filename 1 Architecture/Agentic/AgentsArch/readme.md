@@ -8,8 +8,7 @@
 mermaid
 
 graph LR
-    subgraph "AGENT (e.g., Claude)"
-        direction TB
+    subgraph "AGENT (e.g., Claude)" direction TB
         REASON[Reasoning Engine]
         PLAN[Planning System]
         MEMORY[Context Memory]
