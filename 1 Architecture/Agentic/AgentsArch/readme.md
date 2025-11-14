@@ -5,6 +5,8 @@
 ##Skills
 ##Tools
 
+mermaid
+
 graph LR
     subgraph "AGENT (e.g., Claude)"
         direction TB
