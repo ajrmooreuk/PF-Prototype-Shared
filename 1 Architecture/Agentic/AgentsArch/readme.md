@@ -4,9 +4,8 @@
 ##Sub Agents
 ##Skills
 ##Tools
-ComponentDefinitionCharacteristicsExamplesTOOLAtomic capability that performs a specific action- No reasoning<br/>- Deterministic<br/>- Single function<br/>- Input → Output<br/>- Statelessweb_search, file_read, bash_tool, str_replace, API callsSKILLDomain knowledge package that guides behavior- Procedural knowledge<br/>- Best practices<br/>- Context patterns<br/>- Progressive disclosure<br/>- No execution logicOKR Alignment, DOCX creation, PDF processing, Brand GuidelinesSUB-AGENTSpecialized autonomous worker for specific domain- Limited autonomy<br/>- Domain-focused<br/>- Delegated tasks<br/>- Reports to parent<br/>- Uses skills + toolsProcess Engineer Agent, Campaign Manager Agent, PMF Validator AgentAGENTPrimary autonomous reasoner with full orchestration- Full reasoning<br/>- Goal-oriented<br/>- Multi-step planning<br/>- Orchestrates sub-agents<br/>- Selects skills + toolsClaude (main), OAA (Ontology Architect Agent), Strategic Advisor Agent
-Relationship Matrix
-mermaidgraph LR
+
+graph LR
     subgraph "AGENT (e.g., Claude)"
         direction TB
         REASON[Reasoning Engine]
