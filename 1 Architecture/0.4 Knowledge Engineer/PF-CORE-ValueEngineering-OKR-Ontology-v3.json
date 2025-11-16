@@ -1,0 +1,499 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "okr": "https://pf-core.ai/ontology/okr#",
+    "vsom": "https://pf-core.ai/ontology/vsom#",
+    "ve": "https://pf-core.ai/ontology/value-engineering#",
+    "pmf": "https://pf-core.ai/ontology/pmf#",
+    "ctx": "https://pf-core.ai/ontology/context#"
+  },
+  "ontology": {
+    "metadata": {
+      "version": "3.0.0",
+      "name": "PF-CORE Value Engineering OKR Ontology",
+      "description": "Formal semantic structure for OKR as a component of Value Engineering, cascading from VSOM to tactical execution with Context Engineering integration",
+      "domain": "AI-Augmented Strategic Execution",
+      "pf_instance": "BAIV",
+      "created": "2025-11-16",
+      "author": "AI BI Digital Transformation Architecture",
+      "schema_org_alignment_target": "95%",
+      "license": "Proprietary"
+    },
+    "namespace": {
+      "okr": "https://pf-core.ai/ontology/okr#",
+      "vsom": "https://pf-core.ai/ontology/vsom#",
+      "ve": "https://pf-core.ai/ontology/value-engineering#",
+      "pmf": "https://pf-core.ai/ontology/pmf#",
+      "ctx": "https://pf-core.ai/ontology/context#",
+      "schema": "https://schema.org/"
+    },
+    "core_entities": {
+      "okr_objective": {
+        "@id": "okr:Objective",
+        "@type": ["schema:Action", "schema:DefinedTerm"],
+        "definition": "A qualitative, inspirational goal that supports strategic objectives through measurable key results",
+        "attributes": {
+          "okr_id": {
+            "type": "string",
+            "pattern": "^OKR-[A-Z]{3,4}-[0-9]{4}-[0-9]{3}$",
+            "required": true,
+            "example": "OKR-MKT-2025-001",
+            "description": "Unique identifier following domain-year-sequence pattern"
+          },
+          "objective_title": {
+            "type": "string",
+            "maxLength": 120,
+            "required": true,
+            "example": "Establish AI Authority Leadership"
+          },
+          "objective_description": {
+            "@type": "schema:Text",
+            "type": "string",
+            "required": true,
+            "example": "Build organizational authority across AI-powered discovery platforms through strategic content and engagement"
+          },
+          "domain": {
+            "type": "string",
+            "enum": ["Marketing", "Sales", "Operations", "Product", "Technology", "Finance", "HR"],
+            "required": true
+          },
+          "functional_strategy_alignment": {
+            "@type": "schema:Thing",
+            "type": "object",
+            "properties": {
+              "strategy_pillar": { "type": "string" },
+              "contribution_percentage": { "type": "number", "minimum": 0, "maximum": 100 },
+              "alignment_score": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "time_horizon": {
+            "@type": "schema:Duration",
+            "type": "object",
+            "properties": {
+              "start_date": { "type": "string", "format": "date" },
+              "end_date": { "type": "string", "format": "date" },
+              "duration_months": { "type": "integer", "minimum": 1, "maximum": 36 }
+            },
+            "required": true
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["P0-Critical", "P1-High", "P2-Medium", "P3-Low"],
+            "required": true
+          },
+          "owner": {
+            "@type": "schema:Role",
+            "type": "object",
+            "properties": {
+              "role_title": { "type": "string" },
+              "department": { "type": "string" },
+              "accountability_level": { "type": "string", "enum": ["Accountable", "Responsible", "Consulted", "Informed"] }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["Draft", "Active", "At-Risk", "On-Track", "Achieved", "Missed", "Deferred"],
+            "default": "Draft"
+          }
+        },
+        "relationships": {
+          "supports": {
+            "target": "vsom:Strategy",
+            "cardinality": "many-to-one",
+            "mandatory": true,
+            "description": "Every OKR must support at least one strategic pillar"
+          },
+          "aligns_with": {
+            "target": "vsom:Objectives",
+            "cardinality": "many-to-many",
+            "description": "OKR objectives align with VSOM strategic objectives"
+          },
+          "measured_by": {
+            "target": "okr:KeyResult",
+            "cardinality": "one-to-many",
+            "mandatory": true,
+            "description": "Each objective has 3-5 key results"
+          },
+          "validated_by": {
+            "target": "pmf:ProductMarketFit",
+            "cardinality": "many-to-one",
+            "description": "PMF signals validate objective achievement"
+          },
+          "decomposes_to": {
+            "target": "ve:Initiative",
+            "cardinality": "one-to-many",
+            "description": "Objectives decompose into tactical initiatives"
+          },
+          "contextualized_by": {
+            "target": "ctx:DomainContext",
+            "cardinality": "many-to-many",
+            "description": "Context layers inform objective execution"
+          }
+        }
+      },
+      "okr_key_result": {
+        "@id": "okr:KeyResult",
+        "@type": ["schema:QuantitativeValue", "schema:Observation"],
+        "definition": "A measurable outcome that indicates progress toward achieving an objective",
+        "attributes": {
+          "kr_id": {
+            "type": "string",
+            "pattern": "^KR[0-9]{1,2}$",
+            "required": true,
+            "example": "KR1"
+          },
+          "kr_title": {
+            "type": "string",
+            "maxLength": 200,
+            "required": true,
+            "example": "200+ monthly AI citations at 85% positive sentiment"
+          },
+          "measurement_type": {
+            "type": "string",
+            "enum": ["Quantitative", "Qualitative", "Binary", "Composite"],
+            "required": true
+          },
+          "baseline_value": {
+            "@type": "schema:QuantitativeValue",
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "unit": { "type": "string" },
+              "as_of_date": { "type": "string", "format": "date" }
+            },
+            "required": true
+          },
+          "target_value": {
+            "@type": "schema:QuantitativeValue",
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "unit": { "type": "string" },
+              "deadline": { "type": "string", "format": "date" }
+            },
+            "required": true
+          },
+          "current_value": {
+            "@type": "schema:QuantitativeValue",
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "unit": { "type": "string" },
+              "measurement_date": { "type": "string", "format": "date-time" },
+              "trend": { "type": "string", "enum": ["Improving", "Stable", "Declining"] }
+            }
+          },
+          "progress_percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 200,
+            "description": "Progress toward target, can exceed 100% for stretch goals"
+          },
+          "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Probability of achieving target by deadline"
+          },
+          "milestones": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "milestone_date": { "type": "string", "format": "date" },
+                "expected_value": { "type": "number" },
+                "actual_value": { "type": "number" },
+                "variance": { "type": "number" }
+              }
+            }
+          }
+        },
+        "relationships": {
+          "measures": {
+            "target": "okr:Objective",
+            "cardinality": "many-to-one",
+            "mandatory": true
+          },
+          "feeds_into": {
+            "target": "vsom:Metrics",
+            "cardinality": "many-to-many",
+            "description": "KRs contribute to VSOM metric calculations"
+          },
+          "driven_by": {
+            "target": "ve:Initiative",
+            "cardinality": "one-to-many",
+            "description": "Initiatives drive KR improvement"
+          }
+        }
+      },
+      "value_engineering_cascade": {
+        "@id": "ve:Cascade",
+        "@type": "schema:HierarchicalStructure",
+        "definition": "The hierarchical flow from corporate strategy through functional strategy to OKR execution",
+        "layers": {
+          "corporate_strategy": {
+            "level": 1,
+            "purpose": "Enterprise-wide strategic direction",
+            "okr_integration": "Defines strategic objectives that OKRs must support",
+            "components": ["Strategic Principles", "Security Objectives", "Value Creation Goals"]
+          },
+          "functional_strategy": {
+            "level": 2,
+            "purpose": "Domain-specific strategy execution",
+            "okr_integration": "OKRs bridge functional strategy to tactical initiatives",
+            "domains": ["Marketing", "Sales", "Operations", "Product", "Technology"]
+          },
+          "okr_layer": {
+            "level": 3,
+            "purpose": "Measurable objectives with quantified key results",
+            "okr_integration": "Core execution mechanism for Value Engineering",
+            "components": ["Objectives", "Key Results", "Progress Tracking"]
+          },
+          "tactical_execution": {
+            "level": 4,
+            "purpose": "Day-to-day initiatives and activities",
+            "okr_integration": "Key Results decompose into tactical initiatives",
+            "components": ["Initiatives", "Tasks", "Actions"]
+          }
+        }
+      },
+      "context_engineering_domain": {
+        "@id": "ctx:MarketingDomain",
+        "@type": "schema:DefinedTermSet",
+        "definition": "Contextual layers that inform AI-augmented decision making for Marketing OKRs",
+        "context_layers": {
+          "market_context": {
+            "description": "Industry trends, market dynamics, demand patterns",
+            "data_sources": ["Market Research", "Industry Reports", "Trend Analysis"],
+            "okr_influence": "Validates objective relevance and target feasibility"
+          },
+          "competitive_landscape": {
+            "description": "Direct and indirect competitor analysis",
+            "data_sources": ["Competitor Monitoring", "Market Share Data", "Feature Comparison"],
+            "okr_influence": "Benchmarks KRs against competitor performance"
+          },
+          "organizational_context": {
+            "description": "Brand position, value propositions, VSOM alignment",
+            "data_sources": ["VSOM Framework", "Brand Assets", "Value Proposition Canvas"],
+            "okr_influence": "Ensures objectives align with organizational identity"
+          },
+          "customer_context": {
+            "description": "Journey stages, pain points, value perception",
+            "data_sources": ["Customer Research", "Journey Maps", "Feedback Systems"],
+            "okr_influence": "Validates customer-centricity of objectives"
+          },
+          "ai_visibility_context": {
+            "description": "Platform presence, citation patterns, authority signals",
+            "data_sources": ["AI Platform Monitoring", "Citation Tracking", "Authority Scoring"],
+            "okr_influence": "Specific to BAIV: measures AI-specific outcomes"
+          }
+        }
+      },
+      "marketing_cmo_okr_framework": {
+        "@id": "okr:MarketingCMOFramework",
+        "@type": "schema:DefinedTermSet",
+        "definition": "CMO-specific OKR structure for AI Visibility optimization",
+        "strategic_lens": {
+          "vision_contribution": "How marketing contributes to organizational vision",
+          "functional_strategy": "Marketing-specific approach to strategic goals",
+          "smart_objectives": "Marketing OKRs with measurable key results",
+          "metrics": "Marketing KPIs feeding into enterprise metrics"
+        },
+        "high_level_objectives": [
+          {
+            "objective_id": "OKR-MKT-2025-001",
+            "title": "Brand Authority Leadership",
+            "time_horizon_months": 18,
+            "ai_visibility_contribution": 35,
+            "key_results": [
+              { "kr_id": "KR1", "title": "Top-3 industry thought leader recognition" },
+              { "kr_id": "KR2", "title": "10,000+ monthly organic brand mentions" },
+              { "kr_id": "KR3", "title": "40% share of voice in industry conversations" }
+            ]
+          },
+          {
+            "objective_id": "OKR-MKT-2025-002",
+            "title": "Customer Acquisition Optimization",
+            "time_horizon_months": 12,
+            "ai_visibility_contribution": 30,
+            "key_results": [
+              { "kr_id": "KR1", "title": "150% increase in qualified leads (1,000 → 2,500 monthly)" },
+              { "kr_id": "KR2", "title": "30% CAC reduction ($500 → $350)" },
+              { "kr_id": "KR3", "title": "25% lead-to-customer conversion rate" }
+            ]
+          },
+          {
+            "objective_id": "OKR-MKT-2025-003",
+            "title": "Market Expansion",
+            "time_horizon_months": 18,
+            "ai_visibility_contribution": 25,
+            "key_results": [
+              { "kr_id": "KR1", "title": "15% market share in new segment" },
+              { "kr_id": "KR2", "title": "$2M ARR from new markets" }
+            ]
+          }
+        ],
+        "ai_visibility_specific_okrs": [
+          {
+            "objective_id": "OKR-AIV-2025-001",
+            "title": "AI Authority Establishment",
+            "key_results": [
+              {
+                "kr_id": "KR1",
+                "title": "Monthly AI citations with positive sentiment",
+                "baseline": { "value": 15, "unit": "citations" },
+                "target": { "value": 200, "unit": "citations", "sentiment_threshold": 85 }
+              },
+              {
+                "kr_id": "KR2",
+                "title": "AI platforms with top-5 rankings",
+                "baseline": { "value": 3, "unit": "platforms", "avg_rank": 15 },
+                "target": { "value": 8, "unit": "platforms", "avg_rank": 5 }
+              },
+              {
+                "kr_id": "KR3",
+                "title": "AI authority score",
+                "baseline": { "value": 35, "unit": "score/100" },
+                "target": { "value": 85, "unit": "score/100" }
+              }
+            ]
+          },
+          {
+            "objective_id": "OKR-AIV-2025-002",
+            "title": "AI-Driven Business Impact",
+            "key_results": [
+              {
+                "kr_id": "KR1",
+                "title": "Traffic from AI referrals",
+                "baseline": { "value": 3, "unit": "percentage" },
+                "target": { "value": 30, "unit": "percentage" }
+              },
+              {
+                "kr_id": "KR2",
+                "title": "Conversion rate on AI traffic",
+                "baseline": { "value": 25, "unit": "percentage" },
+                "target": { "value": 40, "unit": "percentage" }
+              },
+              {
+                "kr_id": "KR3",
+                "title": "AI-attributed revenue",
+                "baseline": { "value": 50000, "unit": "USD" },
+                "target": { "value": 800000, "unit": "USD" }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "business_rules": {
+      "alignment_rules": [
+        {
+          "rule_id": "BR-OKR-001",
+          "description": "Every OKR objective must support at least one VSOM strategic pillar",
+          "enforcement": "mandatory",
+          "validation": "supports relationship must not be empty"
+        },
+        {
+          "rule_id": "BR-OKR-002",
+          "description": "Each objective must have 3-5 measurable key results",
+          "enforcement": "mandatory",
+          "validation": "key_results array length between 3 and 5"
+        },
+        {
+          "rule_id": "BR-OKR-003",
+          "description": "Key results must have quantifiable baseline and target values",
+          "enforcement": "mandatory",
+          "validation": "baseline_value and target_value must be non-null"
+        },
+        {
+          "rule_id": "BR-OKR-004",
+          "description": "OKR time horizon must not exceed 18 months",
+          "enforcement": "recommended",
+          "validation": "duration_months <= 18"
+        },
+        {
+          "rule_id": "BR-OKR-005",
+          "description": "Progress must be reviewed at minimum monthly",
+          "enforcement": "mandatory",
+          "validation": "last_review_date within 30 days"
+        }
+      ],
+      "governance_rules": [
+        {
+          "rule_id": "GOV-OKR-001",
+          "description": "Weekly tactical check-ins for active OKRs",
+          "enforcement": "mandatory"
+        },
+        {
+          "rule_id": "GOV-OKR-002",
+          "description": "Monthly milestone reviews with stakeholders",
+          "enforcement": "mandatory"
+        },
+        {
+          "rule_id": "GOV-OKR-003",
+          "description": "Quarterly strategic alignment validation",
+          "enforcement": "mandatory"
+        },
+        {
+          "rule_id": "GOV-OKR-004",
+          "description": "Annual VSOM cascade review",
+          "enforcement": "mandatory"
+        }
+      ],
+      "early_warning_rules": [
+        {
+          "rule_id": "EW-OKR-001",
+          "trigger": "20% decline in any key result metric",
+          "response_time": "72 hours",
+          "escalation": "Major"
+        },
+        {
+          "rule_id": "EW-OKR-002",
+          "trigger": "Confidence score below 0.5",
+          "response_time": "1 week",
+          "escalation": "Minor"
+        },
+        {
+          "rule_id": "EW-OKR-003",
+          "trigger": "Two consecutive missed milestones",
+          "response_time": "24 hours",
+          "escalation": "Critical"
+        }
+      ]
+    },
+    "pmf_integration": {
+      "feedback_loop": {
+        "pmf_validates_strategy": "OKR achievement proves strategic direction correctness",
+        "pmf_proves_objectives": "Market response confirms objective relevance",
+        "pmf_updates_metrics": "Real-world performance refines measurement approaches",
+        "pmf_adjusts_vision": "Fundamental market learning may shift aspirational direction"
+      },
+      "baiv_product_alignment": {
+        "goal": "100 Paying Clients with PMF wired for feedback engagement",
+        "okr_contribution": [
+          "Each client's OKR framework provides structured feedback data",
+          "OKR achievement rates across client base indicate product-market fit",
+          "Context Engineering quality improves with each client implementation",
+          "Marketing domain OKRs serve as template for rapid client onboarding"
+        ]
+      }
+    },
+    "implementation_framework": {
+      "okr_creation_process": [
+        "VSOM Alignment Review: Ensure objective maps to strategic pillars",
+        "Baseline Establishment: Measure current state for all key results",
+        "Target Definition: Set ambitious but achievable targets",
+        "Context Integration: Map OKR to domain context layers",
+        "Stakeholder Assignment: Define RACI for each objective",
+        "Progress Tracking Setup: Establish measurement cadence"
+      ],
+      "review_cadence": {
+        "weekly": "Tactical performance and adjustments",
+        "monthly": "Strategic progress and optimization",
+        "quarterly": "Major decisions and pivots",
+        "annually": "Full cascade validation"
+      }
+    }
+  }
+}
