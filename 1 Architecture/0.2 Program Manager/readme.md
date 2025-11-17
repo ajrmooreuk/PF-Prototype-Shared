@@ -1,0 +1,1 @@
+Programe Manager Scope, from Value Proposition and Context Creates PRD for Product and this can then be translated into PBS and WBS to input to Orchestration of the Build and Development being the Program Manager,
