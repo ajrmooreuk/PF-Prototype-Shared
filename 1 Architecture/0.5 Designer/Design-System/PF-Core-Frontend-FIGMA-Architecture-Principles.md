@@ -1,4 +1,4 @@
-# PF-Core Frontend FIGMA: Architecture & Design Principles
+# PF-Core Frontend FIGMA: 2 Architecture & Design Principles
 
 ## 📐 Document Overview
 
