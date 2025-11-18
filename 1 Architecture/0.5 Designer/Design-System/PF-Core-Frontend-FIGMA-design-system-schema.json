@@ -1,0 +1,839 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "SoftwareSourceCode",
+  "name": "Figma Design System Schema",
+  "description": "Comprehensive schema.org-based JSON structure for design system tokens, components, and brand definitions",
+  "version": "1.0.0",
+  "datePublished": "2024-11-18",
+  "programmingLanguage": ["TypeScript", "JavaScript", "CSS"],
+  "runtimePlatform": ["Web", "iOS", "Android"],
+  
+  "designSystem": {
+    "@type": "CreativeWork",
+    "name": "Master Design System",
+    "identifier": "ds-master-v1",
+    
+    "tokens": {
+      "@type": "DefinedTermSet",
+      "name": "Design Tokens",
+      
+      "colorTokens": {
+        "@type": "DefinedTerm",
+        "name": "Color Tokens",
+        "termCode": "tokens.colors",
+        
+        "primitive": {
+          "@type": "DefinedTermSet",
+          "name": "Primitive Colors",
+          "hasDefinedTerm": [
+            {
+              "@type": "DefinedTerm",
+              "termCode": "color.blue.50",
+              "name": "Blue 50",
+              "description": "Lightest blue shade",
+              "value": "#eff6ff",
+              "colorFormat": "hex"
+            },
+            {
+              "@type": "DefinedTerm",
+              "termCode": "color.blue.500",
+              "name": "Blue 500",
+              "description": "Base blue color",
+              "value": "#3b82f6",
+              "colorFormat": "hex"
+            },
+            {
+              "@type": "DefinedTerm",
+              "termCode": "color.blue.900",
+              "name": "Blue 900",
+              "description": "Darkest blue shade",
+              "value": "#1e3a8a",
+              "colorFormat": "hex"
+            }
+          ]
+        },
+        
+        "semantic": {
+          "@type": "DefinedTermSet",
+          "name": "Semantic Colors",
+          "hasDefinedTerm": [
+            {
+              "@type": "DefinedTerm",
+              "termCode": "color.primary",
+              "name": "Primary Color",
+              "description": "Main brand color for primary actions",
+              "valueReference": "color.blue.500",
+              "modes": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "light",
+                  "value": "#3b82f6"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "dark",
+                  "value": "#60a5fa"
+                }
+              ],
+              "accessibilityFeature": "highContrast",
+              "wcagCompliance": "AAA"
+            },
+            {
+              "@type": "DefinedTerm",
+              "termCode": "color.success",
+              "name": "Success Color",
+              "description": "Color for success states and positive feedback",
+              "valueReference": "color.green.500",
+              "modes": [
+                {
+                  "@type": "PropertyValue",
+                  "name": "light",
+                  "value": "#10b981"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "name": "dark",
+                  "value": "#34d399"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      
+      "typographyTokens": {
+        "@type": "DefinedTermSet",
+        "name": "Typography Tokens",
+        "termCode": "tokens.typography",
+        "hasDefinedTerm": [
+          {
+            "@type": "DefinedTerm",
+            "termCode": "typography.font.family.primary",
+            "name": "Primary Font Family",
+            "value": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+            "category": "fontFamily"
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "typography.size.base",
+            "name": "Base Font Size",
+            "value": "16px",
+            "valueInRem": "1rem",
+            "category": "fontSize"
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "typography.weight.regular",
+            "name": "Regular Font Weight",
+            "value": 400,
+            "category": "fontWeight"
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "typography.lineheight.base",
+            "name": "Base Line Height",
+            "value": 1.5,
+            "category": "lineHeight"
+          }
+        ]
+      },
+      
+      "spacingTokens": {
+        "@type": "DefinedTermSet",
+        "name": "Spacing Tokens",
+        "termCode": "tokens.spacing",
+        "hasDefinedTerm": [
+          {
+            "@type": "DefinedTerm",
+            "termCode": "spacing.xs",
+            "name": "Extra Small Spacing",
+            "value": "4px",
+            "valueInRem": "0.25rem",
+            "scale": 0.25
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "spacing.sm",
+            "name": "Small Spacing",
+            "value": "8px",
+            "valueInRem": "0.5rem",
+            "scale": 0.5
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "spacing.md",
+            "name": "Medium Spacing",
+            "value": "16px",
+            "valueInRem": "1rem",
+            "scale": 1
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "spacing.lg",
+            "name": "Large Spacing",
+            "value": "24px",
+            "valueInRem": "1.5rem",
+            "scale": 1.5
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "spacing.xl",
+            "name": "Extra Large Spacing",
+            "value": "32px",
+            "valueInRem": "2rem",
+            "scale": 2
+          }
+        ]
+      }
+    },
+    
+    "components": {
+      "@type": "ItemList",
+      "name": "Component Library",
+      
+      "atoms": {
+        "@type": "ItemList",
+        "name": "Atomic Components",
+        "itemListElement": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Button",
+            "identifier": "atoms.button",
+            "applicationCategory": "Atom",
+            "description": "Interactive button component with multiple variants and states",
+            
+            "componentProperties": {
+              "@type": "PropertyValueSpecification",
+              "properties": [
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "variant",
+                  "name": "variant",
+                  "valueRequired": true,
+                  "defaultValue": "primary",
+                  "valueName": ["primary", "secondary", "tertiary", "ghost", "danger"]
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "size",
+                  "name": "size",
+                  "valueRequired": true,
+                  "defaultValue": "md",
+                  "valueName": ["sm", "md", "lg"]
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "disabled",
+                  "name": "disabled",
+                  "valueRequired": false,
+                  "defaultValue": false,
+                  "valueName": "boolean"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "loading",
+                  "name": "loading",
+                  "valueRequired": false,
+                  "defaultValue": false,
+                  "valueName": "boolean"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "leftIcon",
+                  "name": "leftIcon",
+                  "valueRequired": false,
+                  "valueName": "ReactNode"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "rightIcon",
+                  "name": "rightIcon",
+                  "valueRequired": false,
+                  "valueName": "ReactNode"
+                }
+              ]
+            },
+            
+            "states": {
+              "@type": "ItemList",
+              "itemListElement": [
+                {
+                  "@type": "Thing",
+                  "name": "default",
+                  "description": "Default resting state"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "hover",
+                  "description": "Mouse hover state"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "active",
+                  "description": "Active/pressed state"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "focus",
+                  "description": "Keyboard focus state"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "disabled",
+                  "description": "Disabled state"
+                }
+              ]
+            },
+            
+            "tokens": {
+              "@type": "PropertyValueSpecification",
+              "properties": [
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "backgroundColor",
+                  "name": "button.background.primary",
+                  "valueReference": "color.primary"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "textColor",
+                  "name": "button.text.primary",
+                  "value": "#ffffff"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "borderRadius",
+                  "name": "button.borderRadius",
+                  "valueReference": "border.radius.md"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "padding",
+                  "name": "button.padding.md",
+                  "value": "12px 24px"
+                }
+              ]
+            },
+            
+            "accessibility": {
+              "@type": "PropertyValue",
+              "accessibilityAPI": "ARIA",
+              "accessibilityControl": "button",
+              "accessibilityFeature": [
+                "keyboardNavigable",
+                "screenReaderCompatible",
+                "highContrast"
+              ],
+              "accessibilityHazard": "none",
+              "wcagLevel": "AA"
+            },
+            
+            "codeMapping": {
+              "@type": "Code",
+              "programmingLanguage": "TypeScript",
+              "codeRepository": "https://github.com/org/design-system",
+              "filePath": "/packages/components/atoms/Button/Button.tsx",
+              "exampleUsage": "import { Button } from '@org/design-system';\n\n<Button variant=\"primary\" size=\"md\">Click Me</Button>"
+            }
+          },
+          
+          {
+            "@type": "SoftwareApplication",
+            "name": "Input",
+            "identifier": "atoms.input",
+            "applicationCategory": "Atom",
+            "description": "Text input field with validation states",
+            
+            "componentProperties": {
+              "@type": "PropertyValueSpecification",
+              "properties": [
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "type",
+                  "name": "type",
+                  "valueRequired": true,
+                  "defaultValue": "text",
+                  "valueName": ["text", "email", "password", "number", "tel", "url"]
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "size",
+                  "name": "size",
+                  "valueRequired": true,
+                  "defaultValue": "md",
+                  "valueName": ["sm", "md", "lg"]
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "error",
+                  "name": "error",
+                  "valueRequired": false,
+                  "defaultValue": false,
+                  "valueName": "boolean"
+                },
+                {
+                  "@type": "PropertyValue",
+                  "propertyID": "helperText",
+                  "name": "helperText",
+                  "valueRequired": false,
+                  "valueName": "string"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      
+      "molecules": {
+        "@type": "ItemList",
+        "name": "Molecular Components",
+        "itemListElement": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "SearchBar",
+            "identifier": "molecules.searchbar",
+            "applicationCategory": "Molecule",
+            "description": "Search input with icon and optional filters",
+            "isBasedOn": [
+              {
+                "@id": "atoms.input"
+              },
+              {
+                "@id": "atoms.icon"
+              },
+              {
+                "@id": "atoms.button"
+              }
+            ]
+          },
+          
+          {
+            "@type": "SoftwareApplication",
+            "name": "FormGroup",
+            "identifier": "molecules.formgroup",
+            "applicationCategory": "Molecule",
+            "description": "Form field with label, input, helper text and error state",
+            "isBasedOn": [
+              {
+                "@id": "atoms.input"
+              },
+              {
+                "@id": "atoms.label"
+              },
+              {
+                "@id": "atoms.text"
+              }
+            ]
+          }
+        ]
+      },
+      
+      "organisms": {
+        "@type": "ItemList",
+        "name": "Organism Components",
+        "itemListElement": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Navigation",
+            "identifier": "organisms.navigation",
+            "applicationCategory": "Organism",
+            "description": "Main navigation component with menu items and dropdowns",
+            "isBasedOn": [
+              {
+                "@id": "molecules.navitem"
+              },
+              {
+                "@id": "atoms.button"
+              },
+              {
+                "@id": "atoms.icon"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    
+    "brands": {
+      "@type": "ItemList",
+      "name": "Brand Configurations",
+      "itemListElement": [
+        {
+          "@type": "Brand",
+          "name": "Brand A",
+          "identifier": "brand-a",
+          "description": "Primary brand platform",
+          
+          "brandTokens": {
+            "@type": "DefinedTermSet",
+            "name": "Brand A Tokens",
+            "hasDefinedTerm": [
+              {
+                "@type": "DefinedTerm",
+                "termCode": "brand-a.color.primary",
+                "name": "Brand A Primary Color",
+                "value": "#0066cc",
+                "overrides": "color.primary"
+              },
+              {
+                "@type": "DefinedTerm",
+                "termCode": "brand-a.font.family",
+                "name": "Brand A Font Family",
+                "value": "Helvetica Neue, sans-serif",
+                "overrides": "typography.font.family.primary"
+              }
+            ]
+          },
+          
+          "logo": {
+            "@type": "ImageObject",
+            "contentUrl": "https://cdn.example.com/brand-a/logo.svg",
+            "encodingFormat": "image/svg+xml"
+          }
+        },
+        
+        {
+          "@type": "Brand",
+          "name": "Brand B",
+          "identifier": "brand-b",
+          "description": "Secondary brand platform",
+          
+          "brandTokens": {
+            "@type": "DefinedTermSet",
+            "name": "Brand B Tokens",
+            "hasDefinedTerm": [
+              {
+                "@type": "DefinedTerm",
+                "termCode": "brand-b.color.primary",
+                "name": "Brand B Primary Color",
+                "value": "#ff6600",
+                "overrides": "color.primary"
+              }
+            ]
+          }
+        },
+        
+        {
+          "@type": "Brand",
+          "name": "Sub-Brand A1",
+          "identifier": "sub-brand-a1",
+          "description": "Sub-brand of Brand A",
+          "parentOrganization": {
+            "@id": "brand-a"
+          },
+          
+          "brandTokens": {
+            "@type": "DefinedTermSet",
+            "name": "Sub-Brand A1 Tokens",
+            "inheritFrom": "brand-a",
+            "hasDefinedTerm": [
+              {
+                "@type": "DefinedTerm",
+                "termCode": "sub-brand-a1.color.accent",
+                "name": "Sub-Brand A1 Accent Color",
+                "value": "#00cc99"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    
+    "templates": {
+      "@type": "ItemList",
+      "name": "Page Templates",
+      "itemListElement": [
+        {
+          "@type": "WebPage",
+          "name": "Dashboard Template",
+          "identifier": "templates.dashboard",
+          "description": "Standard dashboard layout with sidebar and content area",
+          
+          "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+              {
+                "@type": "WebPageElement",
+                "name": "Header",
+                "cssSelector": ".dashboard-header",
+                "isBasedOn": {
+                  "@id": "organisms.navigation"
+                }
+              },
+              {
+                "@type": "WebPageElement",
+                "name": "Sidebar",
+                "cssSelector": ".dashboard-sidebar",
+                "isBasedOn": {
+                  "@id": "organisms.sidebar"
+                }
+              },
+              {
+                "@type": "WebPageElement",
+                "name": "Content",
+                "cssSelector": ".dashboard-content"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    
+    "figmaIntegration": {
+      "@type": "SoftwareApplication",
+      "name": "Figma Design System",
+      "applicationCategory": "Design Tool",
+      
+      "fileStructure": {
+        "@type": "DigitalDocument",
+        "name": "Figma File Organization",
+        
+        "hasPart": [
+          {
+            "@type": "DigitalDocument",
+            "name": "00_Foundations",
+            "description": "Design tokens and foundational elements"
+          },
+          {
+            "@type": "DigitalDocument",
+            "name": "01_Atoms",
+            "description": "Atomic components"
+          },
+          {
+            "@type": "DigitalDocument",
+            "name": "02_Molecules",
+            "description": "Molecular components"
+          },
+          {
+            "@type": "DigitalDocument",
+            "name": "03_Organisms",
+            "description": "Organism components"
+          },
+          {
+            "@type": "DigitalDocument",
+            "name": "04_Templates",
+            "description": "Page templates"
+          }
+        ]
+      },
+      
+      "variables": {
+        "@type": "PropertyValueSpecification",
+        "name": "Figma Variables Configuration",
+        
+        "collections": [
+          {
+            "@type": "PropertyValue",
+            "name": "Colors",
+            "propertyID": "color-collection",
+            "modes": ["Light", "Dark", "High Contrast"]
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Spacing",
+            "propertyID": "spacing-collection",
+            "modes": ["Desktop", "Tablet", "Mobile"]
+          }
+        ]
+      }
+    },
+    
+    "codeGeneration": {
+      "@type": "SoftwareSourceCode",
+      "name": "Code Generation Configuration",
+      "programmingLanguage": "TypeScript",
+      
+      "generator": {
+        "@type": "SoftwareApplication",
+        "name": "Claude Code SDK",
+        "applicationCategory": "Development Tool",
+        
+        "configuration": {
+          "@type": "PropertyValueSpecification",
+          "properties": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "framework",
+              "name": "framework",
+              "value": "react"
+            },
+            {
+              "@type": "PropertyValue",
+              "propertyID": "styling",
+              "name": "styling",
+              "value": "css-modules"
+            },
+            {
+              "@type": "PropertyValue",
+              "propertyID": "typescript",
+              "name": "typescript",
+              "value": true
+            },
+            {
+              "@type": "PropertyValue",
+              "propertyID": "generateTests",
+              "name": "generateTests",
+              "value": true
+            }
+          ]
+        },
+        
+        "outputStructure": {
+          "@type": "DigitalDocument",
+          "name": "Generated Component Structure",
+          
+          "hasPart": [
+            {
+              "@type": "SoftwareSourceCode",
+              "name": "Component.tsx",
+              "programmingLanguage": "TypeScript",
+              "description": "Main component file"
+            },
+            {
+              "@type": "SoftwareSourceCode",
+              "name": "Component.module.css",
+              "programmingLanguage": "CSS",
+              "description": "Component styles"
+            },
+            {
+              "@type": "SoftwareSourceCode",
+              "name": "Component.test.tsx",
+              "programmingLanguage": "TypeScript",
+              "description": "Component tests"
+            },
+            {
+              "@type": "SoftwareSourceCode",
+              "name": "Component.stories.tsx",
+              "programmingLanguage": "TypeScript",
+              "description": "Storybook stories"
+            },
+            {
+              "@type": "SoftwareSourceCode",
+              "name": "index.ts",
+              "programmingLanguage": "TypeScript",
+              "description": "Export barrel"
+            }
+          ]
+        }
+      }
+    },
+    
+    "validation": {
+      "@type": "QualityControlProcess",
+      "name": "Component Validation",
+      
+      "checks": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "accessibility",
+          "name": "Accessibility Check",
+          "value": "WCAG 2.1 AA",
+          "tool": "axe-core"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "visualRegression",
+          "name": "Visual Regression",
+          "value": "enabled",
+          "tool": "Chromatic"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "typeCheck",
+          "name": "Type Checking",
+          "value": "strict",
+          "tool": "TypeScript"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "linting",
+          "name": "Code Linting",
+          "value": "enabled",
+          "tool": "ESLint"
+        }
+      ]
+    },
+    
+    "deployment": {
+      "@type": "PublicationEvent",
+      "name": "Component Deployment",
+      
+      "publishingPrinciples": [
+        {
+          "@type": "Thing",
+          "name": "Semantic Versioning",
+          "description": "Follow semver for all releases"
+        },
+        {
+          "@type": "Thing",
+          "name": "Automated Testing",
+          "description": "All tests must pass before deployment"
+        },
+        {
+          "@type": "Thing",
+          "name": "Documentation",
+          "description": "Documentation must be updated with each release"
+        }
+      ],
+      
+      "publisher": {
+        "@type": "SoftwareApplication",
+        "name": "npm Registry",
+        "url": "https://registry.npmjs.org"
+      }
+    }
+  },
+  
+  "metadata": {
+    "@type": "PropertyValue",
+    "name": "Design System Metadata",
+    
+    "author": {
+      "@type": "Organization",
+      "name": "Your Organization"
+    },
+    
+    "maintainer": [
+      {
+        "@type": "Person",
+        "name": "Design Lead",
+        "jobTitle": "Lead Designer"
+      },
+      {
+        "@type": "Person",
+        "name": "Tech Lead",
+        "jobTitle": "Frontend Architect"
+      }
+    ],
+    
+    "license": {
+      "@type": "CreativeWork",
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    
+    "documentation": {
+      "@type": "TechArticle",
+      "name": "Design System Documentation",
+      "url": "https://designsystem.example.com",
+      
+      "hasPart": [
+        {
+          "@type": "TechArticle",
+          "name": "Getting Started",
+          "url": "https://designsystem.example.com/getting-started"
+        },
+        {
+          "@type": "TechArticle",
+          "name": "Component API",
+          "url": "https://designsystem.example.com/components"
+        },
+        {
+          "@type": "TechArticle",
+          "name": "Token Reference",
+          "url": "https://designsystem.example.com/tokens"
+        }
+      ]
+    }
+  }
+}
