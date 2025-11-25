@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAIV Brand Style Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* BAIV Default Colors */
+            --primary: #00a4bf;
+            --primary-dark: #005260;
+            --primary-light: #cce8ee;
+            --accent: #cec528;
+            --success: #019587;
+            --warning: #cf057d;
+            --dark: #393939;
+            --light: #cce8ee;
+            --white: #f5f3d4;
+            
+            /* Font Variables */
+            --font-heading: 'Titillium Web', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Monaco', monospace;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            min-height: 100vh;
+            padding: 24px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo-container {
+            width: 60px;
+            height: 60px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-placeholder {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            font-family: var(--font-heading);
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 30%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+
+        .brand-button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            background: #f9fafb;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-url {
+            font-size: 10px;
+            color: #9ca3af;
+        }
+
+        .brand-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-button.active {
+            background: linear-gradient(135deg, var(--primary) 30%, var(--primary-dark) 100%);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .brand-button.active .brand-url {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .add-brand-container {
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .font-selector {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 12px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .font-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .font-label {
+            flex: 1;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .font-preview {
+            flex: 2;
+            padding: 8px;
+            background: #f9fafb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .color-label {
+            flex: 1;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .color-value {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: #9ca3af;
+            width: 70px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #f3f4f6;
+            color: #6b7280;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-button:hover {
+            background: #e5e7eb;
+        }
+
+        .action-button.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .action-button.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .action-button.success {
+            background: var(--success);
+            color: white;
+        }
+
+        .edit-button {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #f3f4f6;
+            color: #6b7280;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .edit-button.active {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .preview {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .preview-logo {
+            width: 48px;
+            height: 48px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .preview-title {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 30%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .preview-text {
+            font-family: var(--font-body);
+            margin-bottom: 24px;
+            color: var(--dark);
+        }
+
+        .preview-button {
+            background: linear-gradient(135deg, var(--primary) 30%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-right: 12px;
+            font-family: var(--font-body);
+        }
+
+        .preview-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .preview-button.secondary {
+            background: #f1f5f9;
+            color: var(--dark);
+            box-shadow: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .config-info {
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .config-info-title {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .config-info-detail {
+            font-size: 11px;
+            color: #6b7280;
+            font-family: var(--font-mono);
+        }
+
+        .divider {
+            margin: 16px 0;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .export-button {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 164, 191, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .export-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 164, 191, 0.4);
+        }
+
+        .scrape-status {
+            padding: 8px;
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #92400e;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .scrape-status.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-container" id="main-logo-container">
+                <!-- BAIV Logo SVG -->
+                <svg width="60" height="60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Simplified BAIV logo representation -->
+                    <rect x="20" y="60" width="15" height="80" fill="#00a4bf"/>
+                    <rect x="45" y="40" width="15" height="100" fill="#00a4bf"/>
+                    <rect x="70" y="60" width="15" height="80" fill="#00a4bf"/>
+                    <circle cx="115" cy="100" r="20" fill="#cec528"/>
+                    <rect x="145" y="60" width="35" height="15" fill="#00a4bf"/>
+                    <rect x="145" y="92" width="35" height="15" fill="#00a4bf"/>
+                    <rect x="145" y="125" width="35" height="15" fill="#00a4bf"/>
+                </svg>
+            </div>
+            <div class="header-content">
+                <h1>Brand Style Editor</h1>
+                <p class="subtitle">
+                    Configure brand modes with ontology integration • <span id="brandModeText">Mode: OWN</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Brand Selector with Add New -->
+            <div class="card">
+                <h2 class="card-title">Brand Registry</h2>
+                
+                <div id="brand-list">
+                    <button class="brand-button active" onclick="switchBrand('baiv')">
+                        <div class="brand-info">
+                            <span>BAIV (own)</span>
+                        </div>
+                        <span class="brand-url">baiv.ai</span>
+                    </button>
+                    <button class="brand-button" onclick="switchBrand('w4m')">
+                        <div class="brand-info">
+                            <span>Wings for Mind</span>
+                        </div>
+                        <span class="brand-url">wingsformind.com</span>
+                    </button>
+                    <button class="brand-button" onclick="switchBrand('thinktank')">
+                        <div class="brand-info">
+                            <span>Think Tank</span>
+                        </div>
+                        <span class="brand-url">thinktank.io</span>
+                    </button>
+                    <button class="brand-button" onclick="switchBrand('whitelabel')">
+                        <div class="brand-info">
+                            <span>Custom Client</span>
+                        </div>
+                        <span class="brand-url">client-site.com</span>
+                    </button>
+                </div>
+                
+                <div class="divider">
+                    <h3 class="card-title" style="font-size: 14px; margin-bottom: 12px;">Add New Brand</h3>
+                    <div class="add-brand-container">
+                        <div class="input-group">
+                            <label class="input-label">Brand Name</label>
+                            <input type="text" class="text-input" id="new-brand-name" placeholder="Enter brand name">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Website URL</label>
+                            <input type="url" class="text-input" id="new-brand-url" placeholder="https://example.com">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Organization ID</label>
+                            <input type="text" class="text-input" id="new-brand-id" placeholder="org-xxx">
+                        </div>
+                        <div class="button-group">
+                            <button class="action-button primary" onclick="addNewBrand()">Add Brand</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography Editor -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 class="card-title" style="margin: 0;">Typography</h2>
+                    <button class="edit-button" id="font-edit-btn" onclick="toggleFontEdit()">Edit</button>
+                </div>
+                
+                <div class="font-row">
+                    <span class="font-label">Heading</span>
+                    <select class="font-selector" id="heading-font-select" onchange="updateFont('heading', this.value)" disabled>
+                        <option value="'Titillium Web', sans-serif">Titillium Web</option>
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Roboto', sans-serif">Roboto</option>
+                        <option value="'Open Sans', sans-serif">Open Sans</option>
+                        <option value="system-ui, sans-serif">System UI</option>
+                    </select>
+                </div>
+                
+                <div class="font-row">
+                    <span class="font-label">Body</span>
+                    <select class="font-selector" id="body-font-select" onchange="updateFont('body', this.value)" disabled>
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Roboto', sans-serif">Roboto</option>
+                        <option value="'Open Sans', sans-serif">Open Sans</option>
+                        <option value="'Titillium Web', sans-serif">Titillium Web</option>
+                        <option value="system-ui, sans-serif">System UI</option>
+                    </select>
+                </div>
+                
+                <div class="font-row">
+                    <span class="font-label">Monospace</span>
+                    <select class="font-selector" id="mono-font-select" onchange="updateFont('mono', this.value)" disabled>
+                        <option value="'Monaco', monospace">Monaco</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                        <option value="'SF Mono', monospace">SF Mono</option>
+                        <option value="monospace">System Mono</option>
+                    </select>
+                </div>
+                
+                <div class="divider">
+                    <div class="font-preview" style="font-family: var(--font-heading); font-size: 18px; font-weight: 700;">
+                        Heading Preview
+                    </div>
+                    <div class="font-preview" style="font-family: var(--font-body); margin-top: 8px;">
+                        Body text preview with current font selection.
+                    </div>
+                    <div class="font-preview" style="font-family: var(--font-mono); font-size: 12px; margin-top: 8px;">
+                        console.log('Monospace preview');
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Configuration -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 class="card-title" style="margin: 0;">Color Values</h2>
+                    <button class="edit-button" id="color-edit-btn" onclick="toggleEdit()">Edit</button>
+                </div>
+                
+                <div class="color-row">
+                    <span class="color-label">Primary</span>
+                    <div class="color-swatch" style="background-color: var(--primary);">
+                        <input type="color" class="color-input" id="primary-input" onchange="updateColor('primary', this.value)" disabled>
+                    </div>
+                    <span class="color-value" id="primary-value">#00a4bf</span>
+                </div>
+                
+                <div class="color-row">
+                    <span class="color-label">Primary Dark</span>
+                    <div class="color-swatch" style="background-color: var(--primary-dark);">
+                        <input type="color" class="color-input" id="primary-dark-input" onchange="updateColor('primary-dark', this.value)" disabled>
+                    </div>
+                    <span class="color-value" id="primary-dark-value">#005260</span>
+                </div>
+                
+                <div class="color-row">
+                    <span class="color-label">Accent</span>
+                    <div class="color-swatch" style="background-color: var(--accent);">
+                        <input type="color" class="color-input" id="accent-input" onchange="updateColor('accent', this.value)" disabled>
+                    </div>
+                    <span class="color-value" id="accent-value">#cec528</span>
+                </div>
+                
+                <div class="color-row">
+                    <span class="color-label">Success</span>
+                    <div class="color-swatch" style="background-color: var(--success);">
+                        <input type="color" class="color-input" id="success-input" onchange="updateColor('success', this.value)" disabled>
+                    </div>
+                    <span class="color-value" id="success-value">#019587</span>
+                </div>
+                
+                <div class="color-row">
+                    <span class="color-label">Warning</span>
+                    <div class="color-swatch" style="background-color: var(--warning);">
+                        <input type="color" class="color-input" id="warning-input" onchange="updateColor('warning', this.value)" disabled>
+                    </div>
+                    <span class="color-value" id="warning-value">#cf057d</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Preview -->
+        <div class="preview">
+            <div class="preview-header">
+                <div class="preview-logo" id="preview-logo">
+                    <span style="font-weight: bold; color: var(--primary);">BAIV</span>
+                </div>
+                <h2 class="preview-title" id="preview-title">Live Preview - BAIV</h2>
+            </div>
+            <p class="preview-text">
+                This preview demonstrates how the selected brand configuration appears with the current typography and color settings. 
+                All elements adapt dynamically to the ontology configuration.
+            </p>
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                <button class="preview-button">
+                    Primary Action
+                </button>
+                <button class="preview-button secondary">
+                    Secondary Action
+                </button>
+                <span class="badge" id="mode-badge">OWN</span>
+            </div>
+            <div class="config-info">
+                <div class="config-info-title">Ontology Configuration</div>
+                <div class="config-info-detail" id="config-detail">
+                    {
+                      "orgId": "master-001",
+                      "brandMode": "own",
+                      "websiteUrl": "https://baiv.ai",
+                      "liveColors": { "extracted": true },
+                      "fonts": { "heading": "Titillium Web", "body": "Inter" }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Configuration Button -->
+    <button class="export-button" onclick="exportConfiguration()">
+        Export to Ontology
+    </button>
+
+    <script>
+        // Prevent empty src attribute errors on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove all empty src attributes to prevent base64 errors
+            document.querySelectorAll('img[src=""]').forEach(img => {
+                img.removeAttribute('src');
+            });
+        });
+
+        // Enhanced brand configurations with website URLs and fonts
+        const brands = {
+            baiv: {
+                id: 'master-001',
+                name: 'BAIV',
+                type: 'own',
+                websiteUrl: 'https://baiv.ai',
+                colors: {
+                    primary: '#00a4bf',
+                    'primary-dark': '#005260',
+                    'primary-light': '#cce8ee',
+                    accent: '#cec528',
+                    success: '#019587',
+                    warning: '#cf057d',
+                    dark: '#393939',
+                    light: '#cce8ee',
+                    white: '#f5f3d4'
+                },
+                fonts: {
+                    heading: "'Titillium Web', sans-serif",
+                    body: "'Inter', sans-serif",
+                    mono: "'Monaco', monospace"
+                },
+                logos: {
+                    primary: 'images/BAIV_Logo_Master3Color.svg',
+                    light: 'images/BAIV_Logo_Light.svg',
+                    dark: 'images/BAIV_Logo_Dark.svg',
+                    icon: 'images/BAIV_Icon.svg',
+                    wordmark: 'images/BAIV_Wordmark.svg'
+                },
+                liveColors: null // Will store scraped colors
+            },
+            w4m: {
+                id: 'partner-002',
+                name: 'Wings for Mind',
+                type: 'co-branded',
+                websiteUrl: 'https://wingsformind.com',
+                colors: {
+                    primary: '#7c3aed',
+                    'primary-dark': '#5b21b6',
+                    'primary-light': '#ede9fe',
+                    accent: '#f59e0b',
+                    success: '#10b981',
+                    warning: '#ef4444',
+                    dark: '#1f2937',
+                    light: '#f3f4f6',
+                    white: '#ffffff'
+                },
+                fonts: {
+                    heading: "'Inter', sans-serif",
+                    body: "'Inter', sans-serif",
+                    mono: "'Courier New', monospace"
+                },
+                logos: {
+                    primary: ''
+                },
+                liveColors: null
+            },
+            thinktank: {
+                id: 'partner-003',
+                name: 'Think Tank',
+                type: 'co-branded',
+                websiteUrl: 'https://thinktank.io',
+                colors: {
+                    primary: '#065f46',
+                    'primary-dark': '#064e3b',
+                    'primary-light': '#d1fae5',
+                    accent: '#dc2626',
+                    success: '#059669',
+                    warning: '#ea580c',
+                    dark: '#111827',
+                    light: '#e5e7eb',
+                    white: '#fafafa'
+                },
+                fonts: {
+                    heading: "'Titillium Web', sans-serif",
+                    body: "'Inter', sans-serif",
+                    mono: "'Monaco', monospace"
+                },
+                logos: {
+                    primary: ''
+                },
+                liveColors: null
+            },
+            whitelabel: {
+                id: 'client-004',
+                name: 'Custom Client',
+                type: 'white-label',
+                websiteUrl: 'https://client-site.com',
+                colors: {
+                    primary: '#4b5563',
+                    'primary-dark': '#374151',
+                    'primary-light': '#f3f4f6',
+                    accent: '#6b7280',
+                    success: '#9ca3af',
+                    warning: '#9ca3af',
+                    dark: '#1f2937',
+                    light: '#f9fafb',
+                    white: '#ffffff'
+                },
+                fonts: {
+                    heading: "system-ui, sans-serif",
+                    body: "system-ui, sans-serif",
+                    mono: "monospace"
+                },
+                logos: {
+                    primary: ''
+                },
+                liveColors: null
+            }
+        };
+
+        let currentBrand = 'baiv';
+        let editMode = false;
+        let fontEditMode = false;
+
+        function switchBrand(brandKey) {
+            currentBrand = brandKey;
+            const brand = brands[brandKey];
+            
+            // Update colors
+            Object.entries(brand.colors).forEach(([key, value]) => {
+                document.documentElement.style.setProperty(`--${key}`, value);
+                const valueElement = document.getElementById(`${key}-value`);
+                if (valueElement) {
+                    valueElement.textContent = value;
+                }
+                const inputElement = document.getElementById(`${key}-input`);
+                if (inputElement) {
+                    inputElement.value = value;
+                }
+            });
+            
+            // Update fonts
+            Object.entries(brand.fonts).forEach(([key, value]) => {
+                document.documentElement.style.setProperty(`--font-${key}`, value);
+                const selectElement = document.getElementById(`${key}-font-select`);
+                if (selectElement) {
+                    selectElement.value = value;
+                }
+            });
+            
+            // Update UI elements
+            document.getElementById('preview-title').textContent = `Live Preview - ${brand.name}`;
+            document.getElementById('mode-badge').textContent = brand.type.toUpperCase();
+            document.getElementById('brandModeText').textContent = `Mode: ${brand.type.toUpperCase()}`;
+            
+            // Update ontology display
+            updateOntologyDisplay(brand);
+            
+            // Update active button
+            document.querySelectorAll('.brand-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function updateOntologyDisplay(brand) {
+            const ontology = {
+                orgId: brand.id,
+                brandMode: brand.type,
+                websiteUrl: brand.websiteUrl,
+                liveColors: brand.liveColors || { extracted: false },
+                fonts: {
+                    heading: brand.fonts.heading.split(',')[0].replace(/['"]/g, ''),
+                    body: brand.fonts.body.split(',')[0].replace(/['"]/g, '')
+                },
+                configuredColors: brand.colors,
+                timestamp: new Date().toISOString()
+            };
+            
+            document.getElementById('config-detail').textContent = JSON.stringify(ontology, null, 2);
+        }
+
+        function toggleEdit() {
+            editMode = !editMode;
+            const editButton = document.getElementById('color-edit-btn'); // Use specific ID
+            const colorInputs = document.querySelectorAll('.color-input');
+            
+            if (editMode) {
+                editButton.classList.add('active');
+                editButton.textContent = 'Done';
+                colorInputs.forEach(input => input.disabled = false);
+            } else {
+                editButton.classList.remove('active');
+                editButton.textContent = 'Edit';
+                colorInputs.forEach(input => input.disabled = true);
+            }
+        }
+
+        function toggleFontEdit() {
+            fontEditMode = !fontEditMode;
+            const editButton = document.getElementById('font-edit-btn');
+            const fontSelectors = document.querySelectorAll('.font-selector');
+            
+            if (fontEditMode) {
+                editButton.classList.add('active');
+                editButton.textContent = 'Done';
+                fontSelectors.forEach(select => select.disabled = false);
+            } else {
+                editButton.classList.remove('active');
+                editButton.textContent = 'Edit';
+                fontSelectors.forEach(select => select.disabled = true);
+            }
+        }
+
+        function updateColor(colorKey, value) {
+            document.documentElement.style.setProperty(`--${colorKey}`, value);
+            document.getElementById(`${colorKey}-value`).textContent = value;
+            
+            if (brands[currentBrand]) {
+                brands[currentBrand].colors[colorKey] = value;
+                updateOntologyDisplay(brands[currentBrand]);
+            }
+        }
+
+        function updateFont(fontType, value) {
+            document.documentElement.style.setProperty(`--font-${fontType}`, value);
+            
+            if (brands[currentBrand]) {
+                brands[currentBrand].fonts[fontType] = value;
+                updateOntologyDisplay(brands[currentBrand]);
+            }
+        }
+
+        function addNewBrand() {
+            const name = document.getElementById('new-brand-name').value;
+            const url = document.getElementById('new-brand-url').value;
+            const orgId = document.getElementById('new-brand-id').value;
+            
+            if (!name || !url || !orgId) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Create new brand configuration
+            const brandKey = name.toLowerCase().replace(/\s+/g, '');
+            
+            brands[brandKey] = {
+                id: orgId,
+                name: name,
+                type: 'custom',
+                websiteUrl: url,
+                colors: {
+                    primary: '#000000',
+                    'primary-dark': '#333333',
+                    'primary-light': '#f0f0f0',
+                    accent: '#666666',
+                    success: '#00aa00',
+                    warning: '#ffaa00',
+                    dark: '#000000',
+                    light: '#eeeeee',
+                    white: '#ffffff'
+                },
+                fonts: {
+                    heading: "system-ui, sans-serif",
+                    body: "system-ui, sans-serif",
+                    mono: "monospace"
+                },
+                logos: {
+                    primary: ''
+                },
+                liveColors: null
+            };
+            
+            // Add button to UI
+            const brandList = document.getElementById('brand-list');
+            const newButton = document.createElement('button');
+            newButton.className = 'brand-button';
+            newButton.onclick = () => switchBrand(brandKey);
+            newButton.innerHTML = `
+                <div class="brand-info">
+                    <span>${name}</span>
+                </div>
+                <span class="brand-url">${url.replace(/https?:\/\//, '')}</span>
+            `;
+            brandList.appendChild(newButton);
+            
+            // Clear form
+            document.getElementById('new-brand-name').value = '';
+            document.getElementById('new-brand-url').value = '';
+            document.getElementById('new-brand-id').value = '';
+            
+            alert(`Brand "${name}" added successfully with Org ID: ${orgId}. You can now edit its colors and fonts.`);
+        }
+
+        function exportConfiguration() {
+            try {
+                const ontology = {
+                    version: '2.2.0',
+                    timestamp: new Date().toISOString(),
+                    brands: {}
+                };
+                
+                // Build complete ontology structure
+                Object.entries(brands).forEach(([key, brand]) => {
+                    // Skip any undefined or null values
+                    if (!brand || !brand.id) return;
+                    
+                    ontology.brands[brand.id] = {
+                        orgId: brand.id || '',
+                        name: brand.name || '',
+                        type: brand.type || '',
+                        websiteUrl: brand.websiteUrl || '',
+                        configuredColors: brand.colors || {},
+                        liveWebsiteColors: brand.liveColors || null,
+                        fonts: brand.fonts || {},
+                        logos: brand.logos || {},
+                        relationships: {
+                            master: brand.type === 'own' ? brand.id : 'master-001',
+                            bridges: brand.type === 'co-branded' ? ['master-001', brand.id] : []
+                        }
+                    };
+                });
+                
+                // Convert to JSON string
+                const dataStr = JSON.stringify(ontology, null, 2);
+                
+                // Create blob instead of data URI (more reliable for large data)
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = window.URL.createObjectURL(blob);
+                
+                // Create download link
+                const exportLink = document.createElement('a');
+                exportLink.href = url;
+                exportLink.download = `baiv-ontology-${Date.now()}.json`;
+                document.body.appendChild(exportLink);
+                exportLink.click();
+                
+                // Clean up
+                document.body.removeChild(exportLink);
+                window.URL.revokeObjectURL(url);
+                
+                console.log('Ontology exported successfully');
+                
+            } catch (error) {
+                console.error('Export failed:', error);
+                alert('Export failed. Check console for details.');
+            }
+        }
+    </script>
+</body>
+</html>
