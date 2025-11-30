@@ -1,8 +1,17 @@
 #Context Engineer Integration/Overlap and Boundaries
 -Strategy context  (VE Value engineering)
--market context
--competitive landscape
--org context
+ontology driven
+-market context whats the market trends and opportunity
+ontology driven
+-competitive landscape direct and indirect latent needs and competitive awareness?
+Ontology driven
+-org context, organisation profile, relative profile and can be multiple roles
+  Ontology driven
+-RRR roles,RACI,RBAC
+-customers
+-internal team
+
+
 -architectural context
 #VE Value Engineering for PaaS CI CD Engineer
 Who? Who needs this and who is it for?
