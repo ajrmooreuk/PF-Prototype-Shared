@@ -1,0 +1,31 @@
+flowchart LR
+    subgraph "VISION"
+        VIS["💡 PF-Core Vision<br/>───────────────<br/>Idea-to-Execution<br/>Bidirectional Design↔Code<br/>Blue Ocean Differentiation"]
+    end
+    
+    subgraph "PRD"
+        PRD_DOC["📋 PRD v1.6.1<br/>───────────────<br/>APPROVED<br/>68 Requirements<br/>8 Requirement Categories"]
+    end
+    
+    subgraph "PBS"
+        PBS_DOC["📦 PBS v1.0.0<br/>───────────────<br/>217 Deliverables<br/>10 Categories<br/>42 Components<br/>98 Sub-components<br/>67 Elements"]
+    end
+    
+    subgraph "WBS"
+        WBS_DOC["📝 WBS v1.0.0<br/>───────────────<br/>156 Tasks<br/>27 Work Packages<br/>2,406 Hours<br/>8 Phases"]
+    end
+    
+    subgraph "EXECUTION"
+        EXE["🚀 Implementation<br/>───────────────<br/>23-24 Weeks<br/>~3.4 FTE<br/>Critical Path: 20 weeks"]
+    end
+    
+    VIS -->|"defines"| PRD_DOC
+    PRD_DOC -->|"decomposes"| PBS_DOC
+    PBS_DOC -->|"schedules"| WBS_DOC
+    WBS_DOC -->|"executes"| EXE
+    
+    style VIS fill:#8b5cf6,color:#fff
+    style PRD_DOC fill:#dc2626,color:#fff,stroke:#991b1b,stroke-width:3px
+    style PBS_DOC fill:#10b981,color:#fff
+    style WBS_DOC fill:#3b82f6,color:#fff
+    style EXE fill:#f59e0b,color:#fff

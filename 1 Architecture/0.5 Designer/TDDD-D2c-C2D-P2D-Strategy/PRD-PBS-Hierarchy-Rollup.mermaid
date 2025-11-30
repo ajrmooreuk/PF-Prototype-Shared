@@ -1,0 +1,60 @@
+flowchart TB
+    subgraph "LEVEL 0: PRODUCT"
+        L0["🏛️ PF-Core<br/>Design Intelligence Platform<br/>PRD v1.6.1 APPROVED<br/>───────────────<br/>68 Requirements"]
+    end
+    
+    subgraph "LEVEL 1: PBS CATEGORIES"
+        L1_1["PF.1<br/>UDS<br/>18"]
+        L1_2["PF.2<br/>Agents<br/>32"]
+        L1_3["PF.3<br/>Ontologies<br/>17"]
+        L1_4["PF.4<br/>Data<br/>10"]
+        L1_5["PF.5<br/>UI<br/>19"]
+        L1_6["PF.6<br/>Figma<br/>13"]
+        L1_7["PF.7<br/>TDDD<br/>16"]
+        L1_8["PF.8<br/>Platforms<br/>22"]
+        L1_9["PF.9<br/>Docs<br/>14"]
+        L1_10["PF.10<br/>DevOps<br/>12"]
+    end
+    
+    subgraph "LEVEL 2: COMPONENTS"
+        L2["42 Components Total"]
+    end
+    
+    subgraph "LEVEL 3: SUB-COMPONENTS"
+        L3["98 Sub-Components Total"]
+    end
+    
+    subgraph "LEVEL 4: ELEMENTS"
+        L4["67 Elements Total<br/>───────────────<br/>217 Total Deliverables"]
+    end
+    
+    L0 --> L1_1 & L1_2 & L1_3 & L1_4 & L1_5
+    L0 --> L1_6 & L1_7 & L1_8 & L1_9 & L1_10
+    
+    L1_1 --> L2
+    L1_2 --> L2
+    L1_3 --> L2
+    L1_4 --> L2
+    L1_5 --> L2
+    L1_6 --> L2
+    L1_7 --> L2
+    L1_8 --> L2
+    L1_9 --> L2
+    L1_10 --> L2
+    
+    L2 --> L3 --> L4
+    
+    style L0 fill:#dc2626,color:#fff,stroke:#991b1b,stroke-width:3px
+    style L1_1 fill:#10b981,color:#fff
+    style L1_2 fill:#10b981,color:#fff
+    style L1_3 fill:#10b981,color:#fff
+    style L1_4 fill:#10b981,color:#fff
+    style L1_5 fill:#10b981,color:#fff
+    style L1_6 fill:#10b981,color:#fff
+    style L1_7 fill:#10b981,color:#fff
+    style L1_8 fill:#10b981,color:#fff
+    style L1_9 fill:#10b981,color:#fff
+    style L1_10 fill:#10b981,color:#fff
+    style L2 fill:#3b82f6,color:#fff
+    style L3 fill:#8b5cf6,color:#fff
+    style L4 fill:#f59e0b,color:#fff
