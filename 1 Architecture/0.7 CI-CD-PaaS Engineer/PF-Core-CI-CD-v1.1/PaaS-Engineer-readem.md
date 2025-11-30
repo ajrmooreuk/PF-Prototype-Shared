@@ -7,3 +7,4 @@ Agent Package Zip v1.0.0 https://github.com/ajrmooreuk/PF-Prototype-Shared/blob/
 
 
 ##ARCHITECTURE: PF-Core->PF Instance-Instance-Product (Paas CI-CD )
+Architecture 1.1.0 https://github.com/ajrmooreuk/PF-Prototype-Shared/blob/main/1%20Architecture/0.7%20CI-CD-PaaS%20Engineer/PF-Core-CI-CD-v1.1/PF-CORE-MVP-CICD-Architecture-v1.1.md
