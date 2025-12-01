@@ -1,0 +1,172 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "agent": "https://platform.foundation/agent/v1/"
+  },
+  "@type": "SoftwareApplication",
+  "@id": "agent:value-proposition-wizard",
+  "name": "PF-Core: VE Value Proposition AGNT-Wizard v1.0.0",
+  "alternateName": "Value Proposition Wizard Agent",
+  "version": "1.0.0",
+  "identifier": "PF-Core_VE_ValueProposition_AgentDef-Wizard_v1.0.0",
+  "description": "Guides users through systematic value proposition development with AI-powered suggestions, integrating VSOM context and optimizing for AI visibility",
+  "applicationCategory": "AI Agent",
+  "operatingSystem": "Claude Agent SDK",
+  
+  "author": {
+    "@type": "Organization",
+    "name": "Platform Foundation Core"
+  },
+  
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "PF-Core Value Engineering Module"
+  },
+  
+  "agentMetadata": {
+    "agentType": "Interactive Wizard",
+    "cluster": "Generation",
+    "primaryMode": "OPERATE",
+    "complexityLevel": "Medium",
+    "humanInLoop": true
+  },
+  
+  "capabilities": [
+    {
+      "capabilityId": "CAP-VPW-001",
+      "name": "Customer Segment Discovery",
+      "description": "Guide users through defining target customer segments with industry, company size, decision makers, and pain points",
+      "inputs": ["organizationContext", "marketContext"],
+      "outputs": ["customerSegmentDefinition"],
+      "aiAssistance": "Suggests industry-specific pain points and decision maker roles"
+    },
+    {
+      "capabilityId": "CAP-VPW-002",
+      "name": "Problem Definition",
+      "description": "Structure problem statements using TARGET-CHALLENGE-OUTCOME-CONSEQUENCES format",
+      "inputs": ["customerSegment", "painPoints"],
+      "outputs": ["problemDefinition"],
+      "aiAssistance": "Validates problem severity and suggests consequence articulation"
+    },
+    {
+      "capabilityId": "CAP-VPW-003",
+      "name": "Value Driver Identification",
+      "description": "Help users identify and quantify value drivers (cost reduction, revenue growth, risk mitigation, etc.)",
+      "inputs": ["problemDefinition", "solutionConcept"],
+      "outputs": ["valueDrivers", "quantifiableValue"],
+      "aiAssistance": "Provides industry benchmarks and ROI calculation templates"
+    },
+    {
+      "capabilityId": "CAP-VPW-004",
+      "name": "Differentiator Analysis",
+      "description": "Identify unique differentiators using Blue Ocean Strategy framework (Eliminate, Reduce, Raise, Create)",
+      "inputs": ["competitiveContext", "valueDrivers"],
+      "outputs": ["differentiators", "competitiveGaps"],
+      "aiAssistance": "Analyzes competitor weaknesses and suggests differentiation strategies"
+    },
+    {
+      "capabilityId": "CAP-VPW-005",
+      "name": "Hypothesis Formulation",
+      "description": "Generate testable hypotheses using IF-FOR-THEN-BECAUSE format",
+      "inputs": ["valuePropositionDraft"],
+      "outputs": ["hypotheses", "validationPlan"],
+      "aiAssistance": "Suggests validation methods and success criteria"
+    },
+    {
+      "capabilityId": "CAP-VPW-006",
+      "name": "AI Visibility Optimization",
+      "description": "Optimize value proposition articulation for AI discovery and recommendation systems",
+      "inputs": ["valueProposition"],
+      "outputs": ["aiOptimizedContent", "visibilityScore"],
+      "aiAssistance": "Analyzes semantic clarity, entity recognition, and citation potential"
+    },
+    {
+      "capabilityId": "CAP-VPW-007",
+      "name": "Visual Representation Generation",
+      "description": "Create visual diagrams showing customer segment → value prop → benefits relationships",
+      "inputs": ["completeValueProposition"],
+      "outputs": ["visualDiagram", "exportableArtifacts"],
+      "aiAssistance": "Generates Mermaid diagrams and exportable PDF/PNG"
+    }
+  ],
+  
+  "ontologyConsumption": [
+    {
+      "ontologyId": "pf-core:ontology:value-proposition-v1",
+      "accessType": "read-write",
+      "entities": ["ValueProposition", "CustomerSegment", "ProblemDefinition", "ValueDriver", "Differentiator", "Hypothesis"]
+    },
+    {
+      "ontologyId": "pf-core:ontology:vsom-v1",
+      "accessType": "read-only",
+      "entities": ["StrategicObjective", "OperationalStrategy"],
+      "purpose": "Align value propositions with organizational strategy"
+    }
+  ],
+  
+  "integrations": [
+    {
+      "system": "Supabase",
+      "purpose": "Persist value proposition data and user progress",
+      "tables": ["value_propositions", "customer_segments", "hypotheses"]
+    },
+    {
+      "system": "BAIV AI Visibility Assessment",
+      "purpose": "Feed validated VPs into visibility optimization pipeline"
+    }
+  ],
+  
+  "systemPrompt": "You are the Value Proposition Wizard Agent, an expert guide for systematic value proposition development. Your role is to help users:\n\n1. **Discover** their target customer segments with precision\n2. **Define** problems using structured TARGET-CHALLENGE-OUTCOME-CONSEQUENCES format\n3. **Identify** value drivers with quantifiable outcomes\n4. **Differentiate** using Blue Ocean Strategy principles\n5. **Formulate** testable hypotheses using IF-FOR-THEN-BECAUSE format\n6. **Optimize** for AI visibility and discoverability\n\n**Context Engineering**:\n- Always request organizational context (VSOM alignment) before starting\n- Consider market context, competitive landscape, and industry specifics\n- Maintain awareness of C-Suite stakeholder perspectives\n\n**Interaction Style**:\n- Guide users step-by-step through the wizard stages\n- Provide AI-powered suggestions at each step\n- Validate inputs against ontology constraints\n- Generate visual representations of relationships\n\n**Output Standards**:\n- All value propositions must include IF-FOR-THEN-BECAUSE hypothesis\n- Quantifiable value must have baseline, target, and timeframe\n- Differentiators must specify sustainability period\n- Final output must be ontology-compliant JSON-LD\n\n**VSOM Integration**:\n- Link value propositions to strategic objectives\n- Ensure alignment with organizational vision and strategy\n- Track contribution to BSC perspectives",
+  
+  "wizardStages": [
+    {
+      "stage": 1,
+      "name": "Customer Segment Definition",
+      "inputs": ["segmentName", "industry", "companySize", "decisionMakers", "influencers"],
+      "validations": ["painPoints required", "at least one decision maker"],
+      "aiHelp": "Suggests common pain points for industry/size combination"
+    },
+    {
+      "stage": 2,
+      "name": "Problem Articulation",
+      "inputs": ["problemStatement", "severity", "frequency", "consequences", "currentSolutions"],
+      "validations": ["problem statement format", "at least one consequence for critical severity"],
+      "aiHelp": "Validates problem structure and suggests consequence articulation"
+    },
+    {
+      "stage": 3,
+      "name": "Solution & Value Drivers",
+      "inputs": ["solutionConcept", "valueDriverType", "quantifiableValue", "evidence"],
+      "validations": ["at least one value driver", "quantifiable value has baseline and target"],
+      "aiHelp": "Provides industry benchmarks for value claims"
+    },
+    {
+      "stage": 4,
+      "name": "Differentiation Strategy",
+      "inputs": ["differentiators", "blueOceanActions", "competitiveGaps", "sustainabilityPeriod"],
+      "validations": ["at least one differentiator", "competitive gap documented"],
+      "aiHelp": "Analyzes competitor landscape and suggests differentiation"
+    },
+    {
+      "stage": 5,
+      "name": "Hypothesis & Validation",
+      "inputs": ["ifComponent", "forComponent", "thenComponent", "becauseComponent", "validationMethod"],
+      "validations": ["all IF-FOR-THEN-BECAUSE components present"],
+      "aiHelp": "Suggests validation approaches and success criteria"
+    }
+  ],
+  
+  "uiRequirements": {
+    "framework": "Next.js with shadcn/ui",
+    "designSystem": "BAIV Brand Colors",
+    "components": [
+      "WizardContainer",
+      "StepIndicator",
+      "AIHelpPanel",
+      "FormElements",
+      "ValuePropCanvas",
+      "ExportControls"
+    ],
+    "figmaDesignSpec": "See PRD-Value-Proposition-Wizard-v2.0.md"
+  }
+}

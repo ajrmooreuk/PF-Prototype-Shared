@@ -1,0 +1,433 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "okr": "https://platform.foundation/ontology/okr/v1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "okr:Ontology",
+      "@type": "CreativeWork",
+      "name": "PF-Core: VE OKR ONT v1.0.0",
+      "alternateName": "Objectives and Key Results Ontology",
+      "version": "1.0.0",
+      "identifier": "PF-Core_VE_OKR_Ontology_v1.0.0",
+      "dateCreated": "2025-11-16",
+      "dateModified": "2025-12-01",
+      "author": {
+        "@type": "Organization",
+        "name": "Platform Foundation Core"
+      },
+      "description": "Comprehensive ontology for Objectives and Key Results framework enabling AI-driven goal management, VSOM alignment tracking, and performance optimization",
+      "keywords": ["OKR", "objectives", "key results", "goal management", "performance", "alignment"],
+      "license": "https://platform.foundation/licenses/pf-core-participant",
+      "isPartOf": {
+        "@type": "SoftwareApplication",
+        "name": "PF-Core Value Engineering Module"
+      }
+    },
+    {
+      "@id": "okr:Objective",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "Objective",
+      "description": "A qualitative, inspirational, time-bound goal that defines what an organization, team, or individual wants to achieve",
+      "properties": [
+        {
+          "@id": "okr:objectiveId",
+          "name": "objectiveId",
+          "rangeIncludes": "Text",
+          "required": true,
+          "example": "OBJ-2025-Q1-001"
+        },
+        {
+          "@id": "okr:objectiveName",
+          "name": "objectiveName",
+          "rangeIncludes": "Text",
+          "required": true,
+          "maxLength": 100
+        },
+        {
+          "@id": "okr:objectiveDescription",
+          "name": "objectiveDescription",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "okr:domain",
+          "name": "domain",
+          "description": "Functional domain this objective belongs to",
+          "rangeIncludes": "Text",
+          "enumValues": ["Marketing", "Sales", "Product", "Engineering", "Finance", "HR", "Operations", "Customer Success"]
+        },
+        {
+          "@id": "okr:timePeriod",
+          "name": "timePeriod",
+          "rangeIncludes": "okr:TimePeriod",
+          "required": true
+        },
+        {
+          "@id": "okr:status",
+          "name": "status",
+          "rangeIncludes": "Text",
+          "enumValues": ["Draft", "Active", "At Risk", "Completed", "Cancelled"]
+        },
+        {
+          "@id": "okr:priority",
+          "name": "priority",
+          "rangeIncludes": "Text",
+          "enumValues": ["P0 - Critical", "P1 - High", "P2 - Medium", "P3 - Low"]
+        },
+        {
+          "@id": "okr:accountableOwner",
+          "name": "accountableOwner",
+          "rangeIncludes": "Person",
+          "required": true
+        },
+        {
+          "@id": "okr:keyResults",
+          "name": "keyResults",
+          "rangeIncludes": "okr:KeyResult",
+          "cardinality": "2..5",
+          "required": true
+        },
+        {
+          "@id": "okr:parentObjective",
+          "name": "parentObjective",
+          "description": "Higher-level objective this cascades from",
+          "rangeIncludes": "okr:Objective"
+        },
+        {
+          "@id": "okr:vsomStrategyAlignment",
+          "name": "vsomStrategyAlignment",
+          "description": "Link to VSOM operational strategy",
+          "rangeIncludes": "URL"
+        },
+        {
+          "@id": "okr:healthScore",
+          "name": "healthScore",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "@id": "okr:confidenceLevel",
+          "name": "confidenceLevel",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      ]
+    },
+    {
+      "@id": "okr:KeyResult",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "QuantitativeValue",
+      "name": "KeyResult",
+      "description": "A specific, measurable outcome that indicates progress toward an objective",
+      "properties": [
+        {
+          "@id": "okr:keyResultId",
+          "name": "keyResultId",
+          "rangeIncludes": "Text",
+          "required": true,
+          "example": "KR-2025-Q1-001-01"
+        },
+        {
+          "@id": "okr:keyResultTitle",
+          "name": "keyResultTitle",
+          "rangeIncludes": "Text",
+          "required": true,
+          "maxLength": 150
+        },
+        {
+          "@id": "okr:indicatorType",
+          "name": "indicatorType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Leading", "Lagging"],
+          "required": true
+        },
+        {
+          "@id": "okr:baselineValue",
+          "name": "baselineValue",
+          "rangeIncludes": "Number",
+          "required": true
+        },
+        {
+          "@id": "okr:targetValue",
+          "name": "targetValue",
+          "rangeIncludes": "Number",
+          "required": true
+        },
+        {
+          "@id": "okr:currentValue",
+          "name": "currentValue",
+          "rangeIncludes": "Number"
+        },
+        {
+          "@id": "okr:unit",
+          "name": "unit",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "okr:progressPercentage",
+          "name": "progressPercentage",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "@id": "okr:confidenceScore",
+          "name": "confidenceScore",
+          "description": "Team confidence in achieving this KR (0-100%)",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "@id": "okr:accountableOwner",
+          "name": "accountableOwner",
+          "rangeIncludes": "Person"
+        },
+        {
+          "@id": "okr:linkedMetric",
+          "name": "linkedMetric",
+          "description": "Reference to Metrics Library metric",
+          "rangeIncludes": "URL"
+        },
+        {
+          "@id": "okr:measurementFrequency",
+          "name": "measurementFrequency",
+          "rangeIncludes": "Text",
+          "enumValues": ["Daily", "Weekly", "Bi-Weekly", "Monthly", "Quarterly"]
+        }
+      ]
+    },
+    {
+      "@id": "okr:TimePeriod",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "TimePeriod",
+      "description": "The time scope for OKR execution",
+      "properties": [
+        {
+          "@id": "okr:periodId",
+          "name": "periodId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "okr:periodType",
+          "name": "periodType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Annual", "Quarterly", "Monthly", "Sprint"],
+          "required": true
+        },
+        {
+          "@id": "okr:startDate",
+          "name": "startDate",
+          "rangeIncludes": "Date",
+          "required": true
+        },
+        {
+          "@id": "okr:endDate",
+          "name": "endDate",
+          "rangeIncludes": "Date",
+          "required": true
+        },
+        {
+          "@id": "okr:fiscalYear",
+          "name": "fiscalYear",
+          "rangeIncludes": "Integer"
+        },
+        {
+          "@id": "okr:quarter",
+          "name": "quarter",
+          "rangeIncludes": "Integer",
+          "minimum": 1,
+          "maximum": 4
+        }
+      ]
+    },
+    {
+      "@id": "okr:CheckIn",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Event",
+      "name": "CheckIn",
+      "description": "A periodic progress review for an objective or key result",
+      "properties": [
+        {
+          "@id": "okr:checkInId",
+          "name": "checkInId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "okr:checkInDate",
+          "name": "checkInDate",
+          "rangeIncludes": "DateTime",
+          "required": true
+        },
+        {
+          "@id": "okr:progressUpdate",
+          "name": "progressUpdate",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "okr:blockers",
+          "name": "blockers",
+          "rangeIncludes": "Text",
+          "cardinality": "0..*"
+        },
+        {
+          "@id": "okr:confidenceChange",
+          "name": "confidenceChange",
+          "rangeIncludes": "Text",
+          "enumValues": ["Increased", "Decreased", "Unchanged"]
+        },
+        {
+          "@id": "okr:nextActions",
+          "name": "nextActions",
+          "rangeIncludes": "Text",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    {
+      "@id": "okr:AlignmentScore",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Rating",
+      "name": "AlignmentScore",
+      "description": "Measures how well an OKR aligns with VSOM strategy",
+      "properties": [
+        {
+          "@id": "okr:scoreValue",
+          "name": "scoreValue",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "@id": "okr:alignmentDimensions",
+          "name": "alignmentDimensions",
+          "rangeIncludes": "okr:AlignmentDimension",
+          "cardinality": "1..*"
+        }
+      ]
+    },
+    {
+      "@id": "okr:AlignmentDimension",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "AlignmentDimension",
+      "description": "A specific dimension of VSOM alignment",
+      "properties": [
+        {
+          "@id": "okr:dimensionName",
+          "name": "dimensionName",
+          "rangeIncludes": "Text",
+          "enumValues": ["Vision Contribution", "Strategy Support", "Objective Alignment", "Metric Connection"]
+        },
+        {
+          "@id": "okr:dimensionScore",
+          "name": "dimensionScore",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "@id": "okr:evidenceLink",
+          "name": "evidenceLink",
+          "rangeIncludes": "URL"
+        }
+      ]
+    }
+  ],
+  "businessRules": [
+    {
+      "ruleId": "BR-OKR-001",
+      "name": "Key Results Per Objective",
+      "description": "Each Objective must have 2-5 Key Results",
+      "constraint": "COUNT(Objective.keyResults) BETWEEN 2 AND 5"
+    },
+    {
+      "ruleId": "BR-OKR-002",
+      "name": "Single Accountable Owner",
+      "description": "Each Objective must have exactly one accountable owner",
+      "constraint": "Objective.accountableOwner IS NOT NULL AND COUNT(Objective.accountableOwner) = 1"
+    },
+    {
+      "ruleId": "BR-OKR-003",
+      "name": "Key Result Measurability",
+      "description": "All Key Results must have baseline and target values",
+      "constraint": "KeyResult.baselineValue IS NOT NULL AND KeyResult.targetValue IS NOT NULL"
+    },
+    {
+      "ruleId": "BR-OKR-004",
+      "name": "Progress Calculation",
+      "description": "Progress percentage calculated from baseline, current, and target values",
+      "constraint": "progressPercentage = ((currentValue - baselineValue) / (targetValue - baselineValue)) * 100"
+    },
+    {
+      "ruleId": "BR-OKR-005",
+      "name": "Health Score Aggregation",
+      "description": "Objective health score is weighted average of Key Result progress",
+      "constraint": "Objective.healthScore = AVG(KeyResult.progressPercentage)"
+    },
+    {
+      "ruleId": "BR-OKR-006",
+      "name": "Leading Indicator Minimum",
+      "description": "At least one Key Result per Objective should be a leading indicator",
+      "constraint": "COUNT(KeyResult WHERE indicatorType = 'Leading') >= 1"
+    }
+  ],
+  "integrationPoints": {
+    "vsom": {
+      "ontologyId": "pf-core:ontology:vsom-v1",
+      "integrationType": "upstream_dependency",
+      "connections": [
+        {
+          "entity": "Objective",
+          "property": "vsomStrategyAlignment",
+          "references": "vsom:OperationalStrategy",
+          "description": "OKR objectives align with VSOM operational strategies"
+        }
+      ]
+    },
+    "metrics_library": {
+      "ontologyId": "pf-core:ontology:metrics-library-v1",
+      "integrationType": "required_dependency",
+      "connections": [
+        {
+          "entity": "KeyResult",
+          "property": "linkedMetric",
+          "references": "ml:Metric",
+          "description": "Key Results reference Metrics Library for measurement"
+        }
+      ]
+    },
+    "roles_raci_rbac": {
+      "ontologyId": "pf-core:ontology:roles-raci-rbac-v3",
+      "integrationType": "cross_reference",
+      "connections": [
+        {
+          "entity": "Objective.accountableOwner",
+          "references": "rrr:Person",
+          "description": "Objective owners link to organizational roles"
+        }
+      ]
+    },
+    "value_proposition": {
+      "ontologyId": "pf-core:ontology:value-proposition-v1",
+      "integrationType": "downstream_consumer",
+      "connections": [
+        {
+          "entity": "Objective",
+          "informedBy": "vp:ValueProposition",
+          "description": "Validated value propositions inform objective setting"
+        }
+      ]
+    }
+  }
+}
