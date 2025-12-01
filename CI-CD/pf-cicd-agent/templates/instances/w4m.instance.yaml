@@ -1,0 +1,67 @@
+# =============================================================================
+# W4M Instance Configuration
+# =============================================================================
+# Workforce 4 Mission Platform Instance
+# =============================================================================
+
+instance_id: "w4m"
+instance_name: "Workforce 4 Mission"
+description: "Workforce development and mission-driven employment platform"
+extends: "pf-core"
+
+# Brand configuration
+design_tokens:
+  colors:
+    primary: "#059669"  # Emerald
+    primary_foreground: "#FFFFFF"
+    secondary: "#10B981"  # Green
+    secondary_foreground: "#FFFFFF"
+    accent: "#F59E0B"  # Amber
+    accent_foreground: "#1F2937"
+    background: "#ECFDF5"  # Light green tint
+    foreground: "#064E3B"
+    muted: "#D1FAE5"
+    muted_foreground: "#065F46"
+    destructive: "#DC2626"
+    border: "#A7F3D0"
+
+  typography:
+    font_family: "Source Sans Pro, sans-serif"
+    font_family_mono: "Source Code Pro, monospace"
+    font_size_base: "16px"
+    line_height_base: 1.55
+
+  spacing:
+    base: "4px"
+    radius_sm: "4px"
+    radius_md: "8px"
+    radius_lg: "12px"
+
+# Brand assets
+brand_assets:
+  logo: "https://assets.w4m-platform.com/logo.svg"
+  logo_dark: "https://assets.w4m-platform.com/logo-dark.svg"
+  favicon: "https://assets.w4m-platform.com/favicon.ico"
+
+# Contact information
+admin_email: "admin@w4m-platform.com"
+support_email: "support@w4m-platform.com"
+
+# Products under this instance
+products:
+  - "endv"
+  - "rnor"
+
+# Instance-specific infrastructure overrides
+infrastructure:
+  production:
+    droplet:
+      size: "s-2vcpu-4gb"
+      backups: true
+      monitoring: true
+    supabase_tier: "pro"
+
+metadata:
+  created_by: "pf-cicd-agent"
+  industry: "workforce_development"
+  target_users: "employers,job_seekers,nonprofits"

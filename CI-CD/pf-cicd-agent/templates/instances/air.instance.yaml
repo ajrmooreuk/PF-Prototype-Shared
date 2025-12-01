@@ -1,0 +1,65 @@
+# =============================================================================
+# AIR Instance Configuration
+# =============================================================================
+# Artist in Residence Platform Instance
+# =============================================================================
+
+instance_id: "air"
+instance_name: "Artist in Residence"
+description: "Platform for managing artist residency programs and creative workspaces"
+extends: "pf-core"
+
+# Brand configuration
+design_tokens:
+  colors:
+    primary: "#E11D48"  # Rose
+    primary_foreground: "#FFFFFF"
+    secondary: "#F472B6"  # Pink
+    secondary_foreground: "#FFFFFF"
+    accent: "#FBBF24"  # Amber
+    accent_foreground: "#1F2937"
+    background: "#FFFBEB"  # Warm white
+    foreground: "#1F2937"
+    muted: "#FEF3C7"
+    muted_foreground: "#6B7280"
+    destructive: "#DC2626"
+    border: "#FECDD3"
+
+  typography:
+    font_family: "Playfair Display, serif"
+    font_family_mono: "JetBrains Mono, monospace"
+    font_size_base: "16px"
+    line_height_base: 1.6
+
+  spacing:
+    base: "4px"
+    radius_sm: "8px"
+    radius_md: "12px"
+    radius_lg: "16px"
+
+# Brand assets
+brand_assets:
+  logo: "https://assets.air-platform.com/logo.svg"
+  logo_dark: "https://assets.air-platform.com/logo-dark.svg"
+  favicon: "https://assets.air-platform.com/favicon.ico"
+
+# Contact information
+admin_email: "admin@air-platform.com"
+support_email: "support@air-platform.com"
+
+# Products under this instance
+products:
+  - "ep"
+
+# Instance-specific infrastructure overrides
+infrastructure:
+  production:
+    droplet:
+      size: "s-2vcpu-4gb"  # Larger for production
+      backups: true
+    supabase_tier: "pro"
+
+metadata:
+  created_by: "pf-cicd-agent"
+  industry: "arts_culture"
+  target_users: "artists,curators,administrators"
