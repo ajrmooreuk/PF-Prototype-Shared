@@ -1,0 +1,117 @@
+# =============================================================================
+# PF-CORE Base Configuration Template
+# =============================================================================
+# This is the root configuration inherited by all instances
+# Template Version: 1.0.0
+# =============================================================================
+
+schema_version: "1.0.0"
+platform_name: "PF-CORE"
+platform_version: "1.0.0"
+
+# Default runtime versions
+default_node_version: "20"
+default_python_version: "3.11"
+
+# Infrastructure defaults
+infrastructure:
+  development:
+    droplet:
+      size: "s-1vcpu-1gb"
+      region: "{{ do_region | default('lon1') }}"
+      image: "ubuntu-22-04-x64"
+      backups: false
+      monitoring: true
+    supabase_tier: "free"
+    domain: "dev.{{ base_domain }}"
+    auto_deploy: true
+
+  staging:
+    droplet:
+      size: "s-1vcpu-1gb"
+      region: "{{ do_region | default('lon1') }}"
+      image: "ubuntu-22-04-x64"
+      backups: false
+      monitoring: true
+    supabase_tier: "free"
+    domain: "staging.{{ base_domain }}"
+    auto_deploy: true
+
+  production:
+    droplet:
+      size: "s-1vcpu-2gb"
+      region: "{{ do_region | default('lon1') }}"
+      image: "ubuntu-22-04-x64"
+      backups: true
+      monitoring: true
+    supabase_tier: "pro"
+    domain: "{{ base_domain }}"
+    auto_deploy: false
+
+# GitHub repository defaults
+github:
+  visibility: "private"
+  has_issues: true
+  has_wiki: false
+  has_projects: true
+  delete_branch_on_merge: true
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: true
+  branch_protection:
+    main:
+      required_reviews: 2
+      dismiss_stale_reviews: true
+      require_code_owner_reviews: false
+      require_status_checks:
+        - "quality-gates"
+        - "security"
+      enforce_admins: true
+    develop:
+      required_reviews: 1
+      dismiss_stale_reviews: true
+      require_code_owner_reviews: false
+      require_status_checks:
+        - "quality-gates"
+      enforce_admins: false
+
+# CI/CD pipeline defaults
+pipeline:
+  quality_gates:
+    coverage_threshold: 80.0
+    lint_enabled: true
+    type_check_enabled: true
+    security_scan_enabled: true
+  deployment_strategy: "rolling"
+  enable_preview_deployments: false
+  enable_e2e_tests: true
+
+# Default design tokens (can be overridden per instance)
+design_tokens:
+  colors:
+    primary: "#3B82F6"
+    primary_foreground: "#FFFFFF"
+    secondary: "#6B7280"
+    secondary_foreground: "#FFFFFF"
+    accent: "#8B5CF6"
+    accent_foreground: "#FFFFFF"
+    background: "#FFFFFF"
+    foreground: "#0F172A"
+    muted: "#F1F5F9"
+    muted_foreground: "#64748B"
+    destructive: "#EF4444"
+    border: "#E2E8F0"
+  typography:
+    font_family: "Inter, sans-serif"
+    font_family_mono: "JetBrains Mono, monospace"
+    font_size_base: "16px"
+    line_height_base: 1.5
+  spacing:
+    base: "4px"
+    radius_sm: "4px"
+    radius_md: "8px"
+    radius_lg: "12px"
+
+metadata:
+  created_by: "pf-cicd-agent"
+  template_version: "1.0.0"

@@ -1,0 +1,67 @@
+# =============================================================================
+# BAIV Instance Configuration
+# =============================================================================
+# Bay Area Innovation Ventures Platform Instance
+# =============================================================================
+
+instance_id: "baiv"
+instance_name: "Bay Area Innovation Ventures"
+description: "Innovation hub platform for startups, accelerators, and venture capital"
+extends: "pf-core"
+
+# Brand configuration
+design_tokens:
+  colors:
+    primary: "#0EA5E9"  # Sky blue
+    primary_foreground: "#FFFFFF"
+    secondary: "#6366F1"  # Indigo
+    secondary_foreground: "#FFFFFF"
+    accent: "#22D3EE"  # Cyan
+    accent_foreground: "#1F2937"
+    background: "#F0F9FF"  # Light blue tint
+    foreground: "#0F172A"
+    muted: "#E0F2FE"
+    muted_foreground: "#475569"
+    destructive: "#EF4444"
+    border: "#BAE6FD"
+
+  typography:
+    font_family: "Inter, sans-serif"
+    font_family_mono: "Fira Code, monospace"
+    font_size_base: "15px"
+    line_height_base: 1.5
+
+  spacing:
+    base: "4px"
+    radius_sm: "6px"
+    radius_md: "10px"
+    radius_lg: "14px"
+
+# Brand assets
+brand_assets:
+  logo: "https://assets.baiv-platform.com/logo.svg"
+  logo_dark: "https://assets.baiv-platform.com/logo-dark.svg"
+  favicon: "https://assets.baiv-platform.com/favicon.ico"
+
+# Contact information
+admin_email: "admin@baiv-platform.com"
+support_email: "support@baiv-platform.com"
+
+# Products under this instance
+products:
+  - "vhf"
+  - "wwg"
+
+# Instance-specific infrastructure overrides
+infrastructure:
+  production:
+    droplet:
+      size: "s-2vcpu-4gb"
+      backups: true
+      monitoring: true
+    supabase_tier: "pro"
+
+metadata:
+  created_by: "pf-cicd-agent"
+  industry: "technology_innovation"
+  target_users: "startups,investors,accelerators"
