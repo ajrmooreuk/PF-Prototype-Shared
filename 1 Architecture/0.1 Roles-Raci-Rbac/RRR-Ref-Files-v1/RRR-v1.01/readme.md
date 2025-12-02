@@ -1,0 +1,1 @@
+#Main files or establishng RRR Context and Ontology for the Roles and Responsibilities, the RACI Matrix and the Collaborative Relationships between roles and finally the discrete User Role Based Profiles and Controls that align with named individual users.
