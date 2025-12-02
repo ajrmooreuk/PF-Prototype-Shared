@@ -1,2 +1,0 @@
-#PF-Core Files and Approaches to revise and utilise in Context Engineer,VE and Both ICP and RRR across PF-Core, within PF-Instance and Prodtuct-Instance and Context for Client-ORG-ID and User-ID using a product in PF-Instnace
-Roles strategic look at business roles perspectives scopes and their responsibiliitites as an ontology that informs what matters most for the roles responsibiliities, relationships RACI and specific role based access controls  for the given context of the user.
