@@ -1,0 +1,665 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "oaa": "https://ontology-architect.io/schema/v1/",
+    "baiv": "https://baiv.io/ontology/v2/"
+  },
+  "@type": "oaa:OntologyRegistryEntry",
+  "@id": "oaa:registry/ai-visibility-marketing-v2",
+  "registrationDate": "2025-10-10T00:00:00Z",
+  "status": "active",
+  
+  "ontology": {
+    "@id": "baiv:ontology/ai-visibility-marketing-v2",
+    "@type": "Ontology",
+    "identifier": "ai-visibility-marketing-v2",
+    "name": "AI Visibility Marketing Ontology",
+    "version": "2.0.0",
+    "versionDate": "2025-10-10",
+    "description": "Comprehensive ontology integrating AI Visibility as foundational marketing capability within CMO framework, enabling systematic planning and execution of AI discoverability strategies",
+    "domain": "Marketing Strategy & AI Visibility",
+    "subDomains": [
+      "CMO Leadership",
+      "AI Search Optimization",
+      "Content Strategy",
+      "Performance Marketing",
+      "Knowledge Management"
+    ]
+  },
+  
+  "metadata": {
+    "creator": {
+      "@type": "Organization",
+      "name": "BAIV - Business AI Visibility",
+      "email": "ontology@baiv.io"
+    },
+    "maintainer": {
+      "@type": "Person",
+      "name": "CMO Office",
+      "email": "cmo-office@baiv.io"
+    },
+    "contributors": [
+      {
+        "@type": "Person",
+        "name": "Marketing Operations Team",
+        "role": "Implementation"
+      },
+      {
+        "@type": "Person",
+        "name": "Data Architecture Team",
+        "role": "Technical Review"
+      }
+    ],
+    "license": "Proprietary - Internal Use",
+    "language": "en-US"
+  },
+  
+  "entities": {
+    "total": 10,
+    "core": [
+      "AIVisibilityStrategy",
+      "AIVisibilityObjective",
+      "KeyResult",
+      "KnowledgeGraph",
+      "AIOptimizedContent",
+      "CitationSource",
+      "AIVisibilityMetric",
+      "CMORole",
+      "MarketingCampaign",
+      "PlatformInstance"
+    ],
+    "entitySummary": {
+      "newEntities": 7,
+      "extendedFromSchemaOrg": 3,
+      "totalProperties": 48,
+      "totalRelationships": 6
+    }
+  },
+  
+  "relationships": [
+    {
+      "type": "cascadesTo",
+      "description": "OKR cascade from strategic to tactical",
+      "usage": "Connect corporate → marketing → AI Visibility → execution OKRs"
+    },
+    {
+      "type": "dependsOn",
+      "description": "Dependency showing what requires AI Visibility",
+      "usage": "Show marketing activities dependent on discoverability"
+    },
+    {
+      "type": "enables",
+      "description": "Shows what AI Visibility enables",
+      "usage": "Map how visibility enables downstream activities"
+    },
+    {
+      "type": "collaboratesOn",
+      "description": "Cross-functional collaboration",
+      "usage": "Connect C-Suite roles working on AI Visibility"
+    },
+    {
+      "type": "measures",
+      "description": "Metrics measuring success",
+      "usage": "Link strategies to performance metrics"
+    },
+    {
+      "type": "cites",
+      "description": "Citation relationships",
+      "usage": "Track authoritative sources citing organization"
+    }
+  ],
+  
+  "dependencies": {
+    "requiredOntologies": [
+      {
+        "identifier": "schema.org",
+        "version": "latest",
+        "entities": [
+          "Thing",
+          "Intangible",
+          "Role",
+          "OrganizationRole",
+          "Action",
+          "Goal",
+          "CreativeWork",
+          "Dataset"
+        ],
+        "purpose": "Foundation vocabulary for semantic interoperability"
+      }
+    ],
+    "optionalOntologies": [
+      {
+        "identifier": "baiv:cmo-role-ontology-v1",
+        "version": "1.0.0",
+        "purpose": "Original CMO framework - v2.0 extends this"
+      },
+      {
+        "identifier": "baiv:okr-ontology-v1",
+        "version": "1.0.0",
+        "purpose": "OKR framework patterns"
+      },
+      {
+        "identifier": "baiv:process-ontology-v1",
+        "version": "1.0.0",
+        "purpose": "Business process workflows"
+      }
+    ],
+    "dependentOntologies": [
+      {
+        "identifier": "baiv:campaign-manager-ontology-v1",
+        "version": "1.0.0",
+        "purpose": "Campaign management extends AI Visibility concepts"
+      }
+    ]
+  },
+  
+  "consumers": [
+    {
+      "system": "BAIV Platform",
+      "version": "3.2.0",
+      "usage": "Core product functionality for AI visibility services",
+      "criticality": "Critical"
+    },
+    {
+      "system": "W4M Platform",
+      "version": "2.1.0",
+      "usage": "Website AI readiness features",
+      "criticality": "High"
+    },
+    {
+      "system": "ECOOAI Platform",
+      "version": "1.8.0",
+      "usage": "E-commerce AI discoverability",
+      "criticality": "High"
+    },
+    {
+      "system": "Marketing Analytics Dashboard",
+      "version": "1.5.0",
+      "usage": "Performance tracking and reporting",
+      "criticality": "Medium"
+    }
+  ],
+  
+  "qualityMetrics": {
+    "entityReuseRate": {
+      "value": 85,
+      "threshold": 80,
+      "status": "pass",
+      "notes": "High reuse across BAIV, W4M, ECOOAI platforms"
+    },
+    "schemaOrgAlignment": {
+      "value": 85,
+      "threshold": 80,
+      "status": "pass",
+      "notes": "Strong grounding in schema.org vocabulary"
+    },
+    "validationPassRate": {
+      "value": 100,
+      "threshold": 95,
+      "status": "pass",
+      "notes": "All test instances validate successfully"
+    },
+    "agentQuerySuccess": {
+      "value": 95,
+      "threshold": 90,
+      "status": "pass",
+      "notes": "High success rate for AI agent queries"
+    },
+    "documentationCompleteness": {
+      "value": 100,
+      "threshold": 95,
+      "status": "pass",
+      "notes": "Comprehensive documentation with examples"
+    },
+    "relationshipDensity": {
+      "value": 4.2,
+      "threshold": null,
+      "status": "appropriate",
+      "notes": "Balanced complexity for marketing domain"
+    },
+    "namingConventionCompliance": {
+      "value": 100,
+      "threshold": 100,
+      "status": "pass",
+      "notes": "Consistent camelCase and clear naming"
+    }
+  },
+  
+  "artifacts": {
+    "definitionFile": {
+      "format": "JSON-LD",
+      "location": "/ontologies/ai-visibility-marketing/v2/definition.jsonld",
+      "size": "45KB",
+      "checksum": "sha256:abc123...",
+      "lastModified": "2025-10-10T00:00:00Z"
+    },
+    "glossary": {
+      "formats": ["JSON", "Markdown", "HTML"],
+      "locations": [
+        "/ontologies/ai-visibility-marketing/v2/glossary.json",
+        "/ontologies/ai-visibility-marketing/v2/glossary.md",
+        "/ontologies/ai-visibility-marketing/v2/glossary.html"
+      ],
+      "termCount": 67,
+      "lastModified": "2025-10-10T00:00:00Z"
+    },
+    "testData": {
+      "format": "JSON-LD",
+      "location": "/ontologies/ai-visibility-marketing/v2/test-data.jsonld",
+      "instanceCount": 50,
+      "coverage": {
+        "typical": 30,
+        "edge": 10,
+        "boundary": 5,
+        "invalid": 5
+      },
+      "lastModified": "2025-10-10T00:00:00Z"
+    },
+    "documentation": {
+      "formats": ["Markdown", "HTML", "PDF"],
+      "locations": [
+        "/ontologies/ai-visibility-marketing/v2/CMO_Strategic_Framework_v2_AI_Visibility.md",
+        "/ontologies/ai-visibility-marketing/v2/AI_Visibility_Implementation_Guide_v2.md",
+        "/ontologies/ai-visibility-marketing/v2/docs.html",
+        "/ontologies/ai-visibility-marketing/v2/docs.pdf"
+      ],
+      "pages": 85,
+      "lastModified": "2025-10-10T00:00:00Z"
+    },
+    "visualizations": {
+      "diagrams": [
+        "Strategic Architecture",
+        "OKR Cascade",
+        "Dependency Graph",
+        "RACI Matrices",
+        "Implementation Roadmap",
+        "Measurement Dashboard"
+      ],
+      "format": "Mermaid (embedded in Markdown)",
+      "count": 35
+    }
+  },
+  
+  "validationReport": {
+    "validationDate": "2025-10-10T00:00:00Z",
+    "validator": "OAA Validation Suite v1.0",
+    "overallStatus": "PASS",
+    "details": {
+      "structuralValidation": {
+        "status": "PASS",
+        "validJSON-LD": true,
+        "requiredFieldsPresent": true,
+        "schemaCompliance": true
+      },
+      "semanticValidation": {
+        "status": "PASS",
+        "circularDependencies": false,
+        "validCardinality": true,
+        "consistentNaming": true
+      },
+      "businessRuleValidation": {
+        "status": "PASS",
+        "rulesCount": 12,
+        "rulesPassed": 12,
+        "rulesFailed": 0
+      },
+      "qualityThresholds": {
+        "status": "PASS",
+        "thresholdsMet": 7,
+        "thresholdsTotal": 7,
+        "details": "All quality metrics exceed minimum thresholds"
+      },
+      "testDataValidation": {
+        "status": "PASS",
+        "instancesTested": 50,
+        "instancesPassed": 50,
+        "validationRate": 100
+      }
+    },
+    "warnings": [],
+    "recommendations": [
+      "Consider adding more edge case test instances for PlatformInstance entity",
+      "Document integration patterns with external systems"
+    ]
+  },
+  
+  "changeHistory": [
+    {
+      "version": "2.0.0",
+      "date": "2025-10-10",
+      "changeType": "major",
+      "author": "CMO Office",
+      "rfcId": "RFC-AIV-002",
+      "description": "Complete AI Visibility integration with CMO framework v1.0",
+      "changes": {
+        "added": [
+          "AIVisibilityStrategy entity",
+          "AIVisibilityObjective entity",
+          "KnowledgeGraph entity",
+          "AIOptimizedContent entity",
+          "CitationSource entity",
+          "AIVisibilityMetric entity",
+          "PlatformInstance entity",
+          "Cascading OKR framework",
+          "Graph-based dependency model",
+          "Platform-specific templates (BAIV, W4M, ECOOAI)"
+        ],
+        "changed": [
+          "CMORole entity - added AI Visibility responsibility",
+          "MarketingCampaign entity - added AI attribution",
+          "Extended OKR relationships with cascadesTo, dependsOn, enables"
+        ],
+        "deprecated": [],
+        "removed": []
+      },
+      "breakingChanges": false,
+      "migrationRequired": false,
+      "impactAnalysis": {
+        "affectedSystems": ["BAIV Platform", "W4M Platform", "ECOOAI Platform"],
+        "estimatedEffort": "2 weeks implementation per platform",
+        "riskLevel": "Low - additive changes only"
+      }
+    },
+    {
+      "version": "1.0.0",
+      "date": "2025-10-03",
+      "changeType": "initial",
+      "author": "CMO Office",
+      "rfcId": "RFC-CMO-001",
+      "description": "Initial CMO role and marketing strategy ontology",
+      "changes": {
+        "added": [
+          "CMORole entity",
+          "MarketingStrategy entity",
+          "Basic OKR framework",
+          "C-Suite collaboration model"
+        ]
+      }
+    }
+  ],
+  
+  "governance": {
+    "owner": {
+      "@type": "OrganizationRole",
+      "name": "CMO Office",
+      "email": "cmo-office@baiv.io",
+      "responsibility": "Strategic direction and business alignment"
+    },
+    "steward": {
+      "@type": "OrganizationRole",
+      "name": "Marketing Operations",
+      "email": "mops@baiv.io",
+      "responsibility": "Day-to-day maintenance and updates"
+    },
+    "approvalBoard": [
+      {
+        "@type": "Person",
+        "name": "CEO",
+        "role": "Strategic Approval"
+      },
+      {
+        "@type": "Person",
+        "name": "CMO",
+        "role": "Business Approval"
+      },
+      {
+        "@type": "Person",
+        "name": "CAO",
+        "role": "AI Capability Review"
+      },
+      {
+        "@type": "Person",
+        "name": "CTO",
+        "role": "Technical Review"
+      }
+    ],
+    "reviewCycle": {
+      "frequency": "Quarterly",
+      "nextReview": "2026-01-10",
+      "reviewScope": [
+        "Quality metrics assessment",
+        "Consumer feedback incorporation",
+        "Alignment with business strategy",
+        "Technology stack updates"
+      ]
+    },
+    "changeManagement": {
+      "minorChanges": {
+        "approval": "Marketing Operations",
+        "notification": "Consumers via email",
+        "leadTime": "1 week"
+      },
+      "majorChanges": {
+        "approval": "CMO + Approval Board",
+        "notification": "All stakeholders + formal announcement",
+        "leadTime": "4 weeks",
+        "migrationGuideRequired": true
+      },
+      "breakingChanges": {
+        "approval": "Full approval board + CEO",
+        "notification": "All stakeholders + migration support",
+        "leadTime": "8 weeks",
+        "impactAssessmentRequired": true,
+        "consumerConsultationRequired": true
+      }
+    }
+  },
+  
+  "usageGuidelines": {
+    "whenToUse": [
+      "Developing marketing strategy with AI Visibility focus",
+      "Setting OKRs for marketing teams",
+      "Planning content optimization initiatives",
+      "Measuring AI discoverability performance",
+      "Implementing AI Visibility for new platforms",
+      "Cross-C-Suite collaboration on AI initiatives"
+    ],
+    "whenNotToUse": [
+      "Pure product development (use product ontology)",
+      "Sales process management (use sales ontology)",
+      "Customer support workflows (use support ontology)",
+      "Financial planning (use finance ontology)"
+    ],
+    "bestPractices": [
+      "Always cascade OKRs from corporate through marketing to AI Visibility",
+      "Measure all four AI Visibility dimensions: Discovery, Authority, Engagement, Conversion",
+      "Update metrics weekly, review OKRs monthly, strategy quarterly",
+      "Use platform templates (BAIV/W4M/ECOOAI) as starting point",
+      "Maintain graph-based view of dependencies",
+      "Integrate with existing CMO framework v1.0 where applicable"
+    ],
+    "commonPatterns": [
+      {
+        "name": "Corporate to Execution Cascade",
+        "description": "Trace OKRs from corporate strategy → marketing → AI Visibility → execution",
+        "example": "Corporate market leadership → Marketing thought leadership → AI discoverability → Content optimization"
+      },
+      {
+        "name": "Dependency Analysis",
+        "description": "Identify what marketing activities depend on AI Visibility",
+        "example": "Lead generation depends on AI Visibility, which requires Content optimization and Citation building"
+      },
+      {
+        "name": "Platform Implementation",
+        "description": "Customize AI Visibility strategy for specific platform",
+        "example": "BAIV focuses on thought leadership, W4M on feature education, ECOOAI on product visibility"
+      },
+      {
+        "name": "Cross-Functional Collaboration",
+        "description": "Coordinate AI Visibility across C-Suite",
+        "example": "CMO owns strategy, CTO implements infrastructure, CDO structures data, CAO integrates AI"
+      }
+    ]
+  },
+  
+  "integrationPoints": {
+    "upstreamSystems": [
+      {
+        "system": "Corporate Strategy Platform",
+        "dataFlow": "Corporate OKRs → Marketing OKRs",
+        "frequency": "Quarterly"
+      },
+      {
+        "system": "CEO Dashboard",
+        "dataFlow": "Strategic priorities → AI Visibility priorities",
+        "frequency": "Monthly"
+      }
+    ],
+    "downstreamSystems": [
+      {
+        "system": "Content Management System",
+        "dataFlow": "AI Visibility requirements → Content guidelines",
+        "frequency": "Continuous"
+      },
+      {
+        "system": "Marketing Automation",
+        "dataFlow": "AI Visibility OKRs → Campaign parameters",
+        "frequency": "Weekly"
+      },
+      {
+        "system": "Analytics Dashboard",
+        "dataFlow": "Metrics definition → Performance tracking",
+        "frequency": "Daily"
+      }
+    ],
+    "peerSystems": [
+      {
+        "system": "Sales Ontology",
+        "integration": "AI-attributed leads flow to sales pipeline",
+        "sharedEntities": ["Lead", "Opportunity"]
+      },
+      {
+        "system": "Product Ontology",
+        "integration": "Product features inform AI content optimization",
+        "sharedEntities": ["Product", "Feature"]
+      }
+    ]
+  },
+  
+  "aiAgentCapabilities": {
+    "supportedQueries": [
+      "What is the AI visibility strategy for [organization]?",
+      "Show OKR cascade from corporate to AI Visibility execution",
+      "Which marketing activities depend on AI Visibility?",
+      "What is the current AI visibility score and trend?",
+      "Compare AI visibility across platforms (BAIV, W4M, ECOOAI)",
+      "Who is responsible for AI Visibility implementation?",
+      "What are the top 3 AI Visibility priorities this quarter?",
+      "How does AI Visibility enable revenue growth?"
+    ],
+    "reasoningCapabilities": [
+      "Trace dependencies through graph relationships",
+      "Identify circular dependencies in OKR cascades",
+      "Predict impact of content optimization on visibility",
+      "Recommend citation sources based on authority scores",
+      "Suggest RACI assignments based on role patterns",
+      "Alert when metrics fall below thresholds",
+      "Compare platform strategies and recommend optimizations"
+    ],
+    "generationCapabilities": [
+      "Generate platform-specific OKR templates",
+      "Create implementation checklists",
+      "Produce performance reports",
+      "Draft content optimization guidelines",
+      "Build custom dashboards",
+      "Generate migration guides for updates"
+    ]
+  },
+  
+  "securityAndAccess": {
+    "classification": "Internal - Confidential",
+    "accessControl": {
+      "read": ["All Marketing Team", "C-Suite", "Data Team"],
+      "write": ["Marketing Operations", "CMO Office"],
+      "approve": ["CMO", "Approval Board"],
+      "admin": ["Ontology Architect", "System Admin"]
+    },
+    "dataPrivacy": {
+      "piiIncluded": false,
+      "gdprCompliant": true,
+      "dataRetention": "Indefinite - strategic asset"
+    },
+    "auditLogging": {
+      "enabled": true,
+      "logChanges": true,
+      "logAccess": true,
+      "retentionPeriod": "7 years"
+    }
+  },
+  
+  "performance": {
+    "queryPerformance": {
+      "averageResponseTime": "120ms",
+      "p95ResponseTime": "250ms",
+      "p99ResponseTime": "400ms"
+    },
+    "scalability": {
+      "maxEntities": "10,000+",
+      "maxRelationships": "50,000+",
+      "recommendedIndexes": ["entityType", "platformInstance", "status", "dateModified"]
+    },
+    "caching": {
+      "enabled": true,
+      "ttl": "1 hour",
+      "invalidationTriggers": ["entity update", "relationship change", "metrics refresh"]
+    }
+  },
+  
+  "support": {
+    "documentation": "https://docs.baiv.io/ontologies/ai-visibility-marketing/v2/",
+    "examples": "https://docs.baiv.io/ontologies/ai-visibility-marketing/v2/examples/",
+    "faq": "https://docs.baiv.io/ontologies/ai-visibility-marketing/v2/faq/",
+    "support": "ontology-support@baiv.io",
+    "slack": "#ontology-support",
+    "trainingMaterials": [
+      "AI Visibility Ontology Quick Start Guide",
+      "Platform Implementation Workshop",
+      "OKR Cascade Training",
+      "RACI Assignment Workshop"
+    ]
+  },
+  
+  "futureEnhancements": [
+    {
+      "version": "2.1.0",
+      "plannedDate": "2026-Q2",
+      "features": [
+        "Advanced sentiment analysis integration",
+        "Real-time AI citation tracking",
+        "Automated content optimization recommendations",
+        "Predictive visibility scoring"
+      ]
+    },
+    {
+      "version": "3.0.0",
+      "plannedDate": "2026-Q4",
+      "features": [
+        "Multi-language support",
+        "Industry-specific templates",
+        "Competitive benchmarking",
+        "AI agent self-optimization capabilities"
+      ]
+    }
+  ],
+  
+  "relatedResources": [
+    {
+      "type": "Research Paper",
+      "title": "AI Visibility: The New Marketing Foundation",
+      "url": "https://research.baiv.io/papers/ai-visibility-foundation-2025.pdf",
+      "date": "2025-09-15"
+    },
+    {
+      "type": "Case Study",
+      "title": "How BAIV Achieved 90+ AI Visibility Score in 6 Months",
+      "url": "https://baiv.io/case-studies/baiv-ai-visibility/",
+      "date": "2025-10-01"
+    },
+    {
+      "type": "Webinar",
+      "title": "CMO Framework v2.0: Integrating AI Visibility",
+      "url": "https://baiv.io/webinars/cmo-framework-v2/",
+      "date": "2025-10-05"
+    }
+  ]
+}
