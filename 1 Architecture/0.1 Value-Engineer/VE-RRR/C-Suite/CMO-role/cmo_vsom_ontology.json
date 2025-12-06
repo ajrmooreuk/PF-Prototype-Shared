@@ -1,0 +1,534 @@
+{
+  "@context": {
+    "@vocab": "https://ontology.example.com/cmo-vsom#",
+    "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "org": "https://www.w3.org/ns/org#",
+    "vso": "https://ontology.example.com/vso-okr#"
+  },
+  "@type": "owl:Ontology",
+  "@id": "https://ontology.example.com/cmo-vsom-okr-csuite",
+  "rdfs:label": "CMO VSOM OKR C-Suite Responsibilities Ontology",
+  "rdfs:comment": "Comprehensive ontology mapping Chief Marketing Officer roles, responsibilities, and relationships within VSOM framework, OKR methodology, and C-suite collaboration",
+  "owl:versionInfo": "1.0.0",
+  "owl:imports": [
+    "https://schema.org/",
+    "https://www.w3.org/ns/org"
+  ],
+  "schema:dateCreated": "2025-09-20",
+  "schema:author": {
+    "@type": "schema:Person",
+    "schema:name": "AI BI Digital Transformation Consultant"
+  },
+
+  "classes": {
+    "ChiefMarketingOfficer": {
+      "@type": "owl:Class",
+      "@id": "cmo:ChiefMarketingOfficer",
+      "rdfs:label": "Chief Marketing Officer",
+      "rdfs:comment": "Executive responsible for marketing strategy, brand management, and revenue growth",
+      "rdfs:subClassOf": "schema:Person",
+      "schema:sameAs": "schema:OrganizationRole",
+      "vso:level": 2,
+      "attributes": {
+        "schema:jobTitle": "Chief Marketing Officer",
+        "schema:responsibilities": [
+          "Brand positioning leadership",
+          "Customer acquisition frameworks", 
+          "Market intelligence gathering",
+          "Revenue attribution",
+          "Digital transformation initiatives"
+        ],
+        "schema:skills": [
+          "Strategic thinking",
+          "Data analytics",
+          "Customer experience design",
+          "Marketing technology",
+          "Cross-functional leadership"
+        ],
+        "schema:reports": "schema:ChiefExecutiveOfficer",
+        "vso:vsom_responsibilities": {
+          "vision": "Market positioning and brand vision articulation",
+          "strategy": "Competitive advantage and growth strategy development", 
+          "operations": "Customer journey optimization and operational excellence",
+          "marketing": "Brand growth and marketing execution leadership"
+        }
+      }
+    },
+
+    "MarketStrategy": {
+      "@type": "owl:Class",
+      "@id": "cmo:MarketStrategy", 
+      "rdfs:label": "Market Strategy",
+      "rdfs:comment": "Comprehensive market positioning and competitive strategy framework",
+      "rdfs:subClassOf": "schema:Plan",
+      "schema:sameAs": "schema:BusinessPlan",
+      "attributes": {
+        "schema:name": "Market Strategy Framework",
+        "schema:description": "Annual strategic framework including budget responsibility and market updates",
+        "schema:components": [
+          "Market positioning strategy",
+          "Competitive analysis framework", 
+          "Customer segmentation model",
+          "Brand differentiation strategy",
+          "Revenue growth targets"
+        ],
+        "schema:frequency": "Annual with quarterly updates",
+        "schema:stakeholders": ["CMO", "CEO", "CFO", "Sales Director"],
+        "schema:deliverables": [
+          "Annual marketing budget proposal",
+          "Quarterly market analysis reports",
+          "Competitive positioning updates",
+          "Brand health metrics"
+        ]
+      }
+    },
+
+    "ExecutiveAccountability": {
+      "@type": "owl:Class",
+      "@id": "cmo:ExecutiveAccountability",
+      "rdfs:label": "Executive Accountability Framework", 
+      "rdfs:comment": "CMO-CEO-CFO accountability structure for revenue growth and performance",
+      "rdfs:subClassOf": "schema:Organization",
+      "attributes": {
+        "schema:name": "C-Suite Accountability Matrix",
+        "schema:description": "Executive accountability structure for revenue growth targeting",
+        "schema:participants": {
+          "cmo": {
+            "schema:role": "Marketing Performance Owner",
+            "schema:accountability": "Revenue attribution and marketing ROI",
+            "schema:kpis": [
+              "Customer acquisition cost",
+              "Customer lifetime value", 
+              "Marketing qualified leads",
+              "Brand equity metrics"
+            ]
+          },
+          "ceo": {
+            "schema:role": "Strategic Direction Authority",
+            "schema:accountability": "Overall business performance and vision execution",
+            "schema:authority": "Final approval on marketing strategy and budget"
+          },
+          "cfo": {
+            "schema:role": "Financial Oversight Partner",
+            "schema:accountability": "Budget authorization and financial performance",
+            "schema:collaboration": "ROI measurement and revenue forecasting"
+          }
+        }
+      }
+    },
+
+    "CustomerOperations": {
+      "@type": "owl:Class",
+      "@id": "cmo:CustomerOperations",
+      "rdfs:label": "Customer Operations Excellence",
+      "rdfs:comment": "Technology-driven customer initiatives and success management", 
+      "rdfs:subClassOf": "schema:Service",
+      "attributes": {
+        "schema:name": "Customer Operations Framework",
+        "schema:description": "CTO digital technology initiatives and customer success coordination",
+        "schema:components": [
+          "Customer journey mapping",
+          "Digital experience optimization",
+          "Customer data platform management",
+          "Marketing automation workflows"
+        ],
+        "schema:technology_partnerships": {
+          "cto_collaboration": {
+            "schema:focus": "Digital experience platforms",
+            "schema:deliverables": [
+              "Customer data integration",
+              "Marketing technology architecture", 
+              "Personalization engines",
+              "Analytics dashboards"
+            ]
+          }
+        },
+        "schema:metrics": [
+          "Customer satisfaction scores",
+          "Net promoter score",
+          "Customer effort score",
+          "Digital engagement rates"
+        ]
+      }
+    },
+
+    "OKRAlignment": {
+      "@type": "owl:Class", 
+      "@id": "cmo:OKRAlignment",
+      "rdfs:label": "OKR Alignment Framework",
+      "rdfs:comment": "Cross-functional team alignment and sales coordination through OKR methodology",
+      "rdfs:subClassOf": "schema:Plan",
+      "vso:framework": "Objectives and Key Results",
+      "attributes": {
+        "schema:name": "Marketing OKR Alignment System",
+        "schema:description": "Cross-functional OKR coordination and sales team alignment",
+        "vso:okr_structure": {
+          "company_level": {
+            "schema:responsible": "CEO",
+            "schema:accountable": "Board of Directors",
+            "schema:consulted": ["CMO", "CFO", "CTO", "CHRO"],
+            "schema:informed": "All employees"
+          },
+          "marketing_level": {
+            "schema:responsible": "CMO", 
+            "schema:accountable": "CEO",
+            "schema:consulted": ["Sales Director", "Product Manager"],
+            "schema:informed": ["Marketing Team", "Customer Success"]
+          }
+        },
+        "schema:cross_functional_coordination": [
+          "Sales enablement programs",
+          "Product marketing alignment",
+          "Customer success integration",
+          "Revenue operations coordination"
+        ],
+        "schema:meeting_cadence": {
+          "weekly": "Cross-functional standup meetings",
+          "monthly": "OKR progress reviews",
+          "quarterly": "Strategic alignment sessions"
+        }
+      }
+    },
+
+    "QuarterlyReview": {
+      "@type": "owl:Class",
+      "@id": "cmo:QuarterlyReview", 
+      "rdfs:label": "Quarterly Review Process",
+      "rdfs:comment": "Strategic performance measurement and board reporting framework",
+      "rdfs:subClassOf": "schema:Report",
+      "attributes": {
+        "schema:name": "Quarterly Strategic Performance Review",
+        "schema:description": "Objective performance measurement and board strategic process reporting",
+        "schema:frequency": "Quarterly",
+        "schema:participants": {
+          "board_level": ["Chairman of Board", "Board Directors"],
+          "executive_level": ["CEO", "CMO", "CFO", "CHRO", "CTO", "CAIO"],
+          "functional_level": ["Marketing Director", "Sales Director", "Product Director"]
+        },
+        "schema:reporting_structure": {
+          "cmo_deliverables": [
+            "Marketing performance metrics dashboard",
+            "Brand health indicator reports", 
+            "Customer satisfaction score updates",
+            "Market positioning analysis",
+            "Competitive landscape assessment"
+          ],
+          "board_requirements": [
+            "Quarterly marketing strategy updates",
+            "Annual marketing budget proposals",
+            "Brand risk assessments",
+            "Revenue attribution analysis"
+          ]
+        },
+        "schema:performance_metrics": [
+          "Marketing ROI",
+          "Customer acquisition cost trends", 
+          "Brand equity measurements",
+          "Market share analysis",
+          "Digital engagement metrics"
+        ]
+      }
+    },
+
+    "OrganizationalDevelopment": {
+      "@type": "owl:Class",
+      "@id": "cmo:OrganizationalDevelopment",
+      "rdfs:label": "Organizational Development Framework",
+      "rdfs:comment": "CHRO brand culture and talent development collaboration",
+      "rdfs:subClassOf": "schema:EducationalOrganization",
+      "attributes": {
+        "schema:name": "Brand Culture & Talent Development",
+        "schema:description": "CHRO collaboration on organizational culture, brand development, and talent metrics",
+        "schema:chro_collaboration": {
+          "talent_development": {
+            "schema:focus": "Marketing talent pipeline and skill development",
+            "schema:programs": [
+              "Marketing leadership development",
+              "Digital marketing certification",
+              "Customer experience training",
+              "Data analytics upskilling"
+            ]
+          },
+          "organizational_culture": {
+            "schema:focus": "Brand-aligned culture development",
+            "schema:initiatives": [
+              "Employee brand ambassador programs",
+              "Internal brand communication",
+              "Customer-centric culture building",
+              "Innovation mindset development"
+            ]
+          },
+          "employer_branding": {
+            "schema:focus": "Employer value proposition development",
+            "schema:deliverables": [
+              "Employer brand strategy",
+              "Talent attraction campaigns",
+              "Employee experience optimization",
+              "Recruitment marketing programs"
+            ]
+          }
+        },
+        "schema:metrics": [
+          "Employee engagement scores",
+          "Employer brand recognition",
+          "Talent retention rates",
+          "Internal brand advocacy"
+        ]
+      }
+    },
+
+    "AILeadership": {
+      "@type": "owl:Class",
+      "@id": "cmo:AILeadership",
+      "rdfs:label": "AI Leadership Framework", 
+      "rdfs:comment": "CAIO automation, analytics, and predictive capabilities collaboration",
+      "rdfs:subClassOf": "schema:TechnologyApplication",
+      "attributes": {
+        "schema:name": "AI-Driven Marketing Excellence",
+        "schema:description": "Chief AI Officer collaboration on automation, predictive analytics, and implementation",
+        "schema:caio_collaboration": {
+          "ai_automation": {
+            "schema:focus": "Marketing process automation and optimization",
+            "schema:applications": [
+              "Lead scoring algorithms",
+              "Content personalization engines",
+              "Campaign optimization systems",
+              "Customer journey automation"
+            ]
+          },
+          "predictive_analytics": {
+            "schema:focus": "Advanced analytics and forecasting capabilities",
+            "schema:models": [
+              "Customer lifetime value prediction",
+              "Churn risk assessment",
+              "Market demand forecasting",
+              "Campaign performance prediction"
+            ]
+          },
+          "customer_segmentation": {
+            "schema:focus": "AI-driven customer insights and targeting",
+            "schema:capabilities": [
+              "Behavioral segmentation algorithms",
+              "Lookalike audience modeling",
+              "Real-time personalization",
+              "Dynamic pricing optimization"
+            ]
+          }
+        },
+        "schema:technology_stack": [
+          "Machine learning platforms",
+          "Customer data platforms",
+          "Marketing automation tools",
+          "Analytics and BI systems"
+        ]
+      }
+    }
+  },
+
+  "properties": {
+    "collaboratesWith": {
+      "@type": "owl:ObjectProperty",
+      "@id": "cmo:collaboratesWith",
+      "rdfs:label": "collaborates with",
+      "rdfs:comment": "Defines collaborative relationships between organizational roles",
+      "rdfs:domain": "schema:Person",
+      "rdfs:range": "schema:Person",
+      "schema:sameAs": "org:memberOf"
+    },
+
+    "accountableTo": {
+      "@type": "owl:ObjectProperty", 
+      "@id": "cmo:accountableTo",
+      "rdfs:label": "accountable to",
+      "rdfs:comment": "Defines accountability relationships in organizational hierarchy",
+      "rdfs:domain": "schema:Person",
+      "rdfs:range": "schema:Person", 
+      "schema:sameAs": "org:reportsTo"
+    },
+
+    "hasResponsibility": {
+      "@type": "owl:ObjectProperty",
+      "@id": "cmo:hasResponsibility", 
+      "rdfs:label": "has responsibility",
+      "rdfs:comment": "Links organizational roles to their responsibilities",
+      "rdfs:domain": "schema:Person",
+      "rdfs:range": "schema:Action"
+    },
+
+    "influenceLevel": {
+      "@type": "owl:DatatypeProperty",
+      "@id": "cmo:influenceLevel",
+      "rdfs:label": "influence level",
+      "rdfs:comment": "Quantifies influence level in organizational decisions (0.0-1.0)",
+      "rdfs:domain": "schema:Person", 
+      "rdfs:range": "xsd:decimal"
+    }
+  },
+
+  "individuals": {
+    "cmo_instance": {
+      "@type": "cmo:ChiefMarketingOfficer",
+      "@id": "cmo:cmo_individual",
+      "schema:name": "Chief Marketing Officer",
+      "cmo:collaboratesWith": [
+        "cmo:ceo_individual",
+        "cmo:cfo_individual", 
+        "cmo:chro_individual",
+        "cmo:caio_individual",
+        "cmo:cto_individual"
+      ],
+      "cmo:accountableTo": "cmo:ceo_individual",
+      "cmo:influenceLevel": 0.8,
+      "cmo:hasResponsibility": [
+        "cmo:market_strategy",
+        "cmo:brand_management",
+        "cmo:customer_acquisition",
+        "cmo:revenue_attribution"
+      ]
+    },
+
+    "ceo_individual": {
+      "@type": "schema:Person",
+      "@id": "cmo:ceo_individual", 
+      "schema:jobTitle": "Chief Executive Officer",
+      "schema:name": "Chief Executive Officer",
+      "cmo:influenceLevel": 1.0,
+      "schema:responsibilities": [
+        "Vision execution",
+        "Cross-functional alignment", 
+        "Performance accountability",
+        "Strategic direction authority"
+      ]
+    },
+
+    "cfo_individual": {
+      "@type": "schema:Person",
+      "@id": "cmo:cfo_individual",
+      "schema:jobTitle": "Chief Financial Officer", 
+      "schema:name": "Chief Financial Officer",
+      "cmo:influenceLevel": 0.8,
+      "schema:responsibilities": [
+        "Financial strategy oversight",
+        "Budget authorization",
+        "ROI measurement",
+        "Revenue forecasting"
+      ]
+    },
+
+    "chro_individual": {
+      "@type": "schema:Person",
+      "@id": "cmo:chro_individual",
+      "schema:jobTitle": "Chief Human Resources Officer",
+      "schema:name": "Chief Human Resources Officer", 
+      "cmo:influenceLevel": 0.7,
+      "schema:responsibilities": [
+        "Talent development",
+        "Organizational culture",
+        "Employer value proposition",
+        "Employee engagement"
+      ]
+    },
+
+    "caio_individual": {
+      "@type": "schema:Person",
+      "@id": "cmo:caio_individual",
+      "schema:jobTitle": "Chief AI Officer",
+      "schema:name": "Chief AI Officer",
+      "cmo:influenceLevel": 0.7,
+      "schema:responsibilities": [
+        "AI automation implementation", 
+        "Predictive analytics",
+        "Customer segmentation algorithms",
+        "Marketing technology optimization"
+      ]
+    },
+
+    "cto_individual": {
+      "@type": "schema:Person",
+      "@id": "cmo:cto_individual",
+      "schema:jobTitle": "Chief Technology Officer",
+      "schema:name": "Chief Technology Officer",
+      "cmo:influenceLevel": 0.8, 
+      "schema:responsibilities": [
+        "Digital experience platforms",
+        "Data integration systems",
+        "Marketing technology architecture", 
+        "Customer data platforms"
+      ]
+    }
+  },
+
+  "relationships": {
+    "cmo_ceo_relationship": {
+      "@type": "schema:Organization",
+      "@id": "cmo:cmo_ceo_collaboration",
+      "schema:name": "CMO-CEO Strategic Partnership",
+      "schema:description": "Cross-functional alignment and performance accountability relationship",
+      "schema:participants": ["cmo:cmo_individual", "cmo:ceo_individual"],
+      "schema:collaborationType": "Strategic leadership and vision execution",
+      "schema:meetingFrequency": "Weekly executive meetings, monthly performance reviews"
+    },
+
+    "cmo_cfo_relationship": {
+      "@type": "schema:Organization", 
+      "@id": "cmo:cmo_cfo_collaboration",
+      "schema:name": "CMO-CFO Financial Partnership",
+      "schema:description": "Budget allocation, revenue attribution, and ROI measurement collaboration",
+      "schema:participants": ["cmo:cmo_individual", "cmo:cfo_individual"],
+      "schema:collaborationType": "Financial planning and performance measurement",
+      "schema:key_activities": [
+        "Annual budget planning",
+        "Quarterly financial reviews",
+        "ROI analysis and reporting",
+        "Revenue forecasting"
+      ]
+    },
+
+    "cmo_chro_relationship": {
+      "@type": "schema:Organization",
+      "@id": "cmo:cmo_chro_collaboration", 
+      "schema:name": "CMO-CHRO Culture Partnership",
+      "schema:description": "Talent development, organizational culture, and employer branding collaboration",
+      "schema:participants": ["cmo:cmo_individual", "cmo:chro_individual"],
+      "schema:collaborationType": "Organizational development and brand culture alignment",
+      "schema:focus_areas": [
+        "Employer value proposition development",
+        "Employee engagement strategies",
+        "Brand culture alignment",
+        "Marketing talent development"
+      ]
+    }
+  },
+
+  "governance_framework": {
+    "raci_matrix": {
+      "vision_development": {
+        "responsible": "CMO",
+        "accountable": "CEO", 
+        "consulted": ["CFO", "CHRO", "CTO", "CAIO"],
+        "informed": ["Board Directors", "Senior Management"]
+      },
+      "strategy_execution": {
+        "responsible": "CMO",
+        "accountable": "CEO",
+        "consulted": ["CFO", "Sales Director"],
+        "informed": ["All Departments"]
+      },
+      "okr_management": {
+        "responsible": "CMO",
+        "accountable": "CEO",
+        "consulted": ["Department Heads"],
+        "informed": ["Team Members"]
+      },
+      "quarterly_reporting": {
+        "responsible": "CMO", 
+        "accountable": "CEO",
+        "consulted": ["CFO"],
+        "informed": ["Board Directors", "Stakeholders"]
+      }
+    }
+  }
+}
