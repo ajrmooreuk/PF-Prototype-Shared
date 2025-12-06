@@ -1,0 +1,2 @@
+#Vision for given scope and longer term intent beyond the blindingly obvious and over the longer term.
+How to construct a business vision statement in this context with a view to how the given scope serves the longer term value and purpose of a given business function, solution, application of component thereof, dataset or ontology and its value envisaged and contrbution to creating business value for th scope of the PF-Core or one or PF-Instances and within an Instance for a given Product.
