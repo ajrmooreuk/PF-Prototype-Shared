@@ -1,0 +1,46 @@
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Addendum_OAA-Ontology-Integration_v1.0.0.md	36165 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Guide_Long-Running-Agents_v1.0.0.md	23718 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Guide_Tool-Engineering-ACI_v1.0.0.md	21442 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Manifest_v1.1.0 (1).md	11082 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Manifest_v1.1.0.md	11082 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Strategy_Parameterized-Architecture_v2.0.0.md	61128 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Strategy_VSOM-Agent-Architecture_v1.0.0.md	74060 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_Agent-OKR_v1.0.0 (1).md	12130 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_Agent-OKR_v1.0.0.md	12130 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_Agent-PRD-14-Section_v2.0.0.md	19099 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_Agent-PRD_v1.0.0.md	17064 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_Context-Engineering_v1.0.0 (1).md	22328 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_Context-Engineering_v1.0.0.md	22328 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_TDD-Framework_v1.0.0 (1).md	37791 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_TDD-Framework_v1.0.0.md	37791 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Template_Value-Proposition_v1.0.0.md	13055 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core Agentic Framework_Validation_Anthropic-Compliance-Report_v1.0.0.md	25407 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_Context_Engr_Exploration_v1.4_EXP.md	36347 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_Context_Engr_VE_OKR_v1.0_VSOM.md	34254 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_Context_Engr_VSOM_Framework_v1.2_VSOM.md	36176 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Addendum_OAA-Ontology-Integration_v1.0.0.md	36165 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Guide_Long-Running-Agents_v1.0.0.md	23718 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Guide_Tool-Engineering-ACI_v1.0.0.md	21442 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Manifest_v1.0.0 (1).md	13195 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Manifest_v1.0.0 (2).md	13195 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Manifest_v1.0.0.md	13195 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Strategy_Parameterized-Architecture_v2.0.0.md	61128 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Strategy_VSOM-Agent-Architecture_v1.0.0.md	74060 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Template_Agent-OKR_v1.0.0.md	12130 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Template_Agent-PRD-14-Section_v2.0.0.md	19099 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Template_Agent-PRD_v1.0.0.md	17064 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Template_Context-Engineering_v1.0.0.md	22328 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Template_TDD-Framework_v1.0.0.md	37791 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Template_Value-Proposition_v1.0.0.md	13055 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_PF-Agentic-Framework_Validation_Anthropic-Compliance-Report_v1.0.0.md	25407 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_OKR_Ontology_v1.0.0.jsonld	13232 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_VSOM_Ontology_v1.0.0.jsonld	14796 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_AgentDef-Wizard_v1.0.0.json	8153 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_Catalogue-Chats_v1.0.0.md	11449 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_Diagram-Cascade_v1.0.0.mermaid	3450 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_Diagram-MindMap_v1.0.0.mermaid	2671 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_Glossary_v1.0.0.md	9254 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_README_v1.0.0.md	12897 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_Registry-OAA_v3.0.0.json	8375 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/PF-Core_VE_ValueProposition_TestData-BAIV_v1.0.0.json	9544 bytes
+1 Architecture/0.2 Agentic-Engineer/Agentic-01/readme.md	35 bytes

@@ -1,0 +1,43 @@
+#AI-Visibility PF-Core to BAIV Integration and Platform Instances
+
+1. Milana initial considerations 
+https://github.com/ajrmooreuk/W4mpfcoreV31WithBaivOld/blob/main/src/docs/MILANA_AIViz_INTEGRATION_PRD.md
+
+
+##PF-Core
+
+###PFC-Sol-Architect
+Solution architect managing Platform Test Driven Design Development and Deployment
+
+
+####PFC-Security Architect
+How we keep platform secure.
+
+####PFC-DataArchitect
+ 1 PFC-DB Architect
+ 2 PFC-OAA Ontology architect
+ 2.1 Ontology Registry and Utilisation COnditions
+
+####PFC SpecialAgents
+ 1 PFC-Gap Analaysis Agents
+
+
+###PFC-Platform Manager and Admin
+1. PF Program Manager
+2. PF Onboarding
+  2.1 User Sign-Up
+  2.2 User Login
+###PFC-OAA
+###Value Engineer
+Value engineer PRD PBS WBS Agent PLan
+
+Agent Prototype
+
+###Context Engineer
+
+
+##PF-Core-PF-Instance-PF-Instance-Product
+
+##BAIV-PRD-v1.7 plus
+
+

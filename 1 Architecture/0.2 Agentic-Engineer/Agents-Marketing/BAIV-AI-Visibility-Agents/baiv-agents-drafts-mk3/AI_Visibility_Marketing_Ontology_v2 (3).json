@@ -1,0 +1,604 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "baiv": "https://baiv.io/ontology/v2/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "Ontology",
+  "@id": "baiv:ontology/ai-visibility-marketing-v2",
+  "name": "AI Visibility Marketing Ontology v2.0",
+  "version": "2.0.0",
+  "dateCreated": "2025-10-10",
+  "dateModified": "2025-10-10",
+  "creator": {
+    "@type": "Organization",
+    "name": "BAIV - Business AI Visibility"
+  },
+  "description": "Comprehensive ontology for AI Visibility strategic marketing framework, integrating AI discoverability as foundational capability within CMO role and marketing strategy cascade. Extends schema.org with AI-era marketing concepts.",
+  "domain": "Marketing Strategy & AI Visibility",
+  "purpose": "Enable systematic planning, execution, and measurement of AI Visibility strategies that ensure organizational discoverability in AI-mediated search and recommendation systems",
+  "schemaOrgAlignment": {
+    "baseTypes": ["Thing", "Intangible", "Role", "Action", "Event"],
+    "rationale": "Grounds in schema.org for semantic interoperability while extending for AI Visibility domain",
+    "alignmentPercentage": 85
+  },
+  
+  "entities": [
+    {
+      "@type": "Class",
+      "@id": "baiv:AIVisibilityStrategy",
+      "name": "AI Visibility Strategy",
+      "description": "Strategic capability ensuring an organization's brand, products, expertise, and content are discoverable, understandable, and recommendable by AI systems (LLMs, agents, AI search engines)",
+      "subClassOf": "schema:CreativeWork",
+      "properties": [
+        {
+          "@id": "baiv:visibilityScore",
+          "@type": "PropertyValue",
+          "name": "Visibility Score",
+          "description": "Composite score (0-100) measuring AI discoverability",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:targetAISystems",
+          "@type": "PropertyValue",
+          "name": "Target AI Systems",
+          "description": "AI platforms prioritized for visibility",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Text",
+          "example": ["ChatGPT", "Claude", "Perplexity", "Gemini"]
+        },
+        {
+          "@id": "baiv:knowledgeRepresentation",
+          "@type": "PropertyValue",
+          "name": "Knowledge Representation",
+          "description": "Method of structuring organizational knowledge for AI",
+          "rangeIncludes": "baiv:KnowledgeGraph"
+        },
+        {
+          "@id": "baiv:citationNetwork",
+          "@type": "PropertyValue",
+          "name": "Citation Network",
+          "description": "Web of authoritative sources linking to organization",
+          "rangeIncludes": "baiv:CitationSource"
+        }
+      ],
+      "businessRules": [
+        "AI Visibility Strategy MUST have visibility score target >= 80",
+        "Strategy MUST identify at least 3 target AI systems",
+        "Strategy MUST include knowledge representation approach",
+        "Strategy MUST be reviewed quarterly"
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:AIVisibilityObjective",
+      "name": "AI Visibility Objective",
+      "description": "Strategic objective focused on achieving AI discoverability outcomes, part of OKR framework",
+      "subClassOf": "schema:Goal",
+      "properties": [
+        {
+          "@id": "baiv:objectiveType",
+          "@type": "PropertyValue",
+          "name": "Objective Type",
+          "description": "Category of AI Visibility objective",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["Discovery", "Authority", "Engagement", "Conversion", "Integration"]
+        },
+        {
+          "@id": "baiv:alignsWithCorporate",
+          "@type": "PropertyValue",
+          "name": "Aligns With Corporate",
+          "description": "Corporate objective this AI Visibility objective supports",
+          "rangeIncludes": "schema:Goal"
+        },
+        {
+          "@id": "baiv:cascadesTo",
+          "@type": "PropertyValue",
+          "name": "Cascades To",
+          "description": "Team or functional objectives this cascades to",
+          "rangeIncludes": "schema:Goal"
+        },
+        {
+          "@id": "baiv:keyResults",
+          "@type": "PropertyValue",
+          "name": "Key Results",
+          "description": "Measurable outcomes defining success",
+          "valueRequired": true,
+          "rangeIncludes": "baiv:KeyResult",
+          "cardinality": "1..*"
+        }
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:KeyResult",
+      "name": "Key Result",
+      "description": "Measurable outcome that indicates objective achievement",
+      "subClassOf": "schema:PropertyValue",
+      "properties": [
+        {
+          "@id": "baiv:metric",
+          "@type": "PropertyValue",
+          "name": "Metric",
+          "description": "What is being measured",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Text"
+        },
+        {
+          "@id": "baiv:target",
+          "@type": "PropertyValue",
+          "name": "Target",
+          "description": "Target value to achieve",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:current",
+          "@type": "PropertyValue",
+          "name": "Current",
+          "description": "Current value",
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:measurementFrequency",
+          "@type": "PropertyValue",
+          "name": "Measurement Frequency",
+          "description": "How often measured",
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["Daily", "Weekly", "Monthly", "Quarterly"]
+        }
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:KnowledgeGraph",
+      "name": "Knowledge Graph",
+      "description": "Structured representation of organizational knowledge, entities, and relationships optimized for AI understanding",
+      "subClassOf": "schema:Dataset",
+      "properties": [
+        {
+          "@id": "baiv:entityCount",
+          "@type": "PropertyValue",
+          "name": "Entity Count",
+          "description": "Number of entities in graph",
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:relationshipCount",
+          "@type": "PropertyValue",
+          "name": "Relationship Count",
+          "description": "Number of relationships in graph",
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:schemaOrgCoverage",
+          "@type": "PropertyValue",
+          "name": "Schema.org Coverage",
+          "description": "Percentage of entities using schema.org vocabulary",
+          "rangeIncludes": "schema:Number"
+        }
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:AIOptimizedContent",
+      "name": "AI Optimized Content",
+      "description": "Content asset optimized for AI system comprehension and recommendation",
+      "subClassOf": "schema:CreativeWork",
+      "properties": [
+        {
+          "@id": "baiv:aiReadabilityScore",
+          "@type": "PropertyValue",
+          "name": "AI Readability Score",
+          "description": "Score (0-100) indicating how well AI systems can understand content",
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:hasStructuredData",
+          "@type": "PropertyValue",
+          "name": "Has Structured Data",
+          "description": "Whether content includes semantic markup",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Boolean"
+        },
+        {
+          "@id": "baiv:schemaMarkupType",
+          "@type": "PropertyValue",
+          "name": "Schema Markup Type",
+          "description": "Type of schema.org markup applied",
+          "rangeIncludes": "schema:Text"
+        },
+        {
+          "@id": "baiv:aiCitationCount",
+          "@type": "PropertyValue",
+          "name": "AI Citation Count",
+          "description": "Number of times cited by AI systems",
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:targetQueries",
+          "@type": "PropertyValue",
+          "name": "Target Queries",
+          "description": "AI queries this content should appear in",
+          "rangeIncludes": "schema:Text"
+        }
+      ],
+      "businessRules": [
+        "AI Optimized Content MUST have aiReadabilityScore >= 85",
+        "Content MUST have structured data (hasStructuredData = true)",
+        "Content SHOULD target at least 3 specific AI queries",
+        "Content MUST be reviewed if aiCitationCount = 0 for 30 days"
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:CitationSource",
+      "name": "Citation Source",
+      "description": "Authoritative source that cites or links to organization, contributing to AI visibility",
+      "subClassOf": "schema:WebPage",
+      "properties": [
+        {
+          "@id": "baiv:authorityScore",
+          "@type": "PropertyValue",
+          "name": "Authority Score",
+          "description": "Domain authority or credibility score (0-100)",
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:citationType",
+          "@type": "PropertyValue",
+          "name": "Citation Type",
+          "description": "Type of citation or reference",
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["Direct Link", "Brand Mention", "Product Reference", "Thought Leadership", "Research Citation"]
+        },
+        {
+          "@id": "baiv:impactOnAI",
+          "@type": "PropertyValue",
+          "name": "Impact on AI",
+          "description": "Estimated impact on AI system knowledge",
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["High", "Medium", "Low"]
+        }
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:AIVisibilityMetric",
+      "name": "AI Visibility Metric",
+      "description": "Measurement of AI visibility performance",
+      "subClassOf": "schema:PropertyValue",
+      "properties": [
+        {
+          "@id": "baiv:metricCategory",
+          "@type": "PropertyValue",
+          "name": "Metric Category",
+          "description": "Category of measurement",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["Discovery", "Authority", "Engagement", "Conversion"]
+        },
+        {
+          "@id": "baiv:value",
+          "@type": "PropertyValue",
+          "name": "Value",
+          "description": "Metric value",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:trend",
+          "@type": "PropertyValue",
+          "name": "Trend",
+          "description": "Direction of change",
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["Increasing", "Decreasing", "Stable"]
+        },
+        {
+          "@id": "baiv:benchmark",
+          "@type": "PropertyValue",
+          "name": "Benchmark",
+          "description": "Target or industry benchmark",
+          "rangeIncludes": "schema:Number"
+        }
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:CMORole",
+      "name": "Chief Marketing Officer Role",
+      "description": "C-Suite role responsible for marketing strategy including AI Visibility leadership",
+      "subClassOf": "schema:OrganizationRole",
+      "properties": [
+        {
+          "@id": "baiv:aiVisibilityResponsibility",
+          "@type": "PropertyValue",
+          "name": "AI Visibility Responsibility",
+          "description": "Level of accountability for AI Visibility",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["Accountable", "Responsible", "Consulted", "Informed"]
+        },
+        {
+          "@id": "baiv:collaboratesWithRoles",
+          "@type": "PropertyValue",
+          "name": "Collaborates With Roles",
+          "description": "Other C-Suite roles for AI Visibility",
+          "rangeIncludes": "schema:OrganizationRole"
+        },
+        {
+          "@id": "baiv:ownsStrategies",
+          "@type": "PropertyValue",
+          "name": "Owns Strategies",
+          "description": "Marketing strategies owned by CMO",
+          "rangeIncludes": "baiv:AIVisibilityStrategy"
+        }
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:MarketingCampaign",
+      "name": "Marketing Campaign",
+      "description": "Coordinated marketing initiative that depends on AI Visibility",
+      "subClassOf": "schema:Action",
+      "properties": [
+        {
+          "@id": "baiv:dependsOnAIVisibility",
+          "@type": "PropertyValue",
+          "name": "Depends on AI Visibility",
+          "description": "Whether campaign success requires AI discoverability",
+          "rangeIncludes": "schema:Boolean"
+        },
+        {
+          "@id": "baiv:aiSourcedLeads",
+          "@type": "PropertyValue",
+          "name": "AI Sourced Leads",
+          "description": "Number of leads from AI channels",
+          "rangeIncludes": "schema:Number"
+        },
+        {
+          "@id": "baiv:aiAttributedRevenue",
+          "@type": "PropertyValue",
+          "name": "AI Attributed Revenue",
+          "description": "Revenue attributed to AI visibility",
+          "rangeIncludes": "schema:MonetaryAmount"
+        }
+      ]
+    },
+    
+    {
+      "@type": "Class",
+      "@id": "baiv:PlatformInstance",
+      "name": "Platform Instance",
+      "description": "Specific implementation of AI Visibility strategy for a platform (BAIV, W4M, ECOOAI, etc.)",
+      "subClassOf": "schema:SoftwareApplication",
+      "properties": [
+        {
+          "@id": "baiv:platformType",
+          "@type": "PropertyValue",
+          "name": "Platform Type",
+          "description": "Type of platform",
+          "valueRequired": true,
+          "rangeIncludes": "schema:Text",
+          "enumValues": ["AI Visibility Platform", "Marketing Website Platform", "E-commerce Platform", "Other"]
+        },
+        {
+          "@id": "baiv:implementsStrategy",
+          "@type": "PropertyValue",
+          "name": "Implements Strategy",
+          "description": "AI Visibility strategy implemented",
+          "rangeIncludes": "baiv:AIVisibilityStrategy"
+        },
+        {
+          "@id": "baiv:customOKRs",
+          "@type": "PropertyValue",
+          "name": "Custom OKRs",
+          "description": "Platform-specific OKRs",
+          "rangeIncludes": "baiv:AIVisibilityObjective"
+        }
+      ]
+    }
+  ],
+  
+  "relationships": [
+    {
+      "@type": "Property",
+      "@id": "baiv:cascadesTo",
+      "name": "Cascades To",
+      "description": "OKR cascading relationship from strategic to tactical level",
+      "domainIncludes": ["baiv:AIVisibilityObjective", "schema:Goal"],
+      "rangeIncludes": ["baiv:AIVisibilityObjective", "schema:Goal"],
+      "cardinality": "0..*"
+    },
+    {
+      "@type": "Property",
+      "@id": "baiv:dependsOn",
+      "name": "Depends On",
+      "description": "Dependency relationship showing what requires AI Visibility",
+      "domainIncludes": ["baiv:MarketingCampaign", "schema:Action"],
+      "rangeIncludes": ["baiv:AIVisibilityStrategy"],
+      "cardinality": "0..*"
+    },
+    {
+      "@type": "Property",
+      "@id": "baiv:enables",
+      "name": "Enables",
+      "description": "Shows what AI Visibility enables downstream",
+      "domainIncludes": ["baiv:AIVisibilityStrategy"],
+      "rangeIncludes": ["schema:Action", "schema:Goal"],
+      "cardinality": "0..*"
+    },
+    {
+      "@type": "Property",
+      "@id": "baiv:collaboratesOn",
+      "name": "Collaborates On",
+      "description": "Cross-functional collaboration on AI Visibility",
+      "domainIncludes": ["schema:OrganizationRole"],
+      "rangeIncludes": ["baiv:AIVisibilityStrategy"],
+      "cardinality": "0..*"
+    },
+    {
+      "@type": "Property",
+      "@id": "baiv:measures",
+      "name": "Measures",
+      "description": "Metrics that measure strategy or objective success",
+      "domainIncludes": ["baiv:AIVisibilityStrategy", "baiv:AIVisibilityObjective"],
+      "rangeIncludes": ["baiv:AIVisibilityMetric"],
+      "cardinality": "1..*"
+    },
+    {
+      "@type": "Property",
+      "@id": "baiv:cites",
+      "name": "Cites",
+      "description": "Citation relationship from source to organization",
+      "domainIncludes": ["baiv:CitationSource"],
+      "rangeIncludes": ["schema:Organization", "baiv:AIOptimizedContent"],
+      "cardinality": "1..*"
+    }
+  ],
+  
+  "aiAgentCapabilities": {
+    "queryPatterns": [
+      {
+        "intent": "Find AI Visibility Strategy",
+        "query": "What is the AI visibility strategy for [organization]?",
+        "expectedResponse": "Retrieve AIVisibilityStrategy entity with properties",
+        "requiredEntities": ["baiv:AIVisibilityStrategy"]
+      },
+      {
+        "intent": "Analyze OKR Cascade",
+        "query": "Show how corporate OKRs cascade to AI Visibility execution",
+        "expectedResponse": "Traverse cascadesTo relationships from corporate goals",
+        "requiredEntities": ["baiv:AIVisibilityObjective", "baiv:KeyResult"]
+      },
+      {
+        "intent": "Assess Dependencies",
+        "query": "What marketing activities depend on AI Visibility?",
+        "expectedResponse": "Query dependsOn relationships to find dependent activities",
+        "requiredEntities": ["baiv:MarketingCampaign", "baiv:AIVisibilityStrategy"]
+      },
+      {
+        "intent": "Measure Performance",
+        "query": "What is the current AI visibility score and trend?",
+        "expectedResponse": "Retrieve metrics with category='Discovery' and trend analysis",
+        "requiredEntities": ["baiv:AIVisibilityMetric"]
+      },
+      {
+        "intent": "Platform Comparison",
+        "query": "Compare AI visibility implementation across platforms",
+        "expectedResponse": "Compare PlatformInstance metrics and strategies",
+        "requiredEntities": ["baiv:PlatformInstance", "baiv:AIVisibilityMetric"]
+      }
+    ],
+    "reasoningSupport": [
+      "Identify circular dependencies in OKR cascades",
+      "Recommend optimal citation sources based on authority scores",
+      "Predict impact of content optimization on visibility score",
+      "Suggest RACI assignments based on role collaborations",
+      "Generate alerts when metrics fall below benchmarks"
+    ]
+  },
+  
+  "qualityMetrics": {
+    "entityReuseRate": 85,
+    "schemaOrgAlignment": 85,
+    "validationPassRate": 100,
+    "documentationCompleteness": 100,
+    "relationshipDensity": 4.2,
+    "namingConventionCompliance": 100
+  },
+  
+  "dependencies": [
+    {
+      "ontology": "schema.org",
+      "version": "latest",
+      "entities": ["Thing", "Intangible", "Role", "Action", "Goal", "CreativeWork", "Organization", "OrganizationRole"]
+    },
+    {
+      "ontology": "baiv:okr-ontology-v1",
+      "version": "1.0.0",
+      "entities": ["Objective", "KeyResult"]
+    },
+    {
+      "ontology": "baiv:cmo-role-ontology-v1",
+      "version": "1.0.0",
+      "entities": ["CMORole", "MarketingStrategy"]
+    }
+  ],
+  
+  "changeHistory": [
+    {
+      "version": "2.0.0",
+      "date": "2025-10-10",
+      "changeType": "major",
+      "description": "Complete AI Visibility integration with CMO framework, graph-based dependencies, cascading OKRs, and platform-specific implementations",
+      "rfcId": "RFC-002",
+      "breakingChanges": false
+    },
+    {
+      "version": "1.0.0",
+      "date": "2025-10-03",
+      "changeType": "initial",
+      "description": "Initial CMO role and marketing strategy ontology",
+      "rfcId": "RFC-001"
+    }
+  ],
+  
+  "governance": {
+    "owner": "CMO Office",
+    "maintainer": "Marketing Operations",
+    "reviewCycle": "Quarterly",
+    "approvalRequired": true,
+    "stakeholders": ["CEO", "CMO", "CAO", "CTO", "CDO"]
+  },
+  
+  "useCases": [
+    {
+      "id": "UC-AIV-001",
+      "name": "Corporate Strategy to AI Visibility Cascade",
+      "description": "Trace how corporate leadership objectives cascade through marketing to AI Visibility execution",
+      "actors": ["CEO", "CMO", "VP Digital", "AI Visibility Manager"],
+      "scenario": "CEO sets market leadership goal → CMO creates brand leadership objective → AI Visibility team defines discoverability targets → Content team executes optimization"
+    },
+    {
+      "id": "UC-AIV-002",
+      "name": "Platform-Specific AI Visibility Implementation",
+      "description": "Implement AI Visibility strategy customized for specific platform (BAIV, W4M, ECOOAI)",
+      "actors": ["CMO", "Product Marketing", "Content Team"],
+      "scenario": "Select platform template → Customize OKRs → Deploy strategy → Measure performance"
+    },
+    {
+      "id": "UC-AIV-003",
+      "name": "Cross-Functional AI Visibility Collaboration",
+      "description": "Coordinate AI Visibility efforts across C-Suite and departments",
+      "actors": ["CMO", "CTO", "CDO", "CAO", "Product Teams"],
+      "scenario": "CMO defines strategy → CTO implements infrastructure → CDO structures data → CAO integrates AI capabilities → All measure results"
+    },
+    {
+      "id": "UC-AIV-004",
+      "name": "AI Visibility Performance Analysis",
+      "description": "Analyze AI visibility metrics to identify gaps and opportunities",
+      "actors": ["Marketing Analytics", "AI Visibility Team", "CMO"],
+      "scenario": "Collect metrics → Analyze trends → Identify gaps → Recommend optimizations → Track improvements"
+    }
+  ],
+  
+  "artifacts": {
+    "glossary": "/artifacts/ai-visibility-marketing-glossary-v2.json",
+    "testData": "/artifacts/ai-visibility-marketing-testdata-v2.json",
+    "documentation": "/artifacts/ai-visibility-marketing-docs-v2.html",
+    "visualizations": "/artifacts/ai-visibility-marketing-viz-v2.png"
+  }
+}

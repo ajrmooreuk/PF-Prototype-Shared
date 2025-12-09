@@ -1,0 +1,631 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baiv.platform/schemas/figma-to-code-workflow-v1.0.0.json",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "baiv": "https://baiv.platform/ontology/",
+    "figma": "https://figma.com/api/"
+  },
+  "title": "BAIV Figma-to-Code Workflow Schema",
+  "description": "Comprehensive schema for automating design-to-code pipelines using Figma MCP, Claude Code SDK, and multi-brand theming",
+  "version": "1.0.0",
+  "lastUpdated": "2025-12-07",
+  
+  "workflowDefinition": {
+    "@type": "SoftwareApplication",
+    "name": "BAIV Design-to-Code Pipeline",
+    "applicationCategory": "Design Automation",
+    "operatingSystem": "Cross-platform",
+    
+    "stages": [
+      {
+        "stageId": "STAGE_001",
+        "stageName": "Design Extraction",
+        "stageOrder": 1,
+        "description": "Extract design context from Figma using MCP tools",
+        
+        "inputs": {
+          "required": [
+            {
+              "inputName": "figmaFileKey",
+              "inputType": "string",
+              "description": "The unique key from Figma file URL",
+              "pattern": "^[a-zA-Z0-9]{22}$",
+              "example": "abc123XYZ456def789GHI"
+            },
+            {
+              "inputName": "nodeId", 
+              "inputType": "string",
+              "description": "Target node ID in format 'int:int' or 'int-int'",
+              "pattern": "^-?\\d+[:-]-?\\d+$",
+              "example": "123:456"
+            }
+          ],
+          "optional": [
+            {
+              "inputName": "codeConnectLabel",
+              "inputType": "string",
+              "description": "Label for Code Connect mapping (e.g., 'react', 'vue')"
+            },
+            {
+              "inputName": "forceCode",
+              "inputType": "boolean",
+              "description": "Force code output even for large designs",
+              "default": false
+            }
+          ]
+        },
+        
+        "mcpTools": [
+          {
+            "toolName": "Figma:get_design_context",
+            "purpose": "Primary extraction of design structure, styles, and component hierarchy",
+            "outputFormat": "JSON with code suggestions and asset URLs",
+            "usagePattern": "Always use first for any design extraction"
+          },
+          {
+            "toolName": "Figma:get_variable_defs",
+            "purpose": "Extract design tokens (colors, spacing, typography)",
+            "outputFormat": "JSON mapping variable names to values",
+            "usagePattern": "Use for theme/token extraction"
+          },
+          {
+            "toolName": "Figma:get_code_connect_map",
+            "purpose": "Get existing component-to-code mappings",
+            "outputFormat": "JSON with codeConnectSrc and codeConnectName",
+            "usagePattern": "Check before generating new components"
+          },
+          {
+            "toolName": "Figma:get_metadata",
+            "purpose": "Get structure overview for large files",
+            "outputFormat": "XML with node hierarchy",
+            "usagePattern": "Use when get_design_context output too large"
+          }
+        ],
+        
+        "outputs": {
+          "designContext": {
+            "type": "object",
+            "properties": {
+              "code": { "type": "string", "description": "Generated code suggestion" },
+              "assets": { "type": "object", "description": "Asset download URLs" },
+              "variables": { "type": "object", "description": "Design token mappings" },
+              "componentMap": { "type": "object", "description": "Code Connect mappings" }
+            }
+          }
+        }
+      },
+      
+      {
+        "stageId": "STAGE_002",
+        "stageName": "Design Analysis",
+        "stageOrder": 2,
+        "description": "Analyze extracted design for component patterns and semantic structure",
+        
+        "analysisPatterns": {
+          "atomicClassification": {
+            "description": "Classify design elements into atomic design hierarchy",
+            "levels": ["atoms", "molecules", "organisms", "templates", "pages"],
+            "rules": [
+              {
+                "level": "atoms",
+                "criteria": ["Single element", "No child components", "Basic styling only"],
+                "examples": ["Icon", "Color swatch", "Typography style", "Spacing token"]
+              },
+              {
+                "level": "molecules",
+                "criteria": ["2-5 elements combined", "Single functionality", "Reusable pattern"],
+                "examples": ["Button", "Input field", "Badge", "Avatar"]
+              },
+              {
+                "level": "organisms",
+                "criteria": ["Multiple molecules", "Complex interaction", "Section-level"],
+                "examples": ["Card", "Navigation", "Form", "Data table"]
+              },
+              {
+                "level": "templates",
+                "criteria": ["Page layout", "Placeholder content", "Responsive grid"],
+                "examples": ["Dashboard layout", "Form page", "List view"]
+              },
+              {
+                "level": "pages",
+                "criteria": ["Complete screen", "Real content", "All states"],
+                "examples": ["Organization dashboard", "User profile", "Analytics view"]
+              }
+            ]
+          },
+          
+          "componentMapping": {
+            "description": "Map Figma components to shadcn/ui equivalents",
+            "mappings": [
+              { "figmaPattern": "Button/*", "shadcnComponent": "Button", "variants": ["default", "secondary", "outline", "ghost", "destructive"] },
+              { "figmaPattern": "Input/*", "shadcnComponent": "Input", "variants": ["default", "error", "disabled"] },
+              { "figmaPattern": "Card/*", "shadcnComponent": "Card", "subComponents": ["CardHeader", "CardContent", "CardFooter"] },
+              { "figmaPattern": "Badge/*", "shadcnComponent": "Badge", "variants": ["default", "secondary", "destructive", "outline"] },
+              { "figmaPattern": "Avatar/*", "shadcnComponent": "Avatar", "subComponents": ["AvatarImage", "AvatarFallback"] },
+              { "figmaPattern": "Table/*", "shadcnComponent": "Table", "subComponents": ["TableHeader", "TableBody", "TableRow", "TableCell"] },
+              { "figmaPattern": "Dialog/*", "shadcnComponent": "Dialog", "subComponents": ["DialogTrigger", "DialogContent", "DialogHeader"] },
+              { "figmaPattern": "Select/*", "shadcnComponent": "Select", "subComponents": ["SelectTrigger", "SelectContent", "SelectItem"] },
+              { "figmaPattern": "Tabs/*", "shadcnComponent": "Tabs", "subComponents": ["TabsList", "TabsTrigger", "TabsContent"] },
+              { "figmaPattern": "Navigation/*", "shadcnComponent": "NavigationMenu", "subComponents": ["NavigationMenuList", "NavigationMenuItem"] }
+            ]
+          },
+          
+          "semanticMapping": {
+            "description": "Map components to schema.org types for BAIV ontology",
+            "mappings": [
+              {
+                "componentPattern": "OrganizationCard",
+                "schemaType": "Organization",
+                "properties": ["name", "url", "logo", "industry", "affiliateStatus", "brandConfiguration"],
+                "baivExtension": "comparativeAttributes"
+              },
+              {
+                "componentPattern": "PersonCard",
+                "schemaType": "Person", 
+                "properties": ["name", "email", "jobTitle", "worksFor", "telephone"],
+                "baivExtension": "baivUserRole, businessRole, permissions"
+              },
+              {
+                "componentPattern": "RoleSelector",
+                "schemaType": "Role",
+                "properties": ["roleName", "description", "capabilities"],
+                "baivExtension": "accessLevel, scopes"
+              },
+              {
+                "componentPattern": "AffiliateStatus",
+                "schemaType": "AffiliateProgram",
+                "properties": ["affiliateLevel", "commissionRate", "joinDate"],
+                "baivExtension": "personalAffiliateId"
+              },
+              {
+                "componentPattern": "RAC IMatrix",
+                "schemaType": "RACIChart",
+                "properties": ["activityName", "activityDescription"],
+                "baivExtension": "assignments.responsible, assignments.accountable"
+              }
+            ]
+          }
+        },
+        
+        "outputs": {
+          "analysisReport": {
+            "atomicHierarchy": "Classified component tree",
+            "componentMap": "shadcn/ui mapping recommendations",
+            "semanticTypes": "schema.org type assignments",
+            "variantMatrix": "Required component variants"
+          }
+        }
+      },
+      
+      {
+        "stageId": "STAGE_003",
+        "stageName": "Code Generation",
+        "stageOrder": 3,
+        "description": "Generate production React/Next.js components using Claude Code SDK",
+        
+        "generationRules": {
+          "fileStructure": {
+            "pattern": "feature-based",
+            "structure": {
+              "components": {
+                "ui": "shadcn/ui base components",
+                "features": "Feature-specific components",
+                "layouts": "Page layouts and templates"
+              },
+              "lib": {
+                "utils": "Utility functions",
+                "types": "TypeScript type definitions",
+                "schemas": "Zod validation schemas"
+              },
+              "styles": {
+                "tokens": "Design token CSS variables",
+                "themes": "Brand-specific theme overrides"
+              }
+            }
+          },
+          
+          "codeStandards": {
+            "framework": "Next.js 14",
+            "language": "TypeScript",
+            "styling": "Tailwind CSS + CSS Variables",
+            "componentLibrary": "shadcn/ui",
+            "validation": "Zod",
+            "testing": "Vitest + Playwright",
+            
+            "conventions": {
+              "naming": {
+                "components": "PascalCase",
+                "files": "kebab-case",
+                "cssVariables": "--{category}-{property}-{variant}",
+                "types": "PascalCase with suffix (Props, State, etc.)"
+              },
+              "imports": {
+                "order": ["react", "next", "external", "internal", "types", "styles"],
+                "aliasing": "@/ for src root"
+              },
+              "exports": {
+                "components": "Named exports preferred",
+                "types": "Export from index.ts barrel files"
+              }
+            }
+          },
+          
+          "brandTheming": {
+            "tokenStructure": {
+              "primitive": {
+                "colors": "Raw color values (color-blue-500)",
+                "spacing": "Base spacing units (space-1 = 4px)",
+                "typography": "Font families, sizes, weights"
+              },
+              "semantic": {
+                "colors": "Purpose-based (primary, secondary, accent, error)",
+                "spacing": "Context-based (padding-sm, gap-md)",
+                "typography": "Role-based (heading-1, body-sm)"
+              },
+              "component": {
+                "colors": "Component-specific (button-bg, card-border)",
+                "sizing": "Component dimensions (button-height-md)"
+              }
+            },
+            
+            "brandModes": {
+              "own": {
+                "description": "Client uses their own branding",
+                "tokenOverrides": ["primary", "secondary", "logo"],
+                "componentOverrides": "None - uses master template"
+              },
+              "co-branded": {
+                "description": "Partner branding with platform elements",
+                "tokenOverrides": ["primary", "secondary", "accent", "logo"],
+                "componentOverrides": ["Header", "Footer", "Navigation"]
+              },
+              "white-label": {
+                "description": "Full rebrand with no platform visibility",
+                "tokenOverrides": "All semantic and component tokens",
+                "componentOverrides": "All branded components"
+              }
+            }
+          }
+        },
+        
+        "outputs": {
+          "generatedFiles": {
+            "components": "React/TSX component files",
+            "types": "TypeScript interfaces and types",
+            "schemas": "Zod validation schemas",
+            "styles": "CSS variable definitions",
+            "stories": "Storybook story files",
+            "tests": "Unit and integration tests"
+          }
+        }
+      },
+      
+      {
+        "stageId": "STAGE_004",
+        "stageName": "Validation & Testing",
+        "stageOrder": 4,
+        "description": "Validate generated code against design specifications",
+        
+        "validationChecks": {
+          "typeChecking": {
+            "tool": "TypeScript",
+            "command": "npx tsc --noEmit",
+            "passThreshold": "Zero errors"
+          },
+          "linting": {
+            "tool": "ESLint",
+            "command": "npx eslint src/",
+            "passThreshold": "Zero errors, warnings acceptable"
+          },
+          "formatting": {
+            "tool": "Prettier",
+            "command": "npx prettier --check src/",
+            "passThreshold": "All files formatted"
+          },
+          "accessibility": {
+            "tool": "axe-core",
+            "command": "Integrated in Storybook",
+            "passThreshold": "WCAG 2.1 AA compliance"
+          }
+        },
+        
+        "testingStrategy": {
+          "unit": {
+            "framework": "Vitest",
+            "coverage": "80% minimum",
+            "focus": ["Props validation", "State changes", "Event handlers"]
+          },
+          "integration": {
+            "framework": "Playwright",
+            "coverage": "Critical user flows",
+            "focus": ["Form submissions", "Navigation", "Data loading"]
+          },
+          "visual": {
+            "framework": "Chromatic",
+            "integration": "Storybook",
+            "focus": ["Component variants", "Responsive states", "Brand themes"]
+          }
+        },
+        
+        "designFidelity": {
+          "checks": [
+            {
+              "aspect": "Colors",
+              "tolerance": "Delta E < 1",
+              "method": "Compare CSS variables to Figma tokens"
+            },
+            {
+              "aspect": "Spacing",
+              "tolerance": "±1px",
+              "method": "Measure component dimensions"
+            },
+            {
+              "aspect": "Typography",
+              "tolerance": "Exact match",
+              "method": "Compare font-family, size, weight, line-height"
+            },
+            {
+              "aspect": "Layout",
+              "tolerance": "±2px",
+              "method": "Visual regression testing"
+            }
+          ]
+        }
+      },
+      
+      {
+        "stageId": "STAGE_005",
+        "stageName": "Deployment",
+        "stageOrder": 5,
+        "description": "Deploy validated components to Storybook and production",
+        
+        "deploymentTargets": {
+          "storybook": {
+            "url": "Component documentation and testing playground",
+            "trigger": "On merge to main",
+            "hosting": "Chromatic or Vercel"
+          },
+          "npmPackage": {
+            "scope": "@baiv/ui",
+            "versioning": "Semantic versioning",
+            "trigger": "On release tag"
+          },
+          "production": {
+            "platform": "Vercel/Supabase",
+            "trigger": "On release approval",
+            "environments": ["staging", "production"]
+          }
+        },
+        
+        "cicdPipeline": {
+          "stages": [
+            { "name": "Install", "command": "pnpm install" },
+            { "name": "Lint", "command": "pnpm lint" },
+            { "name": "Type Check", "command": "pnpm type-check" },
+            { "name": "Test", "command": "pnpm test" },
+            { "name": "Build", "command": "pnpm build" },
+            { "name": "Visual Test", "command": "pnpm chromatic" },
+            { "name": "Deploy", "command": "pnpm deploy" }
+          ]
+        }
+      }
+    ]
+  },
+  
+  "integrationPoints": {
+    "figmaMCP": {
+      "description": "Figma Model Context Protocol integration",
+      "tools": [
+        "get_design_context",
+        "get_variable_defs",
+        "get_code_connect_map",
+        "get_metadata",
+        "create_design_system_rules",
+        "get_figjam"
+      ],
+      "authentication": "OAuth via Figma connection",
+      "rateLimit": "Per Figma API limits"
+    },
+    
+    "claudeCodeSDK": {
+      "description": "Claude Code SDK for AI-powered code generation",
+      "capabilities": [
+        "Component code generation from design context",
+        "TypeScript type inference",
+        "Test generation",
+        "Documentation generation",
+        "Code review and optimization"
+      ],
+      "promptPatterns": {
+        "componentGeneration": "Generate a {componentType} component that matches this design context: {designContext}",
+        "typeGeneration": "Create TypeScript interfaces for this component: {componentSpec}",
+        "testGeneration": "Write comprehensive tests for this component: {componentCode}",
+        "documentationGeneration": "Generate JSDoc comments and README for: {componentCode}"
+      }
+    },
+    
+    "supabase": {
+      "description": "Backend services for BAIV platform",
+      "services": [
+        "Authentication (organization, individual users)",
+        "Database (PostgreSQL for ontology data)",
+        "Storage (brand assets, exported files)",
+        "Edge Functions (serverless processing)",
+        "Realtime (collaborative features)"
+      ],
+      "integration": "Supabase client in Next.js app"
+    }
+  },
+  
+  "automationRecipes": {
+    "newClientDashboard": {
+      "name": "Generate New Client Dashboard",
+      "description": "Create a complete branded dashboard for a new organization",
+      "estimatedTime": "10 minutes (vs 40-80 hours manual)",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Extract dashboard template from Figma",
+          "tool": "Figma:get_design_context",
+          "parameters": { "fileKey": "TEMPLATE_FILE", "nodeId": "DASHBOARD_FRAME" }
+        },
+        {
+          "step": 2,
+          "action": "Get organization brand tokens",
+          "tool": "Figma:get_variable_defs",
+          "parameters": { "fileKey": "CLIENT_BRAND_FILE", "nodeId": "TOKENS_FRAME" }
+        },
+        {
+          "step": 3,
+          "action": "Generate themed components",
+          "tool": "Claude Code SDK",
+          "prompt": "Apply {brandTokens} to {dashboardTemplate} maintaining BAIV component structure"
+        },
+        {
+          "step": 4,
+          "action": "Create database records",
+          "tool": "Supabase",
+          "tables": ["organizations", "brand_configurations", "user_permissions"]
+        },
+        {
+          "step": 5,
+          "action": "Deploy to staging",
+          "tool": "Vercel/GitHub Actions",
+          "target": "client-{org_id}.baiv.platform"
+        }
+      ]
+    },
+    
+    "componentLibraryUpdate": {
+      "name": "Sync Component Library",
+      "description": "Update code components when Figma library changes",
+      "trigger": "Figma library publish webhook",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Detect changed components",
+          "tool": "Figma API webhook payload",
+          "output": "List of updated component nodeIds"
+        },
+        {
+          "step": 2,
+          "action": "Extract updated designs",
+          "tool": "Figma:get_design_context",
+          "iterate": "For each changed nodeId"
+        },
+        {
+          "step": 3,
+          "action": "Regenerate component code",
+          "tool": "Claude Code SDK",
+          "prompt": "Update component to match new design while preserving existing props/logic"
+        },
+        {
+          "step": 4,
+          "action": "Run visual regression",
+          "tool": "Chromatic",
+          "threshold": "Intentional changes only"
+        },
+        {
+          "step": 5,
+          "action": "Create PR for review",
+          "tool": "GitHub API",
+          "reviewers": ["design-system-team"]
+        }
+      ]
+    },
+    
+    "designTokenSync": {
+      "name": "Sync Design Tokens",
+      "description": "Update CSS variables when Figma variables change",
+      "trigger": "Manual or scheduled (daily)",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Export all variables",
+          "tool": "Figma:get_variable_defs",
+          "scope": "All variable collections"
+        },
+        {
+          "step": 2,
+          "action": "Transform to CSS format",
+          "tool": "Style Dictionary",
+          "config": "tokens.config.json"
+        },
+        {
+          "step": 3,
+          "action": "Generate Tailwind config",
+          "tool": "Custom transformer",
+          "output": "tailwind.config.js extend section"
+        },
+        {
+          "step": 4,
+          "action": "Update token files",
+          "tool": "File system",
+          "files": ["tokens.css", "tailwind.config.js"]
+        },
+        {
+          "step": 5,
+          "action": "Commit and push",
+          "tool": "Git",
+          "message": "chore(tokens): sync design tokens from Figma"
+        }
+      ]
+    }
+  },
+  
+  "bestPractices": {
+    "designPreparation": [
+      "Use consistent naming for all components and variants",
+      "Apply auto layout to all components for responsive behavior",
+      "Define all colors, spacing, and typography as variables",
+      "Create variant properties that map directly to code props",
+      "Document component behavior in description fields",
+      "Use boolean properties for togglable elements",
+      "Set up proper layer naming for accessibility labels"
+    ],
+    
+    "codeGeneration": [
+      "Always check Code Connect mappings before generating new code",
+      "Use semantic variable names, not raw values",
+      "Generate TypeScript types alongside components",
+      "Include prop validation using Zod schemas",
+      "Add JSDoc comments for all public APIs",
+      "Create Storybook stories for all variants",
+      "Write tests for critical functionality"
+    ],
+    
+    "brandTheming": [
+      "Use CSS variables for all theme-able properties",
+      "Define token hierarchy: primitive → semantic → component",
+      "Support dark mode through semantic tokens",
+      "Test all brand modes with real client branding",
+      "Document which tokens can be overridden per brand mode"
+    ],
+    
+    "maintenance": [
+      "Keep Figma and code in sync through automation",
+      "Use visual regression testing to catch unintended changes",
+      "Version your design tokens alongside code",
+      "Document breaking changes in CHANGELOG",
+      "Review generated code before merging"
+    ]
+  },
+  
+  "metadata": {
+    "schemaVersion": "1.0.0",
+    "compatibility": {
+      "figmaAPI": "v1",
+      "claudeModel": "claude-sonnet-4-20250514",
+      "nextjs": "14.x",
+      "shadcnUI": "latest",
+      "businessDirectory": "v3.1.0"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Think Tank Collaborative",
+      "platform": "BAIV"
+    },
+    "license": "Proprietary - BAIV Platform"
+  }
+}

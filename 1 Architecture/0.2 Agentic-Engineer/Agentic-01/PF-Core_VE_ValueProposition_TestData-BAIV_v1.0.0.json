@@ -1,0 +1,238 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "vp": "https://platform.foundation/ontology/value-proposition/v1/"
+  },
+  "name": "PF-Core: VE Value Proposition TDAT-BAIV v1.0.0",
+  "alternateName": "BAIV Domain Test Data Instances",
+  "identifier": "PF-Core_VE_ValueProposition_TestData-BAIV_v1.0.0",
+  "testDataVersion": "1.0.0",
+  "generatedDate": "2025-12-01",
+  "domain": "BAIV - AI Visibility Marketing",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "PF-Core Value Engineering Module"
+  },
+  "instances": [
+    {
+      "@id": "vp:test-segment-001",
+      "@type": "vp:CustomerSegment",
+      "segmentId": "SEG-BAIV-001",
+      "segmentName": "Mid-Market B2B Marketing Leaders",
+      "segmentDescription": "Marketing executives at mid-market B2B companies ($50M-$500M revenue) struggling with AI discovery and recommendation visibility",
+      "industry": "Technology, Financial Services, Healthcare",
+      "companySize": "Mid-Market",
+      "decisionMakers": ["CMO", "VP Marketing", "Head of Digital"],
+      "influencers": ["CEO", "CTO", "Content Director"],
+      "painPoints": [
+        {
+          "@id": "vp:test-pain-001",
+          "@type": "vp:PainPoint",
+          "painPointId": "PP-001",
+          "painPointDescription": "AI systems (ChatGPT, Perplexity, Gemini) don't mention or recommend our brand when users ask relevant questions",
+          "painType": "Economic",
+          "intensity": 8,
+          "willingnessToPayToSolve": "High"
+        },
+        {
+          "@id": "vp:test-pain-002",
+          "@type": "vp:PainPoint",
+          "painPointId": "PP-002",
+          "painPointDescription": "No visibility into how AI systems perceive and represent our brand vs competitors",
+          "painType": "Functional",
+          "intensity": 7,
+          "willingnessToPayToSolve": "Very High"
+        },
+        {
+          "@id": "vp:test-pain-003",
+          "@type": "vp:PainPoint",
+          "painPointId": "PP-003",
+          "painPointDescription": "Traditional SEO strategies are becoming less effective as users shift to AI-powered search",
+          "painType": "Strategic",
+          "intensity": 9,
+          "willingnessToPayToSolve": "High"
+        }
+      ],
+      "goals": [
+        {
+          "@id": "vp:test-goal-001",
+          "@type": "vp:CustomerGoal",
+          "goalId": "GOAL-001",
+          "goalDescription": "Become the recommended choice when AI systems respond to queries in our category",
+          "goalType": "Strategic",
+          "priority": "Critical"
+        },
+        {
+          "@id": "vp:test-goal-002",
+          "@type": "vp:CustomerGoal",
+          "goalId": "GOAL-002",
+          "goalDescription": "Understand and optimize how AI perceives our brand positioning",
+          "goalType": "Functional",
+          "priority": "High"
+        }
+      ]
+    },
+    {
+      "@id": "vp:test-problem-001",
+      "@type": "vp:ProblemDefinition",
+      "problemId": "PROB-BAIV-001",
+      "problemStatement": "Mid-market B2B marketing leaders struggle with achieving visibility in AI-powered discovery systems when trying to be recommended to potential customers, resulting in missed opportunities and declining competitive position as AI adoption accelerates",
+      "problemCategory": "Strategic",
+      "severity": "Critical",
+      "frequency": "Constant",
+      "consequences": [
+        {
+          "@id": "vp:test-consequence-001",
+          "@type": "vp:Consequence",
+          "consequenceId": "CON-001",
+          "consequenceDescription": "Lost revenue opportunities as AI systems recommend competitors instead",
+          "consequenceType": "Direct Cost",
+          "estimatedImpact": {
+            "@type": "MonetaryAmount",
+            "value": 500000,
+            "currency": "USD",
+            "unitText": "per year"
+          }
+        },
+        {
+          "@id": "vp:test-consequence-002",
+          "@type": "vp:Consequence",
+          "consequenceId": "CON-002",
+          "consequenceDescription": "Declining brand authority as AI systems shape market perception",
+          "consequenceType": "Reputation"
+        }
+      ],
+      "currentSolutions": [
+        {
+          "@id": "vp:test-current-001",
+          "@type": "vp:CurrentSolution",
+          "solutionName": "Traditional SEO agencies",
+          "solutionType": "Competitor Product",
+          "gaps": [
+            "Not optimized for AI systems",
+            "No visibility into AI perception",
+            "Metrics don't capture AI discovery"
+          ],
+          "satisfactionLevel": 4
+        },
+        {
+          "@id": "vp:test-current-002",
+          "@type": "vp:CurrentSolution",
+          "solutionName": "Manual AI monitoring",
+          "solutionType": "Workaround",
+          "gaps": [
+            "Time-consuming",
+            "Inconsistent",
+            "No systematic approach"
+          ],
+          "satisfactionLevel": 3
+        }
+      ]
+    },
+    {
+      "@id": "vp:test-valueprop-001",
+      "@type": "vp:ValueProposition",
+      "propositionId": "VP-BAIV-001",
+      "propositionName": "AI Visibility Optimization Platform",
+      "propositionStatement": "IF we provide systematic AI visibility assessment and optimization FOR mid-market B2B marketing leaders THEN they will become the recommended choice in AI-powered discovery BECAUSE our platform uniquely monitors, analyzes, and optimizes how AI systems perceive and represent their brand",
+      "propositionType": "Product",
+      "targetSegment": {"@id": "vp:test-segment-001"},
+      "problemAddressed": {"@id": "vp:test-problem-001"},
+      "valueDrivers": [
+        {
+          "@id": "vp:test-driver-001",
+          "@type": "vp:ValueDriver",
+          "driverId": "VD-001",
+          "driverName": "Revenue Recovery from AI Discovery",
+          "driverType": "Revenue Growth",
+          "quantifiableValue": {
+            "@type": "vp:QuantifiableValue",
+            "metricName": "AI-attributed pipeline value",
+            "baselineValue": 0,
+            "targetValue": 500000,
+            "improvementPercentage": null,
+            "unit": "USD per year",
+            "timeToValue": "P6M"
+          },
+          "evidenceType": "Case Study"
+        },
+        {
+          "@id": "vp:test-driver-002",
+          "@type": "vp:ValueDriver",
+          "driverId": "VD-002",
+          "driverName": "Competitive Intelligence Advantage",
+          "driverType": "Competitive Advantage",
+          "qualitativeValue": "Real-time visibility into competitor AI presence and positioning gaps",
+          "evidenceType": "Benchmark"
+        }
+      ],
+      "differentiators": [
+        {
+          "@id": "vp:test-diff-001",
+          "@type": "vp:Differentiator",
+          "differentiatorId": "DIFF-001",
+          "differentiatorName": "Multi-AI Platform Monitoring",
+          "differentiatorType": "Technology",
+          "competitiveGap": "No competitor monitors across ChatGPT, Perplexity, Gemini, and Copilot simultaneously",
+          "sustainabilityPeriod": "P18M",
+          "blueOceanStrategy": "Create"
+        },
+        {
+          "@id": "vp:test-diff-002",
+          "@type": "vp:Differentiator",
+          "differentiatorId": "DIFF-002",
+          "differentiatorName": "Semantic Optimization Engine",
+          "differentiatorType": "Methodology",
+          "competitiveGap": "Unique schema.org-grounded approach to AI content optimization",
+          "sustainabilityPeriod": "P24M",
+          "blueOceanStrategy": "Create"
+        }
+      ],
+      "validationStatus": "Tested",
+      "vsomAlignment": "vsom:strategic-objective-market-leadership"
+    },
+    {
+      "@id": "vp:test-hypothesis-001",
+      "@type": "vp:Hypothesis",
+      "hypothesisId": "HYP-BAIV-001",
+      "hypothesisStatement": "IF we provide real-time AI visibility monitoring and optimization recommendations FOR mid-market B2B CMOs THEN they will achieve 30% improvement in AI citation rates within 90 days BECAUSE our semantic optimization approach aligns brand content with how AI systems process and recommend information",
+      "ifComponent": "Provide real-time AI visibility monitoring and optimization recommendations",
+      "forComponent": "Mid-market B2B CMOs ($50M-$500M company revenue)",
+      "thenComponent": "Achieve 30% improvement in AI citation rates within 90 days",
+      "becauseComponent": "Our semantic optimization approach aligns brand content with how AI systems process and recommend information",
+      "validationMethod": "Pilot Program",
+      "validationStatus": "In Progress",
+      "confidenceLevel": 72
+    }
+  ],
+  "validationRules": [
+    {
+      "ruleId": "VAL-001",
+      "testCase": "Customer segment must have at least one pain point",
+      "entity": "CustomerSegment",
+      "expected": "COUNT(painPoints) >= 1",
+      "result": "PASS"
+    },
+    {
+      "ruleId": "VAL-002",
+      "testCase": "Critical problem must have consequences",
+      "entity": "ProblemDefinition",
+      "expected": "IF severity = 'Critical' THEN COUNT(consequences) >= 1",
+      "result": "PASS"
+    },
+    {
+      "ruleId": "VAL-003",
+      "testCase": "Hypothesis must have all IF-FOR-THEN-BECAUSE components",
+      "entity": "Hypothesis",
+      "expected": "ALL components NOT NULL",
+      "result": "PASS"
+    },
+    {
+      "ruleId": "VAL-004",
+      "testCase": "Value proposition must have target segment and problem",
+      "entity": "ValueProposition",
+      "expected": "targetSegment NOT NULL AND problemAddressed NOT NULL",
+      "result": "PASS"
+    }
+  ]
+}
