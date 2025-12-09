@@ -1,1 +1,0 @@
-#guidelines mil3
