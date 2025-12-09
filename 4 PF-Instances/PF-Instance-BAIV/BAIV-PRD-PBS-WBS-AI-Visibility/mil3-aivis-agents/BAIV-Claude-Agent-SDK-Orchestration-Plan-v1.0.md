@@ -66,16 +66,13 @@ graph TB
     
     subgraph BAIV_INSTANCE["BAIV INSTANCE LEVEL AGENTS"]
         MO[Master Orchestrator]
-        
-        subgraph DOMAIN_AGENTS["Specialized Domain Agents"]
-            LI[Lead Intelligence]
-            CS[Content Strategy]
-            CO[Campaign Orchestration]
-            ICP[ICP Discovery]
-            SL[Social Listening]
-            ORA[Outreach Automation]
-            AN[Analytics & Insights]
-        end
+        LI[Lead Intelligence]
+        CS[Content Strategy]
+        CO[Campaign Orchestration]
+        ICP[ICP Discovery]
+        SL[Social Listening]
+        ORA[Outreach Automation]
+        AN[Analytics & Insights]
     end
     
     subgraph SKILLS["SHARED SKILL MODULES"]
@@ -86,11 +83,14 @@ graph TB
         WF[Workflow]
     end
     
-    PF_CORE -->|"Governance & Context"| MO
-    MO -->|"Delegates Tasks"| DOMAIN_AGENTS
-    DOMAIN_AGENTS -->|"Uses"| SKILLS
-    SKILLS -->|"Reports Metrics"| AN
-    AN -->|"Aggregates"| PFM
+    PFM -->|"Governance"| MO
+    MO -->|"Tasks"| LI
+    MO -->|"Tasks"| CS
+    MO -->|"Tasks"| CO
+    LI -->|"Uses"| DA
+    CS -->|"Uses"| NL
+    CO -->|"Uses"| INT
+    AN -->|"Reports"| PFM
     
     style PF_CORE fill:#1e3a8a,color:#fff
     style BAIV_INSTANCE fill:#7c3aed,color:#fff
@@ -318,9 +318,7 @@ Message Format:
 7. Outreach Automation Agent schedules first touch
 8. Analytics Agent logs metrics and updates dashboard
 
-```mermaid
 [WORKFLOW SEQUENCE DIAGRAM: New Lead Processing - TO BE ADDED]
-```
 
 [Explanation paragraphs for New Lead Processing workflow sequence to be added]
 
@@ -334,9 +332,7 @@ Message Format:
 7. Based on performance, Content Strategy Agent suggests optimizations
 8. Campaign Orchestration Agent implements A/B tests
 
-```mermaid
 [WORKFLOW SEQUENCE DIAGRAM: Content Campaign Launch - TO BE ADDED]
-```
 
 [Explanation paragraphs for Content Campaign Launch workflow to be added]
 
@@ -345,27 +341,21 @@ Message Format:
 **[Workflow: ICP Discovery & Market Research]**
 [Step-by-step workflow to be detailed]
 
-```mermaid
 [WORKFLOW DIAGRAM - TO BE ADDED]
-```
 
 [Explanation to be added]
 
 **[Workflow: Social Listening & Engagement Response]**
 [Step-by-step workflow to be detailed]
 
-```mermaid
 [WORKFLOW DIAGRAM - TO BE ADDED]
-```
 
 [Explanation to be added]
 
 **[Workflow: Multi-Channel Campaign Optimization]**
 [Step-by-step workflow to be detailed]
 
-```mermaid
 [WORKFLOW DIAGRAM - TO BE ADDED]
-```
 
 [Explanation to be added]
 
@@ -438,9 +428,7 @@ Message Format:
 * Cost monitoring (API usage, compute resources)
 * User feedback integration
 
-```mermaid
 [MONITORING ARCHITECTURE DIAGRAM - TO BE ADDED]
-```
 
 [Explanation of monitoring and observability architecture to be added]
 
@@ -455,9 +443,7 @@ Message Format:
 **[Message Queue Architecture]**
 [Redis/Supabase Realtime configuration and patterns to be added]
 
-```mermaid
 [TECHNOLOGY STACK DIAGRAM - TO BE ADDED]
-```
 
 [Explanation of technology choices and integration patterns to be added]
 
@@ -472,9 +458,7 @@ Message Format:
 **[Metrics and Analytics Pipeline]**
 [Data pipeline for metrics collection and aggregation to be added]
 
-```mermaid
 [DATA FLOW DIAGRAM - TO BE ADDED]
-```
 
 [Explanation of data flows and transformation points to be added]
 
@@ -489,9 +473,7 @@ Message Format:
 **[High Availability & Disaster Recovery]**
 [HA and DR strategies to be added]
 
-```mermaid
 [DEPLOYMENT ARCHITECTURE DIAGRAM - TO BE ADDED]
-```
 
 [Explanation of deployment topology and scaling approach to be added]
 
@@ -558,9 +540,7 @@ Message Format:
 **[Resource Sharing Across Instances]**
 [How BAIV, AIR, and W4M share skill modules, context packages, and PF-Core agent services]
 
-```mermaid
 [CROSS-INSTANCE COORDINATION DIAGRAM - TO BE ADDED]
-```
 
 [Explanation of resource sharing patterns and conflict resolution]
 
@@ -578,9 +558,7 @@ Message Format:
 **[Zero-Trust Agent Architecture]**
 [Detailed security model with authentication, authorization, and encryption at every agent boundary]
 
-```mermaid
 [SECURITY ARCHITECTURE DIAGRAM - TO BE ADDED]
-```
 
 [Explanation of zero-trust principles applied to agent orchestration]
 
