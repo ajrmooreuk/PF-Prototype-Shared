@@ -1,0 +1,80 @@
+==============================================
+BAIV AI VISIBILITY PLATFORM - COLOR UPDATE
+==============================================
+
+NEW COLOR SCHEME:
+- Primary: #2990C6 (blue) - replaces #02a4bf (teal)
+- Text/Headers: #000000 (black) - replaces #005260 (dark teal)  
+- Accent: #FFFFFF (white)
+- Alert/Warning: #e84e1c (orange) - KEEP AS IS
+
+==============================================
+FIND & REPLACE INSTRUCTIONS:
+==============================================
+
+1. Replace #02a4bf with #2990C6 (PRIMARY COLOR)
+2. Replace #028a9f with #2990C6 (DARKER PRIMARY)
+3. Replace #005260 with #000000 (DARK TEXT)
+
+Files that need updating (50+ files total):
+
+COMPLETED ✅:
+- /App.tsx
+- /components/AppLayout.tsx
+- /components/ui/progress.tsx
+- /components/CircularGauge.tsx
+
+REMAINING (High Priority):
+- /components/Navigation.tsx
+- /components/LeftNavigation.tsx  
+- /components/MetricsRow.tsx
+- /components/PlatformCitationChart.tsx
+- /components/ActivityFeed.tsx
+- /components/QuickActions.tsx
+- /components/TopOpportunities.tsx
+- /components/EmptyState.tsx
+- /components/LoadingOverlay.tsx
+
+Discovery Audit Components:
+- /components/DiscoveryAuditPage.tsx
+- /components/audit/*.tsx (all files)
+
+Settings Components:
+- /components/settings/*.tsx (all files)
+
+Content Studio:
+- /components/blog/*.tsx
+- /components/faq/*.tsx  
+- /components/meta/*.tsx
+- /components/schema/*.tsx
+- /components/link/*.tsx
+- /components/image/*.tsx
+
+Social Media:
+- /components/social/**/*.tsx (all files)
+
+Leads:
+- /components/leads/**/*.tsx (all files)
+
+Podcasts:
+- /components/podcasts/*.tsx (all files)
+
+Ambassadors:
+- /components/ambassadors/*.tsx (all files)
+
+PMF:
+- /components/pmf/*.tsx (all files)
+
+==============================================
+TAILWIND CLASSES:
+==============================================
+
+Replace Tailwind teal classes with custom blue:
+- teal-50 → bg-[#E6F4F9] or blue-50
+- teal-100 → bg-[#CCE9F3] or blue-100
+- teal-600 → bg-[#2990C6] or text-[#2990C6]
+- teal-700 → bg-[#2176AD] or text-[#2176AD]
+- border-teal-* → border-[#2990C6]
+- text-teal-* → text-[#2990C6]
+
+==============================================
