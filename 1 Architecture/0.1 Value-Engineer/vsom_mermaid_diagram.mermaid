@@ -1,0 +1,97 @@
+graph TB
+    VSOM[VSOM Framework<br/>Vision Strategy Objectives Metrics]
+    
+    VSOM --> VISION[Vision<br/>AI-Led Business Ecosystem]
+    VSOM --> STRATEGY[Strategy<br/>Multi-Venture Approach]
+    VSOM --> OBJECTIVES[Objectives<br/>Tiered Timeline]
+    VSOM --> METRICS[Success Metrics<br/>Measurement Framework]
+    
+    %% Vision Layer
+    VISION --> V1[Substantial & Sustainable<br/>Competitive Advantage]
+    VISION --> V2[Beyond Obvious<br/>Use Cases]
+    VISION --> V3[Oncology Expertise +<br/>AI/BI Architecture]
+    VISION --> V4[Schema.org Based<br/>Semantic Modeling]
+    
+    %% Strategy Layer - Ventures
+    STRATEGY --> JV1[AI Visibility<br/>Beyond SEO]
+    STRATEGY --> JV2[AI Strategy &<br/>Innovation]
+    STRATEGY --> JV3[Idea→MVP→PMF<br/>Acceleration]
+    STRATEGY --> JV4[SaaS Incumbent<br/>Optimization]
+    
+    %% Strategy Enablers
+    STRATEGY --> EN1[Ontological<br/>Framework]
+    STRATEGY --> EN2[Agentic AI<br/>Systems]
+    STRATEGY --> EN3[Digital Transformation<br/>Methodology]
+    STRATEGY --> EN4[Domain<br/>Expertise]
+    
+    %% Objectives - Immediate
+    OBJECTIVES --> OBJ1[Q4 2025:<br/>Business Architecture]
+    OBJECTIVES --> OBJ2[Q1 2026:<br/>AI Visibility Validation]
+    OBJECTIVES --> OBJ3[Q1-Q2 2026:<br/>Acceleration Framework]
+    
+    %% Objectives - Medium Term
+    OBJECTIVES --> OBJ4[2026-27:<br/>Multi-Vertical Scale]
+    OBJECTIVES --> OBJ5[2026-27:<br/>Thought Leadership]
+    
+    %% Objectives - Long Term
+    OBJECTIVES --> OBJ6[2027+:<br/>Proprietary IP Moats]
+    
+    %% Ventures to Objectives
+    JV1 --> OBJ2
+    JV2 --> OBJ4
+    JV3 --> OBJ3
+    JV4 --> OBJ4
+    
+    %% Metrics - Financial
+    METRICS --> MF[Financial Metrics]
+    MF --> MF1[Revenue Growth<br/>300% YoY]
+    MF --> MF2[Profit Margins<br/>40-70%]
+    MF --> MF3[Portfolio Valuation<br/>Unicorn Potential]
+    
+    %% Metrics - Market
+    METRICS --> MM[Market Metrics]
+    MM --> MM1[Client Retention<br/>95%+]
+    MM --> MM2[Market Share<br/>Top 3 by 2027]
+    MM --> MM3[Thought Leadership<br/>Conference Speaking]
+    
+    %% Metrics - Innovation
+    METRICS --> MI[Innovation Metrics]
+    MI --> MI1[IP Development<br/>3+ Frameworks/Year]
+    MI --> MI2[Client Success<br/>Competitive Advantage]
+    MI --> MI3[Time to Value<br/>50% Reduction]
+    
+    %% Link Objectives to Metrics
+    OBJ1 --> MF
+    OBJ2 --> MM
+    OBJ3 --> MI3
+    OBJ4 --> MM2
+    OBJ5 --> MM3
+    OBJ6 --> MI1
+    
+    %% Business Models
+    STRATEGY --> BM[Business Models]
+    BM --> BM1[Consulting<br/>Retainer]
+    BM --> BM2[Joint Venture<br/>Equity]
+    BM --> BM3[IP<br/>Licensing]
+    BM --> BM4[Acceleration<br/>Services]
+    
+    BM1 --> MF2
+    BM2 --> MF3
+    BM3 --> MI1
+    BM4 --> MI3
+    
+    %% Styling
+    classDef visionStyle fill:#e1f5ff,stroke:#0288d1,stroke-width:3px
+    classDef strategyStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef objectiveStyle fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef metricStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef ventureStyle fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef enablerStyle fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    
+    class VSOM visionStyle
+    class VISION,V1,V2,V3,V4 visionStyle
+    class STRATEGY,EN1,EN2,EN3,EN4 strategyStyle
+    class JV1,JV2,JV3,JV4 ventureStyle
+    class BM,BM1,BM2,BM3,BM4 enablerStyle
+    class OBJECTIVES,OBJ1,OBJ2,OBJ3,OBJ4,OBJ5,OBJ6 objectiveStyle
+    class METRICS,MF,MM,MI,MF1,MF2,MF3,MM1,MM2,MM3,MI1,MI2,MI3 metricStyle

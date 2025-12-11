@@ -1,0 +1,169 @@
+%% PF-Core: VE BAIV DIAG-Enhancement v1.0.0
+%% BAIV PF-Instance AI Visibility Enhancement Architecture
+%% Platform Foundation Core
+%% Document ID: PF-Core_VE_BAIV_Diagram-Enhancement_v1.0.0
+
+flowchart TB
+    %% ============================================
+    %% PF-CORE GENERIC LAYER
+    %% ============================================
+    subgraph PF_CORE["PF-CORE GENERIC MODULES"]
+        direction LR
+        VP_CORE["Value Proposition<br/>Module v1.0"]
+        GTM_CORE["GTM<br/>Module v0.1"]
+        PMF_CORE["PMF<br/>Module v2.0"]
+    end
+
+    %% ============================================
+    %% BAIV ENHANCEMENT LAYER
+    %% ============================================
+    subgraph BAIV_ENHANCE["BAIV DOMAIN ENHANCEMENTS"]
+        direction TB
+        
+        subgraph AIV_EXT["AI VISIBILITY EXTENSIONS"]
+            AIV_ONT["AI Visibility<br/>Ontology v2.0"]
+            VIS_SCORE["Visibility<br/>Scoring Engine"]
+            ENTITY_REC["Entity<br/>Recognition"]
+            CITATION["Citation<br/>Potential Analyzer"]
+        end
+        
+        subgraph CMO_EXT["CMO FRAMEWORK"]
+            CMO_FRAME["CMO Strategic<br/>Framework"]
+            MKT_STRAT["Marketing<br/>Strategy OKR"]
+            CSUITE["C-Suite<br/>Collaboration"]
+        end
+        
+        subgraph AUDIT_EXT["VISIBILITY AUDIT"]
+            VIS_AUDIT["Visibility<br/>Audit Process"]
+            GAP_ANAL["Gap<br/>Analysis"]
+            COMP_BENCH["Competitor<br/>Benchmarking"]
+        end
+    end
+
+    %% ============================================
+    %% BAIV AGENT CLUSTER
+    %% ============================================
+    subgraph BAIV_AGENTS["BAIV-SPECIFIC AGENTS (Claude SDK)"]
+        direction LR
+        
+        subgraph ORCHESTRATION["ORCHESTRATION"]
+            P0["P0: Master<br/>Reasoning Agent"]
+        end
+        
+        subgraph ANALYSIS["ANALYSIS AGENTS"]
+            P2["P2: Discovery<br/>& Profiling"]
+            P4["P4: Visibility<br/>Audit"]
+            P5["P5: Analytics<br/>& Scoring"]
+            P6["P6: Gap<br/>Analysis"]
+        end
+        
+        subgraph STRATEGY["STRATEGY AGENTS"]
+            P7["P7: Ideation"]
+            P14["P14: Predictive<br/>Analytics"]
+            P15["P15: Reasoning<br/>System"]
+        end
+    end
+
+    %% ============================================
+    %% BAIV PRODUCTS
+    %% ============================================
+    subgraph BAIV_PRODUCTS["BAIV PRODUCT OUTPUTS"]
+        direction LR
+        STRAT_CALL["Strategy<br/>Calls"]
+        FAQ_GEN["AI-Optimized<br/>FAQs"]
+        CONTENT["Visibility-Optimized<br/>Content"]
+        AUDIT_RPT["Visibility<br/>Audit Reports"]
+    end
+
+    %% ============================================
+    %% EXTERNAL INTEGRATIONS
+    %% ============================================
+    subgraph INTEGRATIONS["AI PLATFORM INTEGRATIONS"]
+        direction LR
+        CHATGPT["ChatGPT<br/>Detection"]
+        PERPLEXITY["Perplexity<br/>Monitoring"]
+        GEMINI["Gemini<br/>Analysis"]
+        COPILOT["Copilot<br/>Tracking"]
+    end
+
+    %% ============================================
+    %% CONNECTIONS - Core to Enhancement
+    %% ============================================
+    VP_CORE --> AIV_ONT
+    VP_CORE --> CMO_FRAME
+    GTM_CORE --> CMO_FRAME
+    GTM_CORE --> VIS_AUDIT
+    PMF_CORE --> VIS_AUDIT
+    PMF_CORE --> GAP_ANAL
+
+    %% Enhancement Internal
+    AIV_ONT --> VIS_SCORE
+    AIV_ONT --> ENTITY_REC
+    AIV_ONT --> CITATION
+    CMO_FRAME --> MKT_STRAT
+    CMO_FRAME --> CSUITE
+    VIS_AUDIT --> GAP_ANAL
+    VIS_AUDIT --> COMP_BENCH
+
+    %% Enhancement to Agents
+    AIV_ONT --> P4
+    AIV_ONT --> P5
+    VIS_SCORE --> P5
+    GAP_ANAL --> P6
+    CMO_FRAME --> P0
+    MKT_STRAT --> P7
+    COMP_BENCH --> P14
+
+    %% Agent Orchestration
+    P0 --> P2
+    P0 --> P4
+    P0 --> P5
+    P0 --> P6
+    P0 --> P7
+    P0 --> P14
+    P0 --> P15
+
+    %% Agents to Products
+    P0 --> STRAT_CALL
+    P4 --> AUDIT_RPT
+    P5 --> CONTENT
+    P6 --> FAQ_GEN
+    P7 --> CONTENT
+
+    %% Products to Integrations
+    CONTENT --> CHATGPT
+    CONTENT --> PERPLEXITY
+    CONTENT --> GEMINI
+    CONTENT --> COPILOT
+    FAQ_GEN --> CHATGPT
+    FAQ_GEN --> PERPLEXITY
+
+    %% Feedback Loop
+    INTEGRATIONS -.->|"visibility signals"| P4
+    INTEGRATIONS -.->|"trend data"| P14
+
+    %% ============================================
+    %% STYLING
+    %% ============================================
+    style PF_CORE fill:#E2E8F0,stroke:#64748B
+    style VP_CORE fill:#02A4BF,stroke:#028A9B,color:#fff
+    style GTM_CORE fill:#10B981,stroke:#059669,color:#fff
+    style PMF_CORE fill:#F59E0B,stroke:#D97706,color:#fff
+    
+    style BAIV_ENHANCE fill:#DBEAFE,stroke:#3B82F6
+    style AIV_ONT fill:#1A365D,stroke:#2C5282,color:#fff
+    style CMO_FRAME fill:#1A365D,stroke:#2C5282,color:#fff
+    style VIS_AUDIT fill:#1A365D,stroke:#2C5282,color:#fff
+    
+    style BAIV_AGENTS fill:#E9D5FF,stroke:#8B5CF6
+    style P0 fill:#8B5CF6,stroke:#7C3AED,color:#fff
+    style P4 fill:#A78BFA,stroke:#8B5CF6,color:#fff
+    style P5 fill:#A78BFA,stroke:#8B5CF6,color:#fff
+    style P6 fill:#A78BFA,stroke:#8B5CF6,color:#fff
+    
+    style BAIV_PRODUCTS fill:#D1FAE5,stroke:#10B981
+    style STRAT_CALL fill:#10B981,stroke:#059669,color:#fff
+    style FAQ_GEN fill:#10B981,stroke:#059669,color:#fff
+    style CONTENT fill:#10B981,stroke:#059669,color:#fff
+    
+    style INTEGRATIONS fill:#FEE2E2,stroke:#EF4444

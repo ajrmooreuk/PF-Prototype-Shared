@@ -1,0 +1,148 @@
+%% PF-Core: VE Value Engineering DIAG-EntityGraph v1.0.0
+%% High-Level Entity Relationship Overview
+%% Platform Foundation Core
+%% Document ID: PF-Core_VE_ValueEngineering_Diagram-EntityGraph_v1.0.0
+
+%% This diagram provides a rolled-up view of major entities
+%% and their relationships across the Value Engineering cascade
+
+graph TB
+    %% ============================================
+    %% STRATEGIC FOUNDATION
+    %% ============================================
+    subgraph STRATEGIC["🎯 STRATEGIC FOUNDATION"]
+        direction TB
+        VSOM["<b>VSOM</b><br/>────────────<br/>Vision<br/>Strategy<br/>Objectives<br/>Metrics"]
+        RACI["<b>RACI/RBAC</b><br/>────────────<br/>Roles<br/>Accountability<br/>Access Control"]
+    end
+
+    %% ============================================
+    %% VALUE PROPOSITION CORE
+    %% ============================================
+    subgraph VP_CORE["💎 VALUE PROPOSITION"]
+        direction TB
+        VP["<b>Value Prop</b><br/>────────────<br/>IF-FOR-THEN<br/>-BECAUSE"]
+        
+        subgraph VP_INPUTS["Inputs"]
+            SEGMENT["Customer<br/>Segment"]
+            PROBLEM["Problem<br/>Definition"]
+        end
+        
+        subgraph VP_OUTPUTS["Outputs"]
+            HYP["Hypothesis"]
+            DIFF["Differentiator"]
+        end
+    end
+
+    %% ============================================
+    %% GO-TO-MARKET
+    %% ============================================
+    subgraph GTM_CORE["🚀 GO-TO-MARKET"]
+        direction TB
+        GTM["<b>GTM Strategy</b><br/>────────────<br/>Launch Plan<br/>Channel Mix"]
+        
+        subgraph GTM_EXEC["Execution"]
+            CAMPAIGN["Campaign"]
+            MESSAGE["Messaging"]
+            CHANNEL["Channels"]
+        end
+    end
+
+    %% ============================================
+    %% PRODUCT-MARKET FIT
+    %% ============================================
+    subgraph PMF_CORE["📊 PRODUCT-MARKET FIT"]
+        direction TB
+        PMF["<b>PMF State</b><br/>────────────<br/>40% Rule<br/>Validation"]
+        
+        subgraph PMF_VALID["Validation"]
+            EXPERIMENT["Experiments"]
+            INDICATOR["Indicators"]
+            SURVEY["Surveys"]
+        end
+    end
+
+    %% ============================================
+    %% EXECUTION LAYER
+    %% ============================================
+    subgraph EXECUTION["⚡ EXECUTION"]
+        direction LR
+        OKR["<b>OKR</b><br/>Objectives<br/>Key Results"]
+        PRD["<b>PRD</b><br/>Requirements<br/>Specs"]
+        TDD["<b>TDD</b><br/>Tests<br/>Implementation"]
+    end
+
+    %% ============================================
+    %% GOVERNANCE LAYER
+    %% ============================================
+    subgraph GOVERNANCE["🔐 GOVERNANCE"]
+        direction LR
+        OAA["<b>OAA Architect</b><br/>Ontology Management"]
+        REGISTRY["<b>OAA Registry</b><br/>Version Control"]
+    end
+
+    %% ============================================
+    %% RELATIONSHIPS - Strategic to Value Prop
+    %% ============================================
+    VSOM -->|"aligns"| VP
+    RACI -->|"governs"| SEGMENT
+
+    %% VP Internal
+    SEGMENT --> VP
+    PROBLEM --> VP
+    VP --> HYP
+    VP --> DIFF
+
+    %% VP to GTM
+    VP ==>|"executes via"| GTM
+    SEGMENT -->|"targets"| MESSAGE
+    DIFF -->|"differentiates"| MESSAGE
+    GTM --> CAMPAIGN
+    GTM --> CHANNEL
+    CAMPAIGN --> MESSAGE
+
+    %% VP to PMF
+    HYP ==>|"validated by"| PMF
+    PMF --> EXPERIMENT
+    PMF --> INDICATOR
+    EXPERIMENT --> SURVEY
+
+    %% GTM to PMF (bidirectional)
+    CAMPAIGN -.->|"generates signals"| INDICATOR
+    PMF -.->|"informs strategy"| GTM
+
+    %% PMF Feedback Loop
+    PMF -.->|"updates confidence"| HYP
+
+    %% To Execution
+    VP -->|"decomposes to"| OKR
+    GTM -->|"specifies"| PRD
+    PRD --> TDD
+    INDICATOR -->|"measures"| OKR
+
+    %% Governance
+    OAA -.->|"validates"| VP
+    OAA -.->|"validates"| GTM
+    OAA -.->|"validates"| PMF
+    REGISTRY -.->|"registers"| OAA
+
+    %% ============================================
+    %% STYLING
+    %% ============================================
+    style VSOM fill:#1A365D,stroke:#2C5282,color:#fff
+    style RACI fill:#2C5282,stroke:#1A365D,color:#fff
+    style VP fill:#02A4BF,stroke:#028A9B,color:#fff
+    style GTM fill:#10B981,stroke:#059669,color:#fff
+    style PMF fill:#F59E0B,stroke:#D97706,color:#fff
+    style OKR fill:#8B5CF6,stroke:#7C3AED,color:#fff
+    style PRD fill:#A78BFA,stroke:#8B5CF6,color:#fff
+    style TDD fill:#C4B5FD,stroke:#A78BFA,color:#000
+    style OAA fill:#EC4899,stroke:#DB2777,color:#fff
+    style REGISTRY fill:#F472B6,stroke:#EC4899,color:#fff
+    
+    style STRATEGIC fill:#EBF4FF,stroke:#1A365D
+    style VP_CORE fill:#E0F7FA,stroke:#02A4BF
+    style GTM_CORE fill:#D1FAE5,stroke:#10B981
+    style PMF_CORE fill:#FEF3C7,stroke:#F59E0B
+    style EXECUTION fill:#EDE9FE,stroke:#8B5CF6
+    style GOVERNANCE fill:#FCE7F3,stroke:#EC4899

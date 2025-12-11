@@ -1,0 +1,704 @@
+{
+  "@context": {
+    "@vocab": "https://baiv.ai/ontology/strategy-implementation/v1#",
+    "schema": "http://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "Ontology",
+  "identifier": "baiv:ontology:strategy-implementation-v1",
+  "name": "VSOM Marketing Strategy & OKR Implementation Ontology",
+  "version": "1.0.0",
+  "domain": "Strategic Planning & Marketing Implementation",
+  "description": "Connected ontology linking organizational vision through strategy to marketing OKRs and implementation, specifically designed for AI-led business transformation consulting",
+  "dateCreated": "2025-10-03",
+  "creator": "BAIV Enterprise Architecture",
+  "purpose": "Enable systematic strategy development, marketing alignment, and performance measurement for AI-led business transformation",
+  
+  "entities": {
+    "Organization": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Organization",
+      "description": "Target organization or client engaging with BAIV processes",
+      "properties": {
+        "organizationId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the organization"
+        },
+        "organizationName": {
+          "dataType": "xsd:string", 
+          "required": true,
+          "description": "Legal name of the organization"
+        },
+        "industry": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Primary industry classification"
+        },
+        "maturityLevel": {
+          "dataType": "MaturityLevel",
+          "required": true,
+          "description": "AI/Digital transformation maturity assessment"
+        },
+        "transformationStage": {
+          "dataType": "TransformationStage",
+          "required": true,
+          "description": "Current stage in transformation journey"
+        },
+        "competitivePosition": {
+          "dataType": "xsd:string",
+          "description": "Market position and competitive landscape analysis"
+        }
+      },
+      "relationships": {
+        "hasVision": {
+          "targetEntity": "Vision",
+          "cardinality": "1..*",
+          "description": "Organization's strategic vision statements"
+        },
+        "engagesInProcess": {
+          "targetEntity": "BAIVProcess",
+          "cardinality": "0..*",
+          "description": "BAIV processes the organization is participating in"
+        },
+        "hasstakeholder": {
+          "targetEntity": "Stakeholder",
+          "cardinality": "1..*",
+          "description": "Key stakeholders within the organization"
+        }
+      }
+    },
+
+    "Vision": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:CreativeWork",
+      "description": "Strategic vision statement defining long-term aspirational goals",
+      "properties": {
+        "visionId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the vision"
+        },
+        "visionStatement": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Formal vision statement text"
+        },
+        "timeHorizon": {
+          "dataType": "xsd:duration",
+          "required": true,
+          "description": "Target timeframe for vision achievement"
+        },
+        "aiReadiness": {
+          "dataType": "xsd:float",
+          "description": "AI capability maturity score (0-100)"
+        },
+        "competitiveAdvantage": {
+          "dataType": "xsd:string",
+          "description": "Identified sources of sustainable competitive advantage"
+        }
+      },
+      "relationships": {
+        "alignsWith": {
+          "targetEntity": "Strategy",
+          "cardinality": "1..*",
+          "description": "Strategies that support vision achievement"
+        },
+        "belongsTo": {
+          "targetEntity": "Organization",
+          "cardinality": "1",
+          "description": "Organization that owns this vision"
+        }
+      }
+    },
+
+    "Strategy": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Plan",
+      "description": "Strategic approach defining how to achieve vision objectives",
+      "properties": {
+        "strategyId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the strategy"
+        },
+        "strategyName": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Descriptive name of the strategy"
+        },
+        "strategyType": {
+          "dataType": "StrategyType",
+          "required": true,
+          "description": "Classification of strategy (Business, Marketing, Technology, etc.)"
+        },
+        "competitiveApproach": {
+          "dataType": "CompetitiveApproach",
+          "required": true,
+          "description": "How strategy creates competitive advantage"
+        },
+        "aiLeverage": {
+          "dataType": "xsd:string",
+          "description": "How AI capabilities are leveraged in this strategy"
+        },
+        "innovationFocus": {
+          "dataType": "xsd:string",
+          "description": "Innovation areas targeted by strategy"
+        }
+      },
+      "relationships": {
+        "supportsVision": {
+          "targetEntity": "Vision",
+          "cardinality": "1..*",
+          "description": "Vision(s) this strategy supports"
+        },
+        "hasObjective": {
+          "targetEntity": "Objective",
+          "cardinality": "1..*",
+          "description": "Specific objectives within this strategy"
+        },
+        "informsMarketingStrategy": {
+          "targetEntity": "MarketingStrategy",
+          "cardinality": "0..*",
+          "description": "Marketing strategies derived from this strategy"
+        }
+      }
+    },
+
+    "Objective": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Goal",
+      "description": "Specific, measurable goals that support strategy execution",
+      "properties": {
+        "objectiveId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the objective"
+        },
+        "objectiveStatement": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Clear statement of what will be achieved"
+        },
+        "targetValue": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Specific target or outcome expected"
+        },
+        "timeframe": {
+          "dataType": "xsd:duration",
+          "required": true,
+          "description": "Timeline for objective achievement"
+        },
+        "priority": {
+          "dataType": "Priority",
+          "required": true,
+          "description": "Relative priority level"
+        },
+        "aiEnablement": {
+          "dataType": "xsd:string",
+          "description": "How AI technologies enable this objective"
+        }
+      },
+      "relationships": {
+        "supportsStrategy": {
+          "targetEntity": "Strategy",
+          "cardinality": "1..*",
+          "description": "Strategy(ies) this objective supports"
+        },
+        "hasMeasurement": {
+          "targetEntity": "Metric",
+          "cardinality": "1..*",
+          "description": "Metrics that measure objective progress"
+        },
+        "translatesTo": {
+          "targetEntity": "OKR",
+          "cardinality": "0..*",
+          "description": "OKRs that implement this objective"
+        }
+      }
+    },
+
+    "Metric": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:QuantitativeValue",
+      "description": "Quantitative measures for tracking objective progress",
+      "properties": {
+        "metricId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the metric"
+        },
+        "metricName": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Descriptive name of the metric"
+        },
+        "metricType": {
+          "dataType": "MetricType",
+          "required": true,
+          "description": "Classification of metric (KPI, Leading, Lagging, etc.)"
+        },
+        "measurementUnit": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unit of measurement (percentage, count, currency, etc.)"
+        },
+        "baseline": {
+          "dataType": "xsd:float",
+          "description": "Starting/current value"
+        },
+        "target": {
+          "dataType": "xsd:float",
+          "required": true,
+          "description": "Target value to achieve"
+        },
+        "frequency": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "How often metric is measured and reported"
+        },
+        "automatedCollection": {
+          "dataType": "xsd:boolean",
+          "description": "Whether metric data collection is automated"
+        }
+      },
+      "relationships": {
+        "measuresObjective": {
+          "targetEntity": "Objective",
+          "cardinality": "1..*",
+          "description": "Objective(s) this metric measures"
+        },
+        "trackedInOKR": {
+          "targetEntity": "OKR",
+          "cardinality": "0..*",
+          "description": "OKRs that track this metric"
+        }
+      }
+    },
+
+    "MarketingStrategy": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Plan",
+      "description": "Marketing-specific strategy aligned with business strategy",
+      "properties": {
+        "marketingStrategyId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for marketing strategy"
+        },
+        "focusArea": {
+          "dataType": "MarketingFocus",
+          "required": true,
+          "description": "Primary marketing focus (Visibility, Engagement, Conversion, etc.)"
+        },
+        "targetAudience": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Primary target audience segments"
+        },
+        "competitiveDifferentiation": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "How marketing creates competitive differentiation"
+        },
+        "aiMarketingCapabilities": {
+          "dataType": "xsd:string",
+          "description": "AI capabilities leveraged in marketing"
+        },
+        "visibilityBeyondSEO": {
+          "dataType": "xsd:string",
+          "description": "Non-traditional visibility strategies beyond standard SEO"
+        }
+      },
+      "relationships": {
+        "derivedFrom": {
+          "targetEntity": "Strategy",
+          "cardinality": "1..*",
+          "description": "Business strategy(ies) this marketing strategy supports"
+        },
+        "implementedThrough": {
+          "targetEntity": "OKR",
+          "cardinality": "1..*",
+          "description": "OKRs that implement this marketing strategy"
+        },
+        "targetsAudience": {
+          "targetEntity": "AudienceSegment",
+          "cardinality": "1..*",
+          "description": "Audience segments targeted by this strategy"
+        }
+      }
+    },
+
+    "OKR": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Goal",
+      "description": "Objectives and Key Results for strategy implementation",
+      "properties": {
+        "okrId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the OKR"
+        },
+        "okrObjective": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Qualitative, inspirational objective statement"
+        },
+        "okrLevel": {
+          "dataType": "OKRLevel",
+          "required": true,
+          "description": "Organizational level (Company, Department, Team, Individual)"
+        },
+        "quarter": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Target quarter for achievement (Q1, Q2, Q3, Q4)"
+        },
+        "year": {
+          "dataType": "xsd:int",
+          "required": true,
+          "description": "Target year for achievement"
+        },
+        "confidenceLevel": {
+          "dataType": "xsd:float",
+          "description": "Confidence in achieving OKR (0.0-1.0)"
+        },
+        "aiAcceleration": {
+          "dataType": "xsd:string",
+          "description": "How AI accelerates achievement of this OKR"
+        }
+      },
+      "relationships": {
+        "implements": {
+          "targetEntity": "MarketingStrategy",
+          "cardinality": "0..*",
+          "description": "Marketing strategy(ies) this OKR implements"
+        },
+        "derivedFromObjective": {
+          "targetEntity": "Objective",
+          "cardinality": "0..*",
+          "description": "Strategic objective(s) this OKR supports"
+        },
+        "hasKeyResult": {
+          "targetEntity": "KeyResult",
+          "cardinality": "2..5",
+          "description": "Key results that measure OKR success"
+        },
+        "assignedTo": {
+          "targetEntity": "Stakeholder",
+          "cardinality": "1..*",
+          "description": "Stakeholder(s) responsible for OKR delivery"
+        }
+      }
+    },
+
+    "KeyResult": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:QuantitativeValue",
+      "description": "Specific, measurable outcomes that indicate OKR success",
+      "properties": {
+        "keyResultId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for key result"
+        },
+        "keyResultStatement": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Specific, measurable result statement"
+        },
+        "measurementType": {
+          "dataType": "MeasurementType",
+          "required": true,
+          "description": "Type of measurement (Increase, Decrease, Maintain, Launch, etc.)"
+        },
+        "startingValue": {
+          "dataType": "xsd:float",
+          "description": "Baseline value at start of period"
+        },
+        "targetValue": {
+          "dataType": "xsd:float",
+          "required": true,
+          "description": "Target value to achieve"
+        },
+        "currentValue": {
+          "dataType": "xsd:float",
+          "description": "Current progress value"
+        },
+        "unit": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unit of measurement"
+        },
+        "progressPercent": {
+          "dataType": "xsd:float",
+          "description": "Calculated progress percentage (0-100)"
+        }
+      },
+      "relationships": {
+        "belongsToOKR": {
+          "targetEntity": "OKR",
+          "cardinality": "1",
+          "description": "OKR this key result belongs to"
+        },
+        "measuredBy": {
+          "targetEntity": "Metric",
+          "cardinality": "0..*",
+          "description": "Metrics used to track this key result"
+        }
+      }
+    },
+
+    "BAIVProcess": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Service",
+      "description": "BAIV consulting process for AI-led business transformation",
+      "properties": {
+        "processId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for BAIV process"
+        },
+        "processName": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Name of the BAIV process"
+        },
+        "processType": {
+          "dataType": "BAIVProcessType",
+          "required": true,
+          "description": "Type of BAIV process (Early Access, Strategy Calls, Onboarding)"
+        },
+        "stage": {
+          "dataType": "ProcessStage",
+          "required": true,
+          "description": "Current stage in the process"
+        },
+        "deliverables": {
+          "dataType": "xsd:string",
+          "description": "Key deliverables from this process"
+        },
+        "duration": {
+          "dataType": "xsd:duration",
+          "description": "Expected duration of process"
+        }
+      },
+      "relationships": {
+        "engagesOrganization": {
+          "targetEntity": "Organization",
+          "cardinality": "1",
+          "description": "Organization participating in this process"
+        },
+        "informsStrategy": {
+          "targetEntity": "Strategy",
+          "cardinality": "0..*",
+          "description": "Strategies informed by this process"
+        },
+        "hasStakeholder": {
+          "targetEntity": "Stakeholder",
+          "cardinality": "1..*",
+          "description": "Stakeholders involved in this process"
+        }
+      }
+    },
+
+    "Stakeholder": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Person",
+      "description": "Individual stakeholder involved in strategy and implementation",
+      "properties": {
+        "stakeholderId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for stakeholder"
+        },
+        "name": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Full name of stakeholder"
+        },
+        "role": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Job title or role"
+        },
+        "stakeholderType": {
+          "dataType": "StakeholderType",
+          "required": true,
+          "description": "Type of stakeholder (Executive, Manager, Contributor, etc.)"
+        },
+        "influence": {
+          "dataType": "InfluenceLevel",
+          "description": "Level of influence on strategy execution"
+        },
+        "interest": {
+          "dataType": "InterestLevel",
+          "description": "Level of interest in strategy outcomes"
+        }
+      },
+      "relationships": {
+        "belongsToOrganization": {
+          "targetEntity": "Organization",
+          "cardinality": "1",
+          "description": "Organization this stakeholder belongs to"
+        },
+        "responsibleForOKR": {
+          "targetEntity": "OKR",
+          "cardinality": "0..*",
+          "description": "OKRs this stakeholder is responsible for"
+        },
+        "participatesInProcess": {
+          "targetEntity": "BAIVProcess",
+          "cardinality": "0..*",
+          "description": "BAIV processes this stakeholder participates in"
+        }
+      }
+    },
+
+    "AudienceSegment": {
+      "@type": "Class",
+      "schemaOrgBase": "schema:Audience",
+      "description": "Target audience segment for marketing strategies",
+      "properties": {
+        "segmentId": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for audience segment"
+        },
+        "segmentName": {
+          "dataType": "xsd:string",
+          "required": true,
+          "description": "Descriptive name of segment"
+        },
+        "demographics": {
+          "dataType": "xsd:string",
+          "description": "Demographic characteristics"
+        },
+        "psychographics": {
+          "dataType": "xsd:string",
+          "description": "Psychographic characteristics"
+        },
+        "aiReadiness": {
+          "dataType": "xsd:float",
+          "description": "Audience AI adoption readiness score (0-100)"
+        },
+        "engagementChannels": {
+          "dataType": "xsd:string",
+          "description": "Preferred engagement channels"
+        }
+      },
+      "relationships": {
+        "targetedBy": {
+          "targetEntity": "MarketingStrategy",
+          "cardinality": "0..*",
+          "description": "Marketing strategies targeting this segment"
+        }
+      }
+    }
+  },
+
+  "enumerations": {
+    "MaturityLevel": ["Beginner", "Developing", "Intermediate", "Advanced", "Expert"],
+    "TransformationStage": ["Awareness", "Exploration", "Adoption", "Scaling", "Optimization"],
+    "StrategyType": ["Business", "Marketing", "Technology", "Innovation", "Competitive"],
+    "CompetitiveApproach": ["Differentiation", "Cost Leadership", "Focus", "Innovation", "Disruption"],
+    "Priority": ["Critical", "High", "Medium", "Low"],
+    "MetricType": ["KPI", "Leading", "Lagging", "Diagnostic", "Predictive"],
+    "MarketingFocus": ["Visibility", "Engagement", "Conversion", "Retention", "Advocacy"],
+    "OKRLevel": ["Company", "Department", "Team", "Individual"],
+    "MeasurementType": ["Increase", "Decrease", "Maintain", "Launch", "Complete", "Achieve"],
+    "BAIVProcessType": ["Process1_EarlyAccess", "Process2_StrategyCalls", "Process3_Onboarding"],
+    "ProcessStage": ["Initiated", "In_Progress", "Review", "Completed", "On_Hold"],
+    "StakeholderType": ["Executive", "Manager", "Contributor", "Advisor", "Customer"],
+    "InfluenceLevel": ["High", "Medium", "Low"],
+    "InterestLevel": ["High", "Medium", "Low"]
+  },
+
+  "businessRules": [
+    {
+      "ruleId": "BR-001",
+      "description": "Every Organization must have at least one Vision",
+      "constraint": "Organization.hasVision.cardinality >= 1"
+    },
+    {
+      "ruleId": "BR-002", 
+      "description": "Every Strategy must support at least one Vision",
+      "constraint": "Strategy.supportsVision.cardinality >= 1"
+    },
+    {
+      "ruleId": "BR-003",
+      "description": "Every OKR must have between 2 and 5 Key Results",
+      "constraint": "OKR.hasKeyResult.cardinality >= 2 AND OKR.hasKeyResult.cardinality <= 5"
+    },
+    {
+      "ruleId": "BR-004",
+      "description": "Marketing Strategies must derive from at least one Business Strategy",
+      "constraint": "MarketingStrategy.derivedFrom.cardinality >= 1"
+    },
+    {
+      "ruleId": "BR-005",
+      "description": "Every OKR must be assigned to at least one Stakeholder",
+      "constraint": "OKR.assignedTo.cardinality >= 1"
+    },
+    {
+      "ruleId": "BR-006",
+      "description": "Progress percentage must be between 0 and 100",
+      "constraint": "KeyResult.progressPercent >= 0 AND KeyResult.progressPercent <= 100"
+    },
+    {
+      "ruleId": "BR-007",
+      "description": "AI readiness scores must be between 0 and 100",
+      "constraint": "Vision.aiReadiness >= 0 AND Vision.aiReadiness <= 100 AND AudienceSegment.aiReadiness >= 0 AND AudienceSegment.aiReadiness <= 100"
+    },
+    {
+      "ruleId": "BR-008",
+      "description": "Confidence level must be between 0.0 and 1.0",
+      "constraint": "OKR.confidenceLevel >= 0.0 AND OKR.confidenceLevel <= 1.0"
+    }
+  ],
+
+  "aiAgentCapabilities": {
+    "strategicAlignment": {
+      "description": "AI agents can analyze alignment between vision, strategy, objectives and OKRs",
+      "queries": [
+        "Find strategies not supporting any vision",
+        "Identify objectives without corresponding OKRs",
+        "Assess competitive advantage gaps in strategy portfolio"
+      ]
+    },
+    "performanceAnalysis": {
+      "description": "AI agents can analyze OKR performance and metric trends",
+      "queries": [
+        "Calculate OKR achievement rates by department",
+        "Identify at-risk OKRs based on progress trends",
+        "Recommend metric adjustments based on performance patterns"
+      ]
+    },
+    "recommendationEngine": {
+      "description": "AI agents can recommend strategy optimizations and OKR adjustments",
+      "queries": [
+        "Suggest new OKRs based on underperforming strategic areas",
+        "Recommend audience segments for marketing strategies",
+        "Identify opportunities for AI acceleration in existing OKRs"
+      ]
+    },
+    "competitiveIntelligence": {
+      "description": "AI agents can analyze competitive positioning and opportunities",
+      "queries": [
+        "Compare competitive approaches across strategy portfolio",
+        "Identify differentiation opportunities in market segments",
+        "Assess AI readiness vs competitive landscape"
+      ]
+    }
+  },
+
+  "qualityMetrics": {
+    "entityReuse": 0.85,
+    "schemaOrgAlignment": 0.88,
+    "relationshipDensity": 4.2,
+    "businessRuleCoverage": 0.92,
+    "aiCapabilityMapped": 1.0
+  }
+}
