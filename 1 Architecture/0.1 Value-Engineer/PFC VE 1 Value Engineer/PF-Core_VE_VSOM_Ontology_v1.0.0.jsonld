@@ -1,0 +1,481 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "vsom": "https://platform.foundation/ontology/vsom/v1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "vsom:Ontology",
+      "@type": "CreativeWork",
+      "name": "PF-Core: VE VSOM ONT v1.0.0",
+      "alternateName": "Vision, Strategy, Objectives & Metrics Ontology",
+      "version": "1.0.0",
+      "identifier": "PF-Core_VE_VSOM_Ontology_v1.0.0",
+      "dateCreated": "2025-11-16",
+      "dateModified": "2025-12-01",
+      "author": {
+        "@type": "Organization",
+        "name": "Platform Foundation Core"
+      },
+      "description": "Top-level Value Engineering module providing four-layer strategic planning framework: Vision & Mission, Strategic Objectives (BSC), Operational Strategies & OKRs, Metrics & KPIs",
+      "keywords": ["vision", "strategy", "objectives", "metrics", "balanced scorecard", "value engineering"],
+      "license": "https://platform.foundation/licenses/pf-core-participant",
+      "isPartOf": {
+        "@type": "SoftwareApplication",
+        "name": "PF-Core Value Engineering Module"
+      }
+    },
+    {
+      "@id": "vsom:Vision",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "Vision",
+      "description": "Aspirational description of the organization's desired future state (3-10 years)",
+      "properties": [
+        {
+          "@id": "vsom:visionId",
+          "name": "visionId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:visionStatement",
+          "name": "visionStatement",
+          "rangeIncludes": "Text",
+          "required": true,
+          "maxLength": 500
+        },
+        {
+          "@id": "vsom:timeHorizon",
+          "name": "timeHorizon",
+          "description": "Planning period in years",
+          "rangeIncludes": "Integer",
+          "minimum": 3,
+          "maximum": 10
+        },
+        {
+          "@id": "vsom:aspirationalGoals",
+          "name": "aspirationalGoals",
+          "rangeIncludes": "vsom:AspirationalGoal",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    {
+      "@id": "vsom:Mission",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "Mission",
+      "description": "Clear definition of organizational purpose, who it serves, and how it creates value",
+      "properties": [
+        {
+          "@id": "vsom:missionId",
+          "name": "missionId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:missionStatement",
+          "name": "missionStatement",
+          "rangeIncludes": "Text",
+          "required": true,
+          "maxLength": 300
+        },
+        {
+          "@id": "vsom:purpose",
+          "name": "purpose",
+          "description": "Why the organization exists",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vsom:targetAudience",
+          "name": "targetAudience",
+          "description": "Who the organization serves",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vsom:valueCreationMethod",
+          "name": "valueCreationMethod",
+          "description": "How the organization creates value",
+          "rangeIncludes": "Text"
+        }
+      ]
+    },
+    {
+      "@id": "vsom:CoreValue",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "CoreValue",
+      "description": "Guiding principle that informs decisions and behaviors (5-7 recommended)",
+      "properties": [
+        {
+          "@id": "vsom:valueId",
+          "name": "valueId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:valueName",
+          "name": "valueName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:valueDescription",
+          "name": "valueDescription",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vsom:behavioralIndicators",
+          "name": "behavioralIndicators",
+          "description": "Observable behaviors that demonstrate this value",
+          "rangeIncludes": "Text",
+          "cardinality": "1..*"
+        }
+      ]
+    },
+    {
+      "@id": "vsom:StrategicObjective",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "StrategicObjective",
+      "description": "High-level organizational objective using Balanced Scorecard perspectives",
+      "properties": [
+        {
+          "@id": "vsom:objectiveId",
+          "name": "objectiveId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:objectiveName",
+          "name": "objectiveName",
+          "rangeIncludes": "Text",
+          "required": true,
+          "maxLength": 100
+        },
+        {
+          "@id": "vsom:objectiveDescription",
+          "name": "objectiveDescription",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vsom:bscPerspective",
+          "name": "bscPerspective",
+          "description": "Balanced Scorecard perspective",
+          "rangeIncludes": "Text",
+          "enumValues": ["Financial", "Customer", "Internal Process", "Learning & Growth", "Stakeholder"],
+          "required": true
+        },
+        {
+          "@id": "vsom:priority",
+          "name": "priority",
+          "rangeIncludes": "Text",
+          "enumValues": ["Critical", "High", "Medium", "Low"]
+        },
+        {
+          "@id": "vsom:status",
+          "name": "status",
+          "rangeIncludes": "Text",
+          "enumValues": ["Not Started", "In Progress", "At Risk", "Completed", "On Hold"]
+        },
+        {
+          "@id": "vsom:timeframe",
+          "name": "timeframe",
+          "rangeIncludes": "Duration"
+        },
+        {
+          "@id": "vsom:owner",
+          "name": "owner",
+          "description": "Executive-level owner accountable for this objective",
+          "rangeIncludes": "Person"
+        },
+        {
+          "@id": "vsom:progress",
+          "name": "progress",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "@id": "vsom:successCriteria",
+          "name": "successCriteria",
+          "rangeIncludes": "Text",
+          "cardinality": "1..*"
+        },
+        {
+          "@id": "vsom:dependencies",
+          "name": "dependencies",
+          "rangeIncludes": "vsom:StrategicObjective",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    {
+      "@id": "vsom:OperationalStrategy",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "OperationalStrategy",
+      "description": "Strategy that supports strategic objectives and cascades to OKRs",
+      "properties": [
+        {
+          "@id": "vsom:strategyId",
+          "name": "strategyId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:strategyName",
+          "name": "strategyName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:strategyLevel",
+          "name": "strategyLevel",
+          "rangeIncludes": "Text",
+          "enumValues": ["Corporate", "Functional", "Departmental", "Team"],
+          "required": true
+        },
+        {
+          "@id": "vsom:framework",
+          "name": "framework",
+          "description": "Strategic framework being applied",
+          "rangeIncludes": "Text",
+          "enumValues": ["BSC", "Lean Six Sigma", "Blue Ocean", "OKR", "Value Disciplines", "Porter Generic"]
+        },
+        {
+          "@id": "vsom:parentStrategy",
+          "name": "parentStrategy",
+          "rangeIncludes": "vsom:OperationalStrategy"
+        },
+        {
+          "@id": "vsom:supportedObjectives",
+          "name": "supportedObjectives",
+          "rangeIncludes": "vsom:StrategicObjective",
+          "cardinality": "1..*"
+        },
+        {
+          "@id": "vsom:status",
+          "name": "status",
+          "rangeIncludes": "Text",
+          "enumValues": ["Draft", "Active", "Under Review", "Completed", "Archived"]
+        }
+      ]
+    },
+    {
+      "@id": "vsom:Metric",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "QuantitativeValue",
+      "name": "Metric",
+      "description": "A measurable indicator of performance (KPI)",
+      "properties": [
+        {
+          "@id": "vsom:metricId",
+          "name": "metricId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:metricName",
+          "name": "metricName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:metricType",
+          "name": "metricType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Leading", "Lagging"],
+          "required": true
+        },
+        {
+          "@id": "vsom:unit",
+          "name": "unit",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:baselineValue",
+          "name": "baselineValue",
+          "rangeIncludes": "Number"
+        },
+        {
+          "@id": "vsom:targetValue",
+          "name": "targetValue",
+          "rangeIncludes": "Number"
+        },
+        {
+          "@id": "vsom:currentValue",
+          "name": "currentValue",
+          "rangeIncludes": "Number"
+        },
+        {
+          "@id": "vsom:measurementFrequency",
+          "name": "measurementFrequency",
+          "rangeIncludes": "Text",
+          "enumValues": ["Daily", "Weekly", "Monthly", "Quarterly", "Annually"]
+        },
+        {
+          "@id": "vsom:healthStatus",
+          "name": "healthStatus",
+          "rangeIncludes": "Text",
+          "enumValues": ["On Track", "At Risk", "Behind", "Achieved"]
+        },
+        {
+          "@id": "vsom:trendIndicator",
+          "name": "trendIndicator",
+          "rangeIncludes": "Text",
+          "enumValues": ["Up", "Down", "Stable"]
+        },
+        {
+          "@id": "vsom:linkedObjective",
+          "name": "linkedObjective",
+          "rangeIncludes": "vsom:StrategicObjective"
+        }
+      ]
+    },
+    {
+      "@id": "vsom:AspirationalGoal",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "AspirationalGoal",
+      "description": "Big, audacious goal aligned with the vision (BHAG)",
+      "properties": [
+        {
+          "@id": "vsom:goalId",
+          "name": "goalId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:goalStatement",
+          "name": "goalStatement",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vsom:targetDate",
+          "name": "targetDate",
+          "rangeIncludes": "Date"
+        },
+        {
+          "@id": "vsom:smartCriteria",
+          "name": "smartCriteria",
+          "description": "SMART goal validation",
+          "rangeIncludes": "vsom:SmartCriteria"
+        }
+      ]
+    },
+    {
+      "@id": "vsom:SmartCriteria",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "SmartCriteria",
+      "description": "SMART goal validation criteria",
+      "properties": [
+        {
+          "@id": "vsom:specific",
+          "name": "specific",
+          "rangeIncludes": "Boolean"
+        },
+        {
+          "@id": "vsom:measurable",
+          "name": "measurable",
+          "rangeIncludes": "Boolean"
+        },
+        {
+          "@id": "vsom:achievable",
+          "name": "achievable",
+          "rangeIncludes": "Boolean"
+        },
+        {
+          "@id": "vsom:relevant",
+          "name": "relevant",
+          "rangeIncludes": "Boolean"
+        },
+        {
+          "@id": "vsom:timeBound",
+          "name": "timeBound",
+          "rangeIncludes": "Boolean"
+        }
+      ]
+    }
+  ],
+  "businessRules": [
+    {
+      "ruleId": "BR-VSOM-001",
+      "name": "Strategic Objective Limit",
+      "description": "Organizations should have 8-12 strategic objectives to maintain focus",
+      "constraint": "COUNT(StrategicObjective) BETWEEN 8 AND 12",
+      "severity": "Warning"
+    },
+    {
+      "ruleId": "BR-VSOM-002",
+      "name": "BSC Balance Requirement",
+      "description": "Strategic objectives should span all five BSC perspectives",
+      "constraint": "EACH bscPerspective IN ['Financial', 'Customer', 'Internal Process', 'Learning & Growth', 'Stakeholder'] HAS AT LEAST 1 StrategicObjective"
+    },
+    {
+      "ruleId": "BR-VSOM-003",
+      "name": "Core Values Limit",
+      "description": "Organizations should have 5-7 core values",
+      "constraint": "COUNT(CoreValue) BETWEEN 5 AND 7",
+      "severity": "Warning"
+    },
+    {
+      "ruleId": "BR-VSOM-004",
+      "name": "Health Status Calculation",
+      "description": "Health status is calculated from progress: ≥75% = On Track, 50-74% = At Risk, <50% = Behind, 100% = Achieved",
+      "constraint": "IF progress >= 100 THEN healthStatus = 'Achieved' ELSE IF progress >= 75 THEN healthStatus = 'On Track' ELSE IF progress >= 50 THEN healthStatus = 'At Risk' ELSE healthStatus = 'Behind'"
+    },
+    {
+      "ruleId": "BR-VSOM-005",
+      "name": "At Risk Objective Alert",
+      "description": "At Risk objectives must be visible on executive dashboard",
+      "constraint": "IF StrategicObjective.status = 'At Risk' THEN ALERT_EXECUTIVE_DASHBOARD"
+    }
+  ],
+  "integrationPoints": {
+    "okr": {
+      "ontologyId": "pf-core:ontology:okr-v1",
+      "integrationType": "downstream_cascade",
+      "connections": [
+        {
+          "entity": "OperationalStrategy",
+          "cascadesTo": "okr:Objective",
+          "description": "Strategies cascade to OKR objectives"
+        },
+        {
+          "entity": "Metric",
+          "feedsInto": "okr:KeyResult",
+          "description": "Metrics inform key result targets"
+        }
+      ]
+    },
+    "value_proposition": {
+      "ontologyId": "pf-core:ontology:value-proposition-v1",
+      "integrationType": "downstream_consumer",
+      "connections": [
+        {
+          "entity": "StrategicObjective",
+          "informsVia": "vp:vsomAlignment",
+          "description": "Value propositions align with strategic objectives"
+        }
+      ]
+    },
+    "roles_raci_rbac": {
+      "ontologyId": "pf-core:ontology:roles-raci-rbac-v3",
+      "integrationType": "cross_reference",
+      "connections": [
+        {
+          "entity": "StrategicObjective.owner",
+          "references": "rrr:ExecutiveRole",
+          "description": "Objective owners map to executive roles"
+        }
+      ]
+    }
+  }
+}
