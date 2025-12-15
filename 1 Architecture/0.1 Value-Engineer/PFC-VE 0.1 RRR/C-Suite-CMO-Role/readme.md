@@ -1,0 +1,1 @@
+#COO Role - Maybe reporting to CEO or sometimes CFO but assume wider RACI and COllaborations, Market, Sector org, product/service portfolio refinements as we work through Value Engineering. The role works with the VSOM for the Org overall and then alongside the functional strategies that may apply.
