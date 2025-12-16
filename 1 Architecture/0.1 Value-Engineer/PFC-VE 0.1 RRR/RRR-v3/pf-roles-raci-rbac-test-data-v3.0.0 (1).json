@@ -1,0 +1,659 @@
+{
+  "@context": "https://platform-foundation.io/ontology/v1/context.jsonld",
+  "testDataSet": {
+    "name": "Platform Foundation ROLES/RACI/RBAC Test Data",
+    "version": "3.0.0",
+    "dateGenerated": "2025-10-11",
+    "ontologyVersion": "1.0.0",
+    "distribution": {
+      "typical": "60% - Common, valid scenarios",
+      "edge": "20% - Unusual but valid scenarios",
+      "boundary": "10% - At constraint limits",
+      "invalid": "10% - Violates rules for validation testing"
+    }
+  },
+  "testInstances": {
+    "ExecutiveRole": [
+      {
+        "@type": "pf:ExecutiveRole",
+        "@id": "role:ceo",
+        "testCase": "typical",
+        "roleCode": "CEO",
+        "roleTitle": "Chief Executive Officer",
+        "roleCategory": "Core Traditional CSuite",
+        "strategicFocus": "Corporate Leadership & Vision",
+        "vsomComponent": "Corporate Vision & Strategy",
+        "bscPerspective": "Integrated View",
+        "keyFrameworks": ["Blue Ocean Strategy", "Corporate Strategy"],
+        "primaryMetrics": ["Revenue Growth", "Market Position", "Stakeholder Value"],
+        "aiVisibilityRole": "Executive AI Thought Leadership & Strategic Direction",
+        "seniorityLevel": 1
+      },
+      {
+        "@type": "pf:ExecutiveRole",
+        "@id": "role:cmo",
+        "testCase": "typical",
+        "roleCode": "CMO",
+        "roleTitle": "Chief Marketing Officer",
+        "roleCategory": "Core Traditional CSuite",
+        "strategicFocus": "Market Position & Customer Value",
+        "vsomComponent": "Marketing Strategy & Growth",
+        "bscPerspective": "Customer",
+        "keyFrameworks": ["Customer BSC", "Blue Ocean Market"],
+        "primaryMetrics": ["Market Share", "NPS", "Brand Value"],
+        "aiVisibilityRole": "Primary AI Visibility Strategy Owner & Brand Authority",
+        "seniorityLevel": 1
+      },
+      {
+        "@type": "pf:ExecutiveRole",
+        "@id": "role:caio",
+        "testCase": "typical",
+        "roleCode": "CAIO",
+        "roleTitle": "Chief AI Officer",
+        "roleCategory": "Data Analytics CSuite",
+        "strategicFocus": "AI Strategy & Governance",
+        "vsomComponent": "AI Strategy & Ethical Implementation",
+        "bscPerspective": "Innovation",
+        "keyFrameworks": ["AI Governance", "Ethical AI"],
+        "primaryMetrics": ["AI Maturity", "Ethics Compliance", "AI ROI"],
+        "aiVisibilityRole": "AI Strategic Leadership & Governance Framework",
+        "seniorityLevel": 1
+      },
+      {
+        "@type": "pf:ExecutiveRole",
+        "@id": "role:cfo",
+        "testCase": "edge",
+        "roleCode": "CFO",
+        "roleTitle": "Chief Financial Officer",
+        "roleCategory": "Core Traditional CSuite",
+        "strategicFocus": "Financial Performance & Risk Management",
+        "vsomComponent": "Financial Strategy & Metrics",
+        "bscPerspective": "Financial",
+        "keyFrameworks": ["Financial BSC", "Blue Ocean Value"],
+        "primaryMetrics": ["ROI", "EBITDA", "Cash Flow"],
+        "aiVisibilityRole": "AI ROI Measurement & Budget Optimization",
+        "seniorityLevel": 1,
+        "comment": "Edge case: Managing both traditional finance and emerging AI financial metrics"
+      },
+      {
+        "@type": "pf:ExecutiveRole",
+        "@id": "role:cso-sustainability",
+        "testCase": "edge",
+        "roleCode": "CSUST",
+        "roleTitle": "Chief Sustainability Officer",
+        "roleCategory": "Strategy Innovation CSuite",
+        "strategicFocus": "ESG & Sustainable Growth",
+        "vsomComponent": "Sustainability Strategy & Impact",
+        "bscPerspective": "Stakeholder/ESG",
+        "keyFrameworks": ["ESG BSC", "Sustainability Framework"],
+        "primaryMetrics": ["ESG Score", "Carbon Footprint", "Social Impact"],
+        "aiVisibilityRole": "AI Sustainability Reporting & ESG Communication",
+        "seniorityLevel": 1,
+        "comment": "Edge case: Newer role not present in all organizations"
+      },
+      {
+        "@type": "pf:ExecutiveRole",
+        "@id": "role:temp-exec",
+        "testCase": "boundary",
+        "roleCode": "TEXEC",
+        "roleTitle": "Temporary Executive Role",
+        "roleCategory": "Core Traditional CSuite",
+        "strategicFocus": "Interim Leadership During Transition",
+        "vsomComponent": "Crisis Management",
+        "bscPerspective": "Integrated View",
+        "keyFrameworks": [],
+        "primaryMetrics": [],
+        "aiVisibilityRole": "",
+        "seniorityLevel": 1,
+        "comment": "Boundary case: Minimal attributes, temporary nature"
+      },
+      {
+        "@type": "pf:ExecutiveRole",
+        "@id": "role:invalid-senior",
+        "testCase": "invalid",
+        "roleCode": "INVALID",
+        "roleTitle": "Invalid Role",
+        "roleCategory": "Core Traditional CSuite",
+        "strategicFocus": "Testing",
+        "vsomComponent": "Testing",
+        "bscPerspective": "Financial",
+        "keyFrameworks": [],
+        "primaryMetrics": [],
+        "aiVisibilityRole": "",
+        "seniorityLevel": 5,
+        "comment": "INVALID: seniorityLevel=5 violates BR-006 (C-Suite should be level 1)",
+        "expectedValidationError": "BR-006: C-Suite role must have seniorityLevel=1"
+      }
+    ],
+    "FunctionalRole": [
+      {
+        "@type": "pf:FunctionalRole",
+        "@id": "role:marketing-manager",
+        "testCase": "typical",
+        "function": "Marketing",
+        "roleTitle": "Marketing Manager",
+        "seniorityLevel": 3
+      },
+      {
+        "@type": "pf:FunctionalRole",
+        "@id": "role:data-scientist",
+        "testCase": "typical",
+        "function": "Data",
+        "roleTitle": "Senior Data Scientist",
+        "seniorityLevel": 3
+      },
+      {
+        "@type": "pf:FunctionalRole",
+        "@id": "role:sales-rep",
+        "testCase": "typical",
+        "function": "Sales",
+        "roleTitle": "Sales Representative",
+        "seniorityLevel": 5
+      },
+      {
+        "@type": "pf:FunctionalRole",
+        "@id": "role:fractional-cto",
+        "testCase": "edge",
+        "function": "Technology",
+        "roleTitle": "Fractional CTO",
+        "seniorityLevel": 2,
+        "comment": "Edge case: Part-time senior technical role"
+      },
+      {
+        "@type": "pf:FunctionalRole",
+        "@id": "role:junior-entry",
+        "testCase": "boundary",
+        "function": "Operations",
+        "roleTitle": "Junior Operations Coordinator",
+        "seniorityLevel": 10,
+        "comment": "Boundary case: Lowest seniority level"
+      }
+    ],
+    "RoleAssignment": [
+      {
+        "@type": "pf:RoleAssignment",
+        "@id": "assignment:amanda-ceo-baiv",
+        "testCase": "typical",
+        "individual": {"@id": "person:amanda-moore"},
+        "role": {"@id": "role:ceo"},
+        "organization": {"@id": "org:baiv"},
+        "assignmentType": "Primary",
+        "timeCommitment": 80.0,
+        "isActive": true,
+        "startDate": "2024-01-01",
+        "endDate": null
+      },
+      {
+        "@type": "pf:RoleAssignment",
+        "@id": "assignment:amanda-advisor-w4m",
+        "testCase": "typical",
+        "individual": {"@id": "person:amanda-moore"},
+        "role": {"@id": "role:cmo"},
+        "organization": {"@id": "org:w4m"},
+        "assignmentType": "Advisory",
+        "timeCommitment": 20.0,
+        "isActive": true,
+        "startDate": "2024-03-01",
+        "endDate": null,
+        "comment": "Typical: Multi-venture role portfolio - same person, different roles, different orgs"
+      },
+      {
+        "@type": "pf:RoleAssignment",
+        "@id": "assignment:john-cfo-baiv",
+        "testCase": "typical",
+        "individual": {"@id": "person:john-smith"},
+        "role": {"@id": "role:cfo"},
+        "organization": {"@id": "org:baiv"},
+        "assignmentType": "Primary",
+        "timeCommitment": 100.0,
+        "isActive": true,
+        "startDate": "2024-02-01",
+        "endDate": null
+      },
+      {
+        "@type": "pf:RoleAssignment",
+        "@id": "assignment:sarah-multi-role",
+        "testCase": "edge",
+        "individual": {"@id": "person:sarah-johnson"},
+        "role": {"@id": "role:fractional-cto"},
+        "organization": {"@id": "org:startup-alpha"},
+        "assignmentType": "Consultant",
+        "timeCommitment": 40.0,
+        "isActive": true,
+        "startDate": "2025-01-01",
+        "endDate": null,
+        "comment": "Edge case: Fractional/part-time C-level role"
+      },
+      {
+        "@type": "pf:RoleAssignment",
+        "@id": "assignment:expired",
+        "testCase": "boundary",
+        "individual": {"@id": "person:former-employee"},
+        "role": {"@id": "role:marketing-manager"},
+        "organization": {"@id": "org:baiv"},
+        "assignmentType": "Primary",
+        "timeCommitment": 100.0,
+        "isActive": false,
+        "startDate": "2023-01-01",
+        "endDate": "2023-12-31",
+        "comment": "Boundary case: Expired/historical assignment"
+      },
+      {
+        "@type": "pf:RoleAssignment",
+        "@id": "assignment:invalid-active-with-end",
+        "testCase": "invalid",
+        "individual": {"@id": "person:test-person"},
+        "role": {"@id": "role:sales-rep"},
+        "organization": {"@id": "org:baiv"},
+        "assignmentType": "Primary",
+        "timeCommitment": 100.0,
+        "isActive": true,
+        "startDate": "2024-01-01",
+        "endDate": "2024-12-31",
+        "comment": "INVALID: Violates BR-004 (isActive=true but has endDate)",
+        "expectedValidationError": "BR-004: Active assignment cannot have endDate"
+      },
+      {
+        "@type": "pf:RoleAssignment",
+        "@id": "assignment:invalid-overcommit",
+        "testCase": "invalid",
+        "individual": {"@id": "person:overworked"},
+        "role": {"@id": "role:ceo"},
+        "organization": {"@id": "org:baiv"},
+        "assignmentType": "Primary",
+        "timeCommitment": 150.0,
+        "isActive": true,
+        "startDate": "2024-01-01",
+        "endDate": null,
+        "comment": "INVALID: timeCommitment exceeds 100% for single assignment",
+        "expectedValidationError": "timeCommitment must be between 0-100"
+      }
+    ],
+    "RACIAssignment": [
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:ai-strategy-ceo-accountable",
+        "testCase": "typical",
+        "activity": {"@id": "activity:develop-ai-strategy"},
+        "role": {"@id": "role:ceo"},
+        "raciType": "Accountable",
+        "organization": {"@id": "org:baiv"}
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:ai-strategy-caio-responsible",
+        "testCase": "typical",
+        "activity": {"@id": "activity:develop-ai-strategy"},
+        "role": {"@id": "role:caio"},
+        "raciType": "Responsible",
+        "organization": {"@id": "org:baiv"}
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:ai-strategy-cmo-consulted",
+        "testCase": "typical",
+        "activity": {"@id": "activity:develop-ai-strategy"},
+        "role": {"@id": "role:cmo"},
+        "raciType": "Consulted",
+        "organization": {"@id": "org:baiv"}
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:ai-strategy-cfo-informed",
+        "testCase": "typical",
+        "activity": {"@id": "activity:develop-ai-strategy"},
+        "role": {"@id": "role:cfo"},
+        "raciType": "Informed",
+        "organization": {"@id": "org:baiv"},
+        "comment": "Typical: Complete RACI for 'Develop AI Strategy' activity"
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:dual-responsible",
+        "testCase": "edge",
+        "activity": {"@id": "activity:marketing-campaign"},
+        "role": {"@id": "role:marketing-manager"},
+        "raciType": "Responsible",
+        "context": "Co-responsible with external agency",
+        "comment": "Edge case: Multiple responsible parties for one activity"
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:boundary-minimal",
+        "testCase": "boundary",
+        "activity": {"@id": "activity:minimal-task"},
+        "role": {"@id": "role:junior-entry"},
+        "raciType": "Responsible",
+        "comment": "Boundary case: Minimal RACI assignment (no context, no org scope)"
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:invalid-no-accountable",
+        "testCase": "invalid",
+        "activity": {"@id": "activity:orphan-task"},
+        "role": {"@id": "role:sales-rep"},
+        "raciType": "Responsible",
+        "comment": "INVALID: Activity has Responsible but no Accountable (violates BR-001)",
+        "expectedValidationError": "BR-001: Activity must have exactly one Accountable role"
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:invalid-duplicate-accountable-1",
+        "testCase": "invalid",
+        "activity": {"@id": "activity:confused-task"},
+        "role": {"@id": "role:ceo"},
+        "raciType": "Accountable"
+      },
+      {
+        "@type": "raci:RACIAssignment",
+        "@id": "raci:invalid-duplicate-accountable-2",
+        "testCase": "invalid",
+        "activity": {"@id": "activity:confused-task"},
+        "role": {"@id": "role:cfo"},
+        "raciType": "Accountable",
+        "comment": "INVALID: Two Accountable roles for same activity (violates BR-001)",
+        "expectedValidationError": "BR-001: Activity can only have ONE Accountable role"
+      }
+    ],
+    "Capability": [
+      {
+        "@type": "pf:Capability",
+        "@id": "capability:strategic-planning",
+        "testCase": "typical",
+        "capabilityName": "Strategic Planning",
+        "capabilityType": "Strategic",
+        "proficiencyRequired": "Expert",
+        "relatedFrameworks": ["Blue Ocean Strategy", "BSC", "VSOM"]
+      },
+      {
+        "@type": "pf:Capability",
+        "@id": "capability:brand-management",
+        "testCase": "typical",
+        "capabilityName": "Brand Management",
+        "capabilityType": "Business",
+        "proficiencyRequired": "Advanced",
+        "relatedFrameworks": ["Brand Strategy Framework"]
+      },
+      {
+        "@type": "pf:Capability",
+        "@id": "capability:ai-ethics",
+        "testCase": "typical",
+        "capabilityName": "AI Ethics & Governance",
+        "capabilityType": "Strategic",
+        "proficiencyRequired": "Expert",
+        "relatedFrameworks": ["Ethical AI Framework", "AI Governance"]
+      },
+      {
+        "@type": "pf:Capability",
+        "@id": "capability:niche-skill",
+        "testCase": "edge",
+        "capabilityName": "Quantum Computing Strategy",
+        "capabilityType": "Technical",
+        "proficiencyRequired": "Expert",
+        "relatedFrameworks": [],
+        "comment": "Edge case: Highly specialized emerging capability"
+      },
+      {
+        "@type": "pf:Capability",
+        "@id": "capability:basic-minimal",
+        "testCase": "boundary",
+        "capabilityName": "Email Communication",
+        "capabilityType": "Operational",
+        "proficiencyRequired": "Basic",
+        "relatedFrameworks": [],
+        "comment": "Boundary case: Very basic capability"
+      }
+    ],
+    "Permission": [
+      {
+        "@type": "rbac:Permission",
+        "@id": "perm:approve-budget-unlimited",
+        "testCase": "typical",
+        "action": "Approve",
+        "resource": "Budget",
+        "conditions": [],
+        "effect": "Allow"
+      },
+      {
+        "@type": "rbac:Permission",
+        "@id": "perm:approve-budget-limited",
+        "testCase": "typical",
+        "action": "Approve",
+        "resource": "Budget",
+        "conditions": [
+          {
+            "@type": "rbac:AccessCondition",
+            "attribute": "amount",
+            "operator": "lessThan",
+            "value": "10000"
+          }
+        ],
+        "effect": "Allow",
+        "comment": "Typical: Conditional permission based on budget amount"
+      },
+      {
+        "@type": "rbac:Permission",
+        "@id": "perm:read-strategy",
+        "testCase": "typical",
+        "action": "Read",
+        "resource": "Strategy",
+        "conditions": [],
+        "effect": "Allow"
+      },
+      {
+        "@type": "rbac:Permission",
+        "@id": "perm:deny-export-sensitive",
+        "testCase": "edge",
+        "action": "Export",
+        "resource": "SensitiveData",
+        "conditions": [],
+        "effect": "Deny",
+        "comment": "Edge case: Explicit Deny permission for security"
+      },
+      {
+        "@type": "rbac:Permission",
+        "@id": "perm:complex-condition",
+        "testCase": "boundary",
+        "action": "Delete",
+        "resource": "Document",
+        "conditions": [
+          {
+            "@type": "rbac:AccessCondition",
+            "attribute": "age",
+            "operator": "greaterThan",
+            "value": "365"
+          },
+          {
+            "@type": "rbac:AccessCondition",
+            "attribute": "status",
+            "operator": "equals",
+            "value": "archived"
+          }
+        ],
+        "effect": "Allow",
+        "comment": "Boundary case: Multiple complex conditions"
+      }
+    ],
+    "AccessPolicy": [
+      {
+        "@type": "rbac:AccessPolicy",
+        "@id": "policy:ceo-full-access",
+        "testCase": "typical",
+        "role": {"@id": "role:ceo"},
+        "permissions": [
+          {"@id": "perm:approve-budget-unlimited"},
+          {"@id": "perm:read-strategy"},
+          {"@id": "perm:create-strategy"}
+        ],
+        "organization": {"@id": "org:baiv"},
+        "priority": 100,
+        "isActive": true
+      },
+      {
+        "@type": "rbac:AccessPolicy",
+        "@id": "policy:manager-limited",
+        "testCase": "typical",
+        "role": {"@id": "role:marketing-manager"},
+        "permissions": [
+          {"@id": "perm:approve-budget-limited"},
+          {"@id": "perm:read-strategy"}
+        ],
+        "organization": {"@id": "org:baiv"},
+        "priority": 50,
+        "isActive": true
+      },
+      {
+        "@type": "rbac:AccessPolicy",
+        "@id": "policy:consultant-restricted",
+        "testCase": "edge",
+        "role": {"@id": "role:fractional-cto"},
+        "permissions": [
+          {"@id": "perm:read-strategy"},
+          {"@id": "perm:deny-export-sensitive"}
+        ],
+        "organization": null,
+        "priority": 30,
+        "isActive": true,
+        "comment": "Edge case: No org scope (applies globally), includes Deny permission"
+      },
+      {
+        "@type": "rbac:AccessPolicy",
+        "@id": "policy:inactive",
+        "testCase": "boundary",
+        "role": {"@id": "role:temp-exec"},
+        "permissions": [
+          {"@id": "perm:read-strategy"}
+        ],
+        "organization": {"@id": "org:baiv"},
+        "priority": 10,
+        "isActive": false,
+        "comment": "Boundary case: Inactive policy (should not be applied)"
+      }
+    ]
+  },
+  "relationshipScenarios": [
+    {
+      "scenario": "Multi-Venture Role Portfolio",
+      "description": "Amanda Moore holds CEO role at BAIV (80% time) and CMO advisory role at W4M (20% time)",
+      "involvedEntities": [
+        "person:amanda-moore",
+        "role:ceo",
+        "role:cmo",
+        "org:baiv",
+        "org:w4m",
+        "assignment:amanda-ceo-baiv",
+        "assignment:amanda-advisor-w4m"
+      ],
+      "graphTraversal": "person:amanda-moore -> hasRoleAssignment -> [assignment:amanda-ceo-baiv, assignment:amanda-advisor-w4m] -> assignedRole -> [role:ceo, role:cmo]"
+    },
+    {
+      "scenario": "Permission Resolution for User",
+      "description": "User linked to Amanda Moore can approve unlimited budgets at BAIV via CEO role",
+      "involvedEntities": [
+        "user:amanda.moore@baiv.io",
+        "person:amanda-moore",
+        "assignment:amanda-ceo-baiv",
+        "role:ceo",
+        "policy:ceo-full-access",
+        "perm:approve-budget-unlimited"
+      ],
+      "graphTraversal": "user -> links to -> person:amanda-moore -> hasRoleAssignment -> assignment:amanda-ceo-baiv -> assignedRole -> role:ceo -> governedBy -> policy:ceo-full-access -> grantsPermission -> perm:approve-budget-unlimited"
+    },
+    {
+      "scenario": "RACI Accountability Chain",
+      "description": "For 'Develop AI Strategy' activity: CEO is Accountable, CAIO is Responsible, CMO is Consulted, CFO is Informed",
+      "involvedEntities": [
+        "activity:develop-ai-strategy",
+        "raci:ai-strategy-ceo-accountable",
+        "raci:ai-strategy-caio-responsible",
+        "raci:ai-strategy-cmo-consulted",
+        "raci:ai-strategy-cfo-informed",
+        "role:ceo",
+        "role:caio",
+        "role:cmo",
+        "role:cfo"
+      ],
+      "graphTraversal": "activity:develop-ai-strategy -> hasRACIAssignment -> [multiple RACIAssignments] -> role -> [various executive roles]"
+    },
+    {
+      "scenario": "Reporting Hierarchy",
+      "description": "Marketing Manager reports to CMO, CMO reports to CEO",
+      "involvedEntities": [
+        "role:marketing-manager",
+        "role:cmo",
+        "role:ceo"
+      ],
+      "graphTraversal": "role:marketing-manager -> reportsTo -> role:cmo -> reportsTo -> role:ceo"
+    },
+    {
+      "scenario": "Cross-Functional Collaboration",
+      "description": "CMO collaborates with CTO on digital marketing initiatives",
+      "involvedEntities": [
+        "role:cmo",
+        "role:fractional-cto"
+      ],
+      "graphTraversal": "role:cmo -> collaboratesWith -> role:fractional-cto (symmetric)"
+    }
+  ],
+  "useCaseScenarios": [
+    {
+      "useCaseId": "UC-001",
+      "name": "Multi-Venture Role Assignment",
+      "testDataCoverage": [
+        "assignment:amanda-ceo-baiv (Primary role at BAIV)",
+        "assignment:amanda-advisor-w4m (Advisory role at W4M)",
+        "Total time commitment: 80% + 20% = 100%"
+      ]
+    },
+    {
+      "useCaseId": "UC-002",
+      "name": "RACI Matrix Generation",
+      "testDataCoverage": [
+        "Complete RACI for 'Develop AI Strategy'",
+        "CEO = Accountable",
+        "CAIO = Responsible",
+        "CMO = Consulted",
+        "CFO = Informed"
+      ]
+    },
+    {
+      "useCaseId": "UC-003",
+      "name": "Permission Resolution for Users",
+      "testDataCoverage": [
+        "CEO role has unlimited budget approval via policy:ceo-full-access",
+        "Manager role has limited approval (<$10K) via policy:manager-limited",
+        "Consultant role has explicit Deny on export via policy:consultant-restricted"
+      ]
+    },
+    {
+      "useCaseId": "UC-004",
+      "name": "Organizational Capability Gap Analysis",
+      "testDataCoverage": [
+        "21 Executive roles defined",
+        "Only 3 filled at BAIV (CEO, CFO, CMO/Advisory)",
+        "Gap: 18 unfilled executive capabilities"
+      ]
+    },
+    {
+      "useCaseId": "UC-005",
+      "name": "Cross-Functional Collaboration Discovery",
+      "testDataCoverage": [
+        "CMO collaboratesWith CTO",
+        "Symmetric peer relationship for matrix management"
+      ]
+    }
+  ],
+  "validationExpectations": {
+    "expectedErrors": [
+      "BR-004 violation: assignment:invalid-active-with-end",
+      "BR-001 violation: activity:orphan-task has no Accountable",
+      "BR-001 violation: activity:confused-task has two Accountable roles",
+      "BR-006 violation: role:invalid-senior has seniorityLevel=5 for C-Suite role",
+      "timeCommitment constraint: assignment:invalid-overcommit exceeds 100%"
+    ],
+    "expectedWarnings": [
+      "BR-005 warning: If person:overworked has multiple assignments, total may exceed 100%"
+    ],
+    "expectedPassRate": "85% (typical + edge + boundary should pass, invalid should fail)"
+  }
+}
