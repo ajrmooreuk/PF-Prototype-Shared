@@ -1,0 +1,1271 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://yourdomain.com/schemas/baiv-v2.json",
+  "title": "BAIV Agent Orchestrator Schemas",
+  "version": "2.0.0",
+  "description": "Complete schema definitions for P1-P7 BAIV processes with Schema.org mappings for SEO optimization",
+  
+  "definitions": {
+    
+    "BAIVProcess": {
+      "type": "object",
+      "description": "Base process schema for P1-P7 BAIV",
+      "properties": {
+        "@context": {
+          "type": "string",
+          "const": "https://schema.org"
+        },
+        "@type": {
+          "type": "string",
+          "enum": ["Action", "SearchAction", "AnalyzeAction", "CreateAction", "AssessAction"]
+        },
+        "identifier": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string",
+          "enum": ["P1_Configuration", "P2_Discovery", "P3_Capture", "P4_Audit", "P5_Analytics", "P6_GapAnalysis", "P7_Ideation"]
+        },
+        "agent": {
+          "$ref": "#/definitions/Agent"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "running", "completed", "failed"]
+        },
+        "result": {
+          "type": "object"
+        }
+      },
+      "required": ["@context", "@type", "identifier", "name", "agent", "startTime", "status"]
+    },
+    
+    "Agent": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "const": "SoftwareApplication"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "applicationCategory": {
+          "type": "string",
+          "enum": ["configuration", "discovery", "capture", "audit", "analytics", "gap_analysis", "ideation"]
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": ["@type", "identifier", "name", "applicationCategory"]
+    },
+    
+    "P1_Configuration": {
+      "allOf": [
+        {"$ref": "#/definitions/BAIVProcess"},
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "Action"
+            },
+            "name": {
+              "const": "P1_Configuration"
+            },
+            "object": {
+              "$ref": "#/definitions/BusinessProfile"
+            },
+            "result": {
+              "$ref": "#/definitions/ConfigurationResult"
+            }
+          }
+        }
+      ]
+    },
+    
+    "BusinessProfile": {
+      "type": "object",
+      "properties": {
+        "@context": {
+          "type": "string",
+          "const": "https://schema.org"
+        },
+        "@type": {
+          "type": "string",
+          "const": "Organization"
+        },
+        "name": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Company website"
+        },
+        "description": {
+          "type": "string",
+          "description": "Business description"
+        },
+        "industry": {
+          "type": "string",
+          "description": "Industry vertical"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "@type": {"const": "PostalAddress"},
+            "addressCountry": {"type": "string"},
+            "addressRegion": {"type": "string"}
+          }
+        },
+        "sameAs": {
+          "type": "array",
+          "items": {"type": "string", "format": "uri"},
+          "description": "Social media profiles"
+        },
+        "knowsAbout": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Products/services"
+        },
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Competitor"
+          }
+        },
+        "targetKeywords": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "targetAudience": {
+          "$ref": "#/definitions/Audience"
+        }
+      },
+      "required": ["@context", "@type", "name", "url", "industry"]
+    },
+    
+    "Competitor": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Organization"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "aiVisibilityScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "relationship": {
+          "type": "string",
+          "enum": ["direct", "indirect", "thought_leader"]
+        }
+      },
+      "required": ["@type", "name", "url"]
+    },
+    
+    "Audience": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Audience"
+        },
+        "audienceType": {
+          "type": "string",
+          "description": "B2B, B2C, etc."
+        },
+        "geographicArea": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "jobTitle": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    
+    "ConfigurationResult": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Thing"
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "businessProfile": {
+          "$ref": "#/definitions/BusinessProfile"
+        },
+        "integrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Integration"
+          }
+        },
+        "monitoringSetup": {
+          "$ref": "#/definitions/MonitoringSetup"
+        }
+      },
+      "required": ["@type", "workspaceId", "businessProfile", "integrations"]
+    },
+    
+    "Integration": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "SoftwareApplication"
+        },
+        "name": {
+          "type": "string",
+          "description": "Integration name (reddit, gsc, ga4, etc.)"
+        },
+        "applicationCategory": {
+          "type": "string",
+          "enum": ["seo", "analytics", "social", "content", "research"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["connected", "pending", "error"]
+        },
+        "connectedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["@type", "name", "applicationCategory", "status"]
+    },
+    
+    "MonitoringSetup": {
+      "type": "object",
+      "properties": {
+        "aiAgents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["chatgpt", "claude", "perplexity", "gemini", "copilot"]
+          }
+        },
+        "alertThreshold": {
+          "type": "number",
+          "description": "Change threshold for alerts"
+        },
+        "reportFrequency": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly"]
+        }
+      }
+    },
+    
+    "P2_Discovery": {
+      "allOf": [
+        {"$ref": "#/definitions/BAIVProcess"},
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "SearchAction"
+            },
+            "name": {
+              "const": "P2_Discovery"
+            },
+            "result": {
+              "$ref": "#/definitions/DiscoveryResult"
+            }
+          }
+        }
+      ]
+    },
+    
+    "DiscoveryResult": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "SearchResultsPage"
+        },
+        "redditInsights": {
+          "$ref": "#/definitions/RedditInsights"
+        },
+        "aiVisibilityProfile": {
+          "$ref": "#/definitions/AIVisibilityProfile"
+        },
+        "competitorIntelligence": {
+          "$ref": "#/definitions/CompetitorIntelligence"
+        },
+        "searchIntentMap": {
+          "$ref": "#/definitions/SearchIntentMap"
+        },
+        "opportunitiesIdentified": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["@type", "redditInsights", "aiVisibilityProfile", "opportunitiesIdentified"]
+    },
+    
+    "RedditInsights": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "AnalysisNewsArticle"
+        },
+        "headline": {
+          "type": "string",
+          "description": "Summary of Reddit findings"
+        },
+        "totalMentions": {
+          "type": "integer"
+        },
+        "subredditsMonitored": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "sentimentBreakdown": {
+          "type": "object",
+          "properties": {
+            "positive": {"type": "number", "minimum": 0, "maximum": 1},
+            "neutral": {"type": "number", "minimum": 0, "maximum": 1},
+            "negative": {"type": "number", "minimum": 0, "maximum": 1}
+          }
+        },
+        "keyThemes": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "painPoints": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "competitorMentions": {
+          "type": "object",
+          "additionalProperties": {"type": "integer"}
+        }
+      },
+      "required": ["@type", "headline", "totalMentions", "sentimentBreakdown"]
+    },
+    
+    "AIVisibilityProfile": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Report"
+        },
+        "name": {
+          "const": "AI Visibility Assessment"
+        },
+        "brandMentionRate": {
+          "type": "object",
+          "properties": {
+            "chatgpt": {"type": "number", "minimum": 0, "maximum": 1},
+            "claude": {"type": "number", "minimum": 0, "maximum": 1},
+            "perplexity": {"type": "number", "minimum": 0, "maximum": 1}
+          }
+        },
+        "averagePosition": {
+          "type": "number",
+          "description": "Average position when mentioned (1 = first)"
+        },
+        "citationSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Citation"
+          }
+        },
+        "visibilityScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Overall AI visibility score"
+        },
+        "gapsIdentified": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "required": ["@type", "name", "brandMentionRate", "visibilityScore"]
+    },
+    
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": ["CreativeWork", "WebPage", "ScholarlyArticle"]
+        },
+        "source": {
+          "type": "string",
+          "description": "Source domain"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of times cited"
+        },
+        "authority": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        }
+      },
+      "required": ["@type", "source", "count"]
+    },
+    
+    "CompetitorIntelligence": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Report"
+        },
+        "name": {
+          "const": "Competitive Analysis"
+        },
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompetitorProfile"
+          }
+        },
+        "shareOfVoice": {
+          "type": "object",
+          "additionalProperties": {"type": "number"}
+        }
+      }
+    },
+    
+    "CompetitorProfile": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Organization"
+        },
+        "name": {"type": "string"},
+        "url": {"type": "string", "format": "uri"},
+        "contentStrategy": {
+          "type": "object",
+          "properties": {
+            "totalPages": {"type": "integer"},
+            "blogPosts": {"type": "integer"},
+            "schemaUsage": {"type": "number", "minimum": 0, "maximum": 1}
+          }
+        },
+        "topPerformingContent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentItem"
+          }
+        }
+      }
+    },
+    
+    "SearchIntentMap": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Map"
+        },
+        "queries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchQuery"
+          }
+        },
+        "intentDistribution": {
+          "type": "object",
+          "properties": {
+            "informational": {"type": "number"},
+            "navigational": {"type": "number"},
+            "transactional": {"type": "number"},
+            "commercial": {"type": "number"}
+          }
+        }
+      }
+    },
+    
+    "SearchQuery": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "SearchAction"
+        },
+        "query": {"type": "string"},
+        "searchVolume": {"type": "integer"},
+        "intent": {
+          "type": "string",
+          "enum": ["informational", "navigational", "transactional", "commercial"]
+        },
+        "currentRanking": {"type": "integer"},
+        "difficulty": {
+          "type": "string",
+          "enum": ["easy", "medium", "hard"]
+        }
+      }
+    },
+    
+    "P3_Capture": {
+      "allOf": [
+        {"$ref": "#/definitions/BAIVProcess"},
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "AnalyzeAction"
+            },
+            "name": {
+              "const": "P3_Capture"
+            },
+            "result": {
+              "$ref": "#/definitions/CaptureResult"
+            }
+          }
+        }
+      ]
+    },
+    
+    "CaptureResult": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Dataset"
+        },
+        "paaGraph": {
+          "$ref": "#/definitions/PAAGraph"
+        },
+        "contentInventory": {
+          "$ref": "#/definitions/ContentInventory"
+        },
+        "coverageMap": {
+          "$ref": "#/definitions/CoverageMap"
+        },
+        "schemaAudit": {
+          "$ref": "#/definitions/SchemaAudit"
+        },
+        "gapsIdentified": {
+          "type": "integer"
+        }
+      },
+      "required": ["@type", "paaGraph", "contentInventory", "gapsIdentified"]
+    },
+    
+    "PAAGraph": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "CreativeWork"
+        },
+        "name": {
+          "const": "People Also Ask Question Graph"
+        },
+        "totalQuestions": {
+          "type": "integer"
+        },
+        "rootKeywords": {
+          "type": "integer"
+        },
+        "maxDepth": {
+          "type": "integer",
+          "description": "Maximum recursion depth"
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuestionCluster"
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PAAQuestion"
+          }
+        }
+      },
+      "required": ["@type", "name", "totalQuestions", "clusters"]
+    },
+    
+    "QuestionCluster": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Thing"
+        },
+        "theme": {
+          "type": "string",
+          "description": "Cluster theme"
+        },
+        "questions": {
+          "type": "integer",
+          "description": "Number of questions in cluster"
+        },
+        "avgSearchVolume": {
+          "type": "integer"
+        }
+      }
+    },
+    
+    "PAAQuestion": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Question"
+        },
+        "text": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string",
+          "description": "Parent question or root keyword"
+        },
+        "depth": {
+          "type": "integer"
+        },
+        "searchVolume": {
+          "type": "integer"
+        },
+        "answeredBy": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "URLs of pages answering this"
+        }
+      },
+      "required": ["@type", "text"]
+    },
+    
+    "ContentInventory": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Collection"
+        },
+        "totalPages": {
+          "type": "integer"
+        },
+        "contentTypes": {
+          "type": "object",
+          "properties": {
+            "blogPosts": {"type": "integer"},
+            "productPages": {"type": "integer"},
+            "landingPages": {"type": "integer"},
+            "faqPages": {"type": "integer"}
+          }
+        },
+        "schemaCoverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "% of pages with schema"
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentItem"
+          }
+        }
+      }
+    },
+    
+    "ContentItem": {
+      "type": "object",
+      "properties": {
+        "@context": {
+          "type": "string",
+          "const": "https://schema.org"
+        },
+        "@type": {
+          "type": "string",
+          "enum": ["Article", "BlogPosting", "WebPage", "FAQPage", "HowTo", "Product"]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "headline": {
+          "type": "string"
+        },
+        "wordCount": {
+          "type": "integer"
+        },
+        "datePublished": {
+          "type": "string",
+          "format": "date"
+        },
+        "author": {
+          "type": "object",
+          "properties": {
+            "@type": {"const": "Person"},
+            "name": {"type": "string"}
+          }
+        },
+        "schemaTypes": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "entities": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "internalLinks": {
+          "type": "integer"
+        },
+        "externalLinks": {
+          "type": "integer"
+        },
+        "performanceMetrics": {
+          "$ref": "#/definitions/ContentPerformance"
+        }
+      },
+      "required": ["@context", "@type", "url", "headline"]
+    },
+    
+    "ContentPerformance": {
+      "type": "object",
+      "properties": {
+        "pageViews": {"type": "integer"},
+        "avgTimeOnPage": {"type": "string"},
+        "bounceRate": {"type": "number"},
+        "backlinks": {"type": "integer"},
+        "socialShares": {"type": "integer"}
+      }
+    },
+    
+    "CoverageMap": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Map"
+        },
+        "questionsCovered": {
+          "type": "integer"
+        },
+        "questionsUncovered": {
+          "type": "integer"
+        },
+        "coverageRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "topGaps": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    
+    "SchemaAudit": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Report"
+        },
+        "name": {
+          "const": "Schema Markup Audit"
+        },
+        "totalPages": {"type": "integer"},
+        "pagesWithSchema": {"type": "integer"},
+        "schemaTypes": {
+          "type": "object",
+          "additionalProperties": {"type": "integer"}
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaError"
+          }
+        },
+        "opportunities": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    
+    "SchemaError": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Thing"
+        },
+        "url": {"type": "string", "format": "uri"},
+        "schemaType": {"type": "string"},
+        "errorType": {
+          "type": "string",
+          "enum": ["missing_required", "invalid_property", "wrong_type"]
+        },
+        "errorMessage": {"type": "string"}
+      }
+    },
+    
+    "P4_Audit": {
+      "allOf": [
+        {"$ref": "#/definitions/BAIVProcess"},
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "AssessAction"
+            },
+            "name": {
+              "const": "P4_Audit"
+            },
+            "result": {
+              "$ref": "#/definitions/AuditResult"
+            }
+          }
+        }
+      ]
+    },
+    
+    "AuditResult": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Report"
+        },
+        "name": {
+          "const": "BAIV Brand Audit"
+        },
+        "overallBAIVScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "scoreBreakdown": {
+          "type": "object",
+          "properties": {
+            "aiVisibilityScore": {"type": "number", "minimum": 0, "maximum": 100},
+            "contentQualityScore": {"type": "number", "minimum": 0, "maximum": 100},
+            "technicalSEOScore": {"type": "number", "minimum": 0, "maximum": 100},
+            "brandConsistencyScore": {"type": "number", "minimum": 0, "maximum": 100}
+          }
+        },
+        "competitiveBenchmark": {
+          "type": "object",
+          "additionalProperties": {"type": "number"}
+        },
+        "keyFindings": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recommendation"
+          }
+        }
+      },
+      "required": ["@type", "name", "overallBAIVScore", "scoreBreakdown", "recommendations"]
+    },
+    
+    "Recommendation": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Action"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "category": {
+          "type": "string",
+          "enum": ["AI_Visibility", "Content_Quality", "Technical_SEO", "Schema_Markup", "Brand_Consistency"]
+        },
+        "action": {
+          "type": "string"
+        },
+        "estimatedImpact": {
+          "type": "string",
+          "description": "Impact on BAIV score (e.g., '+15 points')"
+        },
+        "estimatedEffort": {
+          "type": "string",
+          "description": "Time estimate (e.g., '8-12 hours')"
+        }
+      },
+      "required": ["@type", "priority", "category", "action"]
+    },
+    
+    "P7_Ideation": {
+      "allOf": [
+        {"$ref": "#/definitions/BAIVProcess"},
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "CreateAction"
+            },
+            "name": {
+              "const": "P7_Ideation"
+            },
+            "result": {
+              "$ref": "#/definitions/IdeationResult"
+            }
+          }
+        }
+      ]
+    },
+    
+    "IdeationResult": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "CreativeWork"
+        },
+        "name": {
+          "const": "Content Strategy Plan"
+        },
+        "contentIdeas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentIdea"
+          }
+        },
+        "contentClusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentCluster"
+          }
+        },
+        "contentCalendar": {
+          "$ref": "#/definitions/ContentCalendar"
+        },
+        "totalIdeas": {
+          "type": "integer"
+        },
+        "estimatedTotalEffort": {
+          "type": "number",
+          "description": "Total hours"
+        }
+      },
+      "required": ["@type", "name", "contentIdeas", "totalIdeas"]
+    },
+    
+    "ContentIdea": {
+      "type": "object",
+      "properties": {
+        "@context": {
+          "type": "string",
+          "const": "https://schema.org"
+        },
+        "@type": {
+          "type": "string",
+          "enum": ["Article", "BlogPosting", "HowTo", "FAQPage"]
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "headline": {
+          "type": "string",
+          "description": "SEO-optimized title"
+        },
+        "contentType": {
+          "type": "string",
+          "enum": ["pillar_page", "blog_post", "faq", "how_to", "comparison", "guide"]
+        },
+        "description": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "object",
+          "properties": {
+            "primary": {"type": "string"},
+            "secondary": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "searchVolume": {"type": "integer"}
+          }
+        },
+        "paaQuestions": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "outline": {
+          "$ref": "#/definitions/ContentOutline"
+        },
+        "schemaRecommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaRecommendation"
+          }
+        },
+        "estimatedWordCount": {
+          "type": "integer"
+        },
+        "estimatedHours": {
+          "type": "number"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["P0", "P1", "P2", "P3"]
+        },
+        "estimatedImpact": {
+          "type": "object",
+          "properties": {
+            "monthlyTraffic": {"type": "string"},
+            "rankingPotential": {"type": "string"},
+            "aiVisibilityBoost": {"type": "string"}
+          }
+        },
+        "internalLinking": {
+          "type": "object",
+          "properties": {
+            "linkFrom": {"type": "array", "items": {"type": "string"}},
+            "linkTo": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      },
+      "required": ["@context", "@type", "identifier", "headline", "contentType", "priority"]
+    },
+    
+    "ContentOutline": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "CreativeWork"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentSection"
+          }
+        }
+      }
+    },
+    
+    "ContentSection": {
+      "type": "object",
+      "properties": {
+        "heading": {"type": "string"},
+        "subsections": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "estimatedWords": {"type": "integer"}
+      }
+    },
+    
+    "SchemaRecommendation": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Schema.org type (Article, FAQPage, HowTo, etc.)"
+        },
+        "properties": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "note": {
+          "type": "string",
+          "description": "Implementation notes"
+        }
+      }
+    },
+    
+    "ContentCluster": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Collection"
+        },
+        "clusterName": {
+          "type": "string"
+        },
+        "pillarPage": {
+          "type": "string",
+          "description": "Content idea ID"
+        },
+        "supportingContent": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "totalIdeas": {
+          "type": "integer"
+        },
+        "estimatedEffort": {
+          "type": "number"
+        }
+      }
+    },
+    
+    "ContentCalendar": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "Schedule"
+        },
+        "weeks": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WeeklySchedule"
+          }
+        }
+      }
+    },
+    
+    "WeeklySchedule": {
+      "type": "object",
+      "properties": {
+        "p0Ideas": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "p1Ideas": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "estimatedHours": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  
+  "examples": {
+    "p1_configuration_example": {
+      "@context": "https://schema.org",
+      "@type": "Action",
+      "identifier": "proc-p1-001",
+      "name": "P1_Configuration",
+      "agent": {
+        "@type": "SoftwareApplication",
+        "identifier": "agent-config-001",
+        "name": "Configuration Agent",
+        "applicationCategory": "configuration",
+        "version": "2.0.0"
+      },
+      "startTime": "2025-11-25T10:00:00Z",
+      "endTime": "2025-11-25T10:08:00Z",
+      "status": "completed",
+      "object": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Acme SaaS Corp",
+        "url": "https://acmesaas.com",
+        "description": "Project management software for remote teams",
+        "industry": "SaaS",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "US",
+          "addressRegion": "CA"
+        },
+        "sameAs": [
+          "https://twitter.com/acmesaas",
+          "https://linkedin.com/company/acmesaas"
+        ],
+        "knowsAbout": ["project management", "team collaboration", "remote work"],
+        "competitors": [
+          {
+            "@type": "Organization",
+            "name": "Competitor A",
+            "url": "https://competitor-a.com",
+            "aiVisibilityScore": 0.78
+          }
+        ],
+        "targetKeywords": [
+          "project management software",
+          "team collaboration tools",
+          "remote work software"
+        ]
+      },
+      "result": {
+        "@type": "Thing",
+        "workspaceId": "ws-abc123",
+        "integrations": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "google_search_console",
+            "applicationCategory": "seo",
+            "status": "connected"
+          }
+        ]
+      }
+    },
+    
+    "p7_ideation_example": {
+      "@context": "https://schema.org",
+      "@type": "CreateAction",
+      "identifier": "proc-p7-007",
+      "name": "P7_Ideation",
+      "agent": {
+        "@type": "SoftwareApplication",
+        "identifier": "agent-ideation-001",
+        "name": "Ideation Agent",
+        "applicationCategory": "ideation"
+      },
+      "startTime": "2025-11-25T11:30:00Z",
+      "endTime": "2025-11-25T11:48:00Z",
+      "status": "completed",
+      "result": {
+        "@type": "CreativeWork",
+        "name": "Content Strategy Plan",
+        "totalIdeas": 32,
+        "estimatedTotalEffort": 380,
+        "contentIdeas": [
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "identifier": "idea-001",
+            "headline": "The Complete Guide to Project Management Software in 2025",
+            "contentType": "pillar_page",
+            "description": "Comprehensive guide covering PM software selection, features, and implementation",
+            "keywords": {
+              "primary": "project management software",
+              "secondary": ["best PM tools", "how to choose PM software"],
+              "searchVolume": 24500
+            },
+            "paaQuestions": [
+              "What is project management software?",
+              "How does PM software work?",
+              "What features should PM software have?"
+            ],
+            "schemaRecommendations": [
+              {
+                "type": "Article",
+                "properties": ["headline", "author", "datePublished"],
+                "note": "Main article schema"
+              },
+              {
+                "type": "FAQPage",
+                "properties": ["mainEntity"],
+                "note": "Answer 15 PAA questions as FAQ items"
+              }
+            ],
+            "estimatedWordCount": 3500,
+            "estimatedHours": 16,
+            "priority": "P0",
+            "estimatedImpact": {
+              "monthlyTraffic": "+8,500 visitors",
+              "rankingPotential": "top 3",
+              "aiVisibilityBoost": "+15%"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
