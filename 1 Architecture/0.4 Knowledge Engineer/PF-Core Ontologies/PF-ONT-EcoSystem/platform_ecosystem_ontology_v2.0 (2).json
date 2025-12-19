@@ -1,0 +1,571 @@
+{
+  "@context": {
+    "@base": "https://ontology.platformeco.com/",
+    "schema": "https://schema.org/",
+    "baiv": "https://ontology.baiv.com/baiv#",
+    "pf": "https://ontology.platformeco.com/platform#",
+    "venture": "https://ontology.platformeco.com/venture#",
+    "ecosystem": "https://ontology.platformeco.com/ecosystem#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@id": "platform-ecosystem-ontology",
+  "@type": "owl:Ontology",
+  "owl:versionInfo": "2.0.0",
+  "rdfs:label": "Platform Ecosystem Ontology",
+  "rdfs:comment": "Comprehensive ontology for multi-venture AI platform ecosystem with customer targeting, product/service management, and partner networks",
+  "owl:imports": [
+    "https://ontology.baiv.com/org-core",
+    "https://schema.org"
+  ],
+  
+  "entities": {
+    
+    "PlatformCore": {
+      "@id": "pf:PlatformInstance",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "schema:SoftwareApplication",
+      "rdfs:label": "Platform Instance",
+      "rdfs:comment": "The central PF PLATFORM that orchestrates multiple ventures, products, and services",
+      "properties": {
+        "pf:platformId": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:PlatformInstance",
+          "rdfs:range": "xsd:string",
+          "rdfs:comment": "Unique identifier for the platform instance"
+        },
+        "pf:supportedVentures": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformInstance",
+          "rdfs:range": "venture:VentureUnit",
+          "rdfs:comment": "Joint ventures supported by this platform"
+        },
+        "pf:registeredProducts": {
+          "@type": "owl:ObjectProperty", 
+          "rdfs:domain": "pf:PlatformInstance",
+          "rdfs:range": "pf:OptInProduct",
+          "rdfs:comment": "Products that have opted into the platform ecosystem"
+        },
+        "pf:enabledServices": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformInstance", 
+          "rdfs:range": "pf:OptInService",
+          "rdfs:comment": "Services available through the platform"
+        },
+        "pf:connectedApps": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformInstance",
+          "rdfs:range": "pf:PlatformApp",
+          "rdfs:comment": "Applications integrated with the platform"
+        },
+        "pf:orchestratedNetworks": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformInstance",
+          "rdfs:range": "ecosystem:PartnerNetwork",
+          "rdfs:comment": "Partner and referral networks managed by the platform"
+        }
+      }
+    },
+
+    "VentureUnits": {
+      "@id": "venture:VentureUnit", 
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "schema:Organization",
+      "rdfs:label": "Venture Unit",
+      "rdfs:comment": "Individual joint venture within the platform ecosystem",
+      "properties": {
+        "venture:ventureType": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "venture:VentureUnit",
+          "rdfs:range": "venture:VentureTypeEnum",
+          "rdfs:comment": "Type of venture: ai_visibility, ai_strategy_innovation, idea_to_pmf, or other"
+        },
+        "venture:focusDomain": {
+          "@type": "owl:DatatypeProperty", 
+          "rdfs:domain": "venture:VentureUnit",
+          "rdfs:range": "xsd:string",
+          "rdfs:comment": "Primary business domain focus"
+        },
+        "venture:targetMarket": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "venture:VentureUnit", 
+          "rdfs:range": "baiv:TargetOrganization",
+          "rdfs:comment": "Target organizations for this venture using existing BAIV ontology"
+        },
+        "venture:offeredProducts": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "venture:VentureUnit",
+          "rdfs:range": "pf:OptInProduct", 
+          "rdfs:comment": "Products offered by this venture unit"
+        },
+        "venture:deliveredServices": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "venture:VentureUnit",
+          "rdfs:range": "pf:OptInService",
+          "rdfs:comment": "Services delivered by this venture unit"
+        }
+      }
+    },
+
+    "AIVisibilityVenture": {
+      "@id": "venture:AIVisibilityVenture",
+      "@type": "owl:Class", 
+      "rdfs:subClassOf": "venture:VentureUnit",
+      "rdfs:label": "AI Visibility Venture",
+      "rdfs:comment": "Marketing-based AI Visibility venture, different from standard SEO players",
+      "properties": {
+        "venture:visibilityStrategy": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "venture:AIVisibilityVenture",
+          "rdfs:range": "xsd:string",
+          "rdfs:comment": "Unique visibility strategy differentiating from standard SEO"
+        },
+        "venture:aiMarketingCapabilities": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "venture:AIVisibilityVenture", 
+          "rdfs:range": "pf:AICapability",
+          "rdfs:comment": "AI-driven marketing capabilities offered"
+        }
+      }
+    },
+
+    "AIStrategyVenture": {
+      "@id": "venture:AIStrategyVenture",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "venture:VentureUnit", 
+      "rdfs:label": "AI Strategy & Innovation Venture",
+      "rdfs:comment": "Venture focused on AI strategy and innovation consulting",
+      "properties": {
+        "venture:strategyFrameworks": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "venture:AIStrategyVenture",
+          "rdfs:range": "pf:StrategyFramework",
+          "rdfs:comment": "Strategic frameworks and methodologies offered"
+        },
+        "venture:innovationAccelerators": {
+          "@type": "owl:ObjectProperty", 
+          "rdfs:domain": "venture:AIStrategyVenture",
+          "rdfs:range": "pf:InnovationAccelerator",
+          "rdfs:comment": "Innovation acceleration tools and processes"
+        }
+      }
+    },
+
+    "IdeaToPMFVenture": {
+      "@id": "venture:IdeaToPMFVenture",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "venture:VentureUnit",
+      "rdfs:label": "Idea to PMF Venture", 
+      "rdfs:comment": "Venture focused on accelerating time to value from Idea to MVP to Product Market Fit",
+      "properties": {
+        "venture:accelerationStages": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "venture:IdeaToPMFVenture",
+          "rdfs:range": "pf:AccelerationStage",
+          "rdfs:comment": "Stages of acceleration: idea, mvp, pmf"
+        },
+        "venture:timeToValueMetrics": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "venture:IdeaToPMFVenture", 
+          "rdfs:range": "xsd:decimal",
+          "rdfs:comment": "Metrics for measuring acceleration effectiveness"
+        }
+      }
+    },
+
+    "OptInProducts": {
+      "@id": "pf:OptInProduct",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "schema:Product", 
+      "rdfs:label": "Opted-In Product",
+      "rdfs:comment": "Products that have chosen to integrate with the platform ecosystem",
+      "properties": {
+        "pf:optInStatus": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:OptInProduct",
+          "rdfs:range": "pf:OptInStatusEnum",
+          "rdfs:comment": "Status: pending, active, suspended, terminated"
+        },
+        "pf:integrationLevel": {
+          "@type": "owl:DatatypeProperty", 
+          "rdfs:domain": "pf:OptInProduct",
+          "rdfs:range": "pf:IntegrationLevelEnum",
+          "rdfs:comment": "Level: basic, standard, premium, enterprise"
+        },
+        "pf:targetUsers": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:OptInProduct",
+          "rdfs:range": "pf:PlatformUser",
+          "rdfs:comment": "Users who can access this product"
+        },
+        "pf:applicableOrganizations": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:OptInProduct", 
+          "rdfs:range": "baiv:TargetOrganization",
+          "rdfs:comment": "Organizations that this product targets"
+        },
+        "pf:revenueModel": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:OptInProduct",
+          "rdfs:range": "pf:RevenueModel",
+          "rdfs:comment": "How revenue is generated and shared"
+        }
+      }
+    },
+
+    "OptInServices": {
+      "@id": "pf:OptInService",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "schema:Service",
+      "rdfs:label": "Opted-In Service",
+      "rdfs:comment": "Services that have integrated with the platform ecosystem",
+      "properties": {
+        "pf:serviceCategory": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:OptInService", 
+          "rdfs:range": "pf:ServiceCategoryEnum",
+          "rdfs:comment": "Category: consulting, implementation, support, training"
+        },
+        "pf:deliveryMode": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:OptInService",
+          "rdfs:range": "pf:DeliveryModeEnum", 
+          "rdfs:comment": "Mode: self_service, assisted, managed, white_glove"
+        },
+        "pf:aiAugmentation": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:OptInService",
+          "rdfs:range": "pf:AICapability",
+          "rdfs:comment": "AI capabilities that augment this service"
+        }
+      }
+    },
+
+    "PlatformApps": {
+      "@id": "pf:PlatformApp",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "schema:SoftwareApplication",
+      "rdfs:label": "Platform Application",
+      "rdfs:comment": "Applications that run on or integrate with the platform",
+      "properties": {
+        "pf:appType": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:PlatformApp",
+          "rdfs:range": "pf:AppTypeEnum",
+          "rdfs:comment": "Type: native, integrated, embedded, api_only"
+        },
+        "pf:accessPermissions": {
+          "@type": "owl:ObjectProperty", 
+          "rdfs:domain": "pf:PlatformApp",
+          "rdfs:range": "pf:PermissionSet",
+          "rdfs:comment": "What platform data/features this app can access"
+        },
+        "pf:userInterfaces": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformApp",
+          "rdfs:range": "pf:UserInterface",
+          "rdfs:comment": "UI components provided by this app"
+        }
+      }
+    },
+
+    "PlatformUsers": {
+      "@id": "pf:PlatformUser", 
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "schema:Person",
+      "rdfs:label": "Platform User",
+      "rdfs:comment": "Individuals who use products/services through the platform",
+      "properties": {
+        "pf:userRole": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:PlatformUser",
+          "rdfs:range": "pf:UserRoleEnum",
+          "rdfs:comment": "Role: end_user, admin, partner, affiliate"
+        },
+        "pf:accessibleProducts": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformUser", 
+          "rdfs:range": "pf:OptInProduct",
+          "rdfs:comment": "Products this user can access"
+        },
+        "pf:accessibleServices": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformUser",
+          "rdfs:range": "pf:OptInService",
+          "rdfs:comment": "Services this user can access"
+        },
+        "pf:organizationAffiliation": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformUser",
+          "rdfs:range": "baiv:TargetOrganization", 
+          "rdfs:comment": "Organization this user belongs to (leveraging existing BAIV ontology)"
+        },
+        "pf:usagePatterns": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:PlatformUser",
+          "rdfs:range": "pf:UsagePattern",
+          "rdfs:comment": "How this user interacts with the platform"
+        }
+      }
+    },
+
+    "PartnerNetworks": {
+      "@id": "ecosystem:PartnerNetwork",
+      "@type": "owl:Class", 
+      "rdfs:subClassOf": "schema:Organization",
+      "rdfs:label": "Partner Network",
+      "rdfs:comment": "Networks of partners, affiliates, and referral organizations",
+      "properties": {
+        "ecosystem:networkType": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "ecosystem:PartnerNetwork",
+          "rdfs:range": "ecosystem:NetworkTypeEnum",
+          "rdfs:comment": "Type: referral, affiliate, integration, reseller, strategic"
+        },
+        "ecosystem:networkMembers": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "ecosystem:PartnerNetwork",
+          "rdfs:range": "ecosystem:NetworkMember",
+          "rdfs:comment": "Organizations participating in this network"
+        },
+        "ecosystem:revenueSharing": {
+          "@type": "owl:ObjectProperty", 
+          "rdfs:domain": "ecosystem:PartnerNetwork",
+          "rdfs:range": "pf:RevenueModel",
+          "rdfs:comment": "How revenue is shared within the network"
+        },
+        "ecosystem:performanceMetrics": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "ecosystem:PartnerNetwork",
+          "rdfs:range": "ecosystem:NetworkMetrics",
+          "rdfs:comment": "KPIs for measuring network performance"
+        }
+      }
+    },
+
+    "NetworkMembers": {
+      "@id": "ecosystem:NetworkMember",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "baiv:TargetOrganization",
+      "rdfs:label": "Network Member",
+      "rdfs:comment": "Organization participating in partner network (extends existing BAIV organization model)",
+      "properties": {
+        "ecosystem:membershipStatus": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "ecosystem:NetworkMember", 
+          "rdfs:range": "ecosystem:MembershipStatusEnum",
+          "rdfs:comment": "Status: prospect, active, suspended, alumni"
+        },
+        "ecosystem:contributionType": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "ecosystem:NetworkMember",
+          "rdfs:range": "ecosystem:ContributionTypeEnum",
+          "rdfs:comment": "How they contribute: referrals, integration, content, technology"
+        },
+        "ecosystem:networkRoles": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "ecosystem:NetworkMember",
+          "rdfs:range": "ecosystem:NetworkRole", 
+          "rdfs:comment": "Roles this member plays in the network"
+        }
+      }
+    },
+
+    "AICapabilities": {
+      "@id": "pf:AICapability", 
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "schema:Intangible",
+      "rdfs:label": "AI Capability",
+      "rdfs:comment": "AI-driven capabilities that provide competitive advantage",
+      "properties": {
+        "pf:capabilityType": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:AICapability",
+          "rdfs:range": "pf:AICapabilityTypeEnum",
+          "rdfs:comment": "Type: llm_reasoning, predictive_analytics, automation, personalization"
+        },
+        "pf:applicableVentures": {
+          "@type": "owl:ObjectProperty",
+          "rdfs:domain": "pf:AICapability", 
+          "rdfs:range": "venture:VentureUnit",
+          "rdfs:comment": "Which ventures can leverage this capability"
+        },
+        "pf:competitiveAdvantage": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:AICapability",
+          "rdfs:range": "xsd:string",
+          "rdfs:comment": "Description of competitive advantage provided"
+        },
+        "pf:maturityLevel": {
+          "@type": "owl:DatatypeProperty",
+          "rdfs:domain": "pf:AICapability",
+          "rdfs:range": "pf:MaturityLevelEnum",
+          "rdfs:comment": "Maturity: experimental, pilot, production, optimized"
+        }
+      }
+    }
+  },
+
+  "enumerations": {
+    "venture:VentureTypeEnum": {
+      "@type": "owl:Class",
+      "owl:oneOf": [
+        "ai_visibility",
+        "ai_strategy_innovation", 
+        "idea_to_pmf",
+        "saas_augmentation",
+        "other"
+      ]
+    },
+    "pf:OptInStatusEnum": {
+      "@type": "owl:Class", 
+      "owl:oneOf": [
+        "pending",
+        "active",
+        "suspended", 
+        "terminated"
+      ]
+    },
+    "pf:IntegrationLevelEnum": {
+      "@type": "owl:Class",
+      "owl:oneOf": [
+        "basic",
+        "standard",
+        "premium",
+        "enterprise"
+      ]
+    },
+    "ecosystem:NetworkTypeEnum": {
+      "@type": "owl:Class",
+      "owl:oneOf": [
+        "referral",
+        "affiliate", 
+        "integration",
+        "reseller",
+        "strategic"
+      ]
+    },
+    "pf:AICapabilityTypeEnum": {
+      "@type": "owl:Class",
+      "owl:oneOf": [
+        "llm_reasoning",
+        "predictive_analytics",
+        "automation",
+        "personalization",
+        "optimization",
+        "intelligence_gathering"
+      ]
+    }
+  },
+
+  "relationships": {
+    "platform_orchestration": {
+      "@id": "pf:orchestrates",
+      "@type": "owl:ObjectProperty",
+      "rdfs:domain": "pf:PlatformInstance", 
+      "rdfs:range": "venture:VentureUnit",
+      "rdfs:comment": "Platform orchestrates multiple venture units"
+    },
+    "venture_targeting": {
+      "@id": "venture:targets",
+      "@type": "owl:ObjectProperty", 
+      "rdfs:domain": "venture:VentureUnit",
+      "rdfs:range": "baiv:TargetOrganization",
+      "rdfs:comment": "Venture targets specific organizations (leveraging existing BAIV targeting model)"
+    },
+    "user_organization_bridge": {
+      "@id": "pf:affiliatedWith",
+      "@type": "owl:ObjectProperty",
+      "rdfs:domain": "pf:PlatformUser",
+      "rdfs:range": "baiv:TargetOrganization", 
+      "rdfs:comment": "Users are affiliated with target organizations"
+    },
+    "network_ecosystem_bridge": {
+      "@id": "ecosystem:participatesIn",
+      "@type": "owl:ObjectProperty",
+      "rdfs:domain": "baiv:TargetOrganization",
+      "rdfs:range": "ecosystem:PartnerNetwork",
+      "rdfs:comment": "Organizations participate in partner networks"
+    },
+    "ai_capability_enhancement": {
+      "@id": "pf:enhancedBy", 
+      "@type": "owl:ObjectProperty",
+      "rdfs:domain": "pf:OptInService",
+      "rdfs:range": "pf:AICapability",
+      "rdfs:comment": "Services are enhanced by AI capabilities"
+    }
+  },
+
+  "business_rules": [
+    {
+      "@id": "br:platform_user_access",
+      "rdfs:label": "Platform User Access Rule",
+      "rule": "A PlatformUser can only access OptInProducts and OptInServices that are enabled for their organizationAffiliation's qualification level and venture alignment."
+    },
+    {
+      "@id": "br:venture_product_alignment",
+      "rdfs:label": "Venture Product Alignment Rule", 
+      "rule": "OptInProducts must align with at least one VentureUnit's focusDomain and targetMarket criteria."
+    },
+    {
+      "@id": "br:network_member_qualification",
+      "rdfs:label": "Network Member Qualification Rule",
+      "rule": "Organizations can only become NetworkMembers if they meet the qualification criteria defined in the existing BAIV ontology."
+    },
+    {
+      "@id": "br:ai_capability_maturity",
+      "rdfs:label": "AI Capability Maturity Rule",
+      "rule": "AICapabilities with maturityLevel 'experimental' or 'pilot' cannot be offered to enterprise-level customers without explicit approval."
+    }
+  ],
+
+  "use_cases": [
+    {
+      "@id": "uc:multi_venture_customer_journey",
+      "name": "Multi-Venture Customer Journey",
+      "description": "Track how target organizations interact across multiple venture units and platform products/services",
+      "entities": ["baiv:TargetOrganization", "venture:VentureUnit", "pf:OptInProduct", "pf:PlatformUser"],
+      "workflow": "Organization identified by AI Visibility venture → Qualified using BAIV ontology → Engages with AI Strategy venture → Accelerates idea through Idea-to-PMF venture → Becomes platform advocate"
+    },
+    {
+      "@id": "uc:partner_network_optimization", 
+      "name": "Partner Network Optimization",
+      "description": "Optimize partner and referral networks for maximum value generation",
+      "entities": ["ecosystem:PartnerNetwork", "ecosystem:NetworkMember", "pf:RevenueModel"],
+      "workflow": "Identify high-value network members → Analyze contribution patterns → Optimize revenue sharing → Scale successful network models"
+    },
+    {
+      "@id": "uc:ai_capability_competitive_advantage",
+      "name": "AI Capability Competitive Advantage",
+      "description": "Leverage AI capabilities across ventures to create sustainable competitive advantages",
+      "entities": ["pf:AICapability", "venture:VentureUnit", "pf:OptInService"],
+      "workflow": "Develop AI capability → Test across ventures → Integrate into services → Measure competitive impact → Scale successful implementations"
+    }
+  ],
+
+  "integration_points": {
+    "baiv_ontology_bridge": {
+      "description": "Leverages existing BAIV Organization Ontology v1.2 for customer targeting and qualification",
+      "entities_reused": [
+        "baiv:TargetOrganization",
+        "baiv:ProspectOrganization", 
+        "baiv:QualifiedProspectOrganization",
+        "baiv:Person",
+        "baiv:OrganizationalRole"
+      ],
+      "phases_extended": "P1-P16 operational phases now support platform ecosystem management"
+    },
+    "schema_org_extensions": {
+      "description": "Extends schema.org with platform-specific semantics while maintaining interoperability",
+      "base_types": [
+        "schema:SoftwareApplication → pf:PlatformInstance", 
+        "schema:Product → pf:OptInProduct",
+        "schema:Service → pf:OptInService",
+        "schema:Organization → venture:VentureUnit",
+        "schema:Person → pf:PlatformUser"
+      ]
+    }
+  }
+}
