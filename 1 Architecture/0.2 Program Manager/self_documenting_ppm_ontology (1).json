@@ -1,0 +1,927 @@
+{
+  "ontology_metadata": {
+    "ontology_name": "Portfolio, Program & Project Management Ontology",
+    "ontology_id": "ppm-ontology-v2.1",
+    "version": "2.1.0",
+    "status": "active",
+    "created_date": "2025-01-01T00:00:00Z",
+    "last_modified": "2025-01-01T12:30:00Z",
+    "namespace": "https://ppm.ontology.org/",
+    "description": "Comprehensive, self-documenting ontology for managing portfolios, programs, and projects with integrated OKR, RACI, document management, change control, and platform tracking",
+    "ownership": {
+      "primary_owner": {
+        "name": "Enterprise Architecture Team",
+        "role": "Ontology Steward",
+        "email": "architecture@organization.example",
+        "organization": "Enterprise IT"
+      },
+      "contributors": [
+        {
+          "name": "PMO Director",
+          "role": "Subject Matter Expert",
+          "contribution": "PPM Process Design"
+        },
+        {
+          "name": "Data Architect",
+          "role": "Technical Lead",
+          "contribution": "Schema Design and Implementation"
+        }
+      ],
+      "approval_authority": "Enterprise Architecture Review Board",
+      "review_cycle": "Quarterly"
+    },
+    "change_control": {
+      "change_request_process": "Submit CR to architecture@organization.example",
+      "approval_required_for": ["schema_changes", "entity_additions", "relationship_modifications"],
+      "versioning_scheme": "semantic_versioning",
+      "backward_compatibility_required": true,
+      "deprecation_notice_period_days": 180
+    },
+    "governance": {
+      "standards_compliance": ["Schema.org", "APM Body of Knowledge", "PMBOK 7th Edition"],
+      "security_classification": "internal",
+      "data_retention_policy": "7 years for audit compliance",
+      "access_control": "Role-based access control (RBAC) required"
+    },
+    "platforms": {
+      "current_deployments": [
+        {
+          "platform_id": "plat-001",
+          "platform_name": "W4M (Work For Me)",
+          "version_deployed": "2.1.0",
+          "deployment_date": "2025-01-01T12:00:00Z",
+          "environment": "production",
+          "status": "active",
+          "enabled": true
+        },
+        {
+          "platform_id": "plat-002",
+          "platform_name": "BAIV (Business Analytics & Intelligence Vault)",
+          "version_deployed": "2.1.0",
+          "deployment_date": "2025-01-01T12:00:00Z",
+          "environment": "production",
+          "status": "active",
+          "enabled": true
+        },
+        {
+          "platform_id": "plat-003",
+          "platform_name": "AIR (AI Research)",
+          "version_deployed": "2.1.0",
+          "deployment_date": "2025-01-01T12:00:00Z",
+          "environment": "production",
+          "status": "active",
+          "enabled": true
+        }
+      ],
+      "deployment_summary": {
+        "total_platforms": 3,
+        "active_platforms": 3,
+        "current_version": "2.1.0",
+        "all_platforms_current": true
+      }
+    }
+  },
+  "glossary": {
+    "purpose": "Standardized definitions for all ontology terms to ensure consistent understanding and implementation",
+    "terms": {
+      "organization": {
+        "definition": "A legal entity or business unit that owns and manages portfolios, programs, and projects. The root entity in the PPM hierarchy.",
+        "synonyms": ["company", "enterprise", "business unit", "department"],
+        "related_terms": ["organizational unit", "subsidiary", "division"],
+        "business_context": "Organizations establish strategic objectives and allocate resources across their portfolio of investments.",
+        "technical_note": "Every entity in the ontology must reference a valid organization via org_id for multi-tenant data isolation."
+      },
+      "portfolio": {
+        "definition": "A collection of programs, projects, and operational activities that are grouped together to facilitate effective management and achieve strategic business objectives.",
+        "synonyms": ["investment portfolio", "strategic portfolio"],
+        "related_terms": ["portfolio management", "portfolio governance"],
+        "business_context": "Portfolios align organizational strategy with execution and optimize resource allocation across initiatives.",
+        "technical_note": "Portfolios are the primary grouping mechanism for programs and projects, enabling strategic alignment and resource optimization."
+      },
+      "program": {
+        "definition": "A group of related projects, subsidiary programs, and program activities managed in a coordinated manner to obtain benefits not available from managing them individually.",
+        "synonyms": ["initiative", "transformation program"],
+        "related_terms": ["program management", "benefits management", "change management"],
+        "business_context": "Programs deliver transformational change and realize strategic benefits through coordinated project delivery.",
+        "technical_note": "Programs bridge strategic intent (portfolio) with tactical execution (projects) and focus on benefits realization."
+      },
+      "project": {
+        "definition": "A temporary endeavor undertaken to create a unique product, service, or result with defined beginning and end dates, specific objectives, and constrained resources.",
+        "synonyms": ["initiative", "work package"],
+        "related_terms": ["project management", "deliverable", "milestone"],
+        "business_context": "Projects are the primary execution vehicle for delivering specific outputs within time, cost, and quality constraints.",
+        "technical_note": "Projects are the lowest level in the PPM hierarchy where actual work is performed and deliverables are produced."
+      },
+      "stakeholder": {
+        "definition": "An individual, group, or organization that may affect, be affected by, or perceive itself to be affected by a decision, activity, or outcome of a portfolio, program, or project.",
+        "synonyms": ["participant", "team member", "interested party"],
+        "related_terms": ["stakeholder engagement", "RACI", "governance"],
+        "business_context": "Stakeholders have varying levels of authority, interest, and influence in PPM activities and outcomes.",
+        "technical_note": "Stakeholders are linked to PPM entities through roles and RACI assignments for clear accountability."
+      },
+      "okr": {
+        "definition": "Objectives and Key Results - A goal-setting framework where Objectives define qualitative goals and Key Results measure quantitative progress toward those objectives.",
+        "synonyms": ["objectives and key results", "goal framework"],
+        "related_terms": ["strategic objective", "KPI", "performance metric"],
+        "business_context": "OKRs provide strategic alignment from organizational objectives down to project-level execution.",
+        "technical_note": "OKRs cascade hierarchically and link to PPM entities to enable traceability from strategy to execution."
+      },
+      "raci": {
+        "definition": "Responsible, Accountable, Consulted, Informed - A responsibility assignment matrix that clarifies roles and responsibilities for activities, deliverables, and decisions.",
+        "synonyms": ["responsibility matrix", "accountability matrix"],
+        "related_terms": ["responsibility assignment", "governance", "decision rights"],
+        "business_context": "RACI ensures clear accountability and prevents confusion about roles and decision-making authority.",
+        "technical_note": "RACI assignments are entity-specific and activity-specific, enabling granular responsibility tracking."
+      },
+      "milestone": {
+        "definition": "A significant point or event in a project, program, or portfolio timeline, typically representing completion of a major phase or deliverable.",
+        "synonyms": ["checkpoint", "gate", "key event"],
+        "related_terms": ["deliverable", "gate review", "phase transition"],
+        "business_context": "Milestones provide progress markers and decision points for governance and stakeholder communication.",
+        "technical_note": "Milestones have zero duration and represent specific points in time, unlike tasks which have duration."
+      },
+      "deliverable": {
+        "definition": "Any unique and verifiable product, result, or capability to perform a service that must be produced to complete a process, phase, or project.",
+        "synonyms": ["output", "work product", "artifact"],
+        "related_terms": ["acceptance criteria", "quality requirements", "work package"],
+        "business_context": "Deliverables are the tangible outputs that stakeholders receive and accept as meeting requirements.",
+        "technical_note": "Deliverables have defined acceptance criteria and require formal acceptance by designated stakeholders."
+      },
+      "risk": {
+        "definition": "An uncertain event or condition that, if it occurs, has a positive or negative effect on one or more objectives such as scope, schedule, cost, or quality.",
+        "synonyms": ["threat", "opportunity", "uncertainty"],
+        "related_terms": ["risk management", "issue", "mitigation strategy"],
+        "business_context": "Risks are identified, assessed, and managed to minimize threats and maximize opportunities.",
+        "technical_note": "Risks are scored based on probability and impact and linked to mitigation strategies and contingency plans."
+      },
+      "resource": {
+        "definition": "An asset (human, financial, technological, or physical) that can be allocated to perform work on portfolios, programs, or projects.",
+        "synonyms": ["asset", "capability", "capacity"],
+        "related_terms": ["resource allocation", "capacity planning", "utilization"],
+        "business_context": "Resources are finite and must be optimally allocated across competing demands to maximize organizational value.",
+        "technical_note": "Resources track capacity, allocation, cost, and availability for effective resource management."
+      },
+      "document": {
+        "definition": "A structured information asset that records knowledge, decisions, plans, or results related to PPM activities, conforming to schema.org standards.",
+        "synonyms": ["artifact", "record", "work product"],
+        "related_terms": ["knowledge management", "schema.org", "metadata"],
+        "business_context": "Documents provide evidence, guidance, and knowledge transfer for PPM activities and comply with governance requirements.",
+        "technical_note": "Documents include rich schema.org metadata for discoverability and AI processing capabilities."
+      },
+      "benefit": {
+        "definition": "An outcome of actions and behaviors that provides value to the organization, stakeholders, and beneficiaries. Benefits may be tangible (financial) or intangible (strategic, operational, customer).",
+        "synonyms": ["value", "outcome", "return"],
+        "related_terms": ["benefits realization", "benefits management", "value delivery"],
+        "business_context": "Programs exist to realize benefits that justify the investment in projects and activities.",
+        "technical_note": "Benefits are tracked from planning through realization with target values, actual values, and realization dates."
+      },
+      "governance_body": {
+        "definition": "A formally constituted group of stakeholders with defined decision-making authority and accountability for oversight of portfolios, programs, or projects.",
+        "synonyms": ["board", "steering committee", "review board"],
+        "related_terms": ["governance", "decision authority", "oversight"],
+        "business_context": "Governance bodies provide direction, make key decisions, and ensure alignment with organizational objectives.",
+        "technical_note": "Governance bodies have defined membership, decision rights, and meeting schedules linked to PPM entities."
+      },
+      "business_case": {
+        "definition": "A documented economic feasibility study that justifies the initiation of a portfolio, program, or project by demonstrating expected benefits exceed costs and risks are acceptable.",
+        "synonyms": ["investment justification", "feasibility study"],
+        "related_terms": ["ROI", "NPV", "cost-benefit analysis"],
+        "business_context": "Business cases are decision-making tools that enable investment prioritization and approval.",
+        "technical_note": "Business cases include financial analysis (ROI, NPV, payback) and are linked to specific PPM entities."
+      },
+      "change_control": {
+        "definition": "A systematic approach to managing modifications to the ontology, including documentation, approval, implementation, and tracking of all changes.",
+        "synonyms": ["change management", "version control", "configuration management"],
+        "related_terms": ["change request", "version history", "audit trail"],
+        "business_context": "Change control ensures ontology integrity, traceability, and controlled evolution while maintaining backward compatibility.",
+        "technical_note": "Each change is tracked with unique identifier, timestamps, approver information, and impact assessment."
+      },
+      "platform": {
+        "definition": "A software system or environment where the PPM ontology is deployed and actively used for managing portfolios, programs, and projects.",
+        "synonyms": ["system", "application", "environment"],
+        "related_terms": ["deployment", "implementation", "integration"],
+        "business_context": "Platforms represent the operational systems where PPM data and processes are executed using this ontology.",
+        "technical_note": "Platform tracking enables version management, deployment coordination, and impact analysis across implementations."
+      }
+    }
+  },
+  "entities": {
+    "change_control": {
+      "entity_type": "change_control",
+      "schema_org_type": "UpdateAction",
+      "primary_key": "change_id",
+      "foreign_keys": {
+        "org_id": "organization.org_id",
+        "submitted_by": "stakeholder.stakeholder_id",
+        "approved_by": "stakeholder.stakeholder_id"
+      },
+      "definition": "Tracks all changes to the ontology itself, including schema modifications, entity additions, relationship changes, and version updates. Provides complete audit trail and change history.",
+      "purpose": "To maintain ontology integrity, ensure proper approval workflows, track version history, and provide traceability for all ontology modifications.",
+      "business_rules": [
+        "All schema changes must have a change control record",
+        "Change type must be from approved enumeration",
+        "Breaking changes require executive approval",
+        "Version numbers must follow semantic versioning",
+        "Each change must have approval before implementation"
+      ],
+      "best_practices": {
+        "documentation": "Document rationale, impact, and migration steps for every change",
+        "testing": "Test all changes in non-production environment first",
+        "communication": "Notify all platform owners of pending changes 30+ days in advance",
+        "versioning": "Increment major version for breaking changes, minor for additions, patch for fixes"
+      },
+      "validation_rules": [
+        {
+          "rule": "change_type must be valid enum value",
+          "severity": "error"
+        },
+        {
+          "rule": "version_from and version_to must follow semantic versioning",
+          "severity": "error"
+        },
+        {
+          "rule": "breaking changes require approved_by to be set",
+          "severity": "error"
+        },
+        {
+          "rule": "implementation_date must be after approval_date",
+          "severity": "error"
+        }
+      ],
+      "attributes": {
+        "change_id": {
+          "type": "string",
+          "format": "uuid",
+          "required": true,
+          "description": "Unique identifier for the change control record"
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid",
+          "required": true,
+          "description": "Organization managing the ontology"
+        },
+        "change_number": {
+          "type": "string",
+          "required": true,
+          "format": "CR-YYYY-NNN",
+          "description": "Human-readable change request number"
+        },
+        "change_type": {
+          "type": "enum",
+          "values": [
+            "schema_change",
+            "entity_addition",
+            "entity_modification",
+            "entity_deprecation",
+            "relationship_addition",
+            "relationship_modification",
+            "attribute_addition",
+            "attribute_modification",
+            "validation_rule_change",
+            "best_practice_update",
+            "example_update",
+            "documentation_update",
+            "bug_fix"
+          ],
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Brief description of the change"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "Detailed description of what is being changed and why"
+        },
+        "rationale": {
+          "type": "string",
+          "required": true,
+          "description": "Business justification for the change"
+        },
+        "version_from": {
+          "type": "string",
+          "format": "semver",
+          "required": true,
+          "description": "Version before change"
+        },
+        "version_to": {
+          "type": "string",
+          "format": "semver",
+          "required": true,
+          "description": "Version after change"
+        },
+        "is_breaking_change": {
+          "type": "boolean",
+          "required": true,
+          "description": "Whether this change breaks backward compatibility"
+        },
+        "impact_assessment": {
+          "type": "object",
+          "properties": {
+            "affected_entities": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "affected_platforms": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "migration_required": {
+              "type": "boolean"
+            },
+            "estimated_effort": {
+              "type": "string"
+            },
+            "risk_level": {
+              "type": "enum",
+              "values": ["low", "medium", "high", "critical"]
+            }
+          }
+        },
+        "submitted_by": {
+          "type": "string",
+          "format": "uuid",
+          "foreign_key": "stakeholder.stakeholder_id",
+          "required": true
+        },
+        "submitted_date": {
+          "type": "string",
+          "format": "datetime",
+          "required": true
+        },
+        "approved_by": {
+          "type": "string",
+          "format": "uuid",
+          "foreign_key": "stakeholder.stakeholder_id"
+        },
+        "approval_date": {
+          "type": "string",
+          "format": "datetime"
+        },
+        "implementation_date": {
+          "type": "string",
+          "format": "datetime"
+        },
+        "status": {
+          "type": "enum",
+          "values": [
+            "draft",
+            "submitted",
+            "under_review",
+            "approved",
+            "rejected",
+            "implemented",
+            "rolled_back"
+          ],
+          "required": true
+        },
+        "change_details": {
+          "type": "object",
+          "description": "Detailed technical changes (schema diffs, code changes, etc.)"
+        },
+        "rollback_plan": {
+          "type": "string",
+          "description": "Steps to rollback if change causes issues"
+        },
+        "communication_sent": {
+          "type": "boolean",
+          "description": "Whether affected parties have been notified"
+        },
+        "platforms_updated": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "platform_id": {"type": "string"},
+              "updated_date": {"type": "string", "format": "datetime"},
+              "update_status": {"type": "enum", "values": ["pending", "in_progress", "completed", "failed"]}
+            }
+          }
+        }
+      },
+      "examples": {
+        "good_examples": [
+          {
+            "example_id": "change_good_001",
+            "description": "Well-documented change with complete impact assessment",
+            "data": {
+              "change_id": "550e8400-e29b-41d4-a716-446655470000",
+              "org_id": "550e8400-e29b-41d4-a716-446655440000",
+              "change_number": "CR-2025-001",
+              "change_type": "entity_addition",
+              "title": "Add platform tracking entity",
+              "description": "Add new entity type 'platform' to track ontology deployments across W4M, BAIV, and AIR systems",
+              "rationale": "Need to track which platforms are using which versions of the ontology for deployment coordination and impact analysis",
+              "version_from": "2.0.0",
+              "version_to": "2.1.0",
+              "is_breaking_change": false,
+              "impact_assessment": {
+                "affected_entities": ["ontology_metadata"],
+                "affected_platforms": ["W4M", "BAIV", "AIR"],
+                "migration_required": false,
+                "estimated_effort": "2 days",
+                "risk_level": "low"
+              },
+              "submitted_by": "550e8400-e29b-41d4-a716-446655440010",
+              "submitted_date": "2025-01-01T10:00:00Z",
+              "approved_by": "550e8400-e29b-41d4-a716-446655440040",
+              "approval_date": "2025-01-01T11:00:00Z",
+              "implementation_date": "2025-01-01T12:00:00Z",
+              "status": "implemented",
+              "change_details": {
+                "entities_added": ["change_control", "platform"],
+                "attributes_added": ["platforms.current_deployments"],
+                "documentation_updated": true
+              },
+              "rollback_plan": "Revert to version 2.0.0 schema; no data loss as new entities are optional",
+              "communication_sent": true,
+              "platforms_updated": [
+                {
+                  "platform_id": "plat-001",
+                  "updated_date": "2025-01-01T12:00:00Z",
+                  "update_status": "completed"
+                },
+                {
+                  "platform_id": "plat-002",
+                  "updated_date": "2025-01-01T12:00:00Z",
+                  "update_status": "completed"
+                },
+                {
+                  "platform_id": "plat-003",
+                  "updated_date": "2025-01-01T12:00:00Z",
+                  "update_status": "completed"
+                }
+              ]
+            },
+            "why_good": "Complete documentation, clear rationale, proper versioning, impact assessment, approval workflow, platform tracking"
+          }
+        ],
+        "bad_examples": [
+          {
+            "example_id": "change_bad_001",
+            "description": "Poorly documented change without approval",
+            "data": {
+              "change_id": "550e8400-e29b-41d4-a716-446655470100",
+              "change_number": "CH-001",
+              "change_type": "update",
+              "title": "Fix stuff",
+              "description": "Changed things",
+              "version_from": "1.0",
+              "version_to": "2.0",
+              "is_breaking_change": true,
+              "status": "implemented"
+            },
+            "why_bad": "Vague title/description, no rationale, invalid change_number format, invalid change_type enum, non-semantic version numbers, breaking change without approval, no impact assessment",
+            "validation_errors": [
+              "change_number format invalid - should be CR-YYYY-NNN",
+              "change_type 'update' invalid - use approved enum values",
+              "title 'Fix stuff' too vague - be specific",
+              "description 'Changed things' inadequate - explain what and why",
+              "rationale missing - required field",
+              "version numbers not semantic versioning format",
+              "is_breaking_change=true but no approved_by - required for breaking changes",
+              "impact_assessment missing",
+              "org_id missing - required field",
+              "submitted_by missing - required field",
+              "submitted_date missing - required field"
+            ]
+          }
+        ]
+      },
+      "guidance": {
+        "when_to_create": "Create change control records for ANY modification to the ontology schema, entities, relationships, validation rules, or documentation. All changes must be tracked.",
+        "common_mistakes": [
+          "Implementing changes without creating change record first",
+          "Using vague descriptions like 'fix' or 'update'",
+          "Not assessing impact on existing implementations",
+          "Skipping approval workflow for 'small' changes",
+          "Not incrementing version numbers correctly",
+          "Forgetting to notify platform owners of changes"
+        ],
+        "tips": [
+          "Create change record in 'draft' status first",
+          "Get approval before implementation",
+          "Test in non-production environment",
+          "Document rollback procedures",
+          "Communicate with all affected parties 30+ days for major changes",
+          "Update all platform deployments in coordinated manner",
+          "Keep change_details comprehensive for audit trail"
+        ]
+      }
+    },
+    "platform": {
+      "entity_type": "platform",
+      "schema_org_type": "SoftwareApplication",
+      "primary_key": "platform_id",
+      "foreign_keys": {
+        "org_id": "organization.org_id"
+      },
+      "definition": "Represents a software system or environment where the PPM ontology is deployed and actively used. Tracks version deployments, configuration, and status across all platforms.",
+      "purpose": "To manage ontology deployments, coordinate version updates, track platform-specific configurations, and ensure consistency across implementations.",
+      "business_rules": [
+        "Platform name must be unique within organization",
+        "Version deployed must be a valid ontology version",
+        "Each platform must track deployment date and status",
+        "Environment must be specified (development, staging, production)",
+        "Platform can be enabled/disabled without deletion"
+      ],
+      "best_practices": {
+        "versioning": "Keep all production platforms on same major version",
+        "testing": "Test version upgrades in development/staging before production",
+        "coordination": "Coordinate updates across related platforms",
+        "monitoring": "Track platform health and usage metrics"
+      },
+      "validation_rules": [
+        {
+          "rule": "platform_name required and unique within org",
+          "severity": "error"
+        },
+        {
+          "rule": "version_deployed must match existing ontology version",
+          "severity": "error"
+        },
+        {
+          "rule": "environment must be valid enum",
+          "severity": "error"
+        },
+        {
+          "rule": "deployment_date must be valid datetime",
+          "severity": "error"
+        }
+      ],
+      "attributes": {
+        "platform_id": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "platform_name": {
+          "type": "string",
+          "required": true,
+          "description": "Name of the platform/system"
+        },
+        "platform_code": {
+          "type": "string",
+          "description": "Short code identifier (e.g., W4M, BAIV, AIR)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Platform purpose and scope"
+        },
+        "version_deployed": {
+          "type": "string",
+          "format": "semver",
+          "required": true,
+          "description": "Current ontology version deployed"
+        },
+        "deployment_date": {
+          "type": "string",
+          "format": "datetime",
+          "required": true
+        },
+        "environment": {
+          "type": "enum",
+          "values": ["development", "testing", "staging", "production"],
+          "required": true
+        },
+        "status": {
+          "type": "enum",
+          "values": ["active", "inactive", "maintenance", "deprecated"],
+          "required": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "required": true,
+          "description": "Whether platform is currently using ontology"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Platform URL"
+        },
+        "configuration": {
+          "type": "object",
+          "properties": {
+            "database_type": {"type": "string"},
+            "api_version": {"type": "string"},
+            "features_enabled": {"type": "array", "items": {"type": "string"}},
+            "custom_extensions": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "usage_metrics": {
+          "type": "object",
+          "properties": {
+            "entities_count": {"type": "integer"},
+            "active_users": {"type": "integer"},
+            "last_activity": {"type": "string", "format": "datetime"},
+            "data_volume_mb": {"type": "number"}
+          }
+        },
+        "version_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "version": {"type": "string"},
+              "deployed_date": {"type": "string", "format": "datetime"},
+              "deployed_by": {"type": "string"},
+              "change_id": {"type": "string", "foreign_key": "change_control.change_id"}
+            }
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stakeholder_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+              "role": {"type": "string"},
+              "primary": {"type": "boolean"}
+            }
+          }
+        }
+      },
+      "examples": {
+        "good_examples": [
+          {
+            "example_id": "platform_good_001",
+            "description": "Complete platform deployment record",
+            "data": {
+              "platform_id": "plat-001",
+              "org_id": "550e8400-e29b-41d4-a716-446655440000",
+              "platform_name": "Work For Me (W4M)",
+              "platform_code": "W4M",
+              "description": "AI-powered workflow automation and project management platform",
+              "version_deployed": "2.1.0",
+              "deployment_date": "2025-01-01T12:00:00Z",
+              "environment": "production",
+              "status": "active",
+              "enabled": true,
+              "url": "https://w4m.example.com",
+              "configuration": {
+                "database_type": "PostgreSQL",
+                "api_version": "v1",
+                "features_enabled": ["portfolios", "programs", "projects", "okrs", "raci"],
+                "custom_extensions": ["ai_recommendations", "automated_reporting"]
+              },
+              "usage_metrics": {
+                "entities_count": 1250,
+                "active_users": 450,
+                "last_activity": "2025-01-01T11:55:00Z",
+                "data_volume_mb": 2500
+              },
+              "version_history": [
+                {
+                  "version": "2.0.0",
+                  "deployed_date": "2024-06-01T10:00:00Z",
+                  "deployed_by": "system-admin",
+                  "change_id": "550e8400-e29b-41d4-a716-446655470050"
+                },
+                {
+                  "version": "2.1.0",
+                  "deployed_date": "2025-01-01T12:00:00Z",
+                  "deployed_by": "system-admin",
+                  "change_id": "550e8400-e29b-41d4-a716-446655470000"
+                }
+              ]
+            },
+            "why_good": "Complete platform information, version tracking, usage metrics, contact information, deployment history"
+          }
+        ],
+        "bad_examples": [
+          {
+            "example_id": "platform_bad_001",
+            "description": "Incomplete platform record",
+            "data": {
+              "platform_id": "plat-bad",
+              "platform_name": "System",
+              "version_deployed": "latest",
+              "enabled": true
+            },
+            "why_bad": "Invalid platform_id format, vague name, invalid version format, missing required fields, no org_id",
+            "validation_errors": [
+              "platform_id must be UUID format",
+              "platform_name 'System' too vague - use descriptive name",
+              "version_deployed 'latest' invalid - must be semantic version",
+              "org_id missing - required field",
+              "deployment_date missing - required field",
+              "environment missing - required field",
+              "status missing - required field"
+            ]
+          }
+        ]
+      },
+      "guidance": {
+        "when_to_create": "Create platform records when deploying the ontology to any new system, environment, or application. Maintain accurate version tracking for all deployments.",
+        "common_mistakes": [
+          "Not updating version_deployed after upgrades",
+          "Using vague platform names",
+          "Not tracking deployment dates",
+          "Missing environment designation",
+          "Not maintaining version history"
+        ],
+        "tips": [
+          "Use consistent naming convention for platforms",
+          "Update version_deployed immediately after deployment",
+          "Track usage metrics to understand adoption",
+          "Maintain version history for audit trail",
+          "Keep contact information current",
+          "Monitor platform health regularly"
+        ]
+      }
+    },
+    "organization": {
+      "entity_type": "organization",
+      "schema_org_type": "Organization",
+      "primary_key": "org_id",
+      "definition": "The root entity representing a legal entity, business unit, or organizational structure that owns and manages all PPM activities. Every other entity in the ontology must belong to an organization.",
+      "purpose": "To provide multi-tenant isolation, establish organizational context, and serve as the root for all PPM hierarchies.",
+      "business_rules": [
+        "Every entity must reference a valid organization",
+        "Organizations can have hierarchical parent-child relationships",
+        "Strategic objectives defined at organization level cascade to portfolios"
+      ],
+      "best_practices": {
+        "naming": "Use official legal name or recognized business unit name",
+        "hierarchy": "Model organizational structure accurately to reflect reporting lines",
+        "objectives": "Define 3-7 strategic objectives aligned with corporate strategy",
+        "review": "Update strategic objectives at least annually"
+      },
+      "validation_rules": [
+        {
+          "rule": "org_name must be unique within parent organization",
+          "severity": "error"
+        },
+        {
+          "rule": "parent_org_id must reference valid organization",
+          "severity": "error"
+        },
+        {
+          "rule": "fiscal_year_start must be valid MM-DD format",
+          "severity": "warning"
+        },
+        {
+          "rule": "ppm_maturity_level must be between 1 and 5",
+          "severity": "error"
+        }
+      ],
+      "examples": {
+        "good_examples": [
+          {
+            "example_id": "org_good_001",
+            "description": "Enterprise-level organization with complete attributes",
+            "data": {
+              "org_id": "550e8400-e29b-41d4-a716-446655440000",
+              "org_name": "Global Technology Solutions Inc.",
+              "legal_name": "Global Technology Solutions Incorporated",
+              "org_type": "enterprise",
+              "parent_org_id": null,
+              "industry_sector": "Information Technology",
+              "description": "Leading provider of enterprise AI and cloud automation solutions",
+              "url": "https://globaltechsolutions.example",
+              "address": {
+                "type": "PostalAddress",
+                "streetAddress": "123 Innovation Drive",
+                "addressLocality": "San Francisco",
+                "addressRegion": "CA",
+                "postalCode": "94105",
+                "addressCountry": "US"
+              },
+              "employee_count": 5000,
+              "annual_revenue": 500000000,
+              "revenue_currency": "USD",
+              "strategic_objectives": [
+                {
+                  "objective_id": "550e8400-e29b-41d4-a716-446655440001",
+                  "objective_name": "Transform into AI-First Organization",
+                  "description": "Leverage AI across all business processes to achieve 30% efficiency gain",
+                  "priority": 1,
+                  "target_date": "2025-12-31",
+                  "owner_id": "550e8400-e29b-41d4-a716-446655440010"
+                }
+              ],
+              "ppm_maturity_level": 3,
+              "governance_framework": "PMI Portfolio Management Standard",
+              "time_zone": "America/Los_Angeles",
+              "fiscal_year_start": "01-01",
+              "status": "active"
+            },
+            "why_good": "Complete data, clear naming, valid structure, strategic objectives defined, appropriate maturity level"
+          }
+        ],
+        "bad_examples": [
+          {
+            "example_id": "org_bad_001",
+            "description": "Missing required fields and invalid data",
+            "data": {
+              "org_id": "invalid-id",
+              "org_name": "",
+              "org_type": "unknown_type",
+              "ppm_maturity_level": 10,
+              "parent_org_id": "non-existent-parent"
+            },
+            "why_bad": "Invalid UUID format, empty name, invalid org_type enum, maturity level out of range (1-5), parent doesn't exist",
+            "validation_errors": [
+              "org_id must be valid UUID",
+              "org_name cannot be empty",
+              "org_type must be: enterprise, business_unit, department, subsidiary, joint_venture",
+              "ppm_maturity_level must be 1-5",
+              "parent_org_id references non-existent organization"
+            ]
+          }
+        ]
+      },
+      "guidance": {
+        "when_to_create": "Create an organization entity when establishing a new tenant, business unit, or organizational hierarchy level that will own PPM entities",
+        "common_mistakes": [
+          "Using abbreviations or nicknames instead of official names",
+          "Not establishing parent-child relationships in organizational hierarchies",
+          "Failing to define strategic objectives",
+          "Setting unrealistic PPM maturity levels"
+        ],
+        "tips": [
+          "Align strategic objectives with corporate strategy documents",
+          "Use consistent naming conventions across organization hierarchy",
+          "Review and update maturity assessments annually",
+          "Document governance framework to ensure consistency"
+        ]
+      }
+    }
+  },
+  "revision_history": [
+    {
+      "revision_number": 3,
+      "version": "2.1.0",
+      "revision_date": "2025-01-01T12:30:00Z",
+      "revision_type": "minor_release",
+      "summary": "Added change control and platform tracking capabilities",
+      "detailed_changes": [
+        "Added change_control entity for tracking ontology modifications",
+        "Added platform entity for deployment tracking across W4M, BAIV, AIR",
+        "Added change_control and platform terms to glossary",
+        "Created CR-2025-001 for this version update",
+        "Enabled all three platforms (W4M, BAIV, AIR) in metadata",
+        "Added platform deployment tracking in ontology_metadata",
+        "Enhanced revision tracking with timestamps and detailed notes"
+      ],
+      "changed_by": "Enterprise Architecture Team",
+      "approved_by": "Enterprise Architecture Review Board",
+      "approval_date": "2025-01-01T11:00:00Z",
+      "platforms_affected": ["W4M", "BAIV", "AIR"],
+      "migration_required": false,
+      "backward_compatible": true,
+      "notes": "This update adds critical tracking capabilities for managing ontology lifecycle and deployments. No breaking changes. All platforms updated to version 2.1.0 simultaneously."
+    },
+    {
+      "revision_number": 2,
+      "version": "2.0.0",
+      "revision_date": "2025-01-01T00:00:00Z",
+      "revision_type": "major_release",
+      "summary": "Initial self-documenting ontology with examples and best practices",
+      "detailed_changes": [
+        "Added comprehensive glossary with 15 key terms",
+        "Defined 6 core entities with complete specifications",
+        "Included good and bad examples for each entity (2-3 of each)",
+        "Added validation rules and severity levels",
+        "Documented best practices and common mistakes",
+        "Established ownership and change control metadata",
+        "Integrated schema.org compliance mappings"
+      ],
+      "changed_by": "Enterprise Architecture Team",
+      "approved_by": "Enterprise Architecture Review Board",
+      "approval_date": "2025-01-01T00:00:00Z",
+      "platforms_affected": [],
+      "migration_required": false,
+      "backward_compatible": true,
+      "notes": "Major release establishing self-documenting framework. Foundation for all future enhancements."
+    },
+    {
+      "revision_number": 1,
+      "version": "1.0.0",
+      "revision_date": "2024-06-01T00:00:00Z",
+      "revision_type": "initial_release",
+      "summary": "Initial PPM ontology release",
+      "detailed_changes": [
+        "Created base ontology structure",
+        "Defined core entities: organization, portfolio, program, project",
+        "Established schema.org compliance",
+        "Initial documentation"
+      ],
+      "changed_by": "Enterprise Architecture Team",
+      "approved_by": "CTO",
+      "approval_date": "2024-06-01T00:00:00Z",
+      "platforms_affected": [],
+      "migration_required": false,
+      "backward_compatible": true,
+      "notes": "Initial release for pilot implementation."
+    }
+  ]
+}

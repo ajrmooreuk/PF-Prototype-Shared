@@ -1,0 +1,1936 @@
+{
+  "consolidated_ppm_ontology": {
+    "version": "2.0",
+    "description": "Unified Portfolio, Program & Project Management Ontology with integrated document management and schema.org compliance",
+    "namespace": {
+      "base": "https://ppm.ontology.org/",
+      "schema_org": "https://schema.org/",
+      "ppm": "https://ppm.ontology.org/terms/",
+      "org": "https://ppm.ontology.org/org/"
+    },
+    "schema_org_integration": {
+      "compliance_level": "full",
+      "supported_types": [
+        "Organization", "Project", "CreativeWork", "DigitalDocument", 
+        "Report", "TechArticle", "HowTo", "Person", "Role", "Event"
+      ],
+      "custom_extensions": {
+        "ppm_namespace": "https://ppm.ontology.org/terms/",
+        "additional_properties": [
+          "ppmEntityType", "organizationScope", "governanceLevel",
+          "riskCategory", "benefitsType", "resourceType"
+        ]
+      }
+    },
+    "entities": {
+      "organization": {
+        "primary_key": "org_id",
+        "schema_org_type": "Organization",
+        "description": "Root organizational entity - all other entities reference this",
+        "attributes": {
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "legal_name": {
+            "type": "string",
+            "schema_org_property": "legalName"
+          },
+          "org_type": {
+            "type": "enum",
+            "values": ["enterprise", "business_unit", "department", "subsidiary", "joint_venture"],
+            "schema_org_property": "additionalType"
+          },
+          "parent_org_id": {
+            "type": "string",
+            "format": "uuid",
+            "foreign_key": "organization.org_id",
+            "schema_org_property": "parentOrganization"
+          },
+          "industry_sector": {
+            "type": "string",
+            "schema_org_property": "knowsAbout"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "schema_org_property": "url"
+          },
+          "logo": {
+            "type": "string",
+            "format": "uri",
+            "schema_org_property": "logo"
+          },
+          "address": {
+            "type": "object",
+            "schema_org_property": "address",
+            "properties": {
+              "type": {"type": "string", "default": "PostalAddress"},
+              "streetAddress": {"type": "string"},
+              "addressLocality": {"type": "string"},
+              "addressRegion": {"type": "string"},
+              "postalCode": {"type": "string"},
+              "addressCountry": {"type": "string"}
+            }
+          },
+          "contact_point": {
+            "type": "object",
+            "schema_org_property": "contactPoint",
+            "properties": {
+              "type": {"type": "string", "default": "ContactPoint"},
+              "telephone": {"type": "string"},
+              "email": {"type": "string", "format": "email"},
+              "contactType": {"type": "string"}
+            }
+          },
+          "founded_date": {
+            "type": "string",
+            "format": "date",
+            "schema_org_property": "foundingDate"
+          },
+          "employee_count": {
+            "type": "integer",
+            "schema_org_property": "numberOfEmployees"
+          },
+          "annual_revenue": {
+            "type": "number",
+            "description": "Annual revenue amount"
+          },
+          "revenue_currency": {
+            "type": "string",
+            "default": "USD"
+          },
+          "strategic_objectives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "objective_id": {"type": "string", "format": "uuid"},
+                "objective_name": {"type": "string"},
+                "description": {"type": "string"},
+                "priority": {"type": "integer", "minimum": 1, "maximum": 5},
+                "target_date": {"type": "string", "format": "date"},
+                "success_metrics": {"type": "array", "items": {"type": "string"}},
+                "owner_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"}
+              }
+            }
+          },
+          "ppm_maturity_level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "PPM maturity assessment (1=Initial, 5=Optimizing)"
+          },
+          "governance_framework": {
+            "type": "string",
+            "description": "Applied governance framework (PMI, PRINCE2, etc.)"
+          },
+          "compliance_requirements": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Regulatory and compliance frameworks"
+          },
+          "time_zone": {
+            "type": "string",
+            "default": "UTC"
+          },
+          "fiscal_year_start": {
+            "type": "string",
+            "format": "partial-date",
+            "description": "MM-DD format"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "datetime",
+            "schema_org_property": "dateCreated"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "datetime",
+            "schema_org_property": "dateModified"
+          },
+          "status": {
+            "type": "enum",
+            "values": ["active", "inactive", "merged", "dissolved"]
+          }
+        }
+      },
+      "stakeholder": {
+        "primary_key": "stakeholder_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "Person",
+        "attributes": {
+          "stakeholder_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "given_name": {
+            "type": "string",
+            "schema_org_property": "givenName"
+          },
+          "family_name": {
+            "type": "string", 
+            "schema_org_property": "familyName"
+          },
+          "name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name",
+            "description": "Full display name"
+          },
+          "job_title": {
+            "type": "string",
+            "schema_org_property": "jobTitle"
+          },
+          "stakeholder_type": {
+            "type": "enum",
+            "values": ["internal", "external", "vendor", "customer", "regulator", "partner"],
+            "schema_org_property": "additionalType"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role_id": {"type": "string", "format": "uuid"},
+                "role_name": {
+                  "type": "enum", 
+                  "values": [
+                    "portfolio_sponsor", "portfolio_manager", "portfolio_board_member",
+                    "program_sponsor", "program_manager", "program_board_member", 
+                    "project_sponsor", "project_manager", "project_team_member",
+                    "business_analyst", "technical_lead", "architect", "consultant",
+                    "change_manager", "quality_assurance", "risk_manager", "pmo_member"
+                  ]
+                },
+                "entity_id": {"type": "string", "format": "uuid"},
+                "entity_type": {"type": "enum", "values": ["portfolio", "program", "project", "organization"]},
+                "start_date": {"type": "string", "format": "date"},
+                "end_date": {"type": "string", "format": "date"},
+                "allocation_percentage": {"type": "number", "minimum": 0, "maximum": 100}
+              }
+            }
+          },
+          "contact_information": {
+            "type": "object",
+            "properties": {
+              "email": {"type": "string", "format": "email", "schema_org_property": "email"},
+              "telephone": {"type": "string", "schema_org_property": "telephone"},
+              "mobile": {"type": "string"},
+              "department": {"type": "string"},
+              "location": {"type": "string", "schema_org_property": "workLocation"},
+              "office_address": {"type": "string"},
+              "preferred_contact_method": {"type": "enum", "values": ["email", "phone", "teams", "slack"]}
+            }
+          },
+          "competencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "competency_id": {"type": "string", "format": "uuid"},
+                "competency_name": {"type": "string"},
+                "category": {"type": "string"},
+                "proficiency_level": {"type": "enum", "values": ["novice", "beginner", "intermediate", "advanced", "expert"]},
+                "certification": {"type": "string"},
+                "certification_date": {"type": "string", "format": "date"},
+                "expiry_date": {"type": "string", "format": "date"},
+                "verified": {"type": "boolean"}
+              }
+            }
+          },
+          "availability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Current percentage availability"
+          },
+          "cost_rate": {
+            "type": "number",
+            "description": "Hourly or daily rate"
+          },
+          "cost_currency": {
+            "type": "string",
+            "default": "USD"
+          },
+          "reporting_manager_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "security_clearance": {
+            "type": "string",
+            "description": "Security clearance level if applicable"
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"},
+          "status": {
+            "type": "enum", 
+            "values": ["active", "inactive", "on_leave", "terminated"]
+          }
+        }
+      },
+      "portfolio": {
+        "primary_key": "portfolio_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "Project",
+        "attributes": {
+          "portfolio_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "portfolio_name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "portfolio_type": {
+            "type": "enum",
+            "values": ["strategic", "operational", "innovation", "transformation", "compliance"],
+            "schema_org_property": "additionalType"
+          },
+          "strategic_alignment": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "References to organizational strategic objectives"
+          },
+          "vision_statement": {
+            "type": "string",
+            "description": "Portfolio vision and purpose"
+          },
+          "success_criteria": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Criteria for portfolio success"
+          },
+          "portfolio_sponsor_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "portfolio_manager_id": {
+            "type": "string", 
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "budget_allocated": {
+            "type": "number",
+            "minimum": 0
+          },
+          "budget_spent": {
+            "type": "number",
+            "minimum": 0
+          },
+          "budget_currency": {
+            "type": "string",
+            "default": "USD"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "target_end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "actual_end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "enum",
+            "values": ["planning", "active", "on_hold", "closing", "closed", "cancelled"]
+          },
+          "priority": {
+            "type": "enum",
+            "values": ["critical", "high", "medium", "low"]
+          },
+          "risk_tolerance": {
+            "type": "enum",
+            "values": ["very_low", "low", "medium", "high", "very_high"]
+          },
+          "governance_model": {
+            "type": "string",
+            "description": "Reference to governance framework used"
+          },
+          "review_cycle": {
+            "type": "string",
+            "description": "Review frequency (weekly, monthly, quarterly)"
+          },
+          "kpis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kpi_name": {"type": "string"},
+                "target_value": {"type": "number"},
+                "current_value": {"type": "number"},
+                "unit": {"type": "string"},
+                "trend": {"type": "enum", "values": ["improving", "stable", "declining"]}
+              }
+            }
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "program": {
+        "primary_key": "program_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "portfolio_id": "portfolio.portfolio_id"
+        },
+        "schema_org_type": "Project",
+        "attributes": {
+          "program_id": {
+            "type": "string",
+            "format": "uuid", 
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "portfolio_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Parent portfolio (optional for standalone programs)"
+          },
+          "program_name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "program_type": {
+            "type": "enum",
+            "values": ["transformation", "improvement", "compliance", "innovation", "ai_implementation", "digital_transformation"],
+            "schema_org_property": "additionalType"
+          },
+          "program_vision": {
+            "type": "string",
+            "description": "Program vision statement"
+          },
+          "program_objectives": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Key program objectives"
+          },
+          "expected_benefits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "benefit_id": {"type": "string", "format": "uuid"},
+                "benefit_type": {"type": "enum", "values": ["financial", "operational", "strategic", "customer", "compliance"]},
+                "description": {"type": "string"},
+                "target_value": {"type": "number"},
+                "actual_value": {"type": "number"},
+                "measurement_unit": {"type": "string"},
+                "target_date": {"type": "string", "format": "date"},
+                "realization_date": {"type": "string", "format": "date"},
+                "owner_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                "status": {"type": "enum", "values": ["planned", "in_progress", "realized", "at_risk", "not_achieved"]}
+              }
+            }
+          },
+          "program_sponsor_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "program_manager_id": {
+            "type": "string", 
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "budget_allocated": {"type": "number", "minimum": 0},
+          "budget_spent": {"type": "number", "minimum": 0},
+          "budget_currency": {"type": "string", "default": "USD"},
+          "start_date": {"type": "string", "format": "date"},
+          "target_end_date": {"type": "string", "format": "date"},
+          "actual_end_date": {"type": "string", "format": "date"},
+          "status": {
+            "type": "enum",
+            "values": ["initiating", "planning", "executing", "monitoring", "closing", "closed", "cancelled"]
+          },
+          "priority": {
+            "type": "enum", 
+            "values": ["critical", "high", "medium", "low"]
+          },
+          "complexity_level": {
+            "type": "enum",
+            "values": ["low", "medium", "high", "very_high"]
+          },
+          "change_readiness": {
+            "type": "enum",
+            "values": ["not_ready", "partially_ready", "ready", "very_ready"]
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "project": {
+        "primary_key": "project_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "portfolio_id": "portfolio.portfolio_id", 
+          "program_id": "program.program_id"
+        },
+        "schema_org_type": "Project",
+        "attributes": {
+          "project_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string", 
+            "format": "uuid",
+            "required": true
+          },
+          "portfolio_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Parent portfolio (optional)"
+          },
+          "program_id": {
+            "type": "string",
+            "format": "uuid", 
+            "description": "Parent program (optional)"
+          },
+          "project_name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "project_type": {
+            "type": "enum",
+            "values": ["delivery", "enabler", "research", "ai_development", "cloud_migration", "automation", "infrastructure"],
+            "schema_org_property": "additionalType"
+          },
+          "project_objectives": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "success_criteria": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "deliverables": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "deliverable_id": {"type": "string", "format": "uuid"},
+                "deliverable_name": {"type": "string"},
+                "deliverable_type": {"type": "string"},
+                "description": {"type": "string"},
+                "target_date": {"type": "string", "format": "date"},
+                "actual_date": {"type": "string", "format": "date"},
+                "acceptance_criteria": {"type": "array", "items": {"type": "string"}},
+                "status": {"type": "enum", "values": ["not_started", "in_progress", "completed", "accepted", "rejected"]},
+                "owner_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"}
+              }
+            }
+          },
+          "project_sponsor_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "project_manager_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id" 
+          },
+          "budget_allocated": {"type": "number", "minimum": 0},
+          "budget_spent": {"type": "number", "minimum": 0},
+          "budget_currency": {"type": "string", "default": "USD"},
+          "start_date": {"type": "string", "format": "date"},
+          "target_end_date": {"type": "string", "format": "date"},
+          "actual_end_date": {"type": "string", "format": "date"},
+          "status": {
+            "type": "enum",
+            "values": ["not_started", "planning", "executing", "monitoring", "closing", "closed", "cancelled", "on_hold"]
+          },
+          "health": {
+            "type": "enum",
+            "values": ["green", "amber", "red"],
+            "description": "Overall project health status"
+          },
+          "priority": {
+            "type": "enum",
+            "values": ["critical", "high", "medium", "low"]
+          },
+          "methodology": {
+            "type": "enum", 
+            "values": ["waterfall", "agile", "hybrid", "lean", "devops", "safe"]
+          },
+          "progress_percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "quality_gate_passed": {
+            "type": "boolean",
+            "description": "Has project passed latest quality gate"
+          },
+          "lessons_learned": {
+            "type": "array",
+            "items": {
+              "type": "object", 
+              "properties": {
+                "lesson_type": {"type": "enum", "values": ["positive", "negative", "suggestion"]},
+                "description": {"type": "string"},
+                "category": {"type": "string"},
+                "date_recorded": {"type": "string", "format": "date"}
+              }
+            }
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "governance_body": {
+        "primary_key": "governance_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "Organization",
+        "attributes": {
+          "governance_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "governance_name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "governance_type": {
+            "type": "enum",
+            "values": ["portfolio_steering_committee", "program_board", "project_board", "pmo", "change_control_board", "architecture_review_board"],
+            "schema_org_property": "additionalType"
+          },
+          "governance_level": {
+            "type": "enum",
+            "values": ["strategic", "tactical", "operational"]
+          },
+          "scope_entity_type": {
+            "type": "enum",
+            "values": ["organization", "portfolio", "program", "project"],
+            "description": "What level this governance body operates at"
+          },
+          "scope_entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Specific entity this governance body oversees"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "stakeholder_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                "role": {"type": "string"},
+                "voting_rights": {"type": "boolean"},
+                "start_date": {"type": "string", "format": "date"},
+                "end_date": {"type": "string", "format": "date"}
+              }
+            }
+          },
+          "decision_authority": {
+            "type": "array",
+            "items": {
+              "type": "enum",
+              "values": ["investment_approval", "resource_allocation", "scope_change", "risk_escalation", "closure_approval", "quality_gate", "architecture_approval"]
+            }
+          },
+          "meeting_frequency": {
+            "type": "string",
+            "description": "Meeting frequency pattern"
+          },
+          "quorum_required": {
+            "type": "integer",
+            "description": "Minimum members required for decisions"
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "status": {
+            "type": "enum",
+            "values": ["active", "inactive", "suspended"]
+          }
+        }
+      },
+      "business_case": {
+        "primary_key": "business_case_id", 
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "Report",
+        "attributes": {
+          "business_case_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid", 
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project"]
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "executive_summary": {
+            "type": "string",
+            "schema_org_property": "abstract"
+          },
+          "business_need": {
+            "type": "string",
+            "description": "Description of business need or opportunity"
+          },
+          "problem_statement": {
+            "type": "string",
+            "description": "Clear articulation of the problem being solved"
+          },
+          "solution_overview": {
+            "type": "string",
+            "description": "High-level solution description"
+          },
+          "investment_required": {
+            "type": "object",
+            "properties": {
+              "total_cost": {"type": "number", "minimum": 0},
+              "currency": {"type": "string", "default": "USD"},
+              "cost_breakdown": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "category": {"type": "string"},
+                    "amount": {"type": "number"},
+                    "timeframe": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "expected_benefits": {
+            "type": "object", 
+            "properties": {
+              "financial_benefits": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "benefit_type": {"type": "string"},
+                    "description": {"type": "string"},
+                    "value": {"type": "number"},
+                    "currency": {"type": "string"},
+                    "timeframe": {"type": "string"},
+                    "confidence_level": {"type": "enum", "values": ["low", "medium", "high"]}
+                  }
+                }
+              },
+              "non_financial_benefits": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "benefit_type": {"type": "string"},
+                    "description": {"type": "string"},
+                    "measurement_method": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "risks_and_assumptions": {
+            "type": "object",
+            "properties": {
+              "key_risks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "risk_description": {"type": "string"},
+                    "probability": {"type": "enum", "values": ["low", "medium", "high"]},
+                    "impact": {"type": "enum", "values": ["low", "medium", "high"]},
+                    "mitigation": {"type": "string"}
+                  }
+                }
+              },
+              "key_assumptions": {
+                "type": "array", 
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "assumption": {"type": "string"},
+                    "validation_required": {"type": "boolean"},
+                    "impact_if_false": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "alternatives_considered": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "alternative_name": {"type": "string"},
+                "description": {"type": "string"},
+                "cost": {"type": "number"},
+                "benefits": {"type": "string"},
+                "pros": {"type": "array", "items": {"type": "string"}},
+                "cons": {"type": "array", "items": {"type": "string"}},
+                "reason_rejected": {"type": "string"}
+              }
+            }
+          },
+          "financial_analysis": {
+            "type": "object",
+            "properties": {
+              "roi_percentage": {"type": "number"},
+              "payback_period_months": {"type": "number"},
+              "npv": {"type": "number"},
+              "irr_percentage": {"type": "number"},
+              "break_even_point": {"type": "string"}
+            }
+          },
+          "recommendation": {
+            "type": "string",
+            "description": "Final recommendation and rationale"
+          },
+          "approval_status": {
+            "type": "enum",
+            "values": ["draft", "submitted", "under_review", "approved", "rejected", "conditional_approval"]
+          },
+          "approval_date": {"type": "string", "format": "date"},
+          "approved_by": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+          "review_date": {"type": "string", "format": "date"},
+          "author_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "risk": {
+        "primary_key": "risk_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "Event",
+        "attributes": {
+          "risk_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid", 
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project", "organization"]
+          },
+          "risk_title": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "risk_description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "risk_category": {
+            "type": "enum",
+            "values": ["strategic", "operational", "financial", "technical", "regulatory", "market", "resource", "external", "reputational"]
+          },
+          "risk_source": {
+            "type": "string",
+            "description": "Source or cause of the risk"
+          },
+          "probability": {
+            "type": "object",
+            "properties": {
+              "level": {"type": "enum", "values": ["very_low", "low", "medium", "high", "very_high"]},
+              "percentage": {"type": "number", "minimum": 0, "maximum": 100},
+              "rationale": {"type": "string"}
+            }
+          },
+          "impact": {
+            "type": "object",
+            "properties": {
+              "level": {"type": "enum", "values": ["very_low", "low", "medium", "high", "very_high"]},
+              "cost_impact": {"type": "number"},
+              "schedule_impact_days": {"type": "integer"},
+              "quality_impact": {"type": "string"},
+              "scope_impact": {"type": "string"},
+              "rationale": {"type": "string"}
+            }
+          },
+          "risk_score": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Calculated risk score (probability × impact)"
+          },
+          "risk_appetite": {
+            "type": "enum",
+            "values": ["avoid", "minimize", "accept", "transfer"],
+            "description": "Organization's appetite for this risk"
+          },
+          "risk_owner_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "risk_manager_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "mitigation_strategies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "strategy_id": {"type": "string", "format": "uuid"},
+                "strategy_type": {"type": "enum", "values": ["avoid", "mitigate", "transfer", "accept"]},
+                "description": {"type": "string"},
+                "action_owner_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                "target_date": {"type": "string", "format": "date"},
+                "cost": {"type": "number"},
+                "effectiveness": {"type": "enum", "values": ["low", "medium", "high"]},
+                "status": {"type": "enum", "values": ["planned", "in_progress", "completed", "cancelled"]}
+              }
+            }
+          },
+          "contingency_plans": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "plan_description": {"type": "string"},
+                "trigger_conditions": {"type": "string"},
+                "responsible_party_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                "estimated_cost": {"type": "number"}
+              }
+            }
+          },
+          "status": {
+            "type": "enum",
+            "values": ["open", "in_progress", "mitigated", "closed", "occurred", "transferred"]
+          },
+          "identified_date": {"type": "string", "format": "date"},
+          "target_closure_date": {"type": "string", "format": "date"},
+          "actual_closure_date": {"type": "string", "format": "date"},
+          "last_review_date": {"type": "string", "format": "date"},
+          "next_review_date": {"type": "string", "format": "date"},
+          "escalation_required": {"type": "boolean"},
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "milestone": {
+        "primary_key": "milestone_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "Event",
+        "attributes": {
+          "milestone_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project"]
+          },
+          "milestone_name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "milestone_type": {
+            "type": "enum",
+            "values": ["gate", "checkpoint", "deliverable", "decision_point", "go_live", "contract", "regulatory"]
+          },
+          "planned_date": {
+            "type": "string",
+            "format": "date",
+            "schema_org_property": "startDate"
+          },
+          "actual_date": {
+            "type": "string",
+            "format": "date", 
+            "schema_org_property": "endDate"
+          },
+          "baseline_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Original baseline date"
+          },
+          "status": {
+            "type": "enum",
+            "values": ["not_started", "in_progress", "completed", "overdue", "cancelled", "deferred"]
+          },
+          "completion_percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "success_criteria": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "criteria_description": {"type": "string"},
+                "measurement_method": {"type": "string"},
+                "target_value": {"type": "string"},
+                "actual_value": {"type": "string"},
+                "met": {"type": "boolean"}
+              }
+            }
+          },
+          "deliverables": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Deliverables associated with this milestone"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dependency_type": {"type": "enum", "values": ["finish_to_start", "start_to_start", "finish_to_finish", "start_to_finish"]},
+                "dependent_milestone_id": {"type": "string", "foreign_key": "milestone.milestone_id"},
+                "dependency_description": {"type": "string"},
+                "lag_days": {"type": "integer"}
+              }
+            }
+          },
+          "owner_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "approval_required": {"type": "boolean"},
+          "approved_by": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+          "approval_date": {"type": "string", "format": "date"},
+          "budget_impact": {"type": "number"},
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "resource": {
+        "primary_key": "resource_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "Thing",
+        "attributes": {
+          "resource_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "resource_name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description"
+          },
+          "resource_type": {
+            "type": "enum",
+            "values": ["human", "financial", "technology", "facility", "equipment", "software", "infrastructure"]
+          },
+          "resource_category": {
+            "type": "string",
+            "description": "Specific category (developer, analyst, server, etc.)"
+          },
+          "resource_subcategory": {
+            "type": "string",
+            "description": "Further specialization"
+          },
+          "capacity_metrics": {
+            "type": "object",
+            "properties": {
+              "total_capacity": {"type": "number"},
+              "available_capacity": {"type": "number"},
+              "allocated_capacity": {"type": "number"},
+              "reserved_capacity": {"type": "number"},
+              "unit_of_measure": {"type": "string"}
+            }
+          },
+          "cost_structure": {
+            "type": "object",
+            "properties": {
+              "unit_cost": {"type": "number"},
+              "currency": {"type": "string", "default": "USD"},
+              "cost_type": {"type": "enum", "values": ["hourly", "daily", "monthly", "yearly", "fixed", "variable"]},
+              "overhead_percentage": {"type": "number"}
+            }
+          },
+          "availability_schedule": {
+            "type": "object", 
+            "properties": {
+              "availability_start": {"type": "string", "format": "date"},
+              "availability_end": {"type": "string", "format": "date"},
+              "working_hours": {"type": "string"},
+              "time_zone": {"type": "string"},
+              "blackout_periods": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "start_date": {"type": "string", "format": "date"},
+                    "end_date": {"type": "string", "format": "date"},
+                    "reason": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "skills_certifications": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "skill_name": {"type": "string"},
+                "proficiency_level": {"type": "enum", "values": ["novice", "beginner", "intermediate", "advanced", "expert"]},
+                "certification": {"type": "string"},
+                "certification_date": {"type": "string", "format": "date"},
+                "expiry_date": {"type": "string", "format": "date"}
+              }
+            }
+          },
+          "location": {
+            "type": "object",
+            "properties": {
+              "physical_location": {"type": "string"},
+              "remote_capability": {"type": "boolean"},
+              "travel_availability": {"type": "enum", "values": ["none", "limited", "moderate", "extensive"]}
+            }
+          },
+          "procurement_details": {
+            "type": "object",
+            "properties": {
+              "vendor_name": {"type": "string"},
+              "contract_number": {"type": "string"},
+              "procurement_method": {"type": "enum", "values": ["internal", "contract", "lease", "purchase"]},
+              "contract_start": {"type": "string", "format": "date"},
+              "contract_end": {"type": "string", "format": "date"}
+            }
+          },
+          "performance_metrics": {
+            "type": "object",
+            "properties": {
+              "utilization_rate": {"type": "number", "minimum": 0, "maximum": 100},
+              "productivity_score": {"type": "number"},
+              "quality_rating": {"type": "number", "minimum": 1, "maximum": 5},
+              "satisfaction_score": {"type": "number", "minimum": 1, "maximum": 5}
+            }
+          },
+          "status": {
+            "type": "enum",
+            "values": ["available", "allocated", "overallocated", "unavailable", "retired"]
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "resource_allocation": {
+        "primary_key": "allocation_id", 
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "resource_id": "resource.resource_id"
+        },
+        "attributes": {
+          "allocation_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "resource_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project", "operation"]
+          },
+          "allocation_details": {
+            "type": "object",
+            "properties": {
+              "allocated_capacity": {"type": "number"},
+              "allocation_percentage": {"type": "number", "minimum": 0, "maximum": 100},
+              "unit_of_measure": {"type": "string"},
+              "role_in_entity": {"type": "string"}
+            }
+          },
+          "time_period": {
+            "type": "object",
+            "properties": {
+              "start_date": {"type": "string", "format": "date"},
+              "end_date": {"type": "string", "format": "date"},
+              "recurring_pattern": {"type": "string"}
+            }
+          },
+          "allocation_status": {
+            "type": "enum",
+            "values": ["planned", "requested", "approved", "confirmed", "active", "completed", "cancelled"]
+          },
+          "cost_allocation": {
+            "type": "object",
+            "properties": {
+              "budgeted_cost": {"type": "number"},
+              "actual_cost": {"type": "number"},
+              "cost_center": {"type": "string"},
+              "billing_method": {"type": "enum", "values": ["actual", "planned", "fixed"]}
+            }
+          },
+          "approval_workflow": {
+            "type": "object",
+            "properties": {
+              "requested_by": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+              "approved_by": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+              "request_date": {"type": "string", "format": "date"},
+              "approval_date": {"type": "string", "format": "date"}
+            }
+          },
+          "performance_tracking": {
+            "type": "object",
+            "properties": {
+              "actual_utilization": {"type": "number"},
+              "productivity_metrics": {"type": "object"},
+              "deliverables_completed": {"type": "integer"}
+            }
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      },
+      "document": {
+        "primary_key": "document_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "schema_org_type": "DigitalDocument",
+        "attributes": {
+          "document_id": {
+            "type": "string",
+            "format": "uuid", 
+            "required": true,
+            "schema_org_property": "identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "document_metadata": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string", "required": true, "schema_org_property": "name"},
+              "headline": {"type": "string", "schema_org_property": "headline"},
+              "description": {"type": "string", "schema_org_property": "description"},
+              "abstract": {"type": "string", "schema_org_property": "abstract"},
+              "keywords": {"type": "array", "items": {"type": "string"}, "schema_org_property": "keywords"}
+            }
+          },
+          "schema_org_type": {
+            "type": "enum",
+            "values": [
+              "DigitalDocument", "TextDigitalDocument", "Report", 
+              "Article", "TechArticle", "HowTo", "FAQPage",
+              "Presentation", "Dataset", "Spreadsheet", "PresentationDigitalDocument"
+            ],
+            "required": true,
+            "schema_org_property": "@type"
+          },
+          "ppm_document_type": {
+            "type": "enum", 
+            "values": [
+              "business_case", "project_charter", "requirements_document",
+              "project_plan", "status_report", "risk_register",
+              "benefits_realization_plan", "governance_document",
+              "policy_document", "procedure_document", "template",
+              "meeting_minutes", "decision_log", "lessons_learned",
+              "quality_plan", "communication_plan", "stakeholder_analysis",
+              "architecture_document", "test_plan", "deployment_guide"
+            ],
+            "required": true
+          },
+          "authorship": {
+            "type": "object",
+            "properties": {
+              "author": {
+                "type": "object",
+                "schema_org_property": "author",
+                "properties": {
+                  "type": {"type": "string", "default": "Person"},
+                  "name": {"type": "string"},
+                  "identifier": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"}
+                }
+              },
+              "creator": {
+                "type": "object", 
+                "schema_org_property": "creator",
+                "properties": {
+                  "type": {"type": "string", "default": "Person"},
+                  "name": {"type": "string"},
+                  "identifier": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"}
+                }
+              },
+              "publisher": {
+                "type": "object",
+                "schema_org_property": "publisher",
+                "properties": {
+                  "type": {"type": "string", "default": "Organization"},
+                  "name": {"type": "string"},
+                  "identifier": {"type": "string", "foreign_key": "organization.org_id"}
+                }
+              },
+              "contributor": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "identifier": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                    "contribution_type": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "temporal_attributes": {
+            "type": "object", 
+            "properties": {
+              "date_created": {"type": "string", "format": "datetime", "schema_org_property": "dateCreated"},
+              "date_published": {"type": "string", "format": "datetime", "schema_org_property": "datePublished"},
+              "date_modified": {"type": "string", "format": "datetime", "schema_org_property": "dateModified"},
+              "version": {"type": "string", "schema_org_property": "version"},
+              "supersedes": {"type": "string", "foreign_key": "document.document_id"},
+              "valid_from": {"type": "string", "format": "date"},
+              "valid_until": {"type": "string", "format": "date"}
+            }
+          },
+          "technical_attributes": {
+            "type": "object",
+            "properties": {
+              "language": {"type": "string", "schema_org_property": "inLanguage", "default": "en-US"},
+              "encoding_format": {"type": "string", "schema_org_property": "encodingFormat"},
+              "content_size": {"type": "string", "schema_org_property": "contentSize"},
+              "file_hash": {"type": "string", "description": "File integrity hash"},
+              "mime_type": {"type": "string"}
+            }
+          },
+          "access_attributes": {
+            "type": "object",
+            "properties": {
+              "content_url": {"type": "string", "format": "uri", "schema_org_property": "contentUrl"},
+              "download_url": {"type": "string", "format": "uri", "schema_org_property": "downloadUrl"},
+              "thumbnail_url": {"type": "string", "format": "uri", "schema_org_property": "thumbnailUrl"},
+              "preview_available": {"type": "boolean"},
+              "full_text_searchable": {"type": "boolean"}
+            }
+          },
+          "intellectual_property": {
+            "type": "object",
+            "properties": {
+              "license": {
+                "type": "object",
+                "schema_org_property": "license",
+                "properties": {
+                  "type": {"type": "string", "default": "CreativeWork"},
+                  "name": {"type": "string"},
+                  "url": {"type": "string", "format": "uri"}
+                }
+              },
+              "copyright_holder": {
+                "type": "object",
+                "schema_org_property": "copyrightHolder", 
+                "properties": {
+                  "type": {"type": "string", "enum": ["Person", "Organization"]},
+                  "name": {"type": "string"},
+                  "identifier": {"type": "string"}
+                }
+              },
+              "copyright_year": {"type": "integer"}
+            }
+          },
+          "content_relationships": {
+            "type": "object",
+            "properties": {
+              "about": {
+                "type": "array",
+                "schema_org_property": "about",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {"type": "string"},
+                    "name": {"type": "string"},
+                    "identifier": {"type": "string"},
+                    "entity_type": {"type": "enum", "values": ["portfolio", "program", "project", "stakeholder", "risk", "milestone"]}
+                  }
+                }
+              },
+              "mentions": {
+                "type": "array",
+                "schema_org_property": "mentions",
+                "items": {
+                  "type": "object", 
+                  "properties": {
+                    "type": {"type": "string"},
+                    "name": {"type": "string"},
+                    "identifier": {"type": "string"},
+                    "entity_type": {"type": "enum", "values": ["portfolio", "program", "project", "stakeholder", "organization", "risk", "milestone"]},
+                    "context": {"type": "string"}
+                  }
+                }
+              },
+              "citation": {
+                "type": "array",
+                "schema_org_property": "citation",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {"type": "string", "default": "CreativeWork"},
+                    "name": {"type": "string"},
+                    "identifier": {"type": "string"},
+                    "url": {"type": "string", "format": "uri"}
+                  }
+                }
+              },
+              "is_based_on": {
+                "type": "array",
+                "schema_org_property": "isBasedOn",
+                "items": {"type": "string", "foreign_key": "document.document_id"}
+              }
+            }
+          },
+          "audience_and_purpose": {
+            "type": "object",
+            "properties": {
+              "audience": {
+                "type": "object",
+                "schema_org_property": "audience",
+                "properties": {
+                  "type": {"type": "string", "default": "Audience"},
+                  "audienceType": {"type": "string"},
+                  "name": {"type": "string"}
+                }
+              },
+              "purpose": {"type": "string"},
+              "intended_use": {"type": "string"}
+            }
+          },
+          "governance_and_compliance": {
+            "type": "object",
+            "properties": {
+              "security_classification": {
+                "type": "enum",
+                "values": ["public", "internal", "confidential", "restricted", "top_secret"]
+              },
+              "retention_period": {"type": "string"},
+              "retention_trigger": {"type": "string"},
+              "compliance_tags": {"type": "array", "items": {"type": "string"}},
+              "approval_status": {
+                "type": "enum",
+                "values": ["draft", "under_review", "approved", "published", "archived", "superseded"]
+              },
+              "approval_workflow": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "stage": {"type": "string"},
+                    "approver_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                    "approval_date": {"type": "string", "format": "date"},
+                    "status": {"type": "enum", "values": ["pending", "approved", "rejected"]},
+                    "comments": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "ai_processing_metadata": {
+            "type": "object",
+            "properties": {
+              "content_extracted": {"type": "boolean"},
+              "entities_extracted": {"type": "array", "items": {"type": "string"}},
+              "sentiment_score": {"type": "number", "minimum": -1, "maximum": 1},
+              "readability_score": {"type": "number"},
+              "key_phrases": {"type": "array", "items": {"type": "string"}},
+              "topics": {"type": "array", "items": {"type": "string"}},
+              "search_vector": {"type": "string", "description": "Semantic search vector"},
+              "processing_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+              "last_processed": {"type": "string", "format": "datetime"}
+            }
+          },
+          "status": {
+            "type": "enum",
+            "values": ["active", "archived", "deleted", "superseded", "under_review"]
+          }
+        }
+      },
+      "document_content": {
+        "primary_key": "content_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "document_id": "document.document_id"
+        },
+        "attributes": {
+          "content_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "document_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "content_type": {
+            "type": "enum",
+            "values": ["full_text", "summary", "abstract", "extracted_data", "annotations", "binary_content"]
+          },
+          "content_section": {
+            "type": "object",
+            "properties": {
+              "section_name": {"type": "string"},
+              "section_order": {"type": "integer"},
+              "page_number": {"type": "integer"},
+              "paragraph_number": {"type": "integer"}
+            }
+          },
+          "content_data": {
+            "type": "object",
+            "properties": {
+              "content_text": {"type": "string"},
+              "content_structured": {"type": "object"},
+              "content_binary": {"type": "string", "format": "base64"},
+              "schema_org_markup": {"type": "object"}
+            }
+          },
+          "extraction_metadata": {
+            "type": "object",
+            "properties": {
+              "extraction_method": {"type": "enum", "values": ["manual", "ocr", "api_extraction", "ai_processing"]},
+              "extraction_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+              "language_detected": {"type": "string"},
+              "extraction_date": {"type": "string", "format": "datetime"}
+            }
+          }
+        }
+      },
+      "entity_relationship": {
+        "primary_key": "relationship_id",
+        "foreign_keys": {"org_id": "organization.org_id"},
+        "attributes": {
+          "relationship_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid", 
+            "required": true
+          },
+          "source_entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "source_entity_type": {
+            "type": "enum",
+            "values": ["organization", "portfolio", "program", "project", "stakeholder", "document", "risk", "milestone", "resource"],
+            "required": true
+          },
+          "target_entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "target_entity_type": {
+            "type": "enum", 
+            "values": ["organization", "portfolio", "program", "project", "stakeholder", "document", "risk", "milestone", "resource"],
+            "required": true
+          },
+          "relationship_type": {
+            "type": "enum",
+            "values": [
+              "parent_child", "depends_on", "references", "owns", "manages", "sponsors",
+              "contributes_to", "reports_to", "governs", "implements", "supports",
+              "conflicts_with", "derives_from", "supersedes", "relates_to"
+            ],
+            "required": true
+          },
+          "relationship_properties": {
+            "type": "object",
+            "properties": {
+              "strength": {"type": "number", "minimum": 0, "maximum": 1},
+              "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+              "direction": {"type": "enum", "values": ["bidirectional", "unidirectional"]},
+              "context": {"type": "string"},
+              "evidence": {"type": "string"}
+            }
+          },
+          "temporal_scope": {
+            "type": "object",
+            "properties": {
+              "start_date": {"type": "string", "format": "date"},
+              "end_date": {"type": "string", "format": "date"},
+              "is_current": {"type": "boolean"}
+            }
+          },
+          "validation": {
+            "type": "object",
+            "properties": {
+              "verification_status": {"type": "enum", "values": ["automatic", "user_verified", "ai_verified", "disputed"]},
+              "verified_by": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+              "verification_date": {"type": "string", "format": "date"}
+            }
+          },
+          "created_date": {"type": "string", "format": "datetime"},
+          "last_updated": {"type": "string", "format": "datetime"}
+        }
+      }
+    },
+    "consolidated_relationships": {
+      "organizational_hierarchy": {
+        "organization_to_child_entities": {
+          "type": "one_to_many",
+          "parent": "organization",
+          "children": ["portfolio", "program", "project", "stakeholder", "governance_body", "resource", "document"],
+          "constraint": "All entities must reference valid org_id"
+        },
+        "ppm_hierarchy": {
+          "type": "hierarchical",
+          "levels": [
+            {"level": 1, "entity": "organization"},
+            {"level": 2, "entity": "portfolio"}, 
+            {"level": 3, "entity": "program"},
+            {"level": 4, "entity": "project"}
+          ],
+          "constraints": [
+            "Child entities must belong to same organization as parent",
+            "Child entity dates must be within parent entity dates",
+            "Sum of child budgets cannot exceed parent budget"
+          ]
+        }
+      },
+      "governance_relationships": {
+        "governance_oversight": {
+          "type": "many_to_many",
+          "entities": ["governance_body", "portfolio", "program", "project"],
+          "description": "Governance bodies oversee PPM entities"
+        },
+        "stakeholder_governance": {
+          "type": "many_to_many", 
+          "entities": ["stakeholder", "governance_body"],
+          "description": "Stakeholders participate in governance"
+        }
+      },
+      "document_relationships": {
+        "entity_documentation": {
+          "type": "many_to_many",
+          "entities": ["document", "portfolio", "program", "project"],
+          "relationship_entity": "entity_relationship",
+          "description": "Documents relate to PPM entities"
+        },
+        "document_hierarchy": {
+          "type": "many_to_many",
+          "entities": ["document", "document"],
+          "relationship_entity": "entity_relationship", 
+          "description": "Documents can reference other documents"
+        }
+      },
+      "resource_relationships": {
+        "resource_allocation": {
+          "type": "many_to_many",
+          "entities": ["resource", "portfolio", "program", "project"],
+          "relationship_entity": "resource_allocation",
+          "description": "Resources allocated to PPM entities"
+        }
+      },
+      "universal_relationships": {
+        "any_to_any": {
+          "type": "many_to_many",
+          "entities": ["organization", "portfolio", "program", "project", "stakeholder", "document", "risk", "milestone", "resource"],
+          "relationship_entity": "entity_relationship",
+          "description": "Generic relationship tracking between any entities"
+        }
+      }
+    },
+    "business_rules": {
+      "data_integrity": [
+        {
+          "rule_id": "ORG_REFERENCE",
+          "description": "All entities must reference valid organization",
+          "constraint": "NOT NULL foreign key to organization.org_id"
+        },
+        {
+          "rule_id": "HIERARCHY_CONSISTENCY",
+          "description": "Hierarchical entities must maintain organizational consistency",
+          "constraint": "project.org_id = program.org_id = portfolio.org_id"
+        },
+        {
+          "rule_id": "DATE_CONSISTENCY",
+          "description": "Child entity dates within parent dates",
+          "constraint": "child.start_date >= parent.start_date AND child.end_date <= parent.end_date"
+        },
+        {
+          "rule_id": "BUDGET_CONSTRAINT",
+          "description": "Child budgets cannot exceed parent budget",
+          "constraint": "SUM(child.budget_allocated) <= parent.budget_allocated"
+        },
+        {
+          "rule_id": "RESOURCE_ALLOCATION",
+          "description": "Total resource allocation cannot exceed 100%",
+          "constraint": "SUM(allocation_percentage) <= 100 per resource_id"
+        }
+      ],
+      "governance_rules": [
+        {
+          "rule_id": "GOVERNANCE_ALIGNMENT", 
+          "description": "Each PPM entity must have appropriate governance",
+          "mapping": {
+            "portfolio": "portfolio_steering_committee",
+            "program": "program_board", 
+            "project": "project_board"
+          }
+        },
+        {
+          "rule_id": "APPROVAL_WORKFLOW",
+          "description": "Documents require approval based on type and security level",
+          "conditions": "confidential documents require governance approval"
+        }
+      ],
+      "status_transitions": [
+        {
+          "entity": "project",
+          "valid_transitions": {
+            "not_started": ["planning", "cancelled"],
+            "planning": ["executing", "on_hold", "cancelled"],
+            "executing": ["monitoring", "closing", "on_hold"],
+            "monitoring": ["executing", "closing"],
+            "on_hold": ["executing", "cancelled"],
+            "closing": ["closed", "cancelled"],
+            "closed": [],
+            "cancelled": []
+          }
+        }
+      ]
+    },
+    "ai_automation_framework": {
+      "ml_models": [
+        {
+          "model_type": "risk_prediction",
+          "input_entities": ["project", "risk", "stakeholder", "document"],
+          "output": "risk_likelihood_score",
+          "training_data": "historical project and risk data"
+        },
+        {
+          "model_type": "resource_optimization",
+          "input_entities": ["resource", "resource_allocation", "project"],
+          "output": "optimal_allocation_recommendations",
+          "training_data": "resource utilization and project performance data"
+        },
+        {
+          "model_type": "benefits_realization_prediction",
+          "input_entities": ["program", "business_case", "milestone"],
+          "output": "benefits_realization_probability",
+          "training_data": "historical program outcomes and benefits data"
+        },
+        {
+          "model_type": "document_classification", 
+          "input_entities": ["document", "document_content"],
+          "output": "ppm_document_type_classification",
+          "training_data": "labeled document corpus"
+        },
+        {
+          "model_type": "entity_relationship_detection",
+          "input_entities": ["document", "portfolio", "program", "project", "stakeholder"],
+          "output": "entity_relationship_suggestions",
+          "training_data": "validated entity relationships and document content"
+        }
+      ],
+      "automation_triggers": [
+        {
+          "trigger_type": "status_change",
+          "entities": ["project", "program", "portfolio"],
+          "actions": ["update_dashboard", "notify_stakeholders", "recalculate_metrics", "generate_reports"]
+        },
+        {
+          "trigger_type": "milestone_overdue",
+          "entities": ["milestone"],
+          "actions": ["escalate_risk", "notify_governance", "trigger_intervention", "update_project_health"]
+        },
+        {
+          "trigger_type": "budget_variance",
+          "entities": ["project", "program", "portfolio"],
+          "actions": ["flag_exception", "request_forecast_update", "trigger_review", "notify_sponsor"]
+        },
+        {
+          "trigger_type": "document_upload",
+          "entities": ["document"],
+          "actions": ["extract_content", "classify_document", "detect_relationships", "index_for_search"]
+        },
+        {
+          "trigger_type": "risk_threshold_breach",
+          "entities": ["risk"],
+          "actions": ["escalate_to_governance", "trigger_mitigation_review", "notify_risk_owner"]
+        }
+      ],
+      "agentic_workflows": [
+        {
+          "agent_type": "portfolio_optimization",
+          "capabilities": ["resource_reallocation", "priority_adjustment", "risk_mitigation"],
+          "entities_accessed": ["portfolio", "program", "project", "resource", "risk"],
+          "decision_authority": "recommendations_only"
+        },
+        {
+          "agent_type": "document_management",
+          "capabilities": ["classification", "relationship_detection", "compliance_checking"],
+          "entities_accessed": ["document", "stakeholder", "governance_body"],
+          "decision_authority": "automated_classification"
+        },
+        {
+          "agent_type": "governance_assistant",
+          "capabilities": ["meeting_preparation", "decision_tracking", "compliance_monitoring"],
+          "entities_accessed": ["governance_body", "stakeholder", "document", "risk"],
+          "decision_authority": "information_only"
+        }
+      ]
+    },
+    "api_specification": {
+      "base_url": "/api/v1/ppm",
+      "authentication": "Bearer token with org_id scope",
+      "endpoints": [
+        {
+          "path": "/organizations/{org_id}/entities",
+          "methods": ["GET"],
+          "description": "Get all entities for organization",
+          "parameters": ["entity_type", "status", "date_range"]
+        },
+        {
+          "path": "/organizations/{org_id}/hierarchy",
+          "methods": ["GET"], 
+          "description": "Get complete organizational hierarchy",
+          "response": "nested hierarchy structure"
+        },
+        {
+          "path": "/organizations/{org_id}/documents/semantic-search",
+          "methods": ["POST"],
+          "description": "Semantic search across organizational documents",
+          "body": {"query": "string", "filters": {}, "limit": "number"}
+        },
+        {
+          "path": "/organizations/{org_id}/analytics/dashboard",
+          "methods": ["GET"],
+          "description": "Get comprehensive analytics dashboard",
+          "response": "KPIs, trends, alerts"
+        },
+        {
+          "path": "/organizations/{org_id}/relationships/graph",
+          "methods": ["GET"],
+          "description": "Get entity relationship graph",
+          "parameters": ["entity_types", "relationship_types", "depth"]
+        }
+      ]
+    }
+  }
+}
