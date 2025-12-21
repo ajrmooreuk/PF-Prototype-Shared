@@ -1,0 +1,577 @@
+{
+  "@context": {
+    "@vocab": "https://ontology.example.com/raci-daci#",
+    "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "vso": "https://ontology.example.com/vso-okr#",
+    "org": "https://www.w3.org/ns/org#"
+  },
+  "@type": "owl:Ontology",
+  "rdfs:label": "RACI/DACI Organizational Roles Ontology v1.0",
+  "rdfs:comment": "Comprehensive ontology for RACI/DACI frameworks, organizational roles, and functional strategy responsibilities, integrated with VSO-OKR methodology and grounded in Schema.org",
+  "owl:versionInfo": "1.0.0",
+  "owl:imports": [
+    "https://schema.org/",
+    "https://ontology.example.com/vso-okr",
+    "https://www.w3.org/ns/org"
+  ],
+  "schema:basedOn": ["https://schema.org/Organization", "https://schema.org/Person", "https://schema.org/Role"],
+
+  "classes": {
+    "OrganizationalRole": {
+      "@type": "owl:Class",
+      "rdfs:label": "Organizational Role",
+      "rdfs:comment": "Abstract class for all organizational roles with defined responsibilities",
+      "rdfs:subClassOf": "schema:Role",
+      "schema:sameAs": "schema:Role",
+      "subClasses": [
+        "BoardRole",
+        "ExecutiveRole", 
+        "SeniorManagementRole",
+        "MiddleManagementRole",
+        "FunctionalRole",
+        "TeamRole",
+        "IndividualContributorRole"
+      ]
+    },
+
+    "Person": {
+      "@type": "owl:Class",
+      "rdfs:label": "Person",
+      "rdfs:comment": "Individual person within the organization",
+      "rdfs:subClassOf": "schema:Person",
+      "schema:sameAs": "schema:Person"
+    },
+
+    "Team": {
+      "@type": "owl:Class",
+      "rdfs:label": "Team",
+      "rdfs:comment": "Organizational team or department",
+      "rdfs:subClassOf": "schema:Organization",
+      "schema:sameAs": "schema:OrganizationRole"
+    },
+
+    "BoardRole": {
+      "@type": "owl:Class",
+      "rdfs:label": "Board Role",
+      "rdfs:comment": "Board-level governance and oversight roles",
+      "rdfs:subClassOf": "OrganizationalRole",
+      "subClasses": [
+        "ChairmanOfBoard",
+        "BoardDirector",
+        "IndependentDirector",
+        "AuditCommitteeChair",
+        "CompensationCommitteeChair",
+        "NominationCommitteeChair"
+      ]
+    },
+
+    "ExecutiveRole": {
+      "@type": "owl:Class",
+      "rdfs:label": "Executive Role", 
+      "rdfs:comment": "C-Suite executive leadership roles",
+      "rdfs:subClassOf": "OrganizationalRole",
+      "subClasses": [
+        "ChiefExecutiveOfficer",
+        "ChiefOperatingOfficer",
+        "ChiefFinancialOfficer",
+        "ChiefTechnologyOfficer",
+        "ChiefMarketingOfficer",
+        "ChiefHumanResourcesOfficer",
+        "ChiefDataOfficer",
+        "ChiefAIOfficer"
+      ]
+    },
+
+    "SeniorManagementRole": {
+      "@type": "owl:Class",
+      "rdfs:label": "Senior Management Role",
+      "rdfs:comment": "Senior leadership roles below C-Suite level",
+      "rdfs:subClassOf": "OrganizationalRole", 
+      "subClasses": [
+        "VicePresident",
+        "SeniorVicePresident",
+        "ExecutiveVicePresident",
+        "GeneralManager",
+        "DivisionHead",
+        "RegionalDirector"
+      ]
+    },
+
+    "FunctionalRole": {
+      "@type": "owl:Class",
+      "rdfs:label": "Functional Role",
+      "rdfs:comment": "Specialized functional area leadership roles",
+      "rdfs:subClassOf": "OrganizationalRole",
+      "subClasses": [
+        "FinanceDirector",
+        "MarketingDirector", 
+        "TechnologyDirector",
+        "OperationsDirector",
+        "HumanResourcesDirector",
+        "SalesDirector",
+        "ProductDirector",
+        "StrategyDirector"
+      ]
+    },
+
+    "RACIFramework": {
+      "@type": "owl:Class",
+      "rdfs:label": "RACI Framework",
+      "rdfs:comment": "Responsibility Assignment Matrix framework",
+      "subClasses": [
+        "RACIMatrix",
+        "RACIAssignment"
+      ]
+    },
+
+    "DACIFramework": {
+      "@type": "owl:Class", 
+      "rdfs:label": "DACI Framework",
+      "rdfs:comment": "Driver, Approver, Contributors, Informed decision-making framework",
+      "subClasses": [
+        "DACIMatrix",
+        "DACIAssignment"
+      ]
+    },
+
+    "ResponsibilityType": {
+      "@type": "owl:Class",
+      "rdfs:label": "Responsibility Type",
+      "rdfs:comment": "Types of responsibility in RACI/DACI frameworks",
+      "subClasses": [
+        "Responsible",
+        "Accountable", 
+        "Consulted",
+        "Informed",
+        "Driver",
+        "Approver",
+        "Contributor"
+      ]
+    },
+
+    "FunctionalStrategy": {
+      "@type": "owl:Class",
+      "rdfs:label": "Functional Strategy",
+      "rdfs:comment": "Specialized strategic focus areas within organization",
+      "rdfs:subClassOf": "schema:Plan",
+      "subClasses": [
+        "FinancialStrategy",
+        "MarketingStrategy",
+        "TechnologyStrategy", 
+        "OperationalStrategy",
+        "HumanResourceStrategy",
+        "SalesStrategy",
+        "ProductStrategy",
+        "DataStrategy",
+        "AIStrategy",
+        "DigitalTransformationStrategy"
+      ]
+    },
+
+    "StrategicResponsibility": {
+      "@type": "owl:Class",
+      "rdfs:label": "Strategic Responsibility",
+      "rdfs:comment": "Specific responsibility for functional strategy execution",
+      "rdfs:subClassOf": "schema:Action",
+      "subClasses": [
+        "StrategyFormulation",
+        "StrategyExecution", 
+        "StrategyMonitoring",
+        "StrategyEvaluation",
+        "StrategyAdjustment"
+      ]
+    },
+
+    "BusinessOutcome": {
+      "@type": "owl:Class",
+      "rdfs:label": "Business Outcome",
+      "rdfs:comment": "Key business results influenced by roles and strategies",
+      "rdfs:subClassOf": "schema:Result",
+      "subClasses": [
+        "RevenueGrowth",
+        "ProfitabilityImprovement",
+        "MarketShareExpansion", 
+        "CustomerSatisfactionIncrease",
+        "OperationalEfficiencyGain",
+        "InnovationAcceleration",
+        "RiskMitigation",
+        "ComplianceAchievement"
+      ]
+    },
+
+    "DecisionAuthority": {
+      "@type": "owl:Class",
+      "rdfs:label": "Decision Authority",
+      "rdfs:comment": "Level of decision-making authority for roles",
+      "subClasses": [
+        "StrategicDecisionAuthority",
+        "TacticalDecisionAuthority", 
+        "OperationalDecisionAuthority",
+        "FunctionalDecisionAuthority"
+      ]
+    },
+
+    "GovernanceStructure": {
+      "@type": "owl:Class",
+      "rdfs:label": "Governance Structure",
+      "rdfs:comment": "Organizational governance and oversight mechanisms",
+      "rdfs:subClassOf": "schema:GovernmentOrganization",
+      "subClasses": [
+        "BoardGovernance",
+        "ExecutiveGovernance",
+        "FunctionalGovernance", 
+        "ProjectGovernance"
+      ]
+    }
+  },
+
+  "properties": {
+    "objectProperties": {
+      "hasRole": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "has role",
+        "rdfs:subPropertyOf": "schema:hasOccupation",
+        "rdfs:domain": "Person",
+        "rdfs:range": "OrganizationalRole"
+      },
+
+      "memberOfTeam": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "member of team",
+        "rdfs:subPropertyOf": "schema:memberOf", 
+        "rdfs:domain": "Person",
+        "rdfs:range": "Team"
+      },
+
+      "leadsTeam": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "leads team",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "Team"
+      },
+
+      "reportsTo": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "reports to",
+        "rdfs:subPropertyOf": "org:reportsTo",
+        "rdfs:domain": "OrganizationalRole", 
+        "rdfs:range": "OrganizationalRole"
+      },
+
+      "hasResponsibilityFor": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "has responsibility for",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "FunctionalStrategy"
+      },
+
+      "influencesOutcome": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "influences outcome",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "BusinessOutcome"
+      },
+
+      "hasRACIResponsibility": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "has RACI responsibility",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "ResponsibilityType"
+      },
+
+      "hasDACIResponsibility": {
+        "@type": "owl:ObjectProperty", 
+        "rdfs:label": "has DACI responsibility",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "ResponsibilityType"
+      },
+
+      "setsVSODirection": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "sets VSO direction",
+        "rdfs:comment": "Role's influence on Vision-Strategy-Objectives direction",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "vso:VSOFramework"
+      },
+
+      "approvesOKRs": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "approves OKRs", 
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "vso:OKRFramework"
+      },
+
+      "hasDecisionAuthority": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "has decision authority",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "DecisionAuthority"
+      },
+
+      "participatesInGovernance": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "participates in governance", 
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "GovernanceStructure"
+      },
+
+      "cascadesObjectivesTo": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "cascades objectives to",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "OrganizationalRole"
+      },
+
+      "collaboratesWith": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "collaborates with",
+        "rdfs:domain": "OrganizationalRole", 
+        "rdfs:range": "OrganizationalRole"
+      }
+    },
+
+    "dataProperties": {
+      "hasAuthorityLevel": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has authority level",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "xsd:integer",
+        "rdfs:comment": "Hierarchical authority level (1=highest, 10=lowest)"
+      },
+
+      "hasInfluenceScore": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has influence score",
+        "rdfs:domain": "OrganizationalRole", 
+        "rdfs:range": "xsd:decimal",
+        "rdfs:comment": "Influence on business outcomes (0.0-1.0)"
+      },
+
+      "hasAccountabilityLevel": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has accountability level",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "xsd:decimal",
+        "rdfs:comment": "Level of accountability for results (0.0-1.0)"
+      },
+
+      "hasSpanOfControl": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has span of control",
+        "rdfs:subPropertyOf": "schema:numberOfEmployees",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "xsd:integer",
+        "rdfs:comment": "Number of direct and indirect reports"
+      },
+
+      "hasBudgetAuthority": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has budget authority",
+        "rdfs:domain": "OrganizationalRole",
+        "rdfs:range": "xsd:decimal", 
+        "rdfs:comment": "Budget approval authority in USD"
+      },
+
+      "hasStrategicImpact": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has strategic impact",
+        "rdfs:domain": "FunctionalStrategy",
+        "rdfs:range": "xsd:decimal",
+        "rdfs:comment": "Impact on overall organizational strategy (0.0-1.0)"
+      }
+    }
+  },
+
+  "functionalStrategyMappings": {
+    "FinancialStrategy": {
+      "primaryRoles": ["ChiefFinancialOfficer", "FinanceDirector"],
+      "supportingRoles": ["ChiefExecutiveOfficer", "BoardDirector"],
+      "keyResponsibilities": [
+        "Capital allocation and investment decisions",
+        "Financial planning and budgeting", 
+        "Risk management and compliance",
+        "Investor relations and reporting"
+      ],
+      "businessOutcomes": ["ProfitabilityImprovement", "RiskMitigation"],
+      "vsoConnection": "Drives financial objectives and ROI metrics"
+    },
+
+    "MarketingStrategy": {
+      "primaryRoles": ["ChiefMarketingOfficer", "MarketingDirector"],
+      "supportingRoles": ["ChiefExecutiveOfficer", "SalesDirector"],
+      "keyResponsibilities": [
+        "Brand positioning and market analysis",
+        "Customer acquisition and retention strategies", 
+        "Digital marketing and AI visibility",
+        "Market research and competitive intelligence"
+      ],
+      "businessOutcomes": ["MarketShareExpansion", "CustomerSatisfactionIncrease"],
+      "vsoConnection": "Aligns with AI visibility objectives and market positioning"
+    },
+
+    "TechnologyStrategy": {
+      "primaryRoles": ["ChiefTechnologyOfficer", "TechnologyDirector"], 
+      "supportingRoles": ["ChiefAIOfficer", "ChiefDataOfficer"],
+      "keyResponsibilities": [
+        "Technology architecture and infrastructure",
+        "Innovation and emerging technology adoption",
+        "Cybersecurity and data protection",
+        "Technology vendor management"
+      ],
+      "businessOutcomes": ["InnovationAcceleration", "OperationalEfficiencyGain"],
+      "vsoConnection": "Enables digital transformation and AI implementation"
+    },
+
+    "AIStrategy": {
+      "primaryRoles": ["ChiefAIOfficer", "ChiefDataOfficer"],
+      "supportingRoles": ["ChiefTechnologyOfficer", "ChiefMarketingOfficer"],
+      "keyResponsibilities": [
+        "AI governance and ethical framework",
+        "AI technology selection and implementation", 
+        "AI talent acquisition and development",
+        "AI ROI measurement and optimization"
+      ],
+      "businessOutcomes": ["InnovationAcceleration", "OperationalEfficiencyGain"],
+      "vsoConnection": "Direct execution of AI visibility strategy and BAIV process"
+    },
+
+    "OperationalStrategy": {
+      "primaryRoles": ["ChiefOperatingOfficer", "OperationsDirector"],
+      "supportingRoles": ["GeneralManager", "DivisionHead"],
+      "keyResponsibilities": [
+        "Process optimization and efficiency",
+        "Supply chain management",
+        "Quality assurance and continuous improvement", 
+        "Resource allocation and capacity planning"
+      ],
+      "businessOutcomes": ["OperationalEfficiencyGain", "ComplianceAchievement"],
+      "vsoConnection": "Supports strategy execution through operational excellence"
+    },
+
+    "HumanResourceStrategy": {
+      "primaryRoles": ["ChiefHumanResourcesOfficer", "HumanResourcesDirector"],
+      "supportingRoles": ["ChiefExecutiveOfficer", "SeniorVicePresident"],
+      "keyResponsibilities": [
+        "Talent acquisition and retention",
+        "Organizational development and culture",
+        "Performance management and compensation",
+        "Leadership development and succession planning"
+      ],
+      "businessOutcomes": ["InnovationAcceleration", "OperationalEfficiencyGain"],
+      "vsoConnection": "Ensures organizational capability for strategy execution"
+    }
+  },
+
+  "raciDaciTemplates": {
+    "vsoStrategyFormulation": {
+      "framework": "DACI",
+      "driver": ["ChiefExecutiveOfficer"],
+      "approver": ["BoardDirector", "ChairmanOfBoard"],
+      "contributors": ["ChiefFinancialOfficer", "ChiefMarketingOfficer", "ChiefTechnologyOfficer"],
+      "informed": ["SeniorManagementRole", "FunctionalRole"]
+    },
+
+    "okrCascading": {
+      "framework": "RACI", 
+      "responsible": ["FunctionalRole", "SeniorManagementRole"],
+      "accountable": ["ExecutiveRole"],
+      "consulted": ["TeamRole", "IndividualContributorRole"],
+      "informed": ["BoardRole"]
+    },
+
+    "aiVisibilityImplementation": {
+      "framework": "DACI",
+      "driver": ["ChiefAIOfficer", "ChiefMarketingOfficer"],
+      "approver": ["ChiefExecutiveOfficer"],
+      "contributors": ["TechnologyDirector", "MarketingDirector", "DataStrategy"],
+      "informed": ["BoardDirector", "SeniorManagementRole"]
+    },
+
+    "budgetApproval": {
+      "framework": "RACI",
+      "responsible": ["ChiefFinancialOfficer"],
+      "accountable": ["ChiefExecutiveOfficer"], 
+      "consulted": ["FunctionalRole"],
+      "informed": ["BoardDirector"]
+    }
+  },
+
+  "governanceFrameworks": {
+    "boardGovernance": {
+      "participants": ["BoardRole"],
+      "responsibilities": [
+        "Strategic oversight and vision approval",
+        "Risk management and compliance monitoring",
+        "Executive performance evaluation",
+        "Major investment and acquisition decisions"
+      ],
+      "meetingFrequency": "Quarterly",
+      "decisionThreshold": "Majority vote"
+    },
+
+    "executiveGovernance": {
+      "participants": ["ExecutiveRole"],
+      "responsibilities": [
+        "Strategic planning and execution",
+        "Resource allocation and budget approval", 
+        "Cross-functional coordination",
+        "Performance monitoring and adjustment"
+      ],
+      "meetingFrequency": "Monthly",
+      "decisionThreshold": "Consensus or CEO decision"
+    },
+
+    "functionalGovernance": {
+      "participants": ["FunctionalRole", "SeniorManagementRole"],
+      "responsibilities": [
+        "Functional strategy development",
+        "OKR definition and monitoring",
+        "Resource utilization optimization",
+        "Cross-functional collaboration"
+      ],
+      "meetingFrequency": "Bi-weekly", 
+      "decisionThreshold": "Functional lead decision with consultation"
+    }
+  },
+
+  "schemaOrgMappings": {
+    "OrganizationalRole": "schema:Role",
+    "Person": "schema:Person", 
+    "Team": "schema:OrganizationRole",
+    "FunctionalStrategy": "schema:Plan",
+    "BusinessOutcome": "schema:Result",
+    "GovernanceStructure": "schema:GovernmentOrganization",
+    "StrategicResponsibility": "schema:Action"
+  },
+
+  "integrationWithVSOOKR": {
+    "visionInfluence": {
+      "primaryInfluencers": ["ChairmanOfBoard", "ChiefExecutiveOfficer"],
+      "approvers": ["BoardDirector"],
+      "contributors": ["ExecutiveRole", "SeniorManagementRole"]
+    },
+    
+    "strategyDevelopment": {
+      "primaryResponsible": ["ChiefExecutiveOfficer", "StrategyDirector"],
+      "functionalContributors": ["FunctionalRole"],
+      "approval": ["BoardDirector"]
+    },
+
+    "objectivesCascading": {
+      "companyLevel": ["ChiefExecutiveOfficer"],
+      "functionalLevel": ["FunctionalRole"],
+      "teamLevel": ["TeamRole"],
+      "individualLevel": ["IndividualContributorRole"]
+    },
+
+    "okrExecution": {
+      "drivers": ["FunctionalRole", "TeamRole"],
+      "approvers": ["SeniorManagementRole", "ExecutiveRole"],
+      "contributors": ["IndividualContributorRole"],
+      "informed": ["BoardRole"]
+    }
+  }
+}

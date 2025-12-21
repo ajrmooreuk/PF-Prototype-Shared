@@ -1,0 +1,227 @@
+flowchart TD
+    %% Strategic Decision Flow and Escalation Pathways
+    
+    %% Entry Points
+    START_VISION[Vision Decision<br/>Required]
+    START_STRATEGY[Strategy Decision<br/>Required]
+    START_OKR[OKR Decision<br/>Required]
+    START_RESOURCE[Resource Decision<br/>Required]
+    START_PERFORMANCE[Performance Issue<br/>Escalation]
+    
+    %% Level 1: Individual/Team Level
+    INDIVIDUAL_LEVEL[Individual/Team Level<br/>Authority: Operational]
+    TEAM_DECISION{Can Team<br/>Decide?}
+    TEAM_RESOLVE[Team Leader<br/>Resolves<br/>Timeframe: 1-2 days]
+    
+    %% Level 2: Functional Level
+    FUNCTIONAL_LEVEL[Functional Level<br/>Authority: Tactical]
+    FUNC_DECISION{Can Functional<br/>Leader Decide?}
+    FUNC_RESOLVE[Functional Director<br/>Resolves<br/>Timeframe: 3-5 days]
+    
+    %% Level 3: Senior Management Level
+    SENIOR_LEVEL[Senior Management Level<br/>Authority: Strategic]
+    SENIOR_DECISION{Can Senior Mgmt<br/>Decide?}
+    SENIOR_RESOLVE[VP/GM<br/>Resolves<br/>Timeframe: 5-7 days]
+    
+    %% Level 4: Executive Level
+    EXECUTIVE_LEVEL[Executive Level<br/>Authority: Corporate]
+    EXEC_DECISION{Can C-Suite<br/>Decide?}
+    EXEC_RESOLVE[CEO/C-Suite<br/>Resolves<br/>Timeframe: 7-14 days]
+    
+    %% Level 5: Board Level
+    BOARD_LEVEL[Board Level<br/>Authority: Governance]
+    BOARD_DECISION{Board Decision<br/>Required?}
+    BOARD_RESOLVE[Board of Directors<br/>Resolves<br/>Timeframe: 14-30 days]
+    
+    %% Decision Criteria Gates
+    BUDGET_GATE{Budget Impact<br/>>$100K?}
+    STRATEGIC_GATE{Strategic<br/>Impact?}
+    RISK_GATE{High Risk<br/>Decision?}
+    CROSS_FUNC_GATE{Cross-functional<br/>Impact?}
+    
+    %% Specific Decision Paths
+    
+    %% Vision Path
+    VISION_PATH[Vision Decision Path]
+    VISION_CEO[CEO Develops<br/>Vision Proposal<br/>D: Driver]
+    VISION_CSUITE[C-Suite Review<br/>& Input<br/>C: Contributors]
+    VISION_BOARD[Board Approval<br/>Required<br/>A: Approvers]
+    VISION_COMMUNICATE[Organization<br/>Communication<br/>I: Informed]
+    
+    %% Strategy Path
+    STRATEGY_PATH[Strategy Decision Path]
+    STRATEGY_OWNER[Strategy Owner<br/>Develops Plan<br/>R: Responsible]
+    STRATEGY_CEO[CEO Review<br/>& Approval<br/>A: Accountable]
+    STRATEGY_CONSULT[Stakeholder<br/>Consultation<br/>C: Consulted]
+    STRATEGY_INFORM[Organization<br/>Update<br/>I: Informed]
+    
+    %% OKR Path
+    OKR_PATH[OKR Decision Path]
+    OKR_DEVELOP[Level Owner<br/>Develops OKRs<br/>R: Responsible]
+    OKR_APPROVE[Manager<br/>Approval<br/>A: Accountable]
+    OKR_ALIGN[Peer Review<br/>& Alignment<br/>C: Consulted]
+    OKR_CASCADE[Team<br/>Communication<br/>I: Informed]
+    
+    %% Resource Path
+    RESOURCE_PATH[Resource Decision Path]
+    RESOURCE_REQUEST[Requestor<br/>Submits Proposal<br/>R: Responsible]
+    RESOURCE_REVIEW[Budget Owner<br/>Reviews<br/>A: Accountable]
+    RESOURCE_APPROVE[Authority<br/>Approves<br/>Final Decision]
+    RESOURCE_ALLOCATE[Finance<br/>Allocates<br/>Execution]
+    
+    %% Escalation Triggers
+    ESCALATION_TRIGGERS[Escalation Triggers]
+    DEADLINE_TRIGGER[Decision<br/>Deadline Missed]
+    CONFLICT_TRIGGER[Stakeholder<br/>Conflict]
+    RESOURCE_TRIGGER[Resource<br/>Constraint]
+    PERFORMANCE_TRIGGER[Performance<br/>Issue]
+    RISK_TRIGGER[Risk<br/>Threshold Exceeded]
+    
+    %% Escalation Responses
+    ESCALATION_RESPONSES[Escalation Responses]
+    MEDIATION[Conflict<br/>Mediation]
+    RESOURCE_REALLOC[Resource<br/>Reallocation]
+    TIMELINE_ADJUST[Timeline<br/>Adjustment]
+    AUTHORITY_OVERRIDE[Authority<br/>Override]
+    POLICY_EXCEPTION[Policy<br/>Exception]
+    
+    %% Governance Bodies for Complex Decisions
+    GOVERNANCE_BODIES[Governance Bodies]
+    STRATEGY_COMMITTEE[Strategic Planning<br/>Committee<br/>Quarterly Reviews]
+    OKR_COMMITTEE[OKR Governance<br/>Committee<br/>Monthly Reviews]
+    EXEC_COMMITTEE[Executive<br/>Committee<br/>Weekly Reviews]
+    RISK_COMMITTEE[Risk Management<br/>Committee<br/>Monthly Reviews]
+    
+    %% Communication Channels
+    COMMUNICATION[Communication Channels]
+    FORMAL_COMM[Formal<br/>Communication<br/>Official channels]
+    INFORMAL_COMM[Informal<br/>Communication<br/>Direct discussions]
+    DIGITAL_COMM[Digital<br/>Communication<br/>Platforms & tools]
+    
+    %% Main Flow Connections
+    START_VISION --> VISION_PATH
+    START_STRATEGY --> STRATEGY_PATH
+    START_OKR --> OKR_PATH
+    START_RESOURCE --> RESOURCE_PATH
+    START_PERFORMANCE --> INDIVIDUAL_LEVEL
+    
+    %% General Escalation Flow
+    INDIVIDUAL_LEVEL --> TEAM_DECISION
+    TEAM_DECISION -->|Yes| TEAM_RESOLVE
+    TEAM_DECISION -->|No| FUNCTIONAL_LEVEL
+    
+    FUNCTIONAL_LEVEL --> FUNC_DECISION
+    FUNC_DECISION -->|Yes| FUNC_RESOLVE
+    FUNC_DECISION -->|No| SENIOR_LEVEL
+    
+    SENIOR_LEVEL --> SENIOR_DECISION
+    SENIOR_DECISION -->|Yes| SENIOR_RESOLVE
+    SENIOR_DECISION -->|No| EXECUTIVE_LEVEL
+    
+    EXECUTIVE_LEVEL --> EXEC_DECISION
+    EXEC_DECISION -->|Yes| EXEC_RESOLVE
+    EXEC_DECISION -->|No| BOARD_LEVEL
+    
+    BOARD_LEVEL --> BOARD_DECISION
+    BOARD_DECISION -->|Yes| BOARD_RESOLVE
+    
+    %% Decision Gates
+    TEAM_DECISION --> BUDGET_GATE
+    FUNC_DECISION --> STRATEGIC_GATE
+    SENIOR_DECISION --> RISK_GATE
+    EXEC_DECISION --> CROSS_FUNC_GATE
+    
+    BUDGET_GATE -->|>$100K| FUNCTIONAL_LEVEL
+    STRATEGIC_GATE -->|High Impact| SENIOR_LEVEL
+    RISK_GATE -->|High Risk| EXECUTIVE_LEVEL
+    CROSS_FUNC_GATE -->|Multi-functional| BOARD_LEVEL
+    
+    %% Vision Decision Path
+    VISION_PATH --> VISION_CEO
+    VISION_CEO --> VISION_CSUITE
+    VISION_CSUITE --> VISION_BOARD
+    VISION_BOARD --> VISION_COMMUNICATE
+    
+    %% Strategy Decision Path
+    STRATEGY_PATH --> STRATEGY_OWNER
+    STRATEGY_OWNER --> STRATEGY_CEO
+    STRATEGY_CEO --> STRATEGY_CONSULT
+    STRATEGY_CONSULT --> STRATEGY_INFORM
+    
+    %% OKR Decision Path
+    OKR_PATH --> OKR_DEVELOP
+    OKR_DEVELOP --> OKR_APPROVE
+    OKR_APPROVE --> OKR_ALIGN
+    OKR_ALIGN --> OKR_CASCADE
+    
+    %% Resource Decision Path
+    RESOURCE_PATH --> RESOURCE_REQUEST
+    RESOURCE_REQUEST --> RESOURCE_REVIEW
+    RESOURCE_REVIEW --> RESOURCE_APPROVE
+    RESOURCE_APPROVE --> RESOURCE_ALLOCATE
+    
+    %% Escalation Triggers to Responses
+    ESCALATION_TRIGGERS --> DEADLINE_TRIGGER
+    ESCALATION_TRIGGERS --> CONFLICT_TRIGGER
+    ESCALATION_TRIGGERS --> RESOURCE_TRIGGER
+    ESCALATION_TRIGGERS --> PERFORMANCE_TRIGGER
+    ESCALATION_TRIGGERS --> RISK_TRIGGER
+    
+    DEADLINE_TRIGGER --> TIMELINE_ADJUST
+    CONFLICT_TRIGGER --> MEDIATION
+    RESOURCE_TRIGGER --> RESOURCE_REALLOC
+    PERFORMANCE_TRIGGER --> AUTHORITY_OVERRIDE
+    RISK_TRIGGER --> POLICY_EXCEPTION
+    
+    %% Governance Bodies Integration
+    GOVERNANCE_BODIES --> STRATEGY_COMMITTEE
+    GOVERNANCE_BODIES --> OKR_COMMITTEE
+    GOVERNANCE_BODIES --> EXEC_COMMITTEE
+    GOVERNANCE_BODIES --> RISK_COMMITTEE
+    
+    VISION_BOARD -.->|informs| STRATEGY_COMMITTEE
+    STRATEGY_CEO -.->|informs| EXEC_COMMITTEE
+    OKR_APPROVE -.->|informs| OKR_COMMITTEE
+    RISK_TRIGGER -.->|informs| RISK_COMMITTEE
+    
+    %% Communication Integration
+    COMMUNICATION --> FORMAL_COMM
+    COMMUNICATION --> INFORMAL_COMM
+    COMMUNICATION --> DIGITAL_COMM
+    
+    VISION_COMMUNICATE --> FORMAL_COMM
+    STRATEGY_INFORM --> DIGITAL_COMM
+    OKR_CASCADE --> INFORMAL_COMM
+    
+    %% Feedback Loops
+    TEAM_RESOLVE -.->|feedback| FUNCTIONAL_LEVEL
+    FUNC_RESOLVE -.->|feedback| SENIOR_LEVEL
+    SENIOR_RESOLVE -.->|feedback| EXECUTIVE_LEVEL
+    EXEC_RESOLVE -.->|feedback| BOARD_LEVEL
+    
+    %% Continuous Improvement
+    BOARD_RESOLVE -.->|process improvement| ESCALATION_TRIGGERS
+    AUTHORITY_OVERRIDE -.->|policy review| GOVERNANCE_BODIES
+    
+    %% Styling
+    classDef startClass fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
+    classDef levelClass fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef decisionClass fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef resolveClass fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef gateClass fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef pathClass fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    classDef triggerClass fill:#fce4ec,stroke:#ad1457,stroke-width:2px
+    classDef responseClass fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef governanceClass fill:#e8eaf6,stroke:#3f51b5,stroke-width:2px
+    classDef commClass fill:#fff8e1,stroke:#f57c00,stroke-width:2px
+    
+    class START_VISION,START_STRATEGY,START_OKR,START_RESOURCE,START_PERFORMANCE startClass
+    class INDIVIDUAL_LEVEL,FUNCTIONAL_LEVEL,SENIOR_LEVEL,EXECUTIVE_LEVEL,BOARD_LEVEL levelClass
+    class TEAM_DECISION,FUNC_DECISION,SENIOR_DECISION,EXEC_DECISION,BOARD_DECISION decisionClass
+    class TEAM_RESOLVE,FUNC_RESOLVE,SENIOR_RESOLVE,EXEC_RESOLVE,BOARD_RESOLVE resolveClass
+    class BUDGET_GATE,STRATEGIC_GATE,RISK_GATE,CROSS_FUNC_GATE gateClass
+    class VISION_PATH,STRATEGY_PATH,OKR_PATH,RESOURCE_PATH pathClass
+    class ESCALATION_TRIGGERS,DEADLINE_TRIGGER,CONFLICT_TRIGGER,RESOURCE_TRIGGER,PERFORMANCE_TRIGGER,RISK_TRIGGER triggerClass
+    class ESCALATION_RESPONSES,MEDIATION,RESOURCE_REALLOC,TIMELINE_ADJUST,AUTHORITY_OVERRIDE,POLICY_EXCEPTION responseClass
+    class GOVERNANCE_BODIES,STRATEGY_COMMITTEE,OKR_COMMITTEE,EXEC_COMMITTEE,RISK_COMMITTEE governanceClass
+    class COMMUNICATION,FORMAL_COMM,INFORMAL_COMM,DIGITAL_COMM commClass

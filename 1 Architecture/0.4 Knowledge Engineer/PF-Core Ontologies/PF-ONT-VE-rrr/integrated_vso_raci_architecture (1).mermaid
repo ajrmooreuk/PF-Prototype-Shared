@@ -1,0 +1,207 @@
+graph TB
+    %% Integrated VSO-OKR-RACI Architecture
+    
+    %% Board Level
+    BOARD[Board Governance]
+    CHAIRMAN[Chairman of Board<br/>A: Vision Approval]
+    DIRECTOR[Board Directors<br/>A: Strategic Oversight]
+    AUDIT[Audit Committee<br/>C: Financial Strategy]
+    
+    %% C-Suite Executive Level
+    CSUITE[C-Suite Executive Level]
+    CEO[Chief Executive Officer<br/>R: Vision/Strategy<br/>A: Company OKRs]
+    COO[Chief Operating Officer<br/>R: Operations Strategy<br/>A: Operational OKRs]
+    CFO[Chief Financial Officer<br/>R: Financial Strategy<br/>A: Financial OKRs]
+    CMO[Chief Marketing Officer<br/>R: Marketing Strategy<br/>A: Marketing OKRs]
+    CTO[Chief Technology Officer<br/>R: Technology Strategy<br/>A: Technology OKRs]
+    CAIO[Chief AI Officer<br/>R: AI Strategy<br/>A: AI Visibility OKRs]
+    
+    %% Senior Management Level
+    SENIOR[Senior Management Level]
+    VP[Vice Presidents<br/>C: Strategy Development<br/>R: Functional OKRs]
+    SVP[Senior Vice Presidents<br/>C: Strategic Planning<br/>R: Division OKRs]
+    GM[General Managers<br/>R: Regional Strategy<br/>A: Regional OKRs]
+    
+    %% Functional Leadership Level
+    FUNCTIONAL[Functional Leadership Level]
+    FINDIR[Finance Director<br/>R: Financial Objectives<br/>A: Finance Team OKRs]
+    MKTDIR[Marketing Director<br/>R: Marketing Objectives<br/>A: Marketing Team OKRs]
+    TECHDIR[Technology Director<br/>R: Tech Objectives<br/>A: Tech Team OKRs]
+    OPSDIR[Operations Director<br/>R: Ops Objectives<br/>A: Operations Team OKRs]
+    HRDIR[HR Director<br/>R: HR Strategy<br/>A: HR Team OKRs]
+    
+    %% Team Level
+    TEAMS[Team Level]
+    TEAMLEAD[Team Leads<br/>R: Team OKRs<br/>I: Individual OKRs]
+    PROJMGR[Project Managers<br/>R: Project Objectives<br/>C: Resource Allocation]
+    
+    %% Individual Level
+    INDIVIDUAL[Individual Contributors<br/>R: Individual OKRs<br/>I: Team Performance]
+    
+    %% VSO Framework Integration
+    VSO[VSO Framework]
+    VISION[Vision Component<br/>Influenced by: Board + CEO]
+    STRATEGY[Strategy Component<br/>Owned by: C-Suite]
+    OBJECTIVES[Objectives Component<br/>Executed by: Functional Leaders]
+    
+    %% OKR Framework Integration
+    OKR[OKR Framework]
+    COMPANY_OKR[Company OKRs<br/>A: CEO, C: C-Suite]
+    FUNC_OKR[Functional OKRs<br/>A: Functional Leaders]
+    TEAM_OKR[Team OKRs<br/>A: Team Leads]
+    IND_OKR[Individual OKRs<br/>A: Individuals]
+    
+    %% RACI/DACI Matrices
+    RACI[RACI/DACI Matrices]
+    VISION_MATRIX[Vision DACI<br/>D: CEO, A: Board<br/>C: C-Suite, I: All]
+    STRATEGY_MATRIX[Strategy RACI<br/>R: C-Suite, A: CEO<br/>C: Senior Mgmt, I: Functional]
+    OKR_MATRIX[OKR RACI<br/>R: Level Owners<br/>A: Next Level Up<br/>C: Peers, I: Stakeholders]
+    
+    %% Governance Bodies
+    GOVERNANCE[Governance Structure]
+    STRATEGIC_COMM[Strategic Planning Committee<br/>CEO, CFO, CMO, CTO, Strategy Dir]
+    OKR_COMM[OKR Governance Committee<br/>CEO, COO, Functional Leaders]
+    EXEC_TEAM[Executive Leadership Team<br/>All C-Suite Members]
+    
+    %% Functional Strategies
+    FUNCSTRAT[Functional Strategies]
+    FINSTRAT[Financial Strategy<br/>Owner: CFO<br/>RACI: R-CFO, A-CEO, C-Board]
+    MKTSTRAT[Marketing Strategy<br/>Owner: CMO<br/>RACI: R-CMO, A-CEO, C-CTO]
+    TECHSTRAT[Technology Strategy<br/>Owner: CTO<br/>RACI: R-CTO, A-CEO, C-CAIO]
+    AISTRAT[AI Strategy<br/>Owner: CAIO<br/>RACI: R-CAIO, A-CEO, C-CTO,CMO]
+    
+    %% Business Outcomes
+    OUTCOMES[Business Outcomes]
+    REVENUE[Revenue Growth<br/>Influenced by: CMO, CFO]
+    EFFICIENCY[Operational Efficiency<br/>Influenced by: COO, CTO]
+    INNOVATION[Innovation Acceleration<br/>Influenced by: CAIO, CTO]
+    SATISFACTION[Customer Satisfaction<br/>Influenced by: CMO, COO]
+    
+    %% Hierarchical Structure
+    BOARD --> CSUITE
+    CSUITE --> SENIOR
+    SENIOR --> FUNCTIONAL
+    FUNCTIONAL --> TEAMS
+    TEAMS --> INDIVIDUAL
+    
+    %% Board Composition
+    BOARD --> CHAIRMAN
+    BOARD --> DIRECTOR
+    BOARD --> AUDIT
+    
+    %% C-Suite Composition
+    CSUITE --> CEO
+    CSUITE --> COO
+    CSUITE --> CFO
+    CSUITE --> CMO
+    CSUITE --> CTO
+    CSUITE --> CAIO
+    
+    %% Senior Management
+    SENIOR --> VP
+    SENIOR --> SVP
+    SENIOR --> GM
+    
+    %% Functional Leadership
+    FUNCTIONAL --> FINDIR
+    FUNCTIONAL --> MKTDIR
+    FUNCTIONAL --> TECHDIR
+    FUNCTIONAL --> OPSDIR
+    FUNCTIONAL --> HRDIR
+    
+    %% Team Level
+    TEAMS --> TEAMLEAD
+    TEAMS --> PROJMGR
+    
+    %% VSO Framework Connections
+    VSO --> VISION
+    VSO --> STRATEGY
+    VSO --> OBJECTIVES
+    
+    %% VSO Ownership
+    CHAIRMAN -.->|approves| VISION
+    CEO -.->|develops| VISION
+    CEO -.->|owns| STRATEGY
+    CSUITE -.->|contributes to| STRATEGY
+    FUNCTIONAL -.->|executes| OBJECTIVES
+    
+    %% OKR Framework Connections
+    OKR --> COMPANY_OKR
+    OKR --> FUNC_OKR
+    OKR --> TEAM_OKR
+    OKR --> IND_OKR
+    
+    %% OKR Cascading
+    COMPANY_OKR -.->|cascades to| FUNC_OKR
+    FUNC_OKR -.->|cascades to| TEAM_OKR
+    TEAM_OKR -.->|cascades to| IND_OKR
+    
+    %% OKR Accountability
+    CEO -.->|accountable for| COMPANY_OKR
+    FUNCTIONAL -.->|accountable for| FUNC_OKR
+    TEAMLEAD -.->|accountable for| TEAM_OKR
+    INDIVIDUAL -.->|accountable for| IND_OKR
+    
+    %% RACI Matrix Connections
+    RACI --> VISION_MATRIX
+    RACI --> STRATEGY_MATRIX
+    RACI --> OKR_MATRIX
+    
+    %% Governance Structure
+    GOVERNANCE --> STRATEGIC_COMM
+    GOVERNANCE --> OKR_COMM
+    GOVERNANCE --> EXEC_TEAM
+    
+    %% Governance Participation
+    CEO -.->|chairs| STRATEGIC_COMM
+    COO -.->|chairs| OKR_COMM
+    CSUITE -.->|members of| EXEC_TEAM
+    
+    %% Functional Strategy Ownership
+    FUNCSTRAT --> FINSTRAT
+    FUNCSTRAT --> MKTSTRAT
+    FUNCSTRAT --> TECHSTRAT
+    FUNCSTRAT --> AISTRAT
+    
+    CFO -.->|owns| FINSTRAT
+    CMO -.->|owns| MKTSTRAT
+    CTO -.->|owns| TECHSTRAT
+    CAIO -.->|owns| AISTRAT
+    
+    %% Business Outcome Influence
+    OUTCOMES --> REVENUE
+    OUTCOMES --> EFFICIENCY
+    OUTCOMES --> INNOVATION
+    OUTCOMES --> SATISFACTION
+    
+    CMO -.->|drives| REVENUE
+    COO -.->|drives| EFFICIENCY
+    CAIO -.->|drives| INNOVATION
+    CMO -.->|drives| SATISFACTION
+    
+    %% Styling
+    classDef boardClass fill:#ffebee,stroke:#c62828,stroke-width:3px
+    classDef csuiteClass fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
+    classDef seniorClass fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef functionalClass fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef teamClass fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef individualClass fill:#e0f2f1,stroke:#00695c,stroke-width:1px
+    classDef vsoClass fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    classDef okrClass fill:#fff8e1,stroke:#f57c00,stroke-width:3px
+    classDef raciClass fill:#fce4ec,stroke:#ad1457,stroke-width:2px
+    classDef governanceClass fill:#e8eaf6,stroke:#3f51b5,stroke-width:2px
+    classDef strategyClass fill:#f1f8e9,stroke:#33691e,stroke-width:2px
+    classDef outcomeClass fill:#fff3e0,stroke:#bf360c,stroke-width:2px
+    
+    class BOARD,CHAIRMAN,DIRECTOR,AUDIT boardClass
+    class CSUITE,CEO,COO,CFO,CMO,CTO,CAIO csuiteClass
+    class SENIOR,VP,SVP,GM seniorClass
+    class FUNCTIONAL,FINDIR,MKTDIR,TECHDIR,OPSDIR,HRDIR functionalClass
+    class TEAMS,TEAMLEAD,PROJMGR teamClass
+    class INDIVIDUAL individualClass
+    class VSO,VISION,STRATEGY,OBJECTIVES vsoClass
+    class OKR,COMPANY_OKR,FUNC_OKR,TEAM_OKR,IND_OKR okrClass
+    class RACI,VISION_MATRIX,STRATEGY_MATRIX,OKR_MATRIX raciClass
+    class GOVERNANCE,STRATEGIC_COMM,OKR_COMM,EXEC_TEAM governanceClass
+    class FUNCSTRAT,FINSTRAT,MKTSTRAT,TECHSTRAT,AISTRAT strategyClass
+    class OUTCOMES,REVENUE,EFFICIENCY,INNOVATION,SATISFACTION outcomeClass
