@@ -1,4 +1,4 @@
-#RRR incclude RBAC, Tenant/Account and User Session Maanagement.
+#RRR include RBAC, Tenant/Account and User Session Maanagement.
 Data and Ontology Controls include RLS
 Rules
 ORGS Have Accounts, Users are Added and need Authorisation
