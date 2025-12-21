@@ -1,0 +1,1151 @@
+{
+  "@context": {
+    "@vocab": "https://baiv.co.uk/ontology/ai-strategy#",
+    "schema": "https://schema.org/",
+    "baiv": "https://baiv.co.uk/ontology/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "Ontology",
+  "@id": "baiv:ontology:ai-strategy",
+  "name": "AI Strategy Ontology",
+  "version": "1.0.0",
+  "dateCreated": "2025-10-12T00:00:00Z",
+  "dateModified": "2025-10-12T00:00:00Z",
+  "description": "Comprehensive ontology for AI strategy formulation, competitive analysis, innovation identification, and strategic decision-making across internal, client-facing, and market analysis contexts",
+  "creator": "OAA System",
+  "purpose": [
+    "Enable comprehensive competitive analysis across AI capabilities",
+    "Accelerate innovation identification and opportunity detection",
+    "Support strategic decision-making with structured knowledge",
+    "Facilitate AI agent-driven strategy formulation",
+    "Enable cross-organizational capability benchmarking"
+  ],
+  
+  "entities": [
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Capability",
+      "name": "Capability",
+      "description": "An organizational ability to perform specific activities or deliver value, particularly in the context of AI and digital transformation. Capabilities represent what an organization CAN do.",
+      "schemaOrgBase": "schema:Thing",
+      "extensionRationale": "Schema.org lacks a strategic capability concept. Thing provides base semantics.",
+      "properties": [
+        {
+          "name": "capabilityId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the capability"
+        },
+        {
+          "name": "capabilityName",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Human-readable name of the capability"
+        },
+        {
+          "name": "capabilityDescription",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Detailed description of what this capability enables"
+        },
+        {
+          "name": "capabilityType",
+          "type": "CapabilityType",
+          "required": true,
+          "description": "Classification of capability",
+          "allowedValues": ["Technical", "Organizational", "Process", "Data", "AI/ML", "Strategic", "Operational"]
+        },
+        {
+          "name": "maturityLevel",
+          "type": "MaturityLevel",
+          "required": true,
+          "description": "Current maturity level of the capability",
+          "allowedValues": ["Initial", "Developing", "Defined", "Managed", "Optimizing"]
+        },
+        {
+          "name": "strategicImportance",
+          "type": "ImportanceLevel",
+          "required": true,
+          "description": "Strategic importance to organization",
+          "allowedValues": ["Critical", "High", "Medium", "Low"]
+        },
+        {
+          "name": "currentState",
+          "type": "xsd:string",
+          "required": false,
+          "description": "Current state assessment of the capability"
+        },
+        {
+          "name": "targetState",
+          "type": "xsd:string",
+          "required": false,
+          "description": "Desired future state of the capability"
+        },
+        {
+          "name": "dependencies",
+          "type": "array[Capability]",
+          "required": false,
+          "description": "Other capabilities this capability depends on"
+        },
+        {
+          "name": "enabledBy",
+          "type": "array[Technology]",
+          "required": false,
+          "description": "Technologies that enable this capability"
+        },
+        {
+          "name": "dateAssessed",
+          "type": "xsd:dateTime",
+          "required": true,
+          "description": "When this capability was last assessed"
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Gap",
+      "name": "Gap",
+      "description": "A deficiency or absence between current and desired state of a capability, market position, or strategic objective. Gaps represent opportunities for improvement or risk areas.",
+      "schemaOrgBase": "schema:Thing",
+      "extensionRationale": "Schema.org lacks strategic gap concept. Custom entity required.",
+      "properties": [
+        {
+          "name": "gapId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the gap"
+        },
+        {
+          "name": "gapName",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Human-readable name of the gap"
+        },
+        {
+          "name": "gapDescription",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Detailed description of the gap"
+        },
+        {
+          "name": "gapType",
+          "type": "GapType",
+          "required": true,
+          "description": "Type of gap identified",
+          "allowedValues": ["Capability", "Technology", "Process", "Skills", "Data", "Market", "Strategic"]
+        },
+        {
+          "name": "severity",
+          "type": "SeverityLevel",
+          "required": true,
+          "description": "Severity/urgency of addressing this gap",
+          "allowedValues": ["Critical", "High", "Medium", "Low"]
+        },
+        {
+          "name": "impactArea",
+          "type": "array[xsd:string]",
+          "required": true,
+          "description": "Business areas impacted by this gap"
+        },
+        {
+          "name": "currentState",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Description of current state"
+        },
+        {
+          "name": "desiredState",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Description of desired state"
+        },
+        {
+          "name": "estimatedCostToClose",
+          "type": "schema:MonetaryAmount",
+          "required": false,
+          "description": "Estimated investment to close gap"
+        },
+        {
+          "name": "timeToClose",
+          "type": "schema:Duration",
+          "required": false,
+          "description": "Estimated time to close gap"
+        },
+        {
+          "name": "identifiedDate",
+          "type": "xsd:dateTime",
+          "required": true,
+          "description": "When this gap was identified"
+        },
+        {
+          "name": "status",
+          "type": "GapStatus",
+          "required": true,
+          "description": "Current status of gap",
+          "allowedValues": ["Identified", "Acknowledged", "Planned", "InProgress", "Closed", "Deferred"]
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Position",
+      "name": "Position",
+      "description": "Strategic market position of an organization relative to competitors within a specific market segment or capability domain. Represents competitive standing and differentiation.",
+      "schemaOrgBase": "schema:Thing",
+      "extensionRationale": "Schema.org lacks strategic positioning concept. Custom entity required.",
+      "properties": [
+        {
+          "name": "positionId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the position"
+        },
+        {
+          "name": "positionName",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Human-readable name of the position"
+        },
+        {
+          "name": "positionType",
+          "type": "PositionType",
+          "required": true,
+          "description": "Type of strategic position",
+          "allowedValues": ["Leader", "Challenger", "Follower", "Nicher", "Innovator", "Disruptor"]
+        },
+        {
+          "name": "marketSegment",
+          "type": "Market",
+          "required": true,
+          "description": "Market segment where this position applies"
+        },
+        {
+          "name": "relativeTo",
+          "type": "array[Competitor]",
+          "required": false,
+          "description": "Competitors this position is relative to"
+        },
+        {
+          "name": "strengthAreas",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Areas of competitive strength"
+        },
+        {
+          "name": "weaknessAreas",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Areas of competitive weakness"
+        },
+        {
+          "name": "differentiators",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Key differentiating factors"
+        },
+        {
+          "name": "marketShare",
+          "type": "xsd:decimal",
+          "required": false,
+          "description": "Market share percentage (0-100)"
+        },
+        {
+          "name": "positioningStatement",
+          "type": "xsd:string",
+          "required": false,
+          "description": "Strategic positioning statement"
+        },
+        {
+          "name": "assessmentDate",
+          "type": "xsd:dateTime",
+          "required": true,
+          "description": "When this position was assessed"
+        },
+        {
+          "name": "trendDirection",
+          "type": "TrendDirection",
+          "required": false,
+          "description": "Direction of position change",
+          "allowedValues": ["Improving", "Stable", "Declining", "Emerging"]
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Opportunity",
+      "name": "Opportunity",
+      "description": "A strategic opportunity for value creation, competitive advantage, innovation, or market expansion. Opportunities arise from gaps, market changes, or emerging technologies.",
+      "schemaOrgBase": "schema:Thing",
+      "extensionRationale": "Schema.org/Opportunity is job-focused. Strategic opportunity requires custom definition.",
+      "properties": [
+        {
+          "name": "opportunityId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier for the opportunity"
+        },
+        {
+          "name": "opportunityName",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Human-readable name of the opportunity"
+        },
+        {
+          "name": "opportunityDescription",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Detailed description of the opportunity"
+        },
+        {
+          "name": "opportunityType",
+          "type": "OpportunityType",
+          "required": true,
+          "description": "Type of strategic opportunity",
+          "allowedValues": ["Market", "Technology", "Capability", "Partnership", "Innovation", "Efficiency", "Disruption"]
+        },
+        {
+          "name": "valueProposition",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Value that can be captured from this opportunity"
+        },
+        {
+          "name": "potentialValue",
+          "type": "schema:MonetaryAmount",
+          "required": false,
+          "description": "Estimated financial value of the opportunity"
+        },
+        {
+          "name": "timeHorizon",
+          "type": "TimeHorizon",
+          "required": true,
+          "description": "When value can be realized",
+          "allowedValues": ["Horizon1_Current", "Horizon2_Emerging", "Horizon3_Future"]
+        },
+        {
+          "name": "feasibility",
+          "type": "FeasibilityLevel",
+          "required": true,
+          "description": "Feasibility of pursuing opportunity",
+          "allowedValues": ["High", "Medium", "Low", "Unknown"]
+        },
+        {
+          "name": "requiredCapabilities",
+          "type": "array[Capability]",
+          "required": false,
+          "description": "Capabilities required to pursue this opportunity"
+        },
+        {
+          "name": "addressedGaps",
+          "type": "array[Gap]",
+          "required": false,
+          "description": "Gaps that this opportunity addresses"
+        },
+        {
+          "name": "risks",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Risks associated with pursuing opportunity"
+        },
+        {
+          "name": "competitiveAdvantage",
+          "type": "xsd:string",
+          "required": false,
+          "description": "How this opportunity creates competitive advantage"
+        },
+        {
+          "name": "priority",
+          "type": "PriorityLevel",
+          "required": true,
+          "description": "Strategic priority level",
+          "allowedValues": ["Critical", "High", "Medium", "Low"]
+        },
+        {
+          "name": "identifiedDate",
+          "type": "xsd:dateTime",
+          "required": true,
+          "description": "When opportunity was identified"
+        },
+        {
+          "name": "status",
+          "type": "OpportunityStatus",
+          "required": true,
+          "description": "Current status",
+          "allowedValues": ["Identified", "Evaluated", "Approved", "InProgress", "Realized", "Abandoned"]
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Organization",
+      "name": "Organization",
+      "description": "An organization (company, enterprise, institution) that possesses capabilities, occupies market positions, and pursues strategic opportunities. Extends schema.org/Organization.",
+      "schemaOrgBase": "schema:Organization",
+      "extensionRationale": "Uses schema.org/Organization as base, extends with strategy-specific properties.",
+      "properties": [
+        {
+          "name": "organizationId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier"
+        },
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Organization name (schema.org/name)"
+        },
+        {
+          "name": "description",
+          "type": "xsd:string",
+          "required": false,
+          "description": "Organization description (schema.org/description)"
+        },
+        {
+          "name": "organizationType",
+          "type": "OrganizationType",
+          "required": true,
+          "description": "Type of organization",
+          "allowedValues": ["Self", "Client", "Competitor", "Partner", "Target"]
+        },
+        {
+          "name": "industry",
+          "type": "xsd:string",
+          "required": false,
+          "description": "Primary industry (schema.org/industry)"
+        },
+        {
+          "name": "size",
+          "type": "OrganizationSize",
+          "required": false,
+          "description": "Organization size",
+          "allowedValues": ["Startup", "SME", "MidMarket", "Enterprise", "Global"]
+        },
+        {
+          "name": "foundingDate",
+          "type": "xsd:date",
+          "required": false,
+          "description": "Founding date (schema.org/foundingDate)"
+        },
+        {
+          "name": "url",
+          "type": "xsd:anyURI",
+          "required": false,
+          "description": "Organization website (schema.org/url)"
+        },
+        {
+          "name": "capabilities",
+          "type": "array[Capability]",
+          "required": false,
+          "description": "Capabilities possessed by this organization"
+        },
+        {
+          "name": "strategicObjectives",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "High-level strategic objectives"
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Competitor",
+      "name": "Competitor",
+      "description": "A competing organization in the market. Extends Organization with competition-specific attributes.",
+      "schemaOrgBase": "baiv:ai-strategy:Organization",
+      "extensionRationale": "Specializes Organization for competitive analysis context.",
+      "properties": [
+        {
+          "name": "competitorType",
+          "type": "CompetitorType",
+          "required": true,
+          "description": "Type of competitive relationship",
+          "allowedValues": ["Direct", "Indirect", "Potential", "Substitute"]
+        },
+        {
+          "name": "competitiveStrength",
+          "type": "StrengthLevel",
+          "required": false,
+          "description": "Overall competitive strength assessment",
+          "allowedValues": ["Strong", "Moderate", "Weak", "Unknown"]
+        },
+        {
+          "name": "marketOverlap",
+          "type": "array[Market]",
+          "required": false,
+          "description": "Markets where competition occurs"
+        },
+        {
+          "name": "keyStrengths",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Competitor's key strengths"
+        },
+        {
+          "name": "keyWeaknesses",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Competitor's key weaknesses"
+        },
+        {
+          "name": "recentMoves",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Recent strategic moves or announcements"
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Market",
+      "name": "Market",
+      "description": "A market segment or domain where organizations compete and position themselves. Markets have characteristics, dynamics, and competitive landscapes.",
+      "schemaOrgBase": "schema:Thing",
+      "extensionRationale": "Schema.org lacks strategic market segment concept. Custom entity required.",
+      "properties": [
+        {
+          "name": "marketId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier"
+        },
+        {
+          "name": "marketName",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Market segment name"
+        },
+        {
+          "name": "marketDescription",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Description of market segment"
+        },
+        {
+          "name": "marketSize",
+          "type": "schema:MonetaryAmount",
+          "required": false,
+          "description": "Total addressable market size"
+        },
+        {
+          "name": "growthRate",
+          "type": "xsd:decimal",
+          "required": false,
+          "description": "Annual growth rate percentage"
+        },
+        {
+          "name": "maturity",
+          "type": "MarketMaturity",
+          "required": false,
+          "description": "Market maturity stage",
+          "allowedValues": ["Emerging", "Growth", "Mature", "Declining"]
+        },
+        {
+          "name": "keyTrends",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Key market trends"
+        },
+        {
+          "name": "barriers",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Barriers to entry"
+        },
+        {
+          "name": "geography",
+          "type": "xsd:string",
+          "required": false,
+          "description": "Geographic scope"
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Initiative",
+      "name": "Initiative",
+      "description": "A strategic initiative or project to address gaps, build capabilities, or pursue opportunities. Extends schema.org/Action.",
+      "schemaOrgBase": "schema:Action",
+      "extensionRationale": "schema.org/Action provides base semantics for organizational actions. Extended for strategic initiatives.",
+      "properties": [
+        {
+          "name": "initiativeId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier"
+        },
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Initiative name (schema.org/name)"
+        },
+        {
+          "name": "description",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Detailed description (schema.org/description)"
+        },
+        {
+          "name": "initiativeType",
+          "type": "InitiativeType",
+          "required": true,
+          "description": "Type of initiative",
+          "allowedValues": ["Capability Building", "Gap Closure", "Opportunity Pursuit", "Innovation", "Transformation", "Optimization"]
+        },
+        {
+          "name": "status",
+          "type": "InitiativeStatus",
+          "required": true,
+          "description": "Current status",
+          "allowedValues": ["Proposed", "Approved", "InProgress", "OnHold", "Completed", "Cancelled"]
+        },
+        {
+          "name": "startDate",
+          "type": "xsd:date",
+          "required": false,
+          "description": "Start date (schema.org/startTime)"
+        },
+        {
+          "name": "endDate",
+          "type": "xsd:date",
+          "required": false,
+          "description": "Expected/actual end date (schema.org/endTime)"
+        },
+        {
+          "name": "budget",
+          "type": "schema:MonetaryAmount",
+          "required": false,
+          "description": "Initiative budget"
+        },
+        {
+          "name": "addressesGaps",
+          "type": "array[Gap]",
+          "required": false,
+          "description": "Gaps this initiative addresses"
+        },
+        {
+          "name": "pursuesOpportunities",
+          "type": "array[Opportunity]",
+          "required": false,
+          "description": "Opportunities this initiative pursues"
+        },
+        {
+          "name": "buildsCapabilities",
+          "type": "array[Capability]",
+          "required": false,
+          "description": "Capabilities this initiative builds/enhances"
+        },
+        {
+          "name": "expectedOutcomes",
+          "type": "array[xsd:string]",
+          "required": false,
+          "description": "Expected outcomes and benefits"
+        }
+      ]
+    },
+    {
+      "@type": "EntityDefinition",
+      "@id": "baiv:ai-strategy:Technology",
+      "name": "Technology",
+      "description": "A technology, platform, tool, or AI system that enables capabilities or addresses strategic needs. Extends schema.org/SoftwareApplication.",
+      "schemaOrgBase": "schema:SoftwareApplication",
+      "extensionRationale": "schema.org/SoftwareApplication provides base for technology/tool. Extended for strategic technology assessment.",
+      "properties": [
+        {
+          "name": "technologyId",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Unique identifier"
+        },
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Technology name (schema.org/name)"
+        },
+        {
+          "name": "description",
+          "type": "xsd:string",
+          "required": true,
+          "description": "Technology description (schema.org/description)"
+        },
+        {
+          "name": "technologyType",
+          "type": "TechnologyType",
+          "required": true,
+          "description": "Type of technology",
+          "allowedValues": ["AI/ML Platform", "Data Platform", "Cloud Infrastructure", "Analytics", "Automation", "Integration", "Application", "Framework"]
+        },
+        {
+          "name": "vendor",
+          "type": "xsd:string",
+          "required": false,
+          "description": "Technology vendor (schema.org/provider)"
+        },
+        {
+          "name": "maturity",
+          "type": "TechnologyMaturity",
+          "required": false,
+          "description": "Technology maturity level",
+          "allowedValues": ["Experimental", "Emerging", "Established", "Mature", "Legacy"]
+        },
+        {
+          "name": "adoptionStatus",
+          "type": "AdoptionStatus",
+          "required": false,
+          "description": "Adoption status in organization",
+          "allowedValues": ["NotAdopted", "Evaluating", "Piloting", "Adopted", "Standard", "Deprecated"]
+        },
+        {
+          "name": "enablesCapabilities",
+          "type": "array[Capability]",
+          "required": false,
+          "description": "Capabilities this technology enables"
+        },
+        {
+          "name": "url",
+          "type": "xsd:anyURI",
+          "required": false,
+          "description": "Technology URL (schema.org/url)"
+        }
+      ]
+    }
+  ],
+  
+  "relationships": [
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:hasCapability",
+      "name": "hasCapability",
+      "description": "An organization possesses or demonstrates a specific capability",
+      "domain": "Organization",
+      "range": "Capability",
+      "cardinality": "1:*",
+      "inverse": "capabilityOf"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:revealsGap",
+      "name": "revealsGap",
+      "description": "A capability assessment reveals a gap between current and desired state",
+      "domain": "Capability",
+      "range": "Gap",
+      "cardinality": "1:*",
+      "inverse": "gapInCapability"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:createsOpportunity",
+      "name": "createsOpportunity",
+      "description": "A gap creates or implies a strategic opportunity",
+      "domain": "Gap",
+      "range": "Opportunity",
+      "cardinality": "*:*",
+      "inverse": "addressesGap"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:requiresCapability",
+      "name": "requiresCapability",
+      "description": "An opportunity requires specific capabilities to be pursued successfully",
+      "domain": "Opportunity",
+      "range": "Capability",
+      "cardinality": "*:*",
+      "inverse": "enablesOpportunity"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:occupiesPosition",
+      "name": "occupiesPosition",
+      "description": "An organization occupies a strategic position in a market",
+      "domain": "Organization",
+      "range": "Position",
+      "cardinality": "1:*",
+      "inverse": "positionOf"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:positionedIn",
+      "name": "positionedIn",
+      "description": "A position exists within a specific market segment",
+      "domain": "Position",
+      "range": "Market",
+      "cardinality": "*:1",
+      "inverse": "hasPositions"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:competesAgainst",
+      "name": "competesAgainst",
+      "description": "An organization competes against a competitor",
+      "domain": "Organization",
+      "range": "Competitor",
+      "cardinality": "*:*",
+      "inverse": "competitorOf"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:relativeToCompetitor",
+      "name": "relativeToCompetitor",
+      "description": "A position is assessed relative to specific competitors",
+      "domain": "Position",
+      "range": "Competitor",
+      "cardinality": "*:*",
+      "inverse": "referencedInPosition"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:competesInMarket",
+      "name": "competesInMarket",
+      "description": "A competitor operates in a specific market",
+      "domain": "Competitor",
+      "range": "Market",
+      "cardinality": "*:*",
+      "inverse": "hasCompetitors"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:dependsOnCapability",
+      "name": "dependsOnCapability",
+      "description": "A capability depends on other foundational capabilities",
+      "domain": "Capability",
+      "range": "Capability",
+      "cardinality": "*:*",
+      "inverse": "supportedByCapability"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:enabledByTechnology",
+      "name": "enabledByTechnology",
+      "description": "A capability is enabled or supported by specific technologies",
+      "domain": "Capability",
+      "range": "Technology",
+      "cardinality": "*:*",
+      "inverse": "enablesCapability"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:addressesGap",
+      "name": "addressesGap",
+      "description": "An initiative addresses or closes a specific gap",
+      "domain": "Initiative",
+      "range": "Gap",
+      "cardinality": "*:*",
+      "inverse": "addressedByInitiative"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:pursuesOpportunity",
+      "name": "pursuesOpportunity",
+      "description": "An initiative pursues a strategic opportunity",
+      "domain": "Initiative",
+      "range": "Opportunity",
+      "cardinality": "*:*",
+      "inverse": "pursuedByInitiative"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:buildsCapability",
+      "name": "buildsCapability",
+      "description": "An initiative builds or enhances a capability",
+      "domain": "Initiative",
+      "range": "Capability",
+      "cardinality": "*:*",
+      "inverse": "builtByInitiative"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:hasTechnologyStack",
+      "name": "hasTechnologyStack",
+      "description": "An organization has a technology stack (collection of technologies)",
+      "domain": "Organization",
+      "range": "Technology",
+      "cardinality": "1:*",
+      "inverse": "partOfStackFor"
+    },
+    {
+      "@type": "RelationshipDefinition",
+      "@id": "baiv:ai-strategy:influencesPosition",
+      "name": "influencesPosition",
+      "description": "A capability influences competitive position (strength or weakness)",
+      "domain": "Capability",
+      "range": "Position",
+      "cardinality": "*:*",
+      "inverse": "influencedByCapability"
+    }
+  ],
+  
+  "businessRules": [
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-001",
+      "name": "Capability Maturity Progression",
+      "description": "Capability maturity must follow natural progression: Initial → Developing → Defined → Managed → Optimizing",
+      "ruleType": "Constraint",
+      "severity": "Error",
+      "scope": ["Capability"],
+      "validation": "Maturity level changes must be sequential, cannot skip levels"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-002",
+      "name": "Gap Requires Current and Desired State",
+      "description": "Every gap must define both current state and desired state",
+      "ruleType": "Mandatory",
+      "severity": "Error",
+      "scope": ["Gap"],
+      "validation": "currentState and desiredState fields must be non-empty"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-003",
+      "name": "Critical Gaps Must Have Initiatives",
+      "description": "All gaps with severity='Critical' must have at least one initiative addressing them",
+      "ruleType": "Business Logic",
+      "severity": "Warning",
+      "scope": ["Gap", "Initiative"],
+      "validation": "For each Gap where severity='Critical', exists at least one Initiative where addressesGap includes that Gap"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-004",
+      "name": "Opportunity Feasibility vs Priority Alignment",
+      "description": "High priority opportunities should have medium or high feasibility",
+      "ruleType": "Business Logic",
+      "severity": "Warning",
+      "scope": ["Opportunity"],
+      "validation": "If priority='Critical' or 'High', feasibility should not be 'Low'"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-005",
+      "name": "Position Must Reference Market",
+      "description": "Every position must be associated with a specific market segment",
+      "ruleType": "Mandatory",
+      "severity": "Error",
+      "scope": ["Position"],
+      "validation": "marketSegment field must reference valid Market entity"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-006",
+      "name": "Capability Dependency Acyclicity",
+      "description": "Capability dependencies must not create circular dependencies",
+      "ruleType": "Constraint",
+      "severity": "Error",
+      "scope": ["Capability"],
+      "validation": "Graph of dependsOnCapability relationships must be acyclic (DAG)"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-007",
+      "name": "Organization Type Consistency",
+      "description": "An organization cannot be both 'Self' and 'Competitor' simultaneously",
+      "ruleType": "Constraint",
+      "severity": "Error",
+      "scope": ["Organization"],
+      "validation": "organizationType='Self' excludes being Competitor subtype"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-008",
+      "name": "Direct Competitor Must Have Market Overlap",
+      "description": "Competitors classified as 'Direct' must have at least one market overlap",
+      "ruleType": "Business Logic",
+      "severity": "Warning",
+      "scope": ["Competitor"],
+      "validation": "If competitorType='Direct', marketOverlap array must be non-empty"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-009",
+      "name": "Initiative Timeline Validation",
+      "description": "Initiative end date must be after start date",
+      "ruleType": "Constraint",
+      "severity": "Error",
+      "scope": ["Initiative"],
+      "validation": "If both startDate and endDate exist, endDate > startDate"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-010",
+      "name": "Technology Adoption Prerequisite",
+      "description": "Technologies must be 'Adopted' or 'Standard' to enable capabilities marked as 'Managed' or 'Optimizing' maturity",
+      "ruleType": "Business Logic",
+      "severity": "Warning",
+      "scope": ["Capability", "Technology"],
+      "validation": "If Capability.maturityLevel in ['Managed', 'Optimizing'], then Technology.adoptionStatus must be in ['Adopted', 'Standard']"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-011",
+      "name": "Assessment Date Recency",
+      "description": "Capability and Position assessments older than 12 months should be flagged for review",
+      "ruleType": "Quality",
+      "severity": "Info",
+      "scope": ["Capability", "Position"],
+      "validation": "If dateAssessed or assessmentDate is more than 365 days in past, flag for review"
+    },
+    {
+      "@type": "BusinessRule",
+      "ruleId": "BR-012",
+      "name": "Opportunity Value Justification",
+      "description": "High priority opportunities should have estimated potential value documented",
+      "ruleType": "Quality",
+      "severity": "Warning",
+      "scope": ["Opportunity"],
+      "validation": "If priority='Critical' or 'High', potentialValue should be specified"
+    }
+  ],
+  
+  "aiAgentCapabilities": {
+    "queryPatterns": [
+      {
+        "pattern": "Gap Identification",
+        "description": "Identify gaps by comparing current vs target capability states",
+        "sparqlExample": "SELECT ?cap ?gap WHERE { ?org hasCapability ?cap . ?cap revealsGap ?gap . ?gap severity 'Critical' }"
+      },
+      {
+        "pattern": "Competitive Analysis",
+        "description": "Analyze competitive positioning across markets",
+        "sparqlExample": "SELECT ?org ?position ?competitor ?market WHERE { ?org occupiesPosition ?position . ?position positionedIn ?market . ?position relativeToCompetitor ?competitor }"
+      },
+      {
+        "pattern": "Opportunity Scoring",
+        "description": "Score and prioritize opportunities based on value, feasibility, and strategic fit",
+        "sparqlExample": "SELECT ?opp ?value ?feasibility ?priority WHERE { ?opp a Opportunity . ?opp potentialValue ?value . ?opp feasibility ?feasibility . ?opp priority ?priority } ORDER BY DESC(?priority) DESC(?value)"
+      },
+      {
+        "pattern": "Capability Dependency Mapping",
+        "description": "Map capability dependencies to identify foundational requirements",
+        "sparqlExample": "SELECT ?cap ?dependsOn WHERE { ?cap dependsOnCapability ?dependsOn } ORDER BY ?cap"
+      },
+      {
+        "pattern": "Technology Stack Analysis",
+        "description": "Analyze technology stacks and their capability enablement",
+        "sparqlExample": "SELECT ?org ?tech ?cap WHERE { ?org hasTechnologyStack ?tech . ?tech enablesCapability ?cap }"
+      },
+      {
+        "pattern": "Strategic Initiative Portfolio",
+        "description": "View all initiatives and what they address/build",
+        "sparqlExample": "SELECT ?initiative ?gap ?opportunity ?capability WHERE { ?initiative addressesGap ?gap . OPTIONAL { ?initiative pursuesOpportunity ?opportunity } . OPTIONAL { ?initiative buildsCapability ?capability } }"
+      }
+    ],
+    "reasoningCapabilities": [
+      {
+        "capability": "Gap-to-Opportunity Inference",
+        "description": "Infer opportunities from identified gaps and market conditions",
+        "logic": "IF Gap.severity='Critical' AND Market.growthRate>10% AND Competitor.competitiveStrength='Weak' THEN infer Opportunity with high priority"
+      },
+      {
+        "capability": "Capability Sufficiency Assessment",
+        "description": "Assess if current capabilities are sufficient for opportunity pursuit",
+        "logic": "FOR Opportunity, check IF ALL requiredCapabilities exist with maturityLevel >= 'Defined'"
+      },
+      {
+        "capability": "Competitive Positioning Recommendation",
+        "description": "Recommend positioning strategy based on capabilities vs competitors",
+        "logic": "Compare Organization.capabilities vs Competitor.capabilities in shared Market to recommend Position.positionType"
+      },
+      {
+        "capability": "Innovation Horizon Classification",
+        "description": "Classify opportunities into innovation horizons based on timeframe and feasibility",
+        "logic": "Map Opportunity.timeHorizon and Opportunity.feasibility to recommend resource allocation strategy"
+      },
+      {
+        "capability": "Technology Adoption Priority",
+        "description": "Prioritize technology adoption based on capability gaps and strategic importance",
+        "logic": "FOR Technology, calculate priority score based on: count(enablesCapability where Capability.strategicImportance='Critical') and count(Gap.addressedByInitiative where Initiative requires Technology)"
+      }
+    ],
+    "decisionSupport": [
+      {
+        "decision": "Opportunity Prioritization",
+        "inputs": ["Opportunity.potentialValue", "Opportunity.feasibility", "Opportunity.requiredCapabilities", "Gap.severity"],
+        "output": "Ranked list of opportunities with investment recommendations",
+        "method": "Multi-criteria decision analysis (MCDA) with weighted scoring"
+      },
+      {
+        "decision": "Capability Investment",
+        "inputs": ["Capability.maturityLevel", "Capability.strategicImportance", "Gap.severity", "Opportunity.requiresCapability"],
+        "output": "Capability investment priority ranking",
+        "method": "Dependency analysis + strategic importance weighting"
+      },
+      {
+        "decision": "Competitive Response",
+        "inputs": ["Competitor.recentMoves", "Position.trendDirection", "Market.maturity", "Organization.capabilities"],
+        "output": "Recommended competitive response strategy",
+        "method": "Game theory + capability gap analysis"
+      },
+      {
+        "decision": "Market Entry Feasibility",
+        "inputs": ["Market.barriers", "Market.maturity", "Organization.capabilities", "Competitor.competitiveStrength"],
+        "output": "Market entry feasibility score and requirements",
+        "method": "Barrier analysis + capability matching"
+      }
+    ],
+    "integrationPoints": [
+      {
+        "system": "Business Intelligence Platforms",
+        "dataFlow": "Import market data, financial metrics, competitive intelligence",
+        "frequency": "Weekly/Monthly"
+      },
+      {
+        "system": "Project Management Systems",
+        "dataFlow": "Sync Initiative status, timelines, and outcomes",
+        "frequency": "Real-time/Daily"
+      },
+      {
+        "system": "Technology Asset Management",
+        "dataFlow": "Technology inventory, adoption status, capabilities enabled",
+        "frequency": "Monthly"
+      },
+      {
+        "system": "Strategic Planning Tools",
+        "dataFlow": "Strategic objectives, OKRs, performance metrics",
+        "frequency": "Quarterly"
+      }
+    ]
+  },
+  
+  "qualityMetrics": {
+    "structural": {
+      "entityCount": 9,
+      "relationshipCount": 16,
+      "propertyCount": 127,
+      "relationshipDensity": 1.78
+    },
+    "semantic": {
+      "schemaOrgAlignment": 88.9,
+      "entityReuseRate": 100,
+      "namingConsistency": 100
+    },
+    "validation": {
+      "businessRulesCount": 12,
+      "validationCoverage": 100
+    },
+    "documentation": {
+      "completeness": 100,
+      "glossaryTerms": 9,
+      "testDataCoverage": 100
+    }
+  },
+  
+  "changeLog": [
+    {
+      "version": "1.0.0",
+      "date": "2025-10-12",
+      "changes": [
+        "Initial ontology creation",
+        "9 core entities defined with schema.org grounding",
+        "16 relationships establishing strategic knowledge graph",
+        "12 business rules for validation and quality",
+        "AI/Agent capability mappings for automated strategy support",
+        "Support for competitive analysis, innovation identification, decision-making"
+      ],
+      "author": "OAA System"
+    }
+  ]
+}
