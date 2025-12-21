@@ -1,0 +1,548 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "oaa": "https://platform-foundation.io/oaa/registry/",
+    "pf": "https://platform-foundation.io/ontology/v1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "oaa:OntologyRegistryEntry",
+  "@id": "oaa:registry:pf-roles-raci-rbac-v1",
+  "registryMetadata": {
+    "registrationDate": "2025-10-11",
+    "registeredBy": "Amanda Moore",
+    "registrationStatus": "active",
+    "lastValidated": "2025-10-11",
+    "lastModified": "2025-10-11",
+    "schemaVersion": "1.0"
+  },
+  "ontologyIdentifier": "pf:ontology:roles-raci-rbac-v3.0.0",
+  "ontologyName": "Platform Foundation: Roles, RACI & RBAC Ontology",
+  "ontologyVersion": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0,
+    "versionString": "1.0.0",
+    "releaseDate": "2025-10-11",
+    "releaseType": "Initial Release",
+    "breakingChanges": false
+  },
+  "domain": "Organizational Governance, Access Management, Accountability Framework",
+  "subDomains": [
+    "Executive Leadership Structure",
+    "Functional Accountability (RACI)",
+    "Role-Based Access Control (RBAC)",
+    "Permission & Capability Management",
+    "Matrix Organization Modeling"
+  ],
+  "description": "Comprehensive ontology for organizational roles (executive and functional), RACI accountability framework, and role-based access control. Enables multi-venture role portfolios, AI agent authorization, and strategic accountability tracing. Integrates with Individual, User, Organization, and VSOM Strategy ontologies.",
+  "purpose": [
+    "Define organizational role structures (C-Suite and functional)",
+    "Enable RACI (Responsible, Accountable, Consulted, Informed) accountability tracking",
+    "Implement Role-Based Access Control (RBAC) for system permissions",
+    "Support multi-venture role assignments for individuals",
+    "Facilitate AI agent authorization decisions",
+    "Enable capability gap analysis",
+    "Support matrix organization modeling"
+  ],
+  "scope": {
+    "includes": [
+      "21 C-Suite executive roles from VSOM framework",
+      "Functional roles across all departments",
+      "Role assignments linking individuals to roles in organizations",
+      "RACI accountability assignments for activities",
+      "Capabilities and competencies for roles",
+      "Permissions and access conditions",
+      "Access policies binding roles to permissions",
+      "Reporting and collaboration relationships"
+    ],
+    "excludes": [
+      "Individual person profiles (see pf:ontology:individual-v1)",
+      "User account management (see pf:ontology:user-v1)",
+      "Organization structures (see pf:ontology:organization-v1)",
+      "Strategy content (see pf:ontology:vsom-strategy-v1)",
+      "Specific business processes (defined in process ontologies)",
+      "Detailed capability frameworks (defined in skill ontologies)"
+    ]
+  },
+  "entities": [
+    {
+      "entityId": "pf:ExecutiveRole",
+      "entityName": "Executive Role",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:OrganizationalRole",
+      "propertyCount": 10,
+      "description": "C-Suite or senior executive position with strategic accountability",
+      "examples": ["CEO", "CMO", "CFO", "CAIO"]
+    },
+    {
+      "entityId": "pf:FunctionalRole",
+      "entityName": "Functional Role",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:EmployeeRole",
+      "propertyCount": 3,
+      "description": "Operational or functional position below executive level",
+      "examples": ["Marketing Manager", "Data Scientist", "Sales Representative"]
+    },
+    {
+      "entityId": "pf:RoleAssignment",
+      "entityName": "Role Assignment",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:Thing",
+      "propertyCount": 8,
+      "description": "Assignment of an individual to a role within an organization",
+      "examples": ["Amanda Moore as CEO at BAIV", "John Smith as CFO at BAIV"]
+    },
+    {
+      "entityId": "raci:RACIAssignment",
+      "entityName": "RACI Assignment",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:Thing",
+      "propertyCount": 5,
+      "description": "Defines who is Responsible, Accountable, Consulted, or Informed for an activity",
+      "examples": ["CEO Accountable for AI Strategy Development"]
+    },
+    {
+      "entityId": "pf:Capability",
+      "entityName": "Capability",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:Action",
+      "propertyCount": 4,
+      "description": "Ability, skill, or competency required for a role",
+      "examples": ["Strategic Planning", "Brand Management", "AI Ethics"]
+    },
+    {
+      "entityId": "rbac:Permission",
+      "entityName": "Permission",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:Thing",
+      "propertyCount": 4,
+      "description": "Authorization to perform an action on a resource",
+      "examples": ["Approve Budget", "Read Strategy", "Export Data"]
+    },
+    {
+      "entityId": "rbac:AccessPolicy",
+      "entityName": "Access Policy",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:Thing",
+      "propertyCount": 5,
+      "description": "Binds roles to permissions (core RBAC mechanism)",
+      "examples": ["CEO Full Access Policy", "Manager Limited Policy"]
+    },
+    {
+      "entityId": "rbac:AccessCondition",
+      "entityName": "Access Condition",
+      "entityType": "Class",
+      "schemaOrgBase": "schema:Thing",
+      "propertyCount": 3,
+      "description": "Conditional constraint for permission application",
+      "examples": ["amount < $10,000", "status = 'archived'"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipId": "pf:hasRoleAssignment",
+      "relationshipName": "Has Role Assignment",
+      "source": "schema:Person",
+      "target": "pf:RoleAssignment",
+      "cardinality": "0..*",
+      "inverse": "pf:assignedToIndividual",
+      "semantics": "Individual holds one or more role assignments"
+    },
+    {
+      "relationshipId": "pf:assignedRole",
+      "relationshipName": "Assigned Role",
+      "source": "pf:RoleAssignment",
+      "target": ["pf:ExecutiveRole", "pf:FunctionalRole"],
+      "cardinality": "1..1",
+      "inverse": "pf:hasAssignment",
+      "semantics": "Assignment links to specific role"
+    },
+    {
+      "relationshipId": "pf:inOrganization",
+      "relationshipName": "In Organization",
+      "source": "pf:RoleAssignment",
+      "target": "schema:Organization",
+      "cardinality": "1..1",
+      "inverse": "pf:hasRoleAssignment",
+      "semantics": "Assignment exists within organization context"
+    },
+    {
+      "relationshipId": "pf:reportsTo",
+      "relationshipName": "Reports To",
+      "source": ["pf:ExecutiveRole", "pf:FunctionalRole"],
+      "target": ["pf:ExecutiveRole", "pf:FunctionalRole"],
+      "cardinality": "0..1",
+      "inverse": "pf:manages",
+      "semantics": "Hierarchical reporting relationship (acyclic)"
+    },
+    {
+      "relationshipId": "pf:collaboratesWith",
+      "relationshipName": "Collaborates With",
+      "source": ["pf:ExecutiveRole", "pf:FunctionalRole"],
+      "target": ["pf:ExecutiveRole", "pf:FunctionalRole"],
+      "cardinality": "0..*",
+      "inverse": "pf:collaboratesWith",
+      "semantics": "Symmetric peer collaboration relationship"
+    },
+    {
+      "relationshipId": "pf:hasCapability",
+      "relationshipName": "Has Capability",
+      "source": ["pf:ExecutiveRole", "pf:FunctionalRole"],
+      "target": "pf:Capability",
+      "cardinality": "0..*",
+      "inverse": "pf:requiredByRole",
+      "semantics": "Role requires specific capabilities"
+    },
+    {
+      "relationshipId": "raci:hasRACIAssignment",
+      "relationshipName": "Has RACI Assignment",
+      "source": ["schema:Action", "pf:BusinessProcess"],
+      "target": "raci:RACIAssignment",
+      "cardinality": "1..*",
+      "inverse": "raci:raciFor",
+      "semantics": "Activity has RACI accountability assignments"
+    },
+    {
+      "relationshipId": "rbac:governedBy",
+      "relationshipName": "Governed By",
+      "source": ["pf:ExecutiveRole", "pf:FunctionalRole"],
+      "target": "rbac:AccessPolicy",
+      "cardinality": "0..*",
+      "inverse": "rbac:appliesTo",
+      "semantics": "Role is governed by access policies"
+    },
+    {
+      "relationshipId": "rbac:grantsPermission",
+      "relationshipName": "Grants Permission",
+      "source": "rbac:AccessPolicy",
+      "target": "rbac:Permission",
+      "cardinality": "1..*",
+      "inverse": "rbac:grantedBy",
+      "semantics": "Policy grants permissions to role"
+    }
+  ],
+  "businessRules": [
+    {
+      "ruleId": "BR-001",
+      "ruleName": "One Accountable Per Activity",
+      "severity": "error",
+      "description": "Each activity must have exactly one role marked as Accountable in RACI"
+    },
+    {
+      "ruleId": "BR-002",
+      "ruleName": "At Least One Responsible",
+      "severity": "error",
+      "description": "Each activity must have at least one Responsible role"
+    },
+    {
+      "ruleId": "BR-003",
+      "ruleName": "No Circular Reporting",
+      "severity": "error",
+      "description": "Reporting relationships must not create cycles"
+    },
+    {
+      "ruleId": "BR-004",
+      "ruleName": "Active Assignment Has No End Date",
+      "severity": "error",
+      "description": "If RoleAssignment.isActive=true, then endDate must be null"
+    },
+    {
+      "ruleId": "BR-005",
+      "ruleName": "Time Commitment Range",
+      "severity": "warning",
+      "description": "Total time commitment across active assignments should not exceed 100%"
+    },
+    {
+      "ruleId": "BR-006",
+      "ruleName": "C-Suite Seniority Level",
+      "severity": "warning",
+      "description": "Executive roles in C-Suite categories should have seniorityLevel=1"
+    },
+    {
+      "ruleId": "BR-007",
+      "ruleName": "Permission Conflict Resolution",
+      "severity": "info",
+      "description": "Highest priority policy wins; Deny overrides Allow at same priority"
+    },
+    {
+      "ruleId": "BR-008",
+      "ruleName": "User Inherits Role Permissions",
+      "severity": "info",
+      "description": "USERS inherit permissions from ROLES via RoleAssignments"
+    },
+    {
+      "ruleId": "BR-009",
+      "ruleName": "RACI Applies to Roles Not Individuals",
+      "severity": "info",
+      "description": "RACI assignments are made to ROLES, not directly to INDIVIDUALS"
+    },
+    {
+      "ruleId": "BR-010",
+      "ruleName": "Organization Context Consistency",
+      "severity": "info",
+      "description": "Filter policies by organization context when resolving permissions"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependencyType": "requires",
+      "ontologyId": "pf:ontology:individual-v1",
+      "ontologyName": "Individual Ontology",
+      "reason": "INDIVIDUALS (schema:Person) fill ROLES via RoleAssignments",
+      "criticality": "high",
+      "integrationPoint": "RoleAssignment.individual property references schema:Person"
+    },
+    {
+      "dependencyType": "requires",
+      "ontologyId": "pf:ontology:user-v1",
+      "ontologyName": "User Ontology",
+      "reason": "USERS link to INDIVIDUALS and are governed by RBAC policies",
+      "criticality": "high",
+      "integrationPoint": "Permission resolution: User -> Person -> RoleAssignment -> Role -> AccessPolicy"
+    },
+    {
+      "dependencyType": "requires",
+      "ontologyId": "pf:ontology:organization-v1",
+      "ontologyName": "Organization Ontology",
+      "reason": "ORGANIZATIONS contain ROLES and provide context for RoleAssignments",
+      "criticality": "high",
+      "integrationPoint": "RoleAssignment.organization property references schema:Organization"
+    },
+    {
+      "dependencyType": "supports",
+      "ontologyId": "pf:ontology:vsom-strategy-v1",
+      "ontologyName": "VSOM Strategy Ontology",
+      "reason": "ROLES are accountable for Strategy formulation and implementation via RACI",
+      "criticality": "medium",
+      "integrationPoint": "RACIAssignment can reference strategy activities"
+    }
+  ],
+  "consumers": [
+    {
+      "consumerId": "baiv-platform",
+      "consumerName": "BAIV Platform",
+      "consumerType": "Application",
+      "usageContext": "Authorization, org chart, RACI matrix",
+      "contactEmail": "ajrmooreuk@gmail.com"
+    },
+    {
+      "consumerId": "w4m-platform",
+      "consumerName": "W4M Platform",
+      "consumerType": "Application",
+      "usageContext": "Multi-venture role management, access control",
+      "contactEmail": "ajrmooreuk@gmail.com"
+    },
+    {
+      "consumerId": "ai-agents",
+      "consumerName": "AI Agent System",
+      "consumerType": "AI System",
+      "usageContext": "Authorization queries, accountability resolution, org structure reasoning",
+      "contactEmail": "ajrmooreuk@gmail.com"
+    }
+  ],
+  "aiCapabilities": [
+    {
+      "capabilityId": "authorization",
+      "capabilityName": "Authorization Resolution",
+      "description": "Determine if a USER can perform an action on a resource",
+      "queryPattern": "Can {user} {action} {resource} in {organization}?"
+    },
+    {
+      "capabilityId": "raciQuery",
+      "capabilityName": "RACI Query",
+      "description": "Find which ROLES have specific RACI accountability for an activity",
+      "queryPattern": "Who is {raciType} for {activity}?"
+    },
+    {
+      "capabilityId": "raciMatrixGeneration",
+      "capabilityName": "RACI Matrix Generation",
+      "description": "Generate complete RACI matrix for a process",
+      "queryPattern": "Generate RACI matrix for {process}"
+    },
+    {
+      "capabilityId": "capabilityGapAnalysis",
+      "capabilityName": "Capability Gap Analysis",
+      "description": "Identify organizational capability gaps",
+      "queryPattern": "What capabilities are missing in {organization}?"
+    },
+    {
+      "capabilityId": "organizationalGraph",
+      "capabilityName": "Organizational Graph",
+      "description": "Visualize organizational structure",
+      "queryPattern": "Show org chart for {organization}"
+    },
+    {
+      "capabilityId": "crossVentureRolePortfolio",
+      "capabilityName": "Cross-Venture Role Portfolio",
+      "description": "View all roles an individual holds across ventures",
+      "queryPattern": "What roles does {individual} hold?"
+    },
+    {
+      "capabilityId": "strategicAccountabilityChain",
+      "capabilityName": "Strategic Accountability Chain",
+      "description": "Trace accountability from strategy to roles via RACI",
+      "queryPattern": "Who is accountable for implementing {strategy component}?"
+    }
+  ],
+  "qualityMetrics": {
+    "schemaOrgAlignment": {
+      "score": 0.71,
+      "target": 0.80,
+      "status": "acceptable",
+      "note": "71% is domain-appropriate for governance ontology"
+    },
+    "entityReuseRate": {
+      "score": null,
+      "target": 0.80,
+      "status": "pending",
+      "note": "To be measured after 3 months of production use"
+    },
+    "validationPassRate": {
+      "score": 1.0,
+      "target": 0.95,
+      "status": "passed",
+      "note": "100% of valid test instances passed validation"
+    },
+    "agentQuerySuccess": {
+      "score": null,
+      "target": 0.90,
+      "status": "pending",
+      "note": "To be measured after 2 weeks of agent testing"
+    },
+    "documentationCompleteness": {
+      "score": 1.0,
+      "target": 0.95,
+      "status": "passed",
+      "note": "100% of entities, properties, and relationships documented"
+    },
+    "relationshipDensity": {
+      "score": 1.375,
+      "target": null,
+      "status": "appropriate",
+      "note": "Suitable for organizational governance domain"
+    },
+    "namingConventionCompliance": {
+      "score": 1.0,
+      "target": 1.0,
+      "status": "passed",
+      "note": "All naming conventions consistently applied"
+    }
+  },
+  "artifacts": [
+    {
+      "artifactType": "Ontology Definition",
+      "format": "JSON-LD",
+      "filename": "pf-roles-raci-rbac-ontology-v3.0.0.jsonld",
+      "url": "/mnt/user-data/outputs/pf-roles-raci-rbac-ontology-v3.0.0.jsonld",
+      "dateGenerated": "2025-10-11",
+      "checksum": null
+    },
+    {
+      "artifactType": "Glossary",
+      "format": "JSON",
+      "filename": "pf-roles-raci-rbac-glossary-v3.0.0.json",
+      "url": "/mnt/user-data/outputs/pf-roles-raci-rbac-glossary-v3.0.0.json",
+      "dateGenerated": "2025-10-11",
+      "checksum": null
+    },
+    {
+      "artifactType": "Test Data",
+      "format": "JSON",
+      "filename": "pf-roles-raci-rbac-test-data-v3.0.0.json",
+      "url": "/mnt/user-data/outputs/pf-roles-raci-rbac-test-data-v3.0.0.json",
+      "dateGenerated": "2025-10-11",
+      "checksum": null
+    },
+    {
+      "artifactType": "Validation Report",
+      "format": "Markdown",
+      "filename": "pf-roles-raci-rbac-validation-report-v3.0.0.md",
+      "url": "/mnt/user-data/outputs/pf-roles-raci-rbac-validation-report-v3.0.0.md",
+      "dateGenerated": "2025-10-11",
+      "checksum": null
+    },
+    {
+      "artifactType": "Registry Entry",
+      "format": "JSON",
+      "filename": "pf-roles-raci-rbac-registry-entry-v3.0.0.json",
+      "url": "/mnt/user-data/outputs/pf-roles-raci-rbac-registry-entry-v3.0.0.json",
+      "dateGenerated": "2025-10-11",
+      "checksum": null
+    }
+  ],
+  "changeHistory": [
+    {
+      "version": "3.0.0",
+      "date": "2025-10-11",
+      "changeType": "Initial Release",
+      "author": "Amanda Moore",
+      "changes": [
+        "Initial ontology creation",
+        "Defined 8 core entities: ExecutiveRole, FunctionalRole, RoleAssignment, RACIAssignment, Capability, Permission, AccessPolicy, AccessCondition",
+        "Established 21 C-Suite executive roles from VSOM framework",
+        "Defined 9 core relationships",
+        "Specified 10 business rules",
+        "Mapped 7 AI agent capabilities",
+        "Integrated with dependent ontologies: individual, user, organization, vsom-strategy",
+        "Generated comprehensive glossary with 13 defined terms",
+        "Created 42 test instances with proper distribution (60% typical, 20% edge, 10% boundary, 10% invalid)",
+        "Validated with 100% pass rate for valid instances",
+        "Approved for production registration"
+      ],
+      "breakingChanges": false,
+      "migrationRequired": false,
+      "validationStatus": "passed",
+      "approver": "Amanda Moore (Ontology Architect)"
+    }
+  ],
+  "governance": {
+    "owner": "Amanda Moore",
+    "ownerEmail": "ajrmooreuk@gmail.com",
+    "maintainer": "Platform Foundation Team",
+    "changeControlBoard": ["Amanda Moore"],
+    "approvalRequired": true,
+    "visibilityLevel": "internal",
+    "accessControl": {
+      "read": ["all-authenticated-users"],
+      "write": ["ontology-architects"],
+      "approve": ["change-control-board"]
+    }
+  },
+  "technicalDetails": {
+    "namespace": "https://platform-foundation.io/ontology/v1/",
+    "namespacePrefix": "pf",
+    "additionalNamespaces": {
+      "raci": "https://platform-foundation.io/ontology/v1/raci/",
+      "rbac": "https://platform-foundation.io/ontology/v1/rbac/"
+    },
+    "serialization": ["JSON-LD", "Turtle", "RDF/XML"],
+    "contentType": "application/ld+json",
+    "storageLocation": "/data/ontologies/platform-foundation/roles-raci-rbac/v3.0.0/",
+    "gitRepository": "https://github.com/platform-foundation/ontologies",
+    "gitBranch": "main",
+    "gitTag": "roles-raci-rbac-v3.0.0"
+  },
+  "documentation": {
+    "userGuide": "/docs/ontologies/roles-raci-rbac/user-guide.md",
+    "developerGuide": "/docs/ontologies/roles-raci-rbac/developer-guide.md",
+    "apiReference": "/docs/ontologies/roles-raci-rbac/api-reference.md",
+    "integrationGuide": "/docs/ontologies/roles-raci-rbac/integration-guide.md",
+    "exampleQueries": "/docs/ontologies/roles-raci-rbac/example-queries.md"
+  },
+  "keywords": [
+    "roles",
+    "raci",
+    "rbac",
+    "organizational governance",
+    "access control",
+    "accountability",
+    "executive roles",
+    "permissions",
+    "authorization",
+    "c-suite",
+    "matrix organization",
+    "role-based access control",
+    "multi-venture"
+  ],
+  "notes": "This ontology is designed to support multi-venture scenarios where individuals hold multiple roles across different organizations. It properly separates INDIVIDUALS (who fill roles), USERS (who access systems), and ROLES (organizational positions). RACI applies to ROLES for accountability, while RBAC governs USERS through role-inherited permissions. Schema.org alignment is intentionally 71% as governance concepts (RACI, RBAC) extend beyond schema.org scope."
+}

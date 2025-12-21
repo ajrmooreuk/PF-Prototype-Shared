@@ -1,0 +1,480 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "ontology": {
+    "metadata": {
+      "version": "1.0.0",
+      "name": "AI-Led Business VSOM Ontology",
+      "description": "Business ontology for Vision, Strategy, Objectives, and Metrics aligned with AI transformation",
+      "domain": "AI Business Transformation",
+      "created": "2025-09-11",
+      "author": "AI BI Digital Transformation Architecture"
+    },
+    "namespace": {
+      "vsom": "https://business.ai/ontology/vsom#",
+      "ai": "https://business.ai/ontology/ai#",
+      "metrics": "https://business.ai/ontology/metrics#"
+    },
+    "core_entities": {
+      "vision": {
+        "id": "vsom:Vision",
+        "type": "Strategic_Entity",
+        "definition": "Long-term aspirational state of the AI-led organization",
+        "attributes": {
+          "vision_statement": {
+            "type": "string",
+            "required": true,
+            "example": "Become the leading AI automation platform transforming enterprise operations globally"
+          },
+          "time_horizon": {
+            "type": "string",
+            "enum": ["3-5 years", "5-10 years", "10+ years"],
+            "default": "5-10 years"
+          },
+          "core_values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "examples": ["Innovation", "Automation", "Intelligence", "Scalability", "Ethics"]
+          },
+          "market_position": {
+            "type": "string",
+            "enum": ["Leader", "Challenger", "Disruptor", "Specialist"]
+          },
+          "ai_maturity_target": {
+            "type": "string",
+            "enum": ["AI-Enabled", "AI-First", "AI-Native", "Autonomous"]
+          }
+        },
+        "relationships": {
+          "drives": ["vsom:Strategy"],
+          "measured_by": ["metrics:VisionMetrics"],
+          "influenced_by": ["Market_Trends", "Technology_Evolution"]
+        }
+      },
+      "strategy": {
+        "id": "vsom:Strategy",
+        "type": "Strategic_Entity",
+        "definition": "Actionable approach to achieve the vision through AI capabilities",
+        "attributes": {
+          "strategy_id": {
+            "type": "string",
+            "pattern": "^STR-[0-9]{4}$"
+          },
+          "name": {
+            "type": "string",
+            "required": true
+          },
+          "description": {
+            "type": "string",
+            "required": true
+          },
+          "strategy_type": {
+            "type": "string",
+            "enum": ["Growth", "Innovation", "Transformation", "Platform", "Ecosystem"]
+          },
+          "ai_focus_areas": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "area": {
+                  "type": "string",
+                  "enum": ["Agentic AI", "Process Automation", "Predictive Analytics", "NLP", "Computer Vision", "MLOps"]
+                },
+                "priority": {
+                  "type": "string",
+                  "enum": ["Critical", "High", "Medium", "Low"]
+                },
+                "investment_level": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "strategic_pillars": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pillar_name": {"type": "string"},
+                "description": {"type": "string"},
+                "key_initiatives": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              }
+            }
+          },
+          "competitive_advantage": {
+            "type": "object",
+            "properties": {
+              "differentiators": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "moat": {"type": "string"},
+              "unique_value_proposition": {"type": "string"}
+            }
+          },
+          "implementation_phases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "phase": {"type": "integer"},
+                "name": {"type": "string"},
+                "duration_months": {"type": "integer"},
+                "key_deliverables": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "relationships": {
+          "aligned_with": ["vsom:Vision"],
+          "implemented_through": ["vsom:Objectives"],
+          "measured_by": ["metrics:StrategyMetrics"],
+          "depends_on": ["Resources", "Capabilities", "Technology_Stack"]
+        }
+      },
+      "objectives": {
+        "id": "vsom:Objectives",
+        "type": "Tactical_Entity",
+        "definition": "Specific, measurable goals supporting strategy execution",
+        "attributes": {
+          "objective_id": {
+            "type": "string",
+            "pattern": "^OBJ-[0-9]{4}$"
+          },
+          "title": {
+            "type": "string",
+            "required": true
+          },
+          "description": {
+            "type": "string",
+            "required": true
+          },
+          "objective_type": {
+            "type": "string",
+            "enum": ["Financial", "Customer", "Process", "Learning", "Technology", "Innovation"]
+          },
+          "smart_criteria": {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "specific": {"type": "string"},
+              "measurable": {"type": "string"},
+              "achievable": {"type": "boolean"},
+              "relevant": {"type": "string"},
+              "time_bound": {
+                "type": "object",
+                "properties": {
+                  "start_date": {"type": "string", "format": "date"},
+                  "end_date": {"type": "string", "format": "date"},
+                  "milestones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {"type": "string", "format": "date"},
+                        "description": {"type": "string"},
+                        "success_criteria": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "ai_enablement": {
+            "type": "object",
+            "properties": {
+              "automation_level": {
+                "type": "string",
+                "enum": ["Manual", "Assisted", "Automated", "Autonomous"]
+              },
+              "ai_components": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["ML Models", "AI Agents", "RPA", "Decision Intelligence", "Cognitive Services"]
+                }
+              },
+              "data_requirements": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["P0-Critical", "P1-High", "P2-Medium", "P3-Low"]
+          },
+          "owner": {
+            "type": "object",
+            "properties": {
+              "role": {"type": "string"},
+              "department": {"type": "string"},
+              "accountability": {"type": "string"}
+            }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dependency_id": {"type": "string"},
+                "type": {
+                  "type": "string",
+                  "enum": ["Technical", "Resource", "Process", "External"]
+                },
+                "criticality": {
+                  "type": "string",
+                  "enum": ["Blocker", "Critical", "Important", "Nice-to-have"]
+                }
+              }
+            }
+          },
+          "risk_assessment": {
+            "type": "object",
+            "properties": {
+              "risk_level": {
+                "type": "string",
+                "enum": ["Low", "Medium", "High", "Critical"]
+              },
+              "mitigation_strategies": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          }
+        },
+        "relationships": {
+          "supports": ["vsom:Strategy"],
+          "measured_by": ["metrics:KPIs", "metrics:OKRs"],
+          "decomposed_into": ["Key_Results", "Initiatives"],
+          "influenced_by": ["Resources", "Constraints"]
+        }
+      },
+      "metrics": {
+        "id": "vsom:Metrics",
+        "type": "Measurement_Entity",
+        "definition": "Quantifiable measures to track progress and performance",
+        "attributes": {
+          "metric_id": {
+            "type": "string",
+            "pattern": "^MET-[0-9]{4}$"
+          },
+          "name": {
+            "type": "string",
+            "required": true
+          },
+          "category": {
+            "type": "string",
+            "enum": ["KPI", "OKR", "SLA", "North Star", "Leading", "Lagging", "Diagnostic"]
+          },
+          "measurement_type": {
+            "type": "string",
+            "enum": ["Quantitative", "Qualitative", "Binary", "Composite"]
+          },
+          "formula": {
+            "type": "object",
+            "properties": {
+              "calculation": {"type": "string"},
+              "variables": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "source": {"type": "string"},
+                    "unit": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "target": {
+            "type": "object",
+            "properties": {
+              "value": {"type": "number"},
+              "unit": {"type": "string"},
+              "threshold_green": {"type": "number"},
+              "threshold_yellow": {"type": "number"},
+              "threshold_red": {"type": "number"}
+            }
+          },
+          "current_value": {
+            "type": "object",
+            "properties": {
+              "value": {"type": "number"},
+              "as_of_date": {"type": "string", "format": "date-time"},
+              "trend": {
+                "type": "string",
+                "enum": ["Improving", "Stable", "Declining"]
+              }
+            }
+          },
+          "reporting": {
+            "type": "object",
+            "properties": {
+              "frequency": {
+                "type": "string",
+                "enum": ["Real-time", "Daily", "Weekly", "Monthly", "Quarterly", "Annual"]
+              },
+              "automation": {
+                "type": "object",
+                "properties": {
+                  "data_source": {"type": "string"},
+                  "collection_method": {
+                    "type": "string",
+                    "enum": ["API", "Database", "Manual", "AI-Generated", "IoT"]
+                  },
+                  "validation_rules": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                  }
+                }
+              },
+              "visualization": {
+                "type": "string",
+                "enum": ["Dashboard", "Scorecard", "Chart", "Heatmap", "Gauge"]
+              }
+            }
+          },
+          "ai_metrics": {
+            "type": "object",
+            "properties": {
+              "model_performance": {
+                "type": "object",
+                "properties": {
+                  "accuracy": {"type": "number"},
+                  "precision": {"type": "number"},
+                  "recall": {"type": "number"},
+                  "f1_score": {"type": "number"}
+                }
+              },
+              "automation_metrics": {
+                "type": "object",
+                "properties": {
+                  "tasks_automated": {"type": "integer"},
+                  "time_saved_hours": {"type": "number"},
+                  "cost_reduction_percentage": {"type": "number"},
+                  "error_reduction_percentage": {"type": "number"}
+                }
+              },
+              "business_impact": {
+                "type": "object",
+                "properties": {
+                  "revenue_impact": {"type": "number"},
+                  "efficiency_gain": {"type": "number"},
+                  "customer_satisfaction_delta": {"type": "number"}
+                }
+              }
+            }
+          }
+        },
+        "relationships": {
+          "measures": ["vsom:Objectives", "vsom:Strategy", "vsom:Vision"],
+          "influences": ["Decision_Making", "Resource_Allocation"],
+          "reported_to": ["Stakeholders", "Board", "Leadership"]
+        }
+      }
+    },
+    "relationships": {
+      "hierarchical": {
+        "vision_to_strategy": {
+          "type": "one-to-many",
+          "parent": "vsom:Vision",
+          "child": "vsom:Strategy",
+          "cardinality": "1:N"
+        },
+        "strategy_to_objectives": {
+          "type": "one-to-many",
+          "parent": "vsom:Strategy",
+          "child": "vsom:Objectives",
+          "cardinality": "1:N"
+        },
+        "objectives_to_metrics": {
+          "type": "many-to-many",
+          "entities": ["vsom:Objectives", "vsom:Metrics"],
+          "cardinality": "M:N"
+        }
+      },
+      "causal": {
+        "metrics_influence_objectives": {
+          "type": "feedback_loop",
+          "from": "vsom:Metrics",
+          "to": "vsom:Objectives",
+          "mechanism": "performance_adjustment"
+        }
+      }
+    },
+    "business_rules": {
+      "alignment": [
+        {
+          "rule_id": "BR001",
+          "description": "Every objective must align with at least one strategy",
+          "enforcement": "mandatory"
+        },
+        {
+          "rule_id": "BR002",
+          "description": "Each strategy must have measurable KPIs",
+          "enforcement": "mandatory"
+        },
+        {
+          "rule_id": "BR003",
+          "description": "AI initiatives must have defined success metrics",
+          "enforcement": "mandatory"
+        }
+      ],
+      "governance": [
+        {
+          "rule_id": "GOV001",
+          "description": "Quarterly review of all metrics against targets",
+          "enforcement": "mandatory"
+        },
+        {
+          "rule_id": "GOV002",
+          "description": "Annual strategy alignment assessment",
+          "enforcement": "mandatory"
+        }
+      ]
+    },
+    "implementation_framework": {
+      "maturity_model": {
+        "levels": [
+          {
+            "level": 1,
+            "name": "Initial",
+            "characteristics": ["Ad-hoc metrics", "Undefined strategy", "Reactive"]
+          },
+          {
+            "level": 2,
+            "name": "Managed",
+            "characteristics": ["Basic KPIs", "Documented strategy", "Some automation"]
+          },
+          {
+            "level": 3,
+            "name": "Defined",
+            "characteristics": ["Comprehensive metrics", "Aligned objectives", "AI-enabled"]
+          },
+          {
+            "level": 4,
+            "name": "Optimized",
+            "characteristics": ["Predictive metrics", "Dynamic strategy", "AI-driven"]
+          },
+          {
+            "level": 5,
+            "name": "Autonomous",
+            "characteristics": ["Self-adjusting", "AI-orchestrated", "Continuous optimization"]
+          }
+        ]
+      }
+    }
+  }
+}

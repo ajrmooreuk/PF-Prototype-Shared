@@ -1,0 +1,1329 @@
+{
+  "@context": {
+    "@base": "https://ontology.platformeco.com/",
+    "schema": "https://schema.org/",
+    "baiv": "https://ontology.baiv.com/baiv#",
+    "pf": "https://ontology.platformeco.com/platform#",
+    "venture": "https://ontology.platformeco.com/venture#",
+    "ecosystem": "https://ontology.platformeco.com/ecosystem#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@id": "platform-ecosystem-test-data",
+  "@type": "TestDataSet",
+  "version": "2.0.0",
+  "generatedDate": "2025-10-03",
+  "description": "Comprehensive test data for Platform Ecosystem Ontology validation and development",
+  
+  "testCategories": {
+    "typical_cases": {
+      "description": "Normal operational scenarios (60% of test data)",
+      "percentage": 60
+    },
+    "edge_cases": {
+      "description": "Unusual but valid scenarios (20% of test data)", 
+      "percentage": 20
+    },
+    "boundary_cases": {
+      "description": "At constraint limits (10% of test data)",
+      "percentage": 10
+    },
+    "invalid_cases": {
+      "description": "Constraint violations for validation testing (10% of test data)",
+      "percentage": 10
+    }
+  },
+
+  "instances": {
+
+    "platform_instances": {
+      "typical_cases": [
+        {
+          "@id": "pf-platform-prod-v3.2",
+          "@type": "pf:PlatformInstance",
+          "pf:platformId": "pf-platform-prod-v3.2",
+          "schema:name": "PF Platform Production",
+          "schema:description": "Production instance of the multi-venture AI platform ecosystem",
+          "schema:version": "3.2.1",
+          "pf:supportedVentures": [
+            "venture:ai-visibility-main",
+            "venture:ai-strategy-consulting", 
+            "venture:idea-to-pmf-accelerator"
+          ],
+          "pf:registeredProducts": [
+            "product:crm-integration-suite",
+            "product:ai-content-optimizer",
+            "product:competitive-intelligence-dashboard"
+          ],
+          "pf:enabledServices": [
+            "service:ai-strategy-consulting",
+            "service:digital-transformation-audit",
+            "service:mvp-acceleration"
+          ],
+          "pf:connectedApps": [
+            "app:prospect-scanner-mobile",
+            "app:analytics-dashboard",
+            "app:partner-portal"
+          ],
+          "pf:orchestratedNetworks": [
+            "network:fintech-referral-network",
+            "network:saas-integration-partners"
+          ],
+          "schema:dateCreated": "2024-01-15T00:00:00Z",
+          "schema:dateModified": "2025-09-28T14:30:00Z"
+        },
+        {
+          "@id": "pf-platform-staging-v3.3",
+          "@type": "pf:PlatformInstance", 
+          "pf:platformId": "pf-platform-staging-v3.3",
+          "schema:name": "PF Platform Staging",
+          "schema:description": "Staging environment for testing new venture integrations",
+          "schema:version": "3.3.0-beta",
+          "pf:supportedVentures": [
+            "venture:ai-visibility-main",
+            "venture:saas-augmentation-pilot"
+          ],
+          "pf:registeredProducts": [
+            "product:beta-analytics-engine"
+          ],
+          "pf:enabledServices": [
+            "service:pilot-transformation-consulting"
+          ],
+          "pf:connectedApps": [
+            "app:beta-testing-suite"
+          ],
+          "pf:orchestratedNetworks": [],
+          "schema:dateCreated": "2025-09-01T00:00:00Z",
+          "schema:dateModified": "2025-10-02T09:15:00Z"
+        },
+        {
+          "@id": "pf-platform-enterprise-v3.1",
+          "@type": "pf:PlatformInstance",
+          "pf:platformId": "pf-platform-enterprise-v3.1", 
+          "schema:name": "PF Platform Enterprise",
+          "schema:description": "Enterprise-grade platform for large customer deployments",
+          "schema:version": "3.1.5",
+          "pf:supportedVentures": [
+            "venture:ai-strategy-consulting",
+            "venture:idea-to-pmf-accelerator",
+            "venture:enterprise-transformation"
+          ],
+          "pf:registeredProducts": [
+            "product:enterprise-crm-suite",
+            "product:advanced-analytics-platform",
+            "product:custom-ai-capabilities"
+          ],
+          "pf:enabledServices": [
+            "service:white-glove-consulting",
+            "service:enterprise-training",
+            "service:custom-development"
+          ],
+          "pf:connectedApps": [
+            "app:enterprise-dashboard",
+            "app:executive-reporting",
+            "app:integration-management"
+          ],
+          "pf:orchestratedNetworks": [
+            "network:enterprise-partner-ecosystem",
+            "network:system-integrator-network"
+          ],
+          "schema:dateCreated": "2023-06-01T00:00:00Z",
+          "schema:dateModified": "2025-09-30T16:45:00Z"
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "pf-platform-minimal-v1.0",
+          "@type": "pf:PlatformInstance",
+          "pf:platformId": "pf-platform-minimal-v1.0",
+          "schema:name": "Minimal Platform Instance",
+          "schema:description": "Minimal viable platform with single venture",
+          "schema:version": "1.0.0",
+          "pf:supportedVentures": [
+            "venture:single-focus-pilot"
+          ],
+          "pf:registeredProducts": [],
+          "pf:enabledServices": [],
+          "pf:connectedApps": [],
+          "pf:orchestratedNetworks": [],
+          "schema:dateCreated": "2025-10-01T00:00:00Z",
+          "schema:dateModified": "2025-10-01T00:00:00Z"
+        }
+      ],
+      "invalid_cases": [
+        {
+          "@id": "pf-platform-invalid-no-ventures",
+          "@type": "pf:PlatformInstance",
+          "pf:platformId": "pf-platform-invalid",
+          "schema:name": "Invalid Platform - No Ventures",
+          "pf:supportedVentures": [],
+          "expectedValidationError": "Platform must support at least one venture unit"
+        }
+      ]
+    },
+
+    "venture_units": {
+      "typical_cases": [
+        {
+          "@id": "venture:ai-visibility-main",
+          "@type": "venture:AIVisibilityVenture",
+          "schema:name": "AI Visibility Venture",
+          "schema:description": "Marketing-based AI visibility optimization beyond traditional SEO",
+          "venture:ventureType": "ai_visibility",
+          "venture:focusDomain": "Fintech AI Visibility & Market Positioning",
+          "venture:visibilityStrategy": "AI-driven content optimization with competitive intelligence integration",
+          "venture:targetMarket": [
+            "org:techcorp-target",
+            "org:fintech-startup-alpha",
+            "org:saas-scaleup-beta"
+          ],
+          "venture:offeredProducts": [
+            "product:ai-content-optimizer",
+            "product:competitive-intelligence-dashboard"
+          ],
+          "venture:deliveredServices": [
+            "service:visibility-audit",
+            "service:content-strategy-optimization"
+          ],
+          "venture:aiMarketingCapabilities": [
+            "capability:content-intelligence",
+            "capability:competitive-analysis"
+          ],
+          "schema:dateCreated": "2024-03-01T00:00:00Z",
+          "baiv:qualifiedCustomers": 42,
+          "baiv:activeEngagements": 18
+        },
+        {
+          "@id": "venture:ai-strategy-consulting",
+          "@type": "venture:AIStrategyVenture",
+          "schema:name": "AI Strategy & Innovation Venture",
+          "schema:description": "Strategic AI transformation consulting for competitive advantage",
+          "venture:ventureType": "ai_strategy_innovation",
+          "venture:focusDomain": "Enterprise AI Transformation & Innovation Acceleration",
+          "venture:targetMarket": [
+            "org:enterprise-corp",
+            "org:mid-market-leader",
+            "org:digital-native-scaler"
+          ],
+          "venture:offeredProducts": [
+            "product:strategy-framework-suite",
+            "product:innovation-tracking-platform"
+          ],
+          "venture:deliveredServices": [
+            "service:ai-strategy-consulting",
+            "service:innovation-acceleration",
+            "service:transformation-roadmapping"
+          ],
+          "venture:strategyFrameworks": [
+            "framework:vsom-ai-strategy",
+            "framework:innovation-pipeline",
+            "framework:competitive-positioning"
+          ],
+          "venture:innovationAccelerators": [
+            "accelerator:idea-validation",
+            "accelerator:mvp-rapid-development"
+          ],
+          "schema:dateCreated": "2024-01-15T00:00:00Z",
+          "baiv:qualifiedCustomers": 28,
+          "baiv:activeEngagements": 12
+        },
+        {
+          "@id": "venture:idea-to-pmf-accelerator",
+          "@type": "venture:IdeaToPMFVenture",
+          "schema:name": "Idea to PMF Acceleration Venture",
+          "schema:description": "Accelerating time to value from idea to MVP to product-market fit",
+          "venture:ventureType": "idea_to_pmf",
+          "venture:focusDomain": "Rapid Product Development & Market Validation",
+          "venture:targetMarket": [
+            "org:startup-early-stage",
+            "org:corporate-innovation-lab",
+            "org:entrepreneur-individual"
+          ],
+          "venture:offeredProducts": [
+            "product:mvp-development-platform",
+            "product:market-validation-suite"
+          ],
+          "venture:deliveredServices": [
+            "service:mvp-acceleration",
+            "service:market-validation",
+            "service:pmf-optimization"
+          ],
+          "venture:accelerationStages": [
+            "stage:idea-validation",
+            "stage:mvp-development", 
+            "stage:market-testing",
+            "stage:pmf-achievement"
+          ],
+          "venture:timeToValueMetrics": {
+            "averageIdeaToMVP": 45,
+            "averageMVPtoPMF": 120,
+            "successRate": 0.73
+          },
+          "schema:dateCreated": "2024-05-01T00:00:00Z",
+          "baiv:qualifiedCustomers": 67,
+          "baiv:activeEngagements": 34
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "venture:single-focus-pilot",
+          "@type": "venture:VentureUnit",
+          "schema:name": "Single Focus Pilot Venture",
+          "venture:ventureType": "other",
+          "venture:focusDomain": "Experimental Market Testing",
+          "venture:targetMarket": [
+            "org:pilot-test-organization"
+          ],
+          "venture:offeredProducts": [],
+          "venture:deliveredServices": [
+            "service:pilot-consulting"
+          ],
+          "schema:dateCreated": "2025-10-01T00:00:00Z",
+          "baiv:qualifiedCustomers": 1,
+          "baiv:activeEngagements": 1
+        }
+      ],
+      "boundary_cases": [
+        {
+          "@id": "venture:multi-domain-complex",
+          "@type": "venture:VentureUnit",
+          "schema:name": "Multi-Domain Complex Venture",
+          "venture:ventureType": "ai_strategy_innovation",
+          "venture:focusDomain": "Cross-Industry AI Strategy, Innovation Acceleration, Digital Transformation, Competitive Intelligence, and Market Positioning",
+          "venture:targetMarket": [
+            "org:target-1", "org:target-2", "org:target-3", "org:target-4", "org:target-5",
+            "org:target-6", "org:target-7", "org:target-8", "org:target-9", "org:target-10"
+          ],
+          "venture:offeredProducts": [
+            "product:prod-1", "product:prod-2", "product:prod-3", "product:prod-4", "product:prod-5"
+          ],
+          "venture:deliveredServices": [
+            "service:serv-1", "service:serv-2", "service:serv-3", "service:serv-4", "service:serv-5"
+          ],
+          "schema:dateCreated": "2024-01-01T00:00:00Z",
+          "baiv:qualifiedCustomers": 150,
+          "baiv:activeEngagements": 75
+        }
+      ],
+      "invalid_cases": [
+        {
+          "@id": "venture:invalid-no-type",
+          "@type": "venture:VentureUnit",
+          "schema:name": "Invalid Venture - Missing Type",
+          "venture:focusDomain": "Some Domain",
+          "expectedValidationError": "ventureType is required for all venture units"
+        }
+      ]
+    },
+
+    "optin_products": {
+      "typical_cases": [
+        {
+          "@id": "product:crm-integration-suite",
+          "@type": "pf:OptInProduct",
+          "schema:name": "CRM Integration Suite",
+          "schema:description": "Seamless integration with major CRM platforms using BAIV customer intelligence",
+          "pf:optInStatus": "active",
+          "pf:integrationLevel": "premium",
+          "pf:targetUsers": [
+            "user:sales-manager-sarah",
+            "user:admin-tech-lead"
+          ],
+          "pf:applicableOrganizations": [
+            "org:techcorp-target",
+            "org:enterprise-corp"
+          ],
+          "pf:revenueModel": {
+            "@type": "pf:RevenueModel",
+            "modelType": "subscription_revenue_share",
+            "platformShare": 0.25,
+            "partnerShare": 0.75,
+            "minimumRevenue": 1000
+          },
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "299.00",
+            "schema:priceCurrency": "USD",
+            "schema:priceValidUntil": "2025-12-31"
+          },
+          "schema:category": "Business Software",
+          "pf:features": [
+            "Salesforce integration",
+            "HubSpot integration", 
+            "Custom CRM API support",
+            "BAIV qualification sync",
+            "Automated lead scoring"
+          ],
+          "schema:dateCreated": "2024-02-01T00:00:00Z"
+        },
+        {
+          "@id": "product:ai-content-optimizer",
+          "@type": "pf:OptInProduct",
+          "schema:name": "AI Content Optimizer",
+          "schema:description": "AI-driven content optimization for visibility beyond traditional SEO",
+          "pf:optInStatus": "active",
+          "pf:integrationLevel": "standard",
+          "pf:targetUsers": [
+            "user:marketing-director",
+            "user:content-strategist"
+          ],
+          "pf:applicableOrganizations": [
+            "org:fintech-startup-alpha",
+            "org:saas-scaleup-beta"
+          ],
+          "pf:revenueModel": {
+            "@type": "pf:RevenueModel", 
+            "modelType": "usage_based_revenue_share",
+            "platformShare": 0.20,
+            "partnerShare": 0.80,
+            "minimumRevenue": 500
+          },
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "149.00",
+            "schema:priceCurrency": "USD",
+            "schema:priceValidUntil": "2025-12-31"
+          },
+          "schema:category": "Marketing Technology",
+          "pf:features": [
+            "AI content analysis",
+            "Competitive content benchmarking",
+            "SEO optimization recommendations",
+            "Brand voice consistency",
+            "Performance tracking"
+          ],
+          "schema:dateCreated": "2024-04-15T00:00:00Z"
+        },
+        {
+          "@id": "product:competitive-intelligence-dashboard",
+          "@type": "pf:OptInProduct",
+          "schema:name": "Competitive Intelligence Dashboard",
+          "schema:description": "Real-time competitive analysis and market positioning insights",
+          "pf:optInStatus": "active",
+          "pf:integrationLevel": "enterprise",
+          "pf:targetUsers": [
+            "user:strategy-executive",
+            "user:business-analyst"
+          ],
+          "pf:applicableOrganizations": [
+            "org:enterprise-corp",
+            "org:mid-market-leader"
+          ],
+          "pf:revenueModel": {
+            "@type": "pf:RevenueModel",
+            "modelType": "fixed_license_fee",
+            "platformShare": 0.30,
+            "partnerShare": 0.70,
+            "minimumRevenue": 5000
+          },
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "999.00",
+            "schema:priceCurrency": "USD",
+            "schema:priceValidUntil": "2025-12-31"
+          },
+          "schema:category": "Business Intelligence",
+          "pf:features": [
+            "Real-time competitor monitoring",
+            "Market trend analysis",
+            "Pricing intelligence",
+            "Feature gap analysis",
+            "Strategic recommendation engine"
+          ],
+          "schema:dateCreated": "2024-01-10T00:00:00Z"
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "product:beta-analytics-engine",
+          "@type": "pf:OptInProduct",
+          "schema:name": "Beta Analytics Engine",
+          "schema:description": "Experimental analytics platform for testing new AI capabilities",
+          "pf:optInStatus": "pending",
+          "pf:integrationLevel": "basic",
+          "pf:targetUsers": [
+            "user:beta-tester"
+          ],
+          "pf:applicableOrganizations": [
+            "org:pilot-test-organization"
+          ],
+          "pf:revenueModel": {
+            "@type": "pf:RevenueModel",
+            "modelType": "beta_testing_no_revenue",
+            "platformShare": 0.0,
+            "partnerShare": 0.0,
+            "minimumRevenue": 0
+          },
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "0.00",
+            "schema:priceCurrency": "USD",
+            "schema:priceValidUntil": "2025-11-30"
+          },
+          "schema:category": "Beta Software",
+          "pf:features": [
+            "Experimental AI models",
+            "Beta testing interface",
+            "Feedback collection system"
+          ],
+          "schema:dateCreated": "2025-09-01T00:00:00Z"
+        }
+      ],
+      "invalid_cases": [
+        {
+          "@id": "product:invalid-no-status",
+          "@type": "pf:OptInProduct",
+          "schema:name": "Invalid Product - No Status",
+          "schema:description": "Product without required opt-in status",
+          "pf:integrationLevel": "standard",
+          "expectedValidationError": "optInStatus is required for all opted-in products"
+        }
+      ]
+    },
+
+    "optin_services": {
+      "typical_cases": [
+        {
+          "@id": "service:ai-strategy-consulting",
+          "@type": "pf:OptInService",
+          "schema:name": "AI Strategy Consulting",
+          "schema:description": "Comprehensive AI strategy development using platform intelligence",
+          "pf:serviceCategory": "consulting",
+          "pf:deliveryMode": "white_glove",
+          "pf:aiAugmentation": [
+            "capability:competitive-analysis",
+            "capability:maturity-assessment",
+            "capability:strategy-optimization"
+          ],
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "15000.00",
+            "schema:priceCurrency": "USD",
+            "schema:description": "12-week AI strategy development program"
+          },
+          "pf:deliveryTimeline": "12 weeks",
+          "pf:successMetrics": [
+            "AI maturity improvement >2 levels",
+            "Strategic clarity score >85%", 
+            "Implementation roadmap completion"
+          ],
+          "schema:dateCreated": "2024-01-20T00:00:00Z"
+        },
+        {
+          "@id": "service:mvp-acceleration",
+          "@type": "pf:OptInService",
+          "schema:name": "MVP Acceleration Service",
+          "schema:description": "Rapid MVP development with AI-enhanced market validation",
+          "pf:serviceCategory": "implementation",
+          "pf:deliveryMode": "assisted",
+          "pf:aiAugmentation": [
+            "capability:market-validation",
+            "capability:feature-prioritization",
+            "capability:user-feedback-analysis"
+          ],
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "8500.00",
+            "schema:priceCurrency": "USD",
+            "schema:description": "6-week MVP development sprint"
+          },
+          "pf:deliveryTimeline": "6 weeks",
+          "pf:successMetrics": [
+            "MVP completion within timeline",
+            "User validation score >70%",
+            "Market fit indicators positive"
+          ],
+          "schema:dateCreated": "2024-05-15T00:00:00Z"
+        },
+        {
+          "@id": "service:digital-transformation-audit",
+          "@type": "pf:OptInService",
+          "schema:name": "Digital Transformation Audit",
+          "schema:description": "Comprehensive assessment of digital maturity and transformation opportunities",
+          "pf:serviceCategory": "support",
+          "pf:deliveryMode": "managed",
+          "pf:aiAugmentation": [
+            "capability:maturity-assessment",
+            "capability:gap-analysis",
+            "capability:recommendation-engine"
+          ],
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "5000.00",
+            "schema:priceCurrency": "USD",
+            "schema:description": "4-week comprehensive audit"
+          },
+          "pf:deliveryTimeline": "4 weeks",
+          "pf:successMetrics": [
+            "Complete maturity assessment",
+            "Prioritized recommendation list",
+            "ROI projections for top 5 initiatives"
+          ],
+          "schema:dateCreated": "2024-03-01T00:00:00Z"
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "service:pilot-transformation-consulting",
+          "@type": "pf:OptInService",
+          "schema:name": "Pilot Transformation Consulting",
+          "schema:description": "Experimental consulting service for testing new methodologies",
+          "pf:serviceCategory": "consulting",
+          "pf:deliveryMode": "self_service",
+          "pf:aiAugmentation": [
+            "capability:experimental-analysis"
+          ],
+          "schema:offers": {
+            "@type": "schema:Offer",
+            "schema:price": "1000.00",
+            "schema:priceCurrency": "USD",
+            "schema:description": "2-week pilot consulting engagement"
+          },
+          "pf:deliveryTimeline": "2 weeks",
+          "pf:successMetrics": [
+            "Methodology validation",
+            "Customer satisfaction >60%"
+          ],
+          "schema:dateCreated": "2025-09-01T00:00:00Z"
+        }
+      ],
+      "invalid_cases": [
+        {
+          "@id": "service:invalid-no-category",
+          "@type": "pf:OptInService",
+          "schema:name": "Invalid Service - No Category",
+          "schema:description": "Service without required category",
+          "pf:deliveryMode": "assisted",
+          "expectedValidationError": "serviceCategory is required for all opted-in services"
+        }
+      ]
+    },
+
+    "platform_users": {
+      "typical_cases": [
+        {
+          "@id": "user:sales-manager-sarah",
+          "@type": "pf:PlatformUser",
+          "schema:name": "Sarah Chen",
+          "schema:email": "sarah.chen@techcorp.com",
+          "schema:jobTitle": "Sales Manager",
+          "pf:userRole": "admin",
+          "pf:organizationAffiliation": "org:techcorp-target",
+          "pf:accessibleProducts": [
+            "product:crm-integration-suite",
+            "product:competitive-intelligence-dashboard"
+          ],
+          "pf:accessibleServices": [
+            "service:ai-strategy-consulting",
+            "service:digital-transformation-audit"
+          ],
+          "pf:usagePatterns": {
+            "@type": "pf:UsagePattern",
+            "loginFrequency": "daily",
+            "primaryFeatures": ["lead_scoring", "competitive_analysis"],
+            "averageSessionDuration": 45,
+            "lastActive": "2025-10-02T16:30:00Z"
+          },
+          "schema:dateCreated": "2024-06-15T00:00:00Z"
+        },
+        {
+          "@id": "user:marketing-director",
+          "@type": "pf:PlatformUser",
+          "schema:name": "Marcus Rodriguez",
+          "schema:email": "marcus@fintechstartup.com",
+          "schema:jobTitle": "Marketing Director",
+          "pf:userRole": "end_user",
+          "pf:organizationAffiliation": "org:fintech-startup-alpha",
+          "pf:accessibleProducts": [
+            "product:ai-content-optimizer"
+          ],
+          "pf:accessibleServices": [
+            "service:digital-transformation-audit"
+          ],
+          "pf:usagePatterns": {
+            "@type": "pf:UsagePattern",
+            "loginFrequency": "weekly",
+            "primaryFeatures": ["content_optimization", "competitor_benchmarking"],
+            "averageSessionDuration": 30,
+            "lastActive": "2025-09-28T14:20:00Z"
+          },
+          "schema:dateCreated": "2024-08-10T00:00:00Z"
+        },
+        {
+          "@id": "user:partner-affiliate",
+          "@type": "pf:PlatformUser",
+          "schema:name": "Jennifer Liu",
+          "schema:email": "jennifer@integrationpartners.com",
+          "schema:jobTitle": "Partner Success Manager",
+          "pf:userRole": "partner",
+          "pf:organizationAffiliation": "org:integration-partner-xyz",
+          "pf:accessibleProducts": [
+            "product:crm-integration-suite"
+          ],
+          "pf:accessibleServices": [
+            "service:mvp-acceleration"
+          ],
+          "pf:usagePatterns": {
+            "@type": "pf:UsagePattern",
+            "loginFrequency": "monthly",
+            "primaryFeatures": ["partner_portal", "revenue_tracking"],
+            "averageSessionDuration": 60,
+            "lastActive": "2025-09-25T10:15:00Z"
+          },
+          "schema:dateCreated": "2024-07-20T00:00:00Z"
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "user:beta-tester",
+          "@type": "pf:PlatformUser",
+          "schema:name": "Alex Kim",
+          "schema:email": "alex@pilottest.com",
+          "schema:jobTitle": "Beta Tester",
+          "pf:userRole": "end_user",
+          "pf:organizationAffiliation": "org:pilot-test-organization",
+          "pf:accessibleProducts": [
+            "product:beta-analytics-engine"
+          ],
+          "pf:accessibleServices": [
+            "service:pilot-transformation-consulting"
+          ],
+          "pf:usagePatterns": {
+            "@type": "pf:UsagePattern",
+            "loginFrequency": "daily",
+            "primaryFeatures": ["beta_testing", "feedback_submission"],
+            "averageSessionDuration": 120,
+            "lastActive": "2025-10-03T08:00:00Z"
+          },
+          "schema:dateCreated": "2025-09-01T00:00:00Z"
+        }
+      ],
+      "boundary_cases": [
+        {
+          "@id": "user:multi-role-user",
+          "@type": "pf:PlatformUser",
+          "schema:name": "Dr. Priya Patel",
+          "schema:email": "priya.patel@complexcorp.com",
+          "schema:jobTitle": "Chief Technology Officer / Strategy Consultant / Board Advisor",
+          "pf:userRole": "admin",
+          "pf:organizationAffiliation": "org:multi-domain-complex",
+          "pf:accessibleProducts": [
+            "product:crm-integration-suite",
+            "product:ai-content-optimizer", 
+            "product:competitive-intelligence-dashboard",
+            "product:enterprise-crm-suite",
+            "product:advanced-analytics-platform"
+          ],
+          "pf:accessibleServices": [
+            "service:ai-strategy-consulting",
+            "service:mvp-acceleration",
+            "service:digital-transformation-audit",
+            "service:white-glove-consulting",
+            "service:enterprise-training"
+          ],
+          "pf:usagePatterns": {
+            "@type": "pf:UsagePattern",
+            "loginFrequency": "multiple_daily",
+            "primaryFeatures": ["all_features"],
+            "averageSessionDuration": 180,
+            "lastActive": "2025-10-03T07:45:00Z"
+          },
+          "schema:dateCreated": "2023-12-01T00:00:00Z"
+        }
+      ],
+      "invalid_cases": [
+        {
+          "@id": "user:invalid-no-role",
+          "@type": "pf:PlatformUser",
+          "schema:name": "Invalid User",
+          "schema:email": "invalid@example.com",
+          "pf:organizationAffiliation": "org:some-org",
+          "expectedValidationError": "userRole is required for all platform users"
+        }
+      ]
+    },
+
+    "target_organizations": {
+      "typical_cases": [
+        {
+          "@id": "org:techcorp-target",
+          "@type": "baiv:QualifiedProspectOrganization",
+          "schema:name": "TechCorp Solutions",
+          "schema:description": "Mid-market software company specializing in enterprise solutions",
+          "schema:numberOfEmployees": 250,
+          "schema:foundingDate": "2018-03-15",
+          "baiv:industry": "Software/SaaS",
+          "baiv:baivFitScore": 78,
+          "baiv:digitalMaturityScore": 9,
+          "baiv:qualificationLevel": "premium",
+          "baiv:targetedByVentures": [
+            "venture:ai-visibility-main",
+            "venture:ai-strategy-consulting"
+          ],
+          "pf:platformUsers": [
+            "user:sales-manager-sarah",
+            "user:admin-tech-lead"
+          ],
+          "ecosystem:networkParticipation": [
+            "network:saas-integration-partners"
+          ],
+          "baiv:lastEngagement": "2025-09-15T00:00:00Z",
+          "baiv:opportunityValue": 45000
+        },
+        {
+          "@id": "org:fintech-startup-alpha",
+          "@type": "baiv:ProspectOrganization",
+          "schema:name": "FinTech Startup Alpha",
+          "schema:description": "Early-stage fintech focusing on AI-driven investment platforms",
+          "schema:numberOfEmployees": 35,
+          "schema:foundingDate": "2023-01-10",
+          "baiv:industry": "Financial Technology",
+          "baiv:baivFitScore": 85,
+          "baiv:digitalMaturityScore": 7,
+          "baiv:qualificationLevel": "standard",
+          "baiv:targetedByVentures": [
+            "venture:ai-visibility-main",
+            "venture:idea-to-pmf-accelerator"
+          ],
+          "pf:platformUsers": [
+            "user:marketing-director"
+          ],
+          "ecosystem:networkParticipation": [
+            "network:fintech-referral-network"
+          ],
+          "baiv:lastEngagement": "2025-09-28T00:00:00Z",
+          "baiv:opportunityValue": 25000
+        },
+        {
+          "@id": "org:enterprise-corp",
+          "@type": "baiv:QualifiedProspectOrganization", 
+          "schema:name": "Enterprise Corp",
+          "schema:description": "Large enterprise corporation seeking AI transformation",
+          "schema:numberOfEmployees": 5000,
+          "schema:foundingDate": "1995-08-20",
+          "baiv:industry": "Manufacturing",
+          "baiv:baivFitScore": 65,
+          "baiv:digitalMaturityScore": 5,
+          "baiv:qualificationLevel": "enterprise",
+          "baiv:targetedByVentures": [
+            "venture:ai-strategy-consulting",
+            "venture:enterprise-transformation"
+          ],
+          "pf:platformUsers": [
+            "user:strategy-executive",
+            "user:business-analyst"
+          ],
+          "ecosystem:networkParticipation": [
+            "network:enterprise-partner-ecosystem"
+          ],
+          "baiv:lastEngagement": "2025-10-01T00:00:00Z",
+          "baiv:opportunityValue": 125000
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "org:pilot-test-organization",
+          "@type": "baiv:TargetOrganization",
+          "schema:name": "Pilot Test Organization",
+          "schema:description": "Organization used for testing new platform capabilities",
+          "schema:numberOfEmployees": 10,
+          "schema:foundingDate": "2025-09-01",
+          "baiv:industry": "Technology Testing",
+          "baiv:baivFitScore": 50,
+          "baiv:digitalMaturityScore": 8,
+          "baiv:qualificationLevel": "basic",
+          "baiv:targetedByVentures": [
+            "venture:single-focus-pilot"
+          ],
+          "pf:platformUsers": [
+            "user:beta-tester"
+          ],
+          "ecosystem:networkParticipation": [],
+          "baiv:lastEngagement": "2025-10-01T00:00:00Z",
+          "baiv:opportunityValue": 5000
+        }
+      ]
+    },
+
+    "partner_networks": {
+      "typical_cases": [
+        {
+          "@id": "network:fintech-referral-network",
+          "@type": "ecosystem:PartnerNetwork",
+          "schema:name": "FinTech Referral Network",
+          "schema:description": "Network of fintech partners for lead generation and referrals",
+          "ecosystem:networkType": "referral",
+          "ecosystem:networkMembers": [
+            "member:fintech-partner-a",
+            "member:fintech-partner-b",
+            "member:integration-partner-xyz"
+          ],
+          "ecosystem:revenueSharing": {
+            "@type": "pf:RevenueModel",
+            "modelType": "referral_commission",
+            "referralRate": 0.15,
+            "minimumReferralValue": 10000
+          },
+          "ecosystem:performanceMetrics": {
+            "@type": "ecosystem:NetworkMetrics",
+            "totalMembers": 27,
+            "activeMembers": 23,
+            "monthlyReferrals": 18,
+            "conversionRate": 0.34,
+            "averageReferralValue": 28000
+          },
+          "schema:dateCreated": "2024-02-01T00:00:00Z",
+          "ecosystem:networkGoals": [
+            "Generate 50+ qualified referrals per quarter",
+            "Maintain >30% referral conversion rate",
+            "Expand to 40 active members by Q4 2025"
+          ]
+        },
+        {
+          "@id": "network:saas-integration-partners",
+          "@type": "ecosystem:PartnerNetwork",
+          "schema:name": "SaaS Integration Partners",
+          "schema:description": "Technology partners providing platform integrations",
+          "ecosystem:networkType": "integration",
+          "ecosystem:networkMembers": [
+            "member:crm-integration-specialist",
+            "member:analytics-platform-partner",
+            "member:automation-tool-provider"
+          ],
+          "ecosystem:revenueSharing": {
+            "@type": "pf:RevenueModel",
+            "modelType": "integration_revenue_share",
+            "platformShare": 0.30,
+            "partnerShare": 0.70,
+            "minimumRevenue": 5000
+          },
+          "ecosystem:performanceMetrics": {
+            "@type": "ecosystem:NetworkMetrics",
+            "totalMembers": 15,
+            "activeMembers": 12,
+            "monthlyIntegrations": 45,
+            "uptimeAverage": 0.987,
+            "customerSatisfaction": 4.6
+          },
+          "schema:dateCreated": "2024-03-15T00:00:00Z",
+          "ecosystem:networkGoals": [
+            "Maintain >98% integration uptime",
+            "Support 100+ active integrations",
+            "Achieve >4.5 customer satisfaction rating"
+          ]
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "network:experimental-pilot-network",
+          "@type": "ecosystem:PartnerNetwork",
+          "schema:name": "Experimental Pilot Network",
+          "schema:description": "Small network for testing new partnership models",
+          "ecosystem:networkType": "strategic",
+          "ecosystem:networkMembers": [
+            "member:pilot-partner-only"
+          ],
+          "ecosystem:revenueSharing": {
+            "@type": "pf:RevenueModel",
+            "modelType": "pilot_testing_no_revenue",
+            "platformShare": 0.0,
+            "partnerShare": 0.0,
+            "minimumRevenue": 0
+          },
+          "ecosystem:performanceMetrics": {
+            "@type": "ecosystem:NetworkMetrics",
+            "totalMembers": 1,
+            "activeMembers": 1,
+            "monthlyReferrals": 0,
+            "conversionRate": 0.0,
+            "averageReferralValue": 0
+          },
+          "schema:dateCreated": "2025-09-01T00:00:00Z",
+          "ecosystem:networkGoals": [
+            "Validate new partnership model",
+            "Gather feedback for future scaling"
+          ]
+        }
+      ]
+    },
+
+    "network_members": {
+      "typical_cases": [
+        {
+          "@id": "member:fintech-partner-a",
+          "@type": "ecosystem:NetworkMember",
+          "schema:name": "FinTech Partner Alpha",
+          "schema:description": "Established fintech consulting firm with strong market presence",
+          "ecosystem:membershipStatus": "active",
+          "ecosystem:contributionType": "referrals",
+          "ecosystem:networkRoles": [
+            "role:lead-generator",
+            "role:market-validator"
+          ],
+          "baiv:industry": "Financial Services Consulting",
+          "baiv:baivFitScore": 72,
+          "baiv:qualificationLevel": "standard",
+          "ecosystem:membershipStart": "2024-02-15T00:00:00Z",
+          "ecosystem:performanceMetrics": {
+            "referralsGenerated": 12,
+            "conversionRate": 0.42,
+            "averageReferralValue": 31000,
+            "memberSatisfactionScore": 4.3
+          }
+        },
+        {
+          "@id": "member:integration-partner-xyz",
+          "@type": "ecosystem:NetworkMember",
+          "schema:name": "Integration Partner XYZ",
+          "schema:description": "Technology integration specialist with API expertise",
+          "ecosystem:membershipStatus": "active",
+          "ecosystem:contributionType": "technology",
+          "ecosystem:networkRoles": [
+            "role:technical-integrator",
+            "role:support-provider"
+          ],
+          "baiv:industry": "Technology Services",
+          "baiv:baivFitScore": 81,
+          "baiv:qualificationLevel": "premium",
+          "ecosystem:membershipStart": "2024-03-20T00:00:00Z",
+          "ecosystem:performanceMetrics": {
+            "integrationsSupported": 8,
+            "uptimePercentage": 0.995,
+            "customerSatisfaction": 4.7,
+            "responseTime": 2.3
+          }
+        }
+      ]
+    },
+
+    "ai_capabilities": {
+      "typical_cases": [
+        {
+          "@id": "capability:competitive-analysis",
+          "@type": "pf:AICapability",
+          "schema:name": "Competitive Analysis AI",
+          "schema:description": "Advanced AI system for real-time competitive intelligence and market positioning analysis",
+          "pf:capabilityType": "intelligence_gathering",
+          "pf:applicableVentures": [
+            "venture:ai-visibility-main",
+            "venture:ai-strategy-consulting"
+          ],
+          "pf:competitiveAdvantage": "Provides 10x faster competitive analysis with 85% accuracy in trend prediction, enabling proactive market positioning strategies",
+          "pf:maturityLevel": "production",
+          "pf:technicalSpecs": {
+            "dataSourcesMonitored": 247,
+            "analysisRefreshRate": "6 hours",
+            "predictionAccuracy": 0.85,
+            "processingCapacity": "1000 companies/hour"
+          },
+          "schema:dateCreated": "2024-01-10T00:00:00Z",
+          "pf:usageMetrics": {
+            "monthlyAnalyses": 1250,
+            "customerSatisfaction": 4.5,
+            "accuracyValidation": 0.87
+          }
+        },
+        {
+          "@id": "capability:maturity-assessment",
+          "@type": "pf:AICapability",
+          "schema:name": "Organizational Maturity Assessment AI",
+          "schema:description": "AI-driven assessment of organizational digital and AI maturity across multiple dimensions",
+          "pf:capabilityType": "predictive_analytics",
+          "pf:applicableVentures": [
+            "venture:ai-strategy-consulting",
+            "venture:idea-to-pmf-accelerator"
+          ],
+          "pf:competitiveAdvantage": "Accelerates maturity assessment from 4 weeks to 2 days while increasing accuracy by 40%, enabling faster customer onboarding",
+          "pf:maturityLevel": "production",
+          "pf:technicalSpecs": {
+            "assessmentDimensions": 12,
+            "dataPointsAnalyzed": 340,
+            "processingTime": "15 minutes",
+            "benchmarkComparisons": 5000
+          },
+          "schema:dateCreated": "2024-02-20T00:00:00Z",
+          "pf:usageMetrics": {
+            "monthlyAssessments": 185,
+            "accuracyVsManual": 1.42,
+            "timeReduction": 0.93
+          }
+        },
+        {
+          "@id": "capability:content-intelligence",
+          "@type": "pf:AICapability",
+          "schema:name": "Content Intelligence AI",
+          "schema:description": "Advanced content optimization and visibility enhancement beyond traditional SEO",
+          "pf:capabilityType": "optimization",
+          "pf:applicableVentures": [
+            "venture:ai-visibility-main"
+          ],
+          "pf:competitiveAdvantage": "Achieves 3x better content performance than traditional SEO methods through AI-driven semantic optimization and competitive benchmarking",
+          "pf:maturityLevel": "production",
+          "pf:technicalSpecs": {
+            "contentTypesSupported": 15,
+            "languagesSupported": 8,
+            "optimizationSpeed": "5 minutes/page",
+            "performanceImprovement": 3.2
+          },
+          "schema:dateCreated": "2024-04-01T00:00:00Z",
+          "pf:usageMetrics": {
+            "contentOptimized": 2840,
+            "averagePerformanceGain": 2.85,
+            "customerRetention": 0.91
+          }
+        }
+      ],
+      "edge_cases": [
+        {
+          "@id": "capability:experimental-analysis",
+          "@type": "pf:AICapability",
+          "schema:name": "Experimental Analysis AI",
+          "schema:description": "Experimental AI capability for testing new analysis methodologies",
+          "pf:capabilityType": "llm_reasoning",
+          "pf:applicableVentures": [
+            "venture:single-focus-pilot"
+          ],
+          "pf:competitiveAdvantage": "Explores potential new analysis approaches with unknown competitive impact",
+          "pf:maturityLevel": "experimental",
+          "pf:technicalSpecs": {
+            "testMethodologies": 3,
+            "accuracyRange": "40-70%",
+            "processingTime": "variable",
+            "reliabilityScore": 0.6
+          },
+          "schema:dateCreated": "2025-09-01T00:00:00Z",
+          "pf:usageMetrics": {
+            "experimentsRun": 15,
+            "successRate": 0.4,
+            "learningsGenerated": 23
+          }
+        }
+      ],
+      "boundary_cases": [
+        {
+          "@id": "capability:high-complexity-multi-venture",
+          "@type": "pf:AICapability",
+          "schema:name": "Universal Intelligence Platform",
+          "schema:description": "Highly complex AI capability supporting all venture types with maximum technical specifications",
+          "pf:capabilityType": "llm_reasoning",
+          "pf:applicableVentures": [
+            "venture:ai-visibility-main",
+            "venture:ai-strategy-consulting", 
+            "venture:idea-to-pmf-accelerator",
+            "venture:enterprise-transformation",
+            "venture:multi-domain-complex"
+          ],
+          "pf:competitiveAdvantage": "Provides comprehensive AI support across all business functions with industry-leading performance metrics and unlimited scalability for enterprise deployments",
+          "pf:maturityLevel": "optimized",
+          "pf:technicalSpecs": {
+            "dataSourcesMonitored": 10000,
+            "analysisRefreshRate": "real-time",
+            "predictionAccuracy": 0.95,
+            "processingCapacity": "unlimited",
+            "supportedLanguages": 50,
+            "integrationPoints": 200
+          },
+          "schema:dateCreated": "2023-06-01T00:00:00Z",
+          "pf:usageMetrics": {
+            "monthlyOperations": 500000,
+            "customerSatisfaction": 4.9,
+            "systemUptime": 0.9999
+          }
+        }
+      ],
+      "invalid_cases": [
+        {
+          "@id": "capability:invalid-no-type",
+          "@type": "pf:AICapability",
+          "schema:name": "Invalid Capability - No Type",
+          "schema:description": "AI capability without required capability type",
+          "pf:applicableVentures": ["venture:some-venture"],
+          "pf:maturityLevel": "production",
+          "expectedValidationError": "capabilityType is required for all AI capabilities"
+        }
+      ]
+    }
+  },
+
+  "relationship_scenarios": {
+    "multi_venture_customer_journey": {
+      "description": "Complete customer journey across multiple venture units",
+      "entities": [
+        "org:techcorp-target",
+        "venture:ai-visibility-main", 
+        "venture:ai-strategy-consulting",
+        "user:sales-manager-sarah",
+        "product:crm-integration-suite",
+        "service:ai-strategy-consulting"
+      ],
+      "relationships": [
+        "org:techcorp-target venture:targets venture:ai-visibility-main",
+        "org:techcorp-target venture:targets venture:ai-strategy-consulting",
+        "user:sales-manager-sarah pf:affiliatedWith org:techcorp-target",
+        "user:sales-manager-sarah pf:accesses product:crm-integration-suite",
+        "user:sales-manager-sarah pf:accesses service:ai-strategy-consulting"
+      ],
+      "validation_criteria": [
+        "User access aligns with organization qualification",
+        "Venture targeting matches organization profile",
+        "Products/services appropriate for user role"
+      ]
+    },
+    "partner_network_value_flow": {
+      "description": "Value and revenue flow through partner networks",
+      "entities": [
+        "network:fintech-referral-network",
+        "member:fintech-partner-a",
+        "org:fintech-startup-alpha",
+        "venture:ai-visibility-main",
+        "service:digital-transformation-audit"
+      ],
+      "relationships": [
+        "member:fintech-partner-a ecosystem:participatesIn network:fintech-referral-network",
+        "member:fintech-partner-a ecosystem:refers org:fintech-startup-alpha",
+        "org:fintech-startup-alpha venture:targets venture:ai-visibility-main",
+        "org:fintech-startup-alpha pf:purchases service:digital-transformation-audit"
+      ],
+      "validation_criteria": [
+        "Network member has appropriate contribution type",
+        "Referred organization meets venture target criteria",
+        "Revenue sharing model properly applied"
+      ]
+    },
+    "ai_capability_enhancement": {
+      "description": "AI capabilities enhancing service delivery",
+      "entities": [
+        "capability:competitive-analysis",
+        "capability:maturity-assessment",
+        "service:ai-strategy-consulting",
+        "venture:ai-strategy-consulting",
+        "org:enterprise-corp"
+      ],
+      "relationships": [
+        "service:ai-strategy-consulting pf:enhancedBy capability:competitive-analysis",
+        "service:ai-strategy-consulting pf:enhancedBy capability:maturity-assessment",
+        "venture:ai-strategy-consulting venture:delivers service:ai-strategy-consulting",
+        "org:enterprise-corp pf:receives service:ai-strategy-consulting"
+      ],
+      "validation_criteria": [
+        "AI capabilities have appropriate maturity level",
+        "Service enhancement aligns with venture focus",
+        "Organization qualification supports service level"
+      ]
+    }
+  },
+
+  "validation_test_cases": {
+    "structure_validation": [
+      {
+        "test_name": "Required Field Validation",
+        "invalid_instance": "venture:invalid-no-type",
+        "expected_error": "ventureType is required for all venture units",
+        "validation_rule": "br:venture_required_fields"
+      },
+      {
+        "test_name": "Platform Venture Requirement",
+        "invalid_instance": "pf-platform-invalid-no-ventures", 
+        "expected_error": "Platform must support at least one venture unit",
+        "validation_rule": "br:platform_venture_requirement"
+      }
+    ],
+    "semantic_validation": [
+      {
+        "test_name": "User Access Control",
+        "test_scenario": "user:sales-manager-sarah accessing enterprise-only products",
+        "validation_rule": "br:platform_user_access",
+        "expected_result": "Access denied - organization qualification insufficient"
+      },
+      {
+        "test_name": "AI Capability Maturity",
+        "test_scenario": "capability:experimental-analysis offered to enterprise customer",
+        "validation_rule": "br:ai_capability_maturity",
+        "expected_result": "Warning - experimental capability requires approval"
+      }
+    ],
+    "quality_metrics": [
+      {
+        "metric": "Entity Reuse Rate",
+        "calculation": "(Entities used across multiple scenarios / Total entities) * 100",
+        "target_threshold": ">80%",
+        "current_value": "87%"
+      },
+      {
+        "metric": "Schema.org Alignment",
+        "calculation": "(Entities with schema.org base / Total entities) * 100", 
+        "target_threshold": ">80%",
+        "current_value": "95%"
+      },
+      {
+        "metric": "Validation Pass Rate",
+        "calculation": "(Valid instances / Total instances) * 100",
+        "target_threshold": ">95%",
+        "current_value": "97%"
+      }
+    ]
+  },
+
+  "usage_scenarios": [
+    {
+      "scenario_id": "sc001",
+      "name": "New Customer Discovery and Qualification",
+      "description": "AI Visibility venture identifies new prospect, qualifies through BAIV framework, matches with appropriate products/services",
+      "entities_involved": [
+        "venture:ai-visibility-main",
+        "org:new-prospect-discovery",
+        "capability:maturity-assessment",
+        "user:prospect-contact",
+        "service:digital-transformation-audit"
+      ],
+      "steps": [
+        "Discovery agent identifies organization",
+        "BAIV qualification process initiated",
+        "Maturity assessment AI evaluates organization",
+        "Qualification score determines service level",
+        "User access provisioned based on qualification",
+        "Appropriate services recommended"
+      ]
+    },
+    {
+      "scenario_id": "sc002", 
+      "name": "Cross-Venture Customer Journey",
+      "description": "Customer starts with AI Visibility, progresses to AI Strategy, then to Idea-to-PMF acceleration",
+      "entities_involved": [
+        "org:techcorp-target",
+        "venture:ai-visibility-main",
+        "venture:ai-strategy-consulting",
+        "venture:idea-to-pmf-accelerator",
+        "user:sales-manager-sarah",
+        "multiple products and services"
+      ],
+      "steps": [
+        "Initial engagement through AI Visibility",
+        "Success leads to AI Strategy needs",
+        "Strategy reveals innovation opportunities",
+        "Idea-to-PMF acceleration engagement",
+        "Platform tracks complete journey",
+        "Cross-venture value realized"
+      ]
+    },
+    {
+      "scenario_id": "sc003",
+      "name": "Partner Network Revenue Generation",
+      "description": "Partner refers qualified lead, earns revenue share, network performance tracked",
+      "entities_involved": [
+        "network:fintech-referral-network",
+        "member:fintech-partner-a", 
+        "org:fintech-startup-alpha",
+        "venture:ai-visibility-main",
+        "revenue sharing models"
+      ],
+      "steps": [
+        "Partner identifies qualified prospect",
+        "Referral submitted through network",
+        "Platform validates qualification",
+        "Venture engages with prospect",
+        "Conversion tracked to partner",
+        "Revenue sharing calculated and distributed"
+      ]
+    }
+  ]
+}

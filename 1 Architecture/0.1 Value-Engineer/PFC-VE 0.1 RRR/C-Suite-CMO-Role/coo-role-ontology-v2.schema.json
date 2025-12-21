@@ -1,0 +1,578 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pf-framework.org/schemas/csuite/coo-role-v2.schema.json",
+  "title": "COO Role Ontology Schema",
+  "description": "JSON Schema for validating COO Role Ontology instances and extensions",
+  "version": "2.0.0",
+  
+  "definitions": {
+    "RichText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000
+    },
+    
+    "Identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9:_-]*$"
+    },
+    
+    "VSOMComponent": {
+      "type": "object",
+      "properties": {
+        "@type": { "type": "string", "pattern": "^pf:" },
+        "pf:alignmentResponsibility": { "$ref": "#/definitions/RichText" },
+        "pf:deliverables": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "pf:cascadeDirection": { "type": "string" }
+      }
+    },
+    
+    "FunctionalDomain": {
+      "type": "object",
+      "required": ["@type", "@id", "name", "description"],
+      "properties": {
+        "@type": { "const": "ops:FunctionalDomain" },
+        "@id": { "$ref": "#/definitions/Identifier" },
+        "name": { "type": "string" },
+        "description": { "$ref": "#/definitions/RichText" },
+        "ops:subDomains": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SubDomain" }
+        },
+        "ops:accountabilityLevel": {
+          "type": "string",
+          "enum": [
+            "Primary",
+            "Primary-or-Shared",
+            "Shared",
+            "Variable-by-Organization",
+            "Advisory"
+          ]
+        },
+        "ops:commonReportingTo": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "SubDomain": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": { "const": "ops:SubDomain" },
+        "name": { "type": "string" },
+        "ops:scopeElements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    
+    "AccountabilityRelationship": {
+      "type": "object",
+      "required": ["@type", "csuite:accountableTo", "csuite:accountabilityType"],
+      "properties": {
+        "@type": { "type": "string" },
+        "csuite:accountableTo": {
+          "type": "object",
+          "required": ["@type", "name"],
+          "properties": {
+            "@type": { "type": "string" },
+            "@id": { "$ref": "#/definitions/Identifier" },
+            "name": { "type": "string" }
+          }
+        },
+        "csuite:accountabilityType": {
+          "type": "string",
+          "enum": [
+            "Direct-Line",
+            "Delegated-via-CEO",
+            "Dotted-Line",
+            "Advisory"
+          ]
+        },
+        "csuite:accountabilityScope": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "PeerRelationship": {
+      "type": "object",
+      "required": ["@type", "csuite:peerRole", "csuite:relationshipType"],
+      "properties": {
+        "@type": { "const": "csuite:PeerRelationship" },
+        "csuite:peerRole": { "type": "string" },
+        "csuite:relationshipType": {
+          "type": "string",
+          "enum": [
+            "Direct-Report-Strategic-Partner",
+            "Strategic-Partner",
+            "Collaborative",
+            "Informational"
+          ]
+        },
+        "csuite:collaborationAreas": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "ReportingRole": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": { "const": "csuite:ReportingRole" },
+        "name": { "type": "string" },
+        "csuite:likelihood": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low", "Variable", "High-in-Multi-Region", "High-in-Multi-BU"]
+        },
+        "csuite:scope": { "type": "string" }
+      }
+    },
+    
+    "StrategyComponent": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": { "const": "strat:StrategyComponent" },
+        "name": { "type": "string" },
+        "strat:elements": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "ExtensionPoint": {
+      "type": "object",
+      "required": ["@type", "@id", "name", "ext:extensionScope"],
+      "properties": {
+        "@type": { "const": "ext:ExtensionPoint" },
+        "@id": { "$ref": "#/definitions/Identifier" },
+        "name": { "type": "string" },
+        "description": { "$ref": "#/definitions/RichText" },
+        "ext:extensionScope": {
+          "type": "string",
+          "enum": ["Sector", "Organization", "Scale", "Maturity", "Portfolio"]
+        },
+        "ext:extensionExamples": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "ext:extensionAttributes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              { "$ref": "#/definitions/PortfolioAttribute" }
+            ]
+          }
+        }
+      }
+    },
+    
+    "PortfolioAttribute": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": { "const": "ext:PortfolioAttribute" },
+        "name": { "type": "string" },
+        "ext:considerations": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "Competency": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": { "const": "csuite:Competency" },
+        "name": { "type": "string" },
+        "csuite:components": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    
+    "AICapabilityArea": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": { "const": "ops:AICapabilityArea" },
+        "name": { "type": "string" },
+        "ops:applications": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "MetricsDomain": {
+      "type": "object",
+      "required": ["@type", "name"],
+      "properties": {
+        "@type": { "const": "pf:MetricsDomain" },
+        "name": { "type": "string" },
+        "pf:metricTypes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  
+  "type": "object",
+  "required": [
+    "@context",
+    "@id",
+    "@type",
+    "name",
+    "version",
+    "csuite:roleDefinition",
+    "csuite:vsomAlignment",
+    "ops:functionalDomains"
+  ],
+  
+  "properties": {
+    "@context": {
+      "type": "object",
+      "required": ["@vocab", "pf", "csuite", "ops", "gov", "strat", "ext"],
+      "properties": {
+        "@vocab": { "type": "string", "format": "uri" },
+        "pf": { "type": "string", "format": "uri" },
+        "csuite": { "type": "string", "format": "uri" },
+        "ops": { "type": "string", "format": "uri" },
+        "gov": { "type": "string", "format": "uri" },
+        "strat": { "type": "string", "format": "uri" },
+        "ext": { "type": "string", "format": "uri" },
+        "xsd": { "type": "string", "format": "uri" }
+      }
+    },
+    
+    "@id": { "$ref": "#/definitions/Identifier" },
+    
+    "@type": {
+      "type": "array",
+      "items": { "type": "string" },
+      "contains": { "const": "csuite:ExecutiveRole" }
+    },
+    
+    "name": { "type": "string" },
+    
+    "alternateName": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    
+    "dateCreated": {
+      "type": "string",
+      "format": "date"
+    },
+    
+    "description": { "$ref": "#/definitions/RichText" },
+    
+    "pf:ontologyMetadata": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "pf:OntologyDefinition" },
+        "pf:frameworkAlignment": { "type": "string" },
+        "pf:vsomIntegration": { "type": "boolean" },
+        "pf:extensionArchitecture": { "type": "string" },
+        "pf:scopeLevel": { "type": "string" },
+        "pf:specializationReadiness": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    
+    "csuite:roleDefinition": {
+      "type": "object",
+      "required": ["@type", "csuite:corePurpose", "csuite:accountabilityChain"],
+      "properties": {
+        "@type": { "const": "csuite:ExecutiveRoleDefinition" },
+        "@id": { "$ref": "#/definitions/Identifier" },
+        "csuite:corePurpose": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "csuite:RolePurpose" },
+            "description": { "$ref": "#/definitions/RichText" },
+            "csuite:valueProposition": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "csuite:accountabilityChain": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "csuite:GovernanceAccountability" },
+            "csuite:primaryAccountability": { "$ref": "#/definitions/AccountabilityRelationship" },
+            "csuite:ultimateAccountability": { "$ref": "#/definitions/AccountabilityRelationship" }
+          }
+        },
+        "csuite:strategyInfluence": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "strat:StrategyInfluenceModel" },
+            "strat:influenceLevel": {
+              "type": "string",
+              "enum": ["Substantial", "Moderate", "Limited", "Advisory"]
+            },
+            "strat:influenceScope": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@type": { "const": "strat:InfluenceDomain" },
+                  "name": { "type": "string" },
+                  "strat:influenceType": { "type": "string" },
+                  "strat:contributionAreas": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "csuite:vsomAlignment": {
+      "type": "object",
+      "required": ["@type"],
+      "properties": {
+        "@type": { "const": "pf:VSOMFramework" },
+        "@id": { "$ref": "#/definitions/Identifier" },
+        "pf:visionAlignment": { "$ref": "#/definitions/VSOMComponent" },
+        "pf:strategyAlignment": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "pf:StrategyComponent" },
+            "pf:accountabilityLevel": { "type": "string" },
+            "pf:strategyLayers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@type": { "const": "pf:StrategyLayer" },
+                  "name": { "type": "string" },
+                  "pf:accountabilityType": { "type": "string" },
+                  "pf:scope": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "pf:objectivesAlignment": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "pf:ObjectivesComponent" },
+            "pf:objectiveCategories": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@type": { "const": "pf:ObjectiveCategory" },
+                  "name": { "type": "string" },
+                  "pf:ownership": { "type": "string" },
+                  "pf:examples": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "pf:metricsAlignment": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "pf:MetricsComponent" },
+            "pf:metricsFramework": {
+              "type": "object",
+              "properties": {
+                "@type": { "const": "pf:MetricsArchitecture" },
+                "pf:primaryMetricsDomains": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/MetricsDomain" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "ops:functionalDomains": {
+      "type": "object",
+      "required": ["@type", "ops:coreFunctionalDomains"],
+      "properties": {
+        "@type": { "const": "ops:OperationalDomainArchitecture" },
+        "@id": { "$ref": "#/definitions/Identifier" },
+        "description": { "$ref": "#/definitions/RichText" },
+        "ops:coreFunctionalDomains": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/FunctionalDomain" },
+          "minItems": 1
+        },
+        "ops:extendedFunctionalDomains": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/FunctionalDomain" }
+        },
+        "ops:aiAugmentedOperations": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "ops:AIOperationsCapability" },
+            "name": { "type": "string" },
+            "ops:aiCapabilityAreas": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/AICapabilityArea" }
+            },
+            "ops:aiGovernance": {
+              "type": "object",
+              "properties": {
+                "@type": { "const": "ops:AIGovernanceFramework" },
+                "ops:accountabilityAreas": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "csuite:reportingStructure": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "csuite:ReportingArchitecture" },
+        "csuite:directReports": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "csuite:ReportingRelationship" },
+            "csuite:potentialDirectReports": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ReportingRole" }
+            }
+          }
+        },
+        "csuite:peerRelationships": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "csuite:CollaborativeRelationships" },
+            "csuite:collaborationMatrix": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/PeerRelationship" }
+            }
+          }
+        }
+      }
+    },
+    
+    "strat:operationsStrategy": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "strat:FunctionalStrategy" },
+        "strat:strategyComponents": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/StrategyComponent" }
+        },
+        "strat:strategicPlanning": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "strat:PlanningFramework" },
+            "strat:planningHorizons": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@type": { "const": "strat:PlanningHorizon" },
+                  "name": { "type": "string" },
+                  "strat:focus": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "ext:extensionArchitecture": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "ext:OntologyExtensionFramework" },
+        "ext:extensionPoints": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ExtensionPoint" }
+        },
+        "ext:extensionMechanism": {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "ext:ExtensionImplementation" },
+            "ext:inheritanceModel": { "type": "string" },
+            "ext:connectionMethod": { "type": "string" },
+            "ext:validationApproach": { "type": "string" }
+          }
+        }
+      }
+    },
+    
+    "csuite:competencyFramework": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "csuite:CompetencyModel" },
+        "csuite:coreCompetencies": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Competency" }
+        }
+      }
+    },
+    
+    "pf:integrationPoints": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "pf:FrameworkIntegration" },
+        "pf:relatedOntologies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": { "const": "pf:OntologyReference" },
+              "name": { "type": "string" },
+              "pf:relationshipType": { "type": "string" },
+              "pf:ontologyId": { "type": "string" },
+              "pf:ontologyIds": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

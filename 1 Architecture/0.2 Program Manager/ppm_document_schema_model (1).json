@@ -1,0 +1,781 @@
+{
+  "ppm_document_ontology": {
+    "version": "1.0",
+    "description": "Document modeling extension for PPM ontology with schema.org integration",
+    "schema_org_mapping": {
+      "base_types": {
+        "CreativeWork": "Root type for all creative works including documents",
+        "DigitalDocument": "Base type for digital documents",
+        "TextDigitalDocument": "Text-based digital documents",
+        "Dataset": "Structured data collections",
+        "MediaObject": "Media files (images, videos, audio)",
+        "SoftwareApplication": "Software and applications"
+      },
+      "specialized_types": {
+        "Report": "Business reports and analytics documents",
+        "Article": "Articles, blog posts, news items",
+        "TechArticle": "Technical documentation and guides",
+        "HowTo": "Procedural documents and instructions",
+        "FAQPage": "Frequently asked questions",
+        "WebPage": "Web-based content",
+        "Presentation": "Slide decks and presentations",
+        "Spreadsheet": "Excel files and data tables",
+        "PresentationDigitalDocument": "Presentation files"
+      }
+    },
+    "entities": {
+      "document": {
+        "primary_key": "document_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "schema_org_compliance": true,
+        "attributes": {
+          "document_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "Unique document identifier"
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "Organization this document belongs to",
+            "foreign_key": "organization.org_id"
+          },
+          "schema_org_type": {
+            "type": "enum",
+            "values": [
+              "DigitalDocument", "TextDigitalDocument", "Report", 
+              "Article", "TechArticle", "HowTo", "FAQPage", 
+              "Presentation", "Dataset", "Spreadsheet"
+            ],
+            "required": true,
+            "description": "Schema.org type classification"
+          },
+          "ppm_document_type": {
+            "type": "enum",
+            "values": [
+              "business_case", "project_charter", "requirements_document",
+              "project_plan", "status_report", "risk_register",
+              "benefits_realization_plan", "governance_document",
+              "policy_document", "procedure_document", "template",
+              "meeting_minutes", "decision_log", "lessons_learned",
+              "quality_plan", "communication_plan", "stakeholder_analysis"
+            ],
+            "required": true,
+            "description": "PPM-specific document classification"
+          },
+          "name": {
+            "type": "string",
+            "required": true,
+            "schema_org_property": "name",
+            "description": "Document title/name"
+          },
+          "headline": {
+            "type": "string",
+            "schema_org_property": "headline",
+            "description": "Document headline or subtitle"
+          },
+          "description": {
+            "type": "string",
+            "schema_org_property": "description",
+            "description": "Document description or abstract"
+          },
+          "abstract": {
+            "type": "string",
+            "schema_org_property": "abstract",
+            "description": "Executive summary or abstract"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {"type": "string"},
+            "schema_org_property": "keywords",
+            "description": "Document keywords and tags"
+          },
+          "author": {
+            "type": "object",
+            "schema_org_property": "author",
+            "properties": {
+              "type": {"type": "string", "default": "Person"},
+              "name": {"type": "string"},
+              "identifier": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+              "org_id": {"type": "string", "foreign_key": "organization.org_id"}
+            }
+          },
+          "creator": {
+            "type": "object",
+            "schema_org_property": "creator",
+            "properties": {
+              "type": {"type": "string", "default": "Person"},
+              "name": {"type": "string"},
+              "identifier": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"}
+            }
+          },
+          "publisher": {
+            "type": "object",
+            "schema_org_property": "publisher",
+            "properties": {
+              "type": {"type": "string", "default": "Organization"},
+              "name": {"type": "string"},
+              "identifier": {"type": "string", "foreign_key": "organization.org_id"}
+            }
+          },
+          "date_created": {
+            "type": "string",
+            "format": "datetime",
+            "schema_org_property": "dateCreated"
+          },
+          "date_published": {
+            "type": "string",
+            "format": "datetime",
+            "schema_org_property": "datePublished"
+          },
+          "date_modified": {
+            "type": "string",
+            "format": "datetime",
+            "schema_org_property": "dateModified"
+          },
+          "version": {
+            "type": "string",
+            "schema_org_property": "version",
+            "description": "Document version number"
+          },
+          "language": {
+            "type": "string",
+            "schema_org_property": "inLanguage",
+            "default": "en-US"
+          },
+          "encoding_format": {
+            "type": "string",
+            "schema_org_property": "encodingFormat",
+            "description": "MIME type (e.g., application/pdf, text/plain)"
+          },
+          "content_size": {
+            "type": "string",
+            "schema_org_property": "contentSize",
+            "description": "File size (e.g., '1.2MB')"
+          },
+          "content_url": {
+            "type": "string",
+            "format": "uri",
+            "schema_org_property": "contentUrl",
+            "description": "URL to access document content"
+          },
+          "download_url": {
+            "type": "string",
+            "format": "uri",
+            "schema_org_property": "downloadUrl",
+            "description": "Direct download URL"
+          },
+          "thumbnail_url": {
+            "type": "string",
+            "format": "uri",
+            "schema_org_property": "thumbnailUrl",
+            "description": "Document thumbnail or preview image"
+          },
+          "license": {
+            "type": "object",
+            "schema_org_property": "license",
+            "properties": {
+              "type": {"type": "string", "default": "CreativeWork"},
+              "name": {"type": "string"},
+              "url": {"type": "string", "format": "uri"}
+            }
+          },
+          "copyright_holder": {
+            "type": "object",
+            "schema_org_property": "copyrightHolder",
+            "properties": {
+              "type": {"type": "string", "enum": ["Person", "Organization"]},
+              "name": {"type": "string"},
+              "identifier": {"type": "string"}
+            }
+          },
+          "about": {
+            "type": "array",
+            "schema_org_property": "about",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {"type": "string", "default": "Thing"},
+                "name": {"type": "string"},
+                "identifier": {"type": "string"},
+                "description": {"type": "string"}
+              }
+            },
+            "description": "What the document is about (PPM entities, topics)"
+          },
+          "mentions": {
+            "type": "array",
+            "schema_org_property": "mentions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {"type": "string"},
+                "name": {"type": "string"},
+                "identifier": {"type": "string"},
+                "entity_type": {"type": "enum", "values": ["portfolio", "program", "project", "stakeholder", "risk", "milestone"]}
+              }
+            },
+            "description": "PPM entities mentioned in the document"
+          },
+          "citation": {
+            "type": "array",
+            "schema_org_property": "citation",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {"type": "string", "default": "CreativeWork"},
+                "name": {"type": "string"},
+                "identifier": {"type": "string"},
+                "url": {"type": "string", "format": "uri"}
+              }
+            },
+            "description": "Documents cited by this document"
+          },
+          "is_based_on": {
+            "type": "array",
+            "schema_org_property": "isBasedOn",
+            "items": {
+              "type": "string",
+              "foreign_key": "document.document_id"
+            },
+            "description": "Documents this document is based on"
+          },
+          "audience": {
+            "type": "object",
+            "schema_org_property": "audience",
+            "properties": {
+              "type": {"type": "string", "default": "Audience"},
+              "audienceType": {"type": "string"},
+              "name": {"type": "string"}
+            }
+          },
+          "security_classification": {
+            "type": "enum",
+            "values": ["public", "internal", "confidential", "restricted"],
+            "description": "Security/confidentiality level"
+          },
+          "retention_period": {
+            "type": "string",
+            "description": "Document retention requirement"
+          },
+          "compliance_tags": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Compliance frameworks (SOX, GDPR, etc.)"
+          },
+          "approval_status": {
+            "type": "enum",
+            "values": ["draft", "under_review", "approved", "archived", "superseded"]
+          },
+          "search_vector": {
+            "type": "string",
+            "description": "Full-text search vector for AI processing"
+          },
+          "metadata_extracted": {
+            "type": "object",
+            "properties": {
+              "entities_extracted": {"type": "array", "items": {"type": "string"}},
+              "sentiment_score": {"type": "number"},
+              "readability_score": {"type": "number"},
+              "key_phrases": {"type": "array", "items": {"type": "string"}},
+              "topics": {"type": "array", "items": {"type": "string"}}
+            },
+            "description": "AI-extracted metadata"
+          }
+        }
+      },
+      "document_relationship": {
+        "primary_key": "relationship_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "source_document_id": "document.document_id",
+          "target_document_id": "document.document_id"
+        },
+        "attributes": {
+          "relationship_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "source_document_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "target_document_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "relationship_type": {
+            "type": "enum",
+            "values": [
+              "references", "cites", "supersedes", "supplements", 
+              "implements", "derives_from", "contradicts", "supports"
+            ],
+            "schema_org_mapping": {
+              "references": "citation",
+              "cites": "citation", 
+              "supersedes": "isBasedOn",
+              "supplements": "isPartOf",
+              "implements": "isBasedOn"
+            }
+          },
+          "relationship_strength": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "AI-calculated relationship strength"
+          },
+          "context": {
+            "type": "string",
+            "description": "Context of the relationship"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "document_entity_link": {
+        "primary_key": "link_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "document_id": "document.document_id"
+        },
+        "attributes": {
+          "link_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "document_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "ID of linked PPM entity"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project", "stakeholder", "risk", "milestone", "business_case"],
+            "required": true
+          },
+          "link_type": {
+            "type": "enum",
+            "values": [
+              "owned_by", "created_for", "references", "governs", 
+              "reports_on", "plans_for", "documents", "approves"
+            ],
+            "description": "Nature of the relationship"
+          },
+          "relevance_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "AI-calculated relevance score"
+          },
+          "link_context": {
+            "type": "string",
+            "description": "Context or rationale for the link"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "created_by": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "verification_status": {
+            "type": "enum",
+            "values": ["automatic", "user_verified", "ai_verified", "disputed"]
+          }
+        }
+      },
+      "document_content": {
+        "primary_key": "content_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "document_id": "document.document_id"
+        },
+        "attributes": {
+          "content_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "document_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "content_type": {
+            "type": "enum",
+            "values": ["full_text", "summary", "abstract", "extracted_data", "annotations"]
+          },
+          "content_text": {
+            "type": "string",
+            "description": "Textual content (for search and AI processing)"
+          },
+          "content_structured": {
+            "type": "object",
+            "description": "Structured content (JSON-LD, extracted data)"
+          },
+          "schema_org_markup": {
+            "type": "object",
+            "description": "Schema.org JSON-LD markup"
+          },
+          "extraction_method": {
+            "type": "enum",
+            "values": ["manual", "ocr", "api_extraction", "ai_processing"]
+          },
+          "extraction_confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "language_detected": {
+            "type": "string"
+          },
+          "page_number": {
+            "type": "integer",
+            "description": "For multi-page documents"
+          },
+          "section_name": {
+            "type": "string",
+            "description": "Document section (e.g., 'Executive Summary')"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "document_access_control": {
+        "primary_key": "access_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "document_id": "document.document_id"
+        },
+        "attributes": {
+          "access_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "document_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "principal_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Stakeholder or role ID"
+          },
+          "principal_type": {
+            "type": "enum",
+            "values": ["stakeholder", "role", "group", "organization"]
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "enum",
+              "values": ["read", "write", "delete", "share", "approve", "comment"]
+            }
+          },
+          "granted_date": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "expiry_date": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "granted_by": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          }
+        }
+      }
+    },
+    "schema_org_json_ld_templates": {
+      "base_document": {
+        "@context": "https://schema.org",
+        "@type": "DigitalDocument",
+        "@id": "{{ document_id }}",
+        "name": "{{ name }}",
+        "description": "{{ description }}",
+        "author": {
+          "@type": "Person",
+          "name": "{{ author.name }}",
+          "identifier": "{{ author.identifier }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ publisher.name }}",
+          "identifier": "{{ publisher.identifier }}"
+        },
+        "dateCreated": "{{ date_created }}",
+        "datePublished": "{{ date_published }}",
+        "dateModified": "{{ date_modified }}",
+        "version": "{{ version }}",
+        "inLanguage": "{{ language }}",
+        "encodingFormat": "{{ encoding_format }}",
+        "contentUrl": "{{ content_url }}",
+        "keywords": "{{ keywords | join(', ') }}",
+        "about": "{{ about }}",
+        "mentions": "{{ mentions }}",
+        "isPartOf": {
+          "@type": "DefinedTerm",
+          "name": "{{ ppm_document_type }}",
+          "inDefinedTermSet": "PPM Document Types"
+        }
+      },
+      "business_case": {
+        "@context": "https://schema.org",
+        "@type": "Report",
+        "@id": "{{ document_id }}",
+        "name": "{{ name }}",
+        "reportNumber": "{{ document_id }}",
+        "about": [
+          {
+            "@type": "DefinedTerm",
+            "name": "Business Case",
+            "inDefinedTermSet": "PPM Document Types"
+          },
+          {
+            "@type": "Project",
+            "name": "{{ linked_project.name }}",
+            "identifier": "{{ linked_project.project_id }}"
+          }
+        ]
+      },
+      "project_plan": {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "@id": "{{ document_id }}",
+        "name": "{{ name }}",
+        "about": {
+          "@type": "Project",
+          "name": "{{ linked_project.name }}",
+          "identifier": "{{ linked_project.project_id }}"
+        },
+        "hasPart": [
+          {
+            "@type": "DefinedTerm",
+            "name": "Work Breakdown Structure"
+          },
+          {
+            "@type": "DefinedTerm", 
+            "name": "Schedule"
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "Budget"
+          }
+        ]
+      }
+    },
+    "ai_processing_hooks": {
+      "content_extraction": {
+        "triggers": ["document_upload", "document_update"],
+        "processors": [
+          {
+            "name": "text_extraction",
+            "input": "binary_content",
+            "output": "document_content.content_text",
+            "supported_formats": ["pdf", "docx", "pptx", "xlsx", "txt"]
+          },
+          {
+            "name": "entity_recognition",
+            "input": "document_content.content_text",
+            "output": "document.mentions",
+            "entities": ["portfolio", "program", "project", "stakeholder", "organization"]
+          },
+          {
+            "name": "schema_org_generation",
+            "input": ["document.attributes", "document_content.content_structured"],
+            "output": "document_content.schema_org_markup"
+          }
+        ]
+      },
+      "relationship_detection": {
+        "triggers": ["content_extraction_complete"],
+        "processors": [
+          {
+            "name": "document_similarity",
+            "algorithm": "embedding_cosine_similarity",
+            "threshold": 0.7,
+            "output": "document_relationship"
+          },
+          {
+            "name": "entity_link_detection",
+            "input": "document.mentions",
+            "output": "document_entity_link",
+            "confidence_threshold": 0.8
+          }
+        ]
+      },
+      "search_indexing": {
+        "triggers": ["content_extraction_complete", "metadata_update"],
+        "processors": [
+          {
+            "name": "full_text_indexing",
+            "input": "document_content.content_text",
+            "output": "search_index"
+          },
+          {
+            "name": "semantic_vectorization",
+            "input": "document_content.content_text",
+            "output": "document.search_vector",
+            "model": "sentence_transformers"
+          }
+        ]
+      }
+    },
+    "query_patterns": {
+      "organizational_document_queries": [
+        {
+          "pattern_name": "org_documents_by_type",
+          "description": "Find all documents of specific type for organization",
+          "sql": "SELECT * FROM document WHERE org_id = ? AND ppm_document_type = ?",
+          "graphql": "query($orgId: ID!, $docType: String!) { documents(orgId: $orgId, type: $docType) { id name dateCreated } }"
+        },
+        {
+          "pattern_name": "org_entity_documents",
+          "description": "Find all documents related to specific PPM entity",
+          "sql": "SELECT d.* FROM document d JOIN document_entity_link l ON d.document_id = l.document_id WHERE d.org_id = ? AND l.entity_id = ? AND l.entity_type = ?",
+          "parameters": ["org_id", "entity_id", "entity_type"]
+        },
+        {
+          "pattern_name": "schema_org_search",
+          "description": "Search documents using schema.org properties",
+          "elasticsearch": {
+            "query": {
+              "bool": {
+                "must": [
+                  {"term": {"org_id": "{{ org_id }}"}},
+                  {"match": {"schema_org_markup.@type": "{{ schema_type }}"}}
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "ai_powered_queries": [
+        {
+          "pattern_name": "semantic_document_search",
+          "description": "Find semantically similar documents",
+          "vector_db": "SELECT document_id, similarity FROM document WHERE org_id = ? ORDER BY search_vector <-> ? LIMIT 10"
+        },
+        {
+          "pattern_name": "entity_mention_analysis",
+          "description": "Analyze entity mentions across documents",
+          "sql": "SELECT entity_type, entity_id, COUNT(*) as mention_count FROM document_entity_link WHERE org_id = ? GROUP BY entity_type, entity_id ORDER BY mention_count DESC"
+        }
+      ]
+    },
+    "api_endpoints": {
+      "base_url": "/api/v1/ppm/documents",
+      "endpoints": [
+        {
+          "path": "/organizations/{org_id}/documents",
+          "method": "GET",
+          "description": "List documents for organization",
+          "query_params": ["type", "entity_id", "entity_type", "author", "date_range"]
+        },
+        {
+          "path": "/organizations/{org_id}/documents/{document_id}/schema-org",
+          "method": "GET", 
+          "description": "Get schema.org JSON-LD for document",
+          "response_format": "application/ld+json"
+        },
+        {
+          "path": "/organizations/{org_id}/documents/search/semantic",
+          "method": "POST",
+          "description": "Semantic search across organization documents",
+          "body": {
+            "query": "string",
+            "filters": {"entity_type": "string", "document_type": "string"},
+            "limit": "number"
+          }
+        },
+        {
+          "path": "/organizations/{org_id}/documents/{document_id}/relationships",
+          "method": "GET",
+          "description": "Get document relationships and entity links"
+        },
+        {
+          "path": "/organizations/{org_id}/entities/{entity_id}/documents",
+          "method": "GET",
+          "description": "Get all documents related to PPM entity"
+        }
+      ]
+    },
+    "integration_examples": {
+      "document_upload_workflow": {
+        "step_1": {
+          "action": "upload_document",
+          "input": {"file": "business_case.pdf", "org_id": "org_123", "entity_id": "project_456"},
+          "output": {"document_id": "doc_789"}
+        },
+        "step_2": {
+          "action": "extract_content", 
+          "trigger": "ai_processing_hooks.content_extraction",
+          "output": {"content_text": "extracted text", "mentions": ["project_456", "stakeholder_123"]}
+        },
+        "step_3": {
+          "action": "generate_schema_org",
+          "output": {"@type": "Report", "about": {"@type": "Project", "identifier": "project_456"}}
+        },
+        "step_4": {
+          "action": "create_entity_links",
+          "output": [{"entity_id": "project_456", "entity_type": "project", "link_type": "created_for"}]
+        }
+      },
+      "search_integration": {
+        "elasticsearch_mapping": {
+          "properties": {
+            "org_id": {"type": "keyword"},
+            "document_id": {"type": "keyword"},
+            "schema_org_type": {"type": "keyword"},
+            "content_text": {"type": "text", "analyzer": "standard"},
+            "search_vector": {"type": "dense_vector", "dims": 768},
+            "mentions": {"type": "nested"},
+            "metadata_extracted": {"type": "object"}
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.baiv.io/design-tokens/v1",
+  "title": "Design Token Schema",
+  "description": "Schema.org-aligned design token definitions for AI-native platforms",
+  "type": "object",
+  "definitions": {
+    "SchemaOrgThing": {
+      "type": "object",
+      "properties": {
+        "@context": {
+          "type": "string",
+          "const": "https://schema.org"
+        },
+        "@type": {
+          "type": "string"
+        },
+        "@id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ColorValue": {
+      "type": "object",
+      "properties": {
+        "r": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "g": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "b": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "a": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "required": ["r", "g", "b"]
+    },
+    "DesignToken": {
+      "allOf": [
+        { "$ref": "#/definitions/SchemaOrgThing" },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "PropertyValue"
+            },
+            "$value": {
+              "oneOf": [
+                { "type": "string" },
+                { "type": "number" },
+                { "$ref": "#/definitions/ColorValue" }
+              ]
+            },
+            "$type": {
+              "type": "string",
+              "enum": ["color", "dimension", "fontFamily", "fontWeight", "duration", "number", "shadow", "border"]
+            },
+            "$description": {
+              "type": "string"
+            },
+            "$extensions": {
+              "type": "object",
+              "properties": {
+                "com.figma": {
+                  "type": "object",
+                  "properties": {
+                    "variableId": { "type": "string" },
+                    "collectionId": { "type": "string" },
+                    "scopes": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "codeSyntax": {
+                      "type": "object",
+                      "additionalProperties": { "type": "string" }
+                    }
+                  }
+                },
+                "org.schema": {
+                  "type": "object",
+                  "properties": {
+                    "@type": { "type": "string" },
+                    "propertyID": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "required": ["$value", "$type"]
+        }
+      ]
+    },
+    "TokenGroup": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/definitions/DesignToken"
+        }
+      }
+    },
+    "Brand": {
+      "allOf": [
+        { "$ref": "#/definitions/SchemaOrgThing" },
+        {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "Brand" },
+            "logo": { "type": "string", "format": "uri" },
+            "identifier": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "UIComponent": {
+      "allOf": [
+        { "$ref": "#/definitions/SchemaOrgThing" },
+        {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "SoftwareSourceCode" },
+            "additionalType": { "const": "UIComponent" },
+            "category": {
+              "type": "string",
+              "enum": ["atom", "molecule", "organism", "template", "page"]
+            },
+            "programmingLanguage": {
+              "type": "string",
+              "enum": ["TypeScript", "JavaScript", "CSS"]
+            },
+            "codeRepository": {
+              "type": "string",
+              "format": "uri"
+            },
+            "hasPart": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComponentProp"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ComponentProp": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "PropertyValueSpecification" },
+        "name": { "type": "string" },
+        "valueRequired": { "type": "boolean" },
+        "defaultValue": {},
+        "valuePattern": { "type": "string" }
+      },
+      "required": ["name"]
+    },
+    "AgentWorkflow": {
+      "allOf": [
+        { "$ref": "#/definitions/SchemaOrgThing" },
+        {
+          "type": "object",
+          "properties": {
+            "@type": { "const": "HowTo" },
+            "additionalType": { "const": "AgentWorkflow" },
+            "step": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkflowStep"
+              }
+            },
+            "tool": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentTool"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "WorkflowStep": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "HowToStep" },
+        "name": { "type": "string" },
+        "position": { "type": "integer" },
+        "itemListElement": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowStep"
+          }
+        }
+      }
+    },
+    "AgentTool": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "HowToTool" },
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://design-tokens.github.io/community-group/format/"
+    },
+    "$metadata": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "string", "const": "figma" },
+        "fileKey": { "type": "string" },
+        "extractedAt": { "type": "string", "format": "date-time" },
+        "version": { "type": "string" }
+      },
+      "required": ["source", "fileKey", "extractedAt", "version"]
+    },
+    "primitives": {
+      "$ref": "#/definitions/TokenGroup"
+    },
+    "semantic": {
+      "$ref": "#/definitions/TokenGroup"
+    },
+    "component": {
+      "$ref": "#/definitions/TokenGroup"
+    },
+    "brand": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/TokenGroup"
+      }
+    }
+  },
+  "required": ["$schema", "$metadata", "primitives", "semantic", "component", "brand"]
+}

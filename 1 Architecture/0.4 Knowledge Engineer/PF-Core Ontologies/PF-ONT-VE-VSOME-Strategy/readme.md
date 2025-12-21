@@ -1,0 +1,1 @@
+#VE VSOM Strategy ontology

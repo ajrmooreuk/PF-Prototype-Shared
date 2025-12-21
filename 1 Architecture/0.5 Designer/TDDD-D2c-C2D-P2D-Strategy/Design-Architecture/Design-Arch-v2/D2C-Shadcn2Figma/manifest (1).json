@@ -1,0 +1,26 @@
+{
+  "name": "shadcn Component Generator",
+  "id": "shadcn-component-generator-mvp",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  },
+  "menu": [
+    {
+      "name": "Generate Breadcrumb",
+      "command": "breadcrumb"
+    },
+    {
+      "separator": true
+    },
+    {
+      "name": "Generate All Components",
+      "command": "all"
+    }
+  ]
+}

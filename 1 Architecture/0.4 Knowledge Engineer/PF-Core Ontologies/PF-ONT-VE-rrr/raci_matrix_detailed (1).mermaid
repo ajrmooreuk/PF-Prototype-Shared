@@ -1,0 +1,194 @@
+graph TB
+    %% RACI/DACI Matrix for VSO-OKR Framework
+    
+    %% Matrix Headers
+    MATRIX[RACI/DACI Responsibility Matrix]
+    
+    %% VSO Components
+    VSO_COMPONENTS[VSO Framework Components]
+    VISION_COMP[Vision Development<br/>& Approval]
+    STRATEGY_COMP[Strategy Formulation<br/>& Planning]
+    OBJECTIVES_COMP[Objectives Setting<br/>& Validation]
+    
+    %% OKR Components  
+    OKR_COMPONENTS[OKR Framework Components]
+    COMPANY_OKRS[Company Level<br/>OKRs]
+    FUNCTIONAL_OKRS[Functional Level<br/>OKRs]
+    TEAM_OKRS[Team Level<br/>OKRs]
+    INDIVIDUAL_OKRS[Individual Level<br/>OKRs]
+    
+    %% BAIV Process Components
+    BAIV_COMPONENTS[BAIV Process Components]
+    P1_CONFIG[P1 Configuration<br/>Setup]
+    P4_AUDIT[P4 Audit<br/>Review]
+    P7_IDEATION[P7 Ideation<br/>Planning]
+    
+    %% Role Categories
+    BOARD_ROLES[Board Level Roles]
+    EXEC_ROLES[Executive Level Roles] 
+    SENIOR_ROLES[Senior Management Roles]
+    FUNC_ROLES[Functional Leader Roles]
+    TEAM_ROLES[Team Level Roles]
+    
+    %% Vision DACI Matrix
+    VISION_DACI[Vision DACI Matrix]
+    V_DRIVER[Driver: CEO<br/>Develops vision statement<br/>Leads visioning process]
+    V_APPROVER[Approver: Board Chairman<br/>Final vision approval<br/>Board resolution required]
+    V_CONTRIBUTOR[Contributors: C-Suite<br/>Strategic input & alignment<br/>Cross-functional perspective]
+    V_INFORMED[Informed: All Staff<br/>Vision communication<br/>Organizational awareness]
+    
+    %% Strategy RACI Matrix
+    STRATEGY_RACI[Strategy RACI Matrix]
+    S_RESPONSIBLE[Responsible: C-Suite<br/>CFO: Financial Strategy<br/>CMO: Marketing Strategy<br/>CTO: Technology Strategy<br/>CAIO: AI Strategy]
+    S_ACCOUNTABLE[Accountable: CEO<br/>Overall strategy approval<br/>Strategic coherence<br/>Resource allocation]
+    S_CONSULTED[Consulted: Senior Mgmt<br/>VPs: Functional input<br/>GMs: Market perspective<br/>Directors: Operational view]
+    S_INFORMED[Informed: All Teams<br/>Strategy communication<br/>Implementation guidance<br/>Progress updates]
+    
+    %% Company OKR RACI Matrix
+    COMP_OKR_RACI[Company OKR RACI Matrix]
+    CO_RESPONSIBLE[Responsible: CEO<br/>Company OKR development<br/>Strategic alignment<br/>Executive coordination]
+    CO_ACCOUNTABLE[Accountable: Board<br/>OKR approval oversight<br/>Performance monitoring<br/>Strategic validation]
+    CO_CONSULTED[Consulted: C-Suite<br/>Cross-functional input<br/>Resource implications<br/>Feasibility assessment]
+    CO_INFORMED[Informed: Organization<br/>OKR communication<br/>Progress transparency<br/>Achievement updates]
+    
+    %% Functional OKR RACI Matrix
+    FUNC_OKR_RACI[Functional OKR RACI Matrix]
+    FO_RESPONSIBLE[Responsible: Functional Leaders<br/>Finance Dir: Financial OKRs<br/>Marketing Dir: Marketing OKRs<br/>Tech Dir: Technology OKRs<br/>Operations Dir: Operations OKRs]
+    FO_ACCOUNTABLE[Accountable: C-Suite<br/>Functional OKR approval<br/>Resource allocation<br/>Performance accountability]
+    FO_CONSULTED[Consulted: Team Leaders<br/>Implementation feasibility<br/>Resource requirements<br/>Timeline validation]
+    FO_INFORMED[Informed: Teams & Individuals<br/>Functional OKR cascade<br/>Individual alignment<br/>Progress visibility]
+    
+    %% Team OKR RACI Matrix  
+    TEAM_OKR_RACI[Team OKR RACI Matrix]
+    TO_RESPONSIBLE[Responsible: Team Leaders<br/>Team OKR development<br/>Individual cascade<br/>Daily execution oversight]
+    TO_ACCOUNTABLE[Accountable: Functional Leaders<br/>Team OKR approval<br/>Resource provision<br/>Performance review]
+    TO_CONSULTED[Consulted: Team Members<br/>Individual capacity<br/>Skill assessment<br/>Timeline input]
+    TO_INFORMED[Informed: Stakeholders<br/>Cross-team dependencies<br/>Progress updates<br/>Achievement communication]
+    
+    %% BAIV Process RACI Matrix
+    BAIV_RACI[BAIV Process RACI Matrix]
+    B_RESPONSIBLE[Responsible: CAIO & CMO<br/>AI visibility implementation<br/>Process execution<br/>Data collection & analysis]
+    B_ACCOUNTABLE[Accountable: CEO<br/>Process oversight<br/>Resource approval<br/>Strategic integration]
+    B_CONSULTED[Consulted: Functional Leaders<br/>Domain expertise<br/>Implementation input<br/>Cross-functional coordination]
+    B_INFORMED[Informed: Board & Senior Mgmt<br/>Progress reporting<br/>Strategic implications<br/>Performance updates]
+    
+    %% Decision Points
+    DECISION_POINTS[Critical Decision Points]
+    VISION_APPROVAL[Vision Approval<br/>Timeframe: 30 days<br/>Escalation: Board deadlock]
+    STRATEGY_DECISION[Strategy Changes<br/>Timeframe: 14 days<br/>Escalation: Executive conflict]
+    OKR_APPROVAL[OKR Approval<br/>Timeframe: 7 days<br/>Escalation: Resource disputes]
+    RESOURCE_ALLOCATION[Resource Allocation<br/>Timeframe: 5 days<br/>Escalation: Budget variance >10%]
+    
+    %% Escalation Paths
+    ESCALATION[Escalation Pathways]
+    BOARD_ESCALATION[Board Level<br/>Strategic conflicts<br/>Vision disagreements<br/>Major resource issues]
+    EXEC_ESCALATION[Executive Level<br/>Cross-functional disputes<br/>Resource conflicts<br/>Performance issues]
+    FUNC_ESCALATION[Functional Level<br/>Team conflicts<br/>Implementation challenges<br/>Capacity constraints]
+    
+    %% Matrix Structure
+    MATRIX --> VSO_COMPONENTS
+    MATRIX --> OKR_COMPONENTS
+    MATRIX --> BAIV_COMPONENTS
+    
+    %% VSO Component Breakdown
+    VSO_COMPONENTS --> VISION_COMP
+    VSO_COMPONENTS --> STRATEGY_COMP
+    VSO_COMPONENTS --> OBJECTIVES_COMP
+    
+    %% OKR Component Breakdown
+    OKR_COMPONENTS --> COMPANY_OKRS
+    OKR_COMPONENTS --> FUNCTIONAL_OKRS
+    OKR_COMPONENTS --> TEAM_OKRS
+    OKR_COMPONENTS --> INDIVIDUAL_OKRS
+    
+    %% BAIV Component Breakdown
+    BAIV_COMPONENTS --> P1_CONFIG
+    BAIV_COMPONENTS --> P4_AUDIT
+    BAIV_COMPONENTS --> P7_IDEATION
+    
+    %% Vision DACI Connections
+    VISION_COMP --> VISION_DACI
+    VISION_DACI --> V_DRIVER
+    VISION_DACI --> V_APPROVER
+    VISION_DACI --> V_CONTRIBUTOR
+    VISION_DACI --> V_INFORMED
+    
+    %% Strategy RACI Connections
+    STRATEGY_COMP --> STRATEGY_RACI
+    STRATEGY_RACI --> S_RESPONSIBLE
+    STRATEGY_RACI --> S_ACCOUNTABLE
+    STRATEGY_RACI --> S_CONSULTED
+    STRATEGY_RACI --> S_INFORMED
+    
+    %% Company OKR RACI Connections
+    COMPANY_OKRS --> COMP_OKR_RACI
+    COMP_OKR_RACI --> CO_RESPONSIBLE
+    COMP_OKR_RACI --> CO_ACCOUNTABLE
+    COMP_OKR_RACI --> CO_CONSULTED
+    COMP_OKR_RACI --> CO_INFORMED
+    
+    %% Functional OKR RACI Connections
+    FUNCTIONAL_OKRS --> FUNC_OKR_RACI
+    FUNC_OKR_RACI --> FO_RESPONSIBLE
+    FUNC_OKR_RACI --> FO_ACCOUNTABLE
+    FUNC_OKR_RACI --> FO_CONSULTED
+    FUNC_OKR_RACI --> FO_INFORMED
+    
+    %% Team OKR RACI Connections
+    TEAM_OKRS --> TEAM_OKR_RACI
+    TEAM_OKR_RACI --> TO_RESPONSIBLE
+    TEAM_OKR_RACI --> TO_ACCOUNTABLE
+    TEAM_OKR_RACI --> TO_CONSULTED
+    TEAM_OKR_RACI --> TO_INFORMED
+    
+    %% BAIV RACI Connections
+    BAIV_COMPONENTS --> BAIV_RACI
+    BAIV_RACI --> B_RESPONSIBLE
+    BAIV_RACI --> B_ACCOUNTABLE
+    BAIV_RACI --> B_CONSULTED
+    BAIV_RACI --> B_INFORMED
+    
+    %% Decision Points Integration
+    MATRIX --> DECISION_POINTS
+    DECISION_POINTS --> VISION_APPROVAL
+    DECISION_POINTS --> STRATEGY_DECISION
+    DECISION_POINTS --> OKR_APPROVAL
+    DECISION_POINTS --> RESOURCE_ALLOCATION
+    
+    %% Escalation Path Integration
+    DECISION_POINTS --> ESCALATION
+    ESCALATION --> BOARD_ESCALATION
+    ESCALATION --> EXEC_ESCALATION
+    ESCALATION --> FUNC_ESCALATION
+    
+    %% Cross-connections showing escalation flows
+    VISION_APPROVAL -.->|escalates to| BOARD_ESCALATION
+    STRATEGY_DECISION -.->|escalates to| EXEC_ESCALATION
+    OKR_APPROVAL -.->|escalates to| FUNC_ESCALATION
+    RESOURCE_ALLOCATION -.->|escalates to| EXEC_ESCALATION
+    
+    %% Styling
+    classDef matrixClass fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
+    classDef vsoClass fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef okrClass fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef baivClass fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef daciClass fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef raciClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef decisionClass fill:#fff8e1,stroke:#f57c00,stroke-width:2px
+    classDef escalationClass fill:#fce4ec,stroke:#ad1457,stroke-width:2px
+    classDef driverClass fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef approverClass fill:#ffebee,stroke:#d32f2f,stroke-width:2px
+    classDef contributorClass fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef informedClass fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    
+    class MATRIX matrixClass
+    class VSO_COMPONENTS,VISION_COMP,STRATEGY_COMP,OBJECTIVES_COMP vsoClass
+    class OKR_COMPONENTS,COMPANY_OKRS,FUNCTIONAL_OKRS,TEAM_OKRS,INDIVIDUAL_OKRS okrClass
+    class BAIV_COMPONENTS,P1_CONFIG,P4_AUDIT,P7_IDEATION baivClass
+    class VISION_DACI,STRATEGY_RACI,COMP_OKR_RACI,FUNC_OKR_RACI,TEAM_OKR_RACI,BAIV_RACI raciClass
+    class DECISION_POINTS,VISION_APPROVAL,STRATEGY_DECISION,OKR_APPROVAL,RESOURCE_ALLOCATION decisionClass
+    class ESCALATION,BOARD_ESCALATION,EXEC_ESCALATION,FUNC_ESCALATION escalationClass
+    class V_DRIVER,S_RESPONSIBLE,CO_RESPONSIBLE,FO_RESPONSIBLE,TO_RESPONSIBLE,B_RESPONSIBLE driverClass
+    class V_APPROVER,S_ACCOUNTABLE,CO_ACCOUNTABLE,FO_ACCOUNTABLE,TO_ACCOUNTABLE,B_ACCOUNTABLE approverClass
+    class V_CONTRIBUTOR,S_CONSULTED,CO_CONSULTED,FO_CONSULTED,TO_CONSULTED,B_CONSULTED contributorClass
+    class V_INFORMED,S_INFORMED,CO_INFORMED,FO_INFORMED,TO_INFORMED,B_INFORMED informedClass

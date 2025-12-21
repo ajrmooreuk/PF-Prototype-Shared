@@ -1,0 +1,448 @@
+{
+  "variableCollections": [
+    {
+      "name": "Colors",
+      "modes": [
+        { "name": "NovaTech" },
+        { "name": "BAIV" }
+      ],
+      "variables": [
+        {
+          "name": "primary/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#3B82F6",
+            "BAIV": "#00a4bf"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "primary/light",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#60A5FA",
+            "BAIV": "#00a4bf"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "primary/dark",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#2563EB",
+            "BAIV": "#005260"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "secondary/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#8B5CF6",
+            "BAIV": "#e84e1c"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "accent/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#EC4899",
+            "BAIV": "#cec528"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "neutral/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#64748B",
+            "BAIV": "#cce8ee"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "success/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#10B981",
+            "BAIV": "#019587"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "warning/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#F59E0B",
+            "BAIV": "#cf057d"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "error/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#EF4444",
+            "BAIV": "#cec528"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "info/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#3B82F6",
+            "BAIV": "#1c3e8e"
+          },
+          "scopes": ["FILL_COLOR", "STROKE_COLOR"]
+        },
+        {
+          "name": "background",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#FFFFFF",
+            "BAIV": "#FFFFFF"
+          },
+          "scopes": ["FILL_COLOR"]
+        },
+        {
+          "name": "foreground",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#0f172a",
+            "BAIV": "#1a1a2e"
+          },
+          "scopes": ["FILL_COLOR", "TEXT_FILL"]
+        },
+        {
+          "name": "surface",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#f8fafc",
+            "BAIV": "#f0f9fa"
+          },
+          "scopes": ["FILL_COLOR"]
+        },
+        {
+          "name": "border",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#e2e8f0",
+            "BAIV": "#d1e7ea"
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "name": "muted/default",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#f1f5f9",
+            "BAIV": "#e6f4f6"
+          },
+          "scopes": ["FILL_COLOR"]
+        },
+        {
+          "name": "muted/foreground",
+          "type": "COLOR",
+          "values": {
+            "NovaTech": "#64748b",
+            "BAIV": "#4a5568"
+          },
+          "scopes": ["FILL_COLOR", "TEXT_FILL"]
+        }
+      ]
+    },
+    {
+      "name": "Spacing",
+      "modes": [
+        { "name": "Default" }
+      ],
+      "variables": [
+        {
+          "name": "spacing/0",
+          "type": "FLOAT",
+          "values": { "Default": 0 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/1",
+          "type": "FLOAT",
+          "values": { "Default": 4 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/2",
+          "type": "FLOAT",
+          "values": { "Default": 8 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/3",
+          "type": "FLOAT",
+          "values": { "Default": 12 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/4",
+          "type": "FLOAT",
+          "values": { "Default": 16 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/5",
+          "type": "FLOAT",
+          "values": { "Default": 20 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/6",
+          "type": "FLOAT",
+          "values": { "Default": 24 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/8",
+          "type": "FLOAT",
+          "values": { "Default": 32 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/10",
+          "type": "FLOAT",
+          "values": { "Default": 40 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/12",
+          "type": "FLOAT",
+          "values": { "Default": 48 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/16",
+          "type": "FLOAT",
+          "values": { "Default": 64 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/20",
+          "type": "FLOAT",
+          "values": { "Default": 80 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "name": "spacing/24",
+          "type": "FLOAT",
+          "values": { "Default": 96 },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        }
+      ]
+    },
+    {
+      "name": "Border Radius",
+      "modes": [
+        { "name": "Default" }
+      ],
+      "variables": [
+        {
+          "name": "radius/none",
+          "type": "FLOAT",
+          "values": { "Default": 0 },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "name": "radius/sm",
+          "type": "FLOAT",
+          "values": { "Default": 4 },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "name": "radius/md",
+          "type": "FLOAT",
+          "values": { "Default": 8 },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "name": "radius/lg",
+          "type": "FLOAT",
+          "values": { "Default": 12 },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "name": "radius/xl",
+          "type": "FLOAT",
+          "values": { "Default": 16 },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "name": "radius/2xl",
+          "type": "FLOAT",
+          "values": { "Default": 24 },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "name": "radius/full",
+          "type": "FLOAT",
+          "values": { "Default": 9999 },
+          "scopes": ["CORNER_RADIUS"]
+        }
+      ]
+    },
+    {
+      "name": "Typography",
+      "modes": [
+        { "name": "Default" }
+      ],
+      "variables": [
+        {
+          "name": "fontSize/xs",
+          "type": "FLOAT",
+          "values": { "Default": 12 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "fontSize/sm",
+          "type": "FLOAT",
+          "values": { "Default": 14 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "fontSize/base",
+          "type": "FLOAT",
+          "values": { "Default": 16 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "fontSize/lg",
+          "type": "FLOAT",
+          "values": { "Default": 18 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "fontSize/xl",
+          "type": "FLOAT",
+          "values": { "Default": 20 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "fontSize/2xl",
+          "type": "FLOAT",
+          "values": { "Default": 24 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "fontSize/3xl",
+          "type": "FLOAT",
+          "values": { "Default": 30 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "fontSize/4xl",
+          "type": "FLOAT",
+          "values": { "Default": 36 },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "name": "lineHeight/tight",
+          "type": "FLOAT",
+          "values": { "Default": 1.25 },
+          "scopes": ["LINE_HEIGHT"]
+        },
+        {
+          "name": "lineHeight/normal",
+          "type": "FLOAT",
+          "values": { "Default": 1.5 },
+          "scopes": ["LINE_HEIGHT"]
+        },
+        {
+          "name": "lineHeight/relaxed",
+          "type": "FLOAT",
+          "values": { "Default": 1.75 },
+          "scopes": ["LINE_HEIGHT"]
+        }
+      ]
+    },
+    {
+      "name": "Brand Assets",
+      "modes": [
+        { "name": "NovaTech" },
+        { "name": "BAIV" }
+      ],
+      "variables": [
+        {
+          "name": "assets/logo",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/logo.svg",
+            "BAIV": "https://drive.google.com/file/d/1BDFu_aeZBo4kar_NbQRlww2s1A0UiI5G/view?usp=drive_link"
+          }
+        },
+        {
+          "name": "assets/icon",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/icon.svg",
+            "BAIV": "https://drive.google.com/file/d/1Ntcn5pBZEuMiL3Oihi8fzgEt75QJR-bY/view?usp=drive_link"
+          }
+        },
+        {
+          "name": "assets/logo-white",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/logo-white.svg",
+            "BAIV": "https://drive.google.com/file/d/10jEjWsRilFPF2hB626APnmI_1bvtsbRg/view?usp=drive_link"
+          }
+        },
+        {
+          "name": "assets/favicon-ico",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/favicon.ico",
+            "BAIV": "https://drive.google.com/file/d/1zIT-XiJah3dud0lcf2ByAq52pBsHKcNS/view?usp=drive_link"
+          }
+        },
+        {
+          "name": "assets/favicon-svg",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/favicon.svg",
+            "BAIV": "https://drive.google.com/file/d/1Ntcn5pBZEuMiL3Oihi8fzgEt75QJR-bY/view?usp=sharing"
+          }
+        },
+        {
+          "name": "assets/icon-192",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/icon-192.png",
+            "BAIV": "https://drive.google.com/file/d/1rSiCi65GXsSTRt9FtMPEFf1Bbc3Tt9Rg/view?usp=drive_link"
+          }
+        },
+        {
+          "name": "assets/icon-512",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/icon-512.png",
+            "BAIV": "https://drive.google.com/file/d/1ch7F97j_yQqEqDyjfh5G6lcWEXcBDcaw/view?usp=drive_link"
+          }
+        },
+        {
+          "name": "assets/hero",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/hero.jpg",
+            "BAIV": "https://drive.google.com/file/d/1Qr7oDMMf4lb91qdQHe521d3DlrSyI3zB/view?usp=drive_link"
+          }
+        },
+        {
+          "name": "assets/og-image",
+          "type": "STRING",
+          "values": {
+            "NovaTech": "https://example.com/og-image.jpg",
+            "BAIV": "https://drive.google.com/file/d/1jQKDdHALduYV1oTaTT0QwwFuZ7f9OSsW/view?usp=drive_link"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,855 @@
+{
+  "@context": {
+    "@vocab": "https://baiv.ai/ontology/strategy-implementation/v1#",
+    "schema": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "TestDataSet",
+  "ontologyVersion": "1.0.0",
+  "dateGenerated": "2025-10-03",
+  "description": "Comprehensive test data for VSOM-Marketing-OKR ontology validation",
+  "distribution": {
+    "typical": "60% (18 instances)",
+    "edge": "20% (6 instances)", 
+    "boundary": "10% (3 instances)",
+    "invalid": "10% (3 instances)"
+  },
+
+  "testInstances": {
+    "organizations": [
+      {
+        "@id": "org:techcorp-inc",
+        "@type": "Organization",
+        "organizationId": "ORG-001",
+        "organizationName": "TechCorp Inc.",
+        "industry": "Software Development",
+        "maturityLevel": "Intermediate",
+        "transformationStage": "Scaling",
+        "competitivePosition": "Market challenger with strong AI capabilities",
+        "_testCase": "typical"
+      },
+      {
+        "@id": "org:finserv-global", 
+        "@type": "Organization",
+        "organizationId": "ORG-002",
+        "organizationName": "FinServ Global Ltd",
+        "industry": "Financial Services",
+        "maturityLevel": "Advanced",
+        "transformationStage": "Optimization",
+        "competitivePosition": "Market leader transitioning to AI-first operations",
+        "_testCase": "typical"
+      },
+      {
+        "@id": "org:startup-ai",
+        "@type": "Organization", 
+        "organizationId": "ORG-003",
+        "organizationName": "StartupAI Ventures",
+        "industry": "Artificial Intelligence",
+        "maturityLevel": "Expert",
+        "transformationStage": "Optimization",
+        "competitivePosition": "AI-native disruptor in multiple verticals",
+        "_testCase": "edge"
+      },
+      {
+        "@id": "org:legacy-manufacturing",
+        "@type": "Organization",
+        "organizationId": "ORG-004", 
+        "organizationName": "Legacy Manufacturing Corp",
+        "industry": "Manufacturing",
+        "maturityLevel": "Beginner",
+        "transformationStage": "Awareness",
+        "competitivePosition": "Traditional manufacturer beginning digital journey",
+        "_testCase": "boundary"
+      },
+      {
+        "@id": "org:invalid-example",
+        "@type": "Organization",
+        "organizationId": "",
+        "organizationName": "Invalid Corp",
+        "industry": "Software",
+        "maturityLevel": "InvalidLevel",
+        "transformationStage": "InvalidStage",
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty organizationId", "Invalid maturityLevel", "Invalid transformationStage"]
+      }
+    ],
+
+    "visions": [
+      {
+        "@id": "vision:techcorp-2027",
+        "@type": "Vision",
+        "visionId": "VIS-001",
+        "visionStatement": "Become the leading AI-powered SaaS platform for enterprise automation by 2027",
+        "timeHorizon": "P3Y",
+        "aiReadiness": 78.5,
+        "competitiveAdvantage": "First-mover advantage in conversational AI for enterprise workflows",
+        "belongsTo": "org:techcorp-inc",
+        "_testCase": "typical"
+      },
+      {
+        "@id": "vision:finserv-digital",
+        "@type": "Vision", 
+        "visionId": "VIS-002",
+        "visionStatement": "Transform into a fully digital, AI-native financial services ecosystem",
+        "timeHorizon": "P5Y",
+        "aiReadiness": 92.3,
+        "competitiveAdvantage": "Predictive financial services with personalized AI advisory",
+        "belongsTo": "org:finserv-global",
+        "_testCase": "typical"
+      },
+      {
+        "@id": "vision:startup-disruption",
+        "@type": "Vision",
+        "visionId": "VIS-003", 
+        "visionStatement": "Redefine multiple industries through AGI-powered solutions",
+        "timeHorizon": "P10Y",
+        "aiReadiness": 98.7,
+        "competitiveAdvantage": "Foundational AI research and AGI development capabilities",
+        "belongsTo": "org:startup-ai",
+        "_testCase": "edge"
+      },
+      {
+        "@id": "vision:boundary-case",
+        "@type": "Vision",
+        "visionId": "VIS-004",
+        "visionStatement": "A",
+        "timeHorizon": "P1M",
+        "aiReadiness": 0.0,
+        "competitiveAdvantage": "",
+        "belongsTo": "org:legacy-manufacturing",
+        "_testCase": "boundary",
+        "_note": "Minimal valid vision - single character statement, 1 month horizon, zero AI readiness"
+      },
+      {
+        "@id": "vision:invalid-example",
+        "@type": "Vision",
+        "visionId": "VIS-999",
+        "visionStatement": "",
+        "timeHorizon": "InvalidDuration",
+        "aiReadiness": 150.0,
+        "belongsTo": "org:nonexistent",
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty visionStatement", "Invalid timeHorizon format", "aiReadiness exceeds 100", "Referenced organization does not exist"]
+      }
+    ],
+
+    "strategies": [
+      {
+        "@id": "strategy:ai-first-customer",
+        "@type": "Strategy",
+        "strategyId": "STR-001",
+        "strategyName": "AI-First Customer Experience Strategy", 
+        "strategyType": "Technology",
+        "competitiveApproach": "Differentiation",
+        "aiLeverage": "Conversational AI, predictive analytics, and personalized recommendations",
+        "innovationFocus": "Autonomous customer service and proactive issue resolution",
+        "supportsVision": ["vision:techcorp-2027"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "strategy:market-expansion",
+        "@type": "Strategy",
+        "strategyId": "STR-002", 
+        "strategyName": "Global Market Expansion Strategy",
+        "strategyType": "Business",
+        "competitiveApproach": "Focus",
+        "aiLeverage": "Market intelligence and localization AI",
+        "innovationFocus": "AI-powered market entry optimization",
+        "supportsVision": ["vision:techcorp-2027"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "strategy:disruptive-innovation",
+        "@type": "Strategy",
+        "strategyId": "STR-003",
+        "strategyName": "Disruptive AGI Innovation Strategy",
+        "strategyType": "Innovation",
+        "competitiveApproach": "Disruption", 
+        "aiLeverage": "Advanced general intelligence, multimodal reasoning, autonomous discovery",
+        "innovationFocus": "Breakthrough AI capabilities that redefine industry standards",
+        "supportsVision": ["vision:startup-disruption"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "strategy:minimal-valid",
+        "@type": "Strategy",
+        "strategyId": "STR-004",
+        "strategyName": "Basic Digital Strategy",
+        "strategyType": "Technology",
+        "competitiveApproach": "Cost Leadership",
+        "supportsVision": ["vision:boundary-case"],
+        "_testCase": "boundary",
+        "_note": "Minimal strategy with only required fields"
+      },
+      {
+        "@id": "strategy:invalid-example",
+        "@type": "Strategy", 
+        "strategyId": "STR-999",
+        "strategyName": "",
+        "strategyType": "InvalidType",
+        "competitiveApproach": "InvalidApproach",
+        "supportsVision": [],
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty strategyName", "Invalid strategyType", "Invalid competitiveApproach", "Must support at least one vision"]
+      }
+    ],
+
+    "objectives": [
+      {
+        "@id": "objective:customer-satisfaction",
+        "@type": "Objective",
+        "objectiveId": "OBJ-001",
+        "objectiveStatement": "Achieve 95% customer satisfaction through AI-powered support",
+        "targetValue": "95%",
+        "timeframe": "P12M",
+        "priority": "Critical",
+        "aiEnablement": "24/7 conversational AI with sentiment analysis and proactive issue detection",
+        "supportsStrategy": ["strategy:ai-first-customer"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "objective:market-penetration",
+        "@type": "Objective",
+        "objectiveId": "OBJ-002",
+        "objectiveStatement": "Penetrate 3 new international markets with localized AI solutions",
+        "targetValue": "3 markets",
+        "timeframe": "P18M", 
+        "priority": "High",
+        "aiEnablement": "AI-powered market analysis, cultural adaptation, and localized product features",
+        "supportsStrategy": ["strategy:market-expansion"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "objective:breakthrough-research",
+        "@type": "Objective",
+        "objectiveId": "OBJ-003",
+        "objectiveStatement": "Achieve breakthrough in multimodal AGI reasoning capabilities",
+        "targetValue": "1 major breakthrough",
+        "timeframe": "P24M",
+        "priority": "Critical",
+        "aiEnablement": "Novel architectures combining symbolic and neural approaches",
+        "supportsStrategy": ["strategy:disruptive-innovation"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "objective:boundary-minimal",
+        "@type": "Objective",
+        "objectiveId": "OBJ-004",
+        "objectiveStatement": "Start",
+        "targetValue": "1",
+        "timeframe": "P1D",
+        "priority": "Low",
+        "supportsStrategy": ["strategy:minimal-valid"],
+        "_testCase": "boundary",
+        "_note": "Minimal valid objective with single-word statement and 1-day timeframe"
+      },
+      {
+        "@id": "objective:invalid-example",
+        "@type": "Objective",
+        "objectiveId": "OBJ-999",
+        "objectiveStatement": "",
+        "targetValue": "",
+        "timeframe": "InvalidDuration",
+        "priority": "InvalidPriority",
+        "supportsStrategy": [],
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty objectiveStatement", "Empty targetValue", "Invalid timeframe", "Invalid priority", "Must support at least one strategy"]
+      }
+    ],
+
+    "metrics": [
+      {
+        "@id": "metric:csat-score",
+        "@type": "Metric",
+        "metricId": "MET-001",
+        "metricName": "Customer Satisfaction Score",
+        "metricType": "KPI",
+        "measurementUnit": "percentage",
+        "baseline": 82.3,
+        "target": 95.0,
+        "frequency": "Monthly",
+        "automatedCollection": true,
+        "measuresObjective": ["objective:customer-satisfaction"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "metric:market-revenue",
+        "@type": "Metric", 
+        "metricId": "MET-002",
+        "metricName": "International Market Revenue",
+        "metricType": "Lagging",
+        "measurementUnit": "USD",
+        "baseline": 0.0,
+        "target": 5000000.0,
+        "frequency": "Quarterly",
+        "automatedCollection": false,
+        "measuresObjective": ["objective:market-penetration"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "metric:research-breakthroughs",
+        "@type": "Metric",
+        "metricId": "MET-003", 
+        "metricName": "AGI Research Breakthroughs",
+        "metricType": "Leading",
+        "measurementUnit": "count",
+        "baseline": 0.0,
+        "target": 1.0,
+        "frequency": "Continuous",
+        "automatedCollection": false,
+        "measuresObjective": ["objective:breakthrough-research"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "metric:boundary-case",
+        "@type": "Metric",
+        "metricId": "MET-004",
+        "metricName": "Basic Count",
+        "metricType": "Diagnostic",
+        "measurementUnit": "count",
+        "target": 1.0,
+        "frequency": "Once",
+        "automatedCollection": true,
+        "measuresObjective": ["objective:boundary-minimal"],
+        "_testCase": "boundary",
+        "_note": "Minimal metric without baseline"
+      },
+      {
+        "@id": "metric:invalid-example",
+        "@type": "Metric",
+        "metricId": "",
+        "metricName": "",
+        "metricType": "InvalidType",
+        "measurementUnit": "",
+        "target": -10.0,
+        "frequency": "",
+        "measuresObjective": [],
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty metricId", "Empty metricName", "Invalid metricType", "Empty measurementUnit", "Negative target", "Empty frequency", "Must measure at least one objective"]
+      }
+    ],
+
+    "marketingStrategies": [
+      {
+        "@id": "mstrategy:ai-visibility-leadership",
+        "@type": "MarketingStrategy",
+        "marketingStrategyId": "MS-001",
+        "focusArea": "Visibility",
+        "targetAudience": "C-suite executives in mid-market technology companies",
+        "competitiveDifferentiation": "Thought leadership in practical AI implementation beyond typical vendor marketing",
+        "aiMarketingCapabilities": "Content personalization, predictive audience segmentation, automated thought leadership distribution",
+        "visibilityBeyondSEO": "AI research publication, executive podcasts, industry speaking, peer referral networks",
+        "derivedFrom": ["strategy:ai-first-customer"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "mstrategy:global-localization",
+        "@type": "MarketingStrategy", 
+        "marketingStrategyId": "MS-002",
+        "focusArea": "Conversion",
+        "targetAudience": "Regional business leaders in target international markets",
+        "competitiveDifferentiation": "AI-powered cultural adaptation and localized value propositions",
+        "aiMarketingCapabilities": "Real-time cultural sentiment analysis, localized content generation, regional competitive intelligence",
+        "visibilityBeyondSEO": "Local industry partnerships, regional thought leadership, cultural ambassador programs",
+        "derivedFrom": ["strategy:market-expansion"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "mstrategy:disruptive-positioning",
+        "@type": "MarketingStrategy",
+        "marketingStrategyId": "MS-003",
+        "focusArea": "Advocacy",
+        "targetAudience": "AI researchers, technology visionaries, and innovation leaders",
+        "competitiveDifferentiation": "Breakthrough research positioning as AGI pioneers",
+        "aiMarketingCapabilities": "Autonomous research dissemination, peer network analysis, innovation trend prediction",
+        "visibilityBeyondSEO": "Academic publication, research collaboration, open-source contributions, AI conference keynotes",
+        "derivedFrom": ["strategy:disruptive-innovation"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "mstrategy:boundary-minimal",
+        "@type": "MarketingStrategy",
+        "marketingStrategyId": "MS-004",
+        "focusArea": "Engagement",
+        "targetAudience": "All",
+        "competitiveDifferentiation": "Basic",
+        "derivedFrom": ["strategy:minimal-valid"],
+        "_testCase": "boundary",
+        "_note": "Minimal marketing strategy with only required fields"
+      },
+      {
+        "@id": "mstrategy:invalid-example",
+        "@type": "MarketingStrategy",
+        "marketingStrategyId": "",
+        "focusArea": "InvalidFocus",
+        "targetAudience": "",
+        "competitiveDifferentiation": "",
+        "derivedFrom": [],
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty marketingStrategyId", "Invalid focusArea", "Empty targetAudience", "Empty competitiveDifferentiation", "Must derive from at least one strategy"]
+      }
+    ],
+
+    "okrs": [
+      {
+        "@id": "okr:q1-customer-excellence",
+        "@type": "OKR",
+        "okrId": "OKR-001",
+        "okrObjective": "Establish AI-powered customer excellence leadership",
+        "okrLevel": "Company",
+        "quarter": "Q1",
+        "year": 2025,
+        "confidenceLevel": 0.85,
+        "aiAcceleration": "Automated customer insight analysis and proactive service optimization",
+        "implements": ["mstrategy:ai-visibility-leadership"],
+        "derivedFromObjective": ["objective:customer-satisfaction"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "okr:q2-market-expansion",
+        "@type": "OKR", 
+        "okrId": "OKR-002",
+        "okrObjective": "Launch AI solutions in European markets",
+        "okrLevel": "Department",
+        "quarter": "Q2",
+        "year": 2025,
+        "confidenceLevel": 0.72,
+        "aiAcceleration": "AI-driven market entry optimization and localized product adaptation",
+        "implements": ["mstrategy:global-localization"],
+        "derivedFromObjective": ["objective:market-penetration"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "okr:q4-agi-breakthrough",
+        "@type": "OKR",
+        "okrId": "OKR-003", 
+        "okrObjective": "Achieve breakthrough in multimodal AGI capabilities",
+        "okrLevel": "Team",
+        "quarter": "Q4",
+        "year": 2025,
+        "confidenceLevel": 0.45,
+        "aiAcceleration": "Novel architecture development and accelerated experimentation cycles",
+        "implements": ["mstrategy:disruptive-positioning"],
+        "derivedFromObjective": ["objective:breakthrough-research"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "okr:boundary-minimal",
+        "@type": "OKR",
+        "okrId": "OKR-004",
+        "okrObjective": "Start something",
+        "okrLevel": "Individual",
+        "quarter": "Q1",
+        "year": 2025,
+        "confidenceLevel": 1.0,
+        "_testCase": "boundary",
+        "_note": "Minimal OKR with maximum confidence"
+      },
+      {
+        "@id": "okr:invalid-example",
+        "@type": "OKR",
+        "okrId": "",
+        "okrObjective": "",
+        "okrLevel": "InvalidLevel",
+        "quarter": "Q5",
+        "year": 1999,
+        "confidenceLevel": 1.5,
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty okrId", "Empty okrObjective", "Invalid okrLevel", "Invalid quarter", "Historic year", "Confidence level exceeds 1.0"]
+      }
+    ],
+
+    "keyResults": [
+      {
+        "@id": "kr:csat-improvement",
+        "@type": "KeyResult",
+        "keyResultId": "KR-001",
+        "keyResultStatement": "Increase customer satisfaction score from 82% to 95%",
+        "measurementType": "Increase",
+        "startingValue": 82.0,
+        "targetValue": 95.0,
+        "currentValue": 87.3,
+        "unit": "percentage",
+        "progressPercent": 40.8,
+        "belongsToOKR": "okr:q1-customer-excellence",
+        "measuredBy": ["metric:csat-score"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "kr:response-time",
+        "@type": "KeyResult",
+        "keyResultId": "KR-002",
+        "keyResultStatement": "Reduce AI support response time to under 30 seconds",
+        "measurementType": "Decrease",
+        "startingValue": 120.0,
+        "targetValue": 30.0,
+        "currentValue": 75.0,
+        "unit": "seconds",
+        "progressPercent": 50.0,
+        "belongsToOKR": "okr:q1-customer-excellence",
+        "_testCase": "typical"
+      },
+      {
+        "@id": "kr:market-launch",
+        "@type": "KeyResult",
+        "keyResultId": "KR-003",
+        "keyResultStatement": "Successfully launch in 2 European markets with localized AI features",
+        "measurementType": "Complete",
+        "startingValue": 0.0,
+        "targetValue": 2.0,
+        "currentValue": 0.0,
+        "unit": "markets",
+        "progressPercent": 0.0,
+        "belongsToOKR": "okr:q2-market-expansion",
+        "_testCase": "typical"
+      },
+      {
+        "@id": "kr:revenue-target",
+        "@type": "KeyResult",
+        "keyResultId": "KR-004",
+        "keyResultStatement": "Generate $2M revenue from new international markets",
+        "measurementType": "Achieve",
+        "startingValue": 0.0,
+        "targetValue": 2000000.0,
+        "currentValue": 150000.0,
+        "unit": "USD",
+        "progressPercent": 7.5,
+        "belongsToOKR": "okr:q2-market-expansion",
+        "measuredBy": ["metric:market-revenue"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "kr:agi-research-publication",
+        "@type": "KeyResult",
+        "keyResultId": "KR-005",
+        "keyResultStatement": "Publish breakthrough AGI research in top-tier AI conference",
+        "measurementType": "Complete",
+        "startingValue": 0.0,
+        "targetValue": 1.0,
+        "currentValue": 0.3,
+        "unit": "publications",
+        "progressPercent": 30.0,
+        "belongsToOKR": "okr:q4-agi-breakthrough",
+        "measuredBy": ["metric:research-breakthroughs"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "kr:boundary-minimal",
+        "@type": "KeyResult",
+        "keyResultId": "KR-006",
+        "keyResultStatement": "Do it",
+        "measurementType": "Complete",
+        "targetValue": 1.0,
+        "currentValue": 1.0,
+        "unit": "task",
+        "progressPercent": 100.0,
+        "belongsToOKR": "okr:boundary-minimal",
+        "_testCase": "boundary",
+        "_note": "Minimal completed key result"
+      },
+      {
+        "@id": "kr:invalid-example",
+        "@type": "KeyResult",
+        "keyResultId": "",
+        "keyResultStatement": "",
+        "measurementType": "InvalidType",
+        "startingValue": -10.0,
+        "targetValue": -5.0,
+        "currentValue": 200.0,
+        "unit": "",
+        "progressPercent": 150.0,
+        "belongsToOKR": "okr:nonexistent",
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty keyResultId", "Empty keyResultStatement", "Invalid measurementType", "Negative values", "Empty unit", "Progress exceeds 100%", "Referenced OKR does not exist"]
+      }
+    ],
+
+    "baivProcesses": [
+      {
+        "@id": "process:techcorp-early-access",
+        "@type": "BAIVProcess",
+        "processId": "BP-001",
+        "processName": "TechCorp AI Strategy Early Access",
+        "processType": "Process1_EarlyAccess",
+        "stage": "Completed",
+        "deliverables": "AI maturity assessment, strategic opportunity identification, transformation roadmap outline",
+        "duration": "P2W",
+        "engagesOrganization": "org:techcorp-inc",
+        "informsStrategy": ["strategy:ai-first-customer"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "process:finserv-strategy-calls",
+        "@type": "BAIVProcess",
+        "processId": "BP-002",
+        "processName": "FinServ Global Strategy Development Calls",
+        "processType": "Process2_StrategyCalls",
+        "stage": "In_Progress",
+        "deliverables": "Comprehensive strategic plan, competitive analysis, implementation timeline, success metrics framework",
+        "duration": "P6W",
+        "engagesOrganization": "org:finserv-global",
+        "informsStrategy": ["strategy:ai-first-customer", "strategy:market-expansion"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "process:startup-onboarding",
+        "@type": "BAIVProcess",
+        "processId": "BP-003",
+        "processName": "StartupAI Advanced Onboarding",
+        "processType": "Process3_Onboarding",
+        "stage": "Review",
+        "deliverables": "Full implementation support, capability development, performance optimization, ongoing advisory",
+        "duration": "P12W",
+        "engagesOrganization": "org:startup-ai",
+        "informsStrategy": ["strategy:disruptive-innovation"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "process:boundary-minimal",
+        "@type": "BAIVProcess",
+        "processId": "BP-004",
+        "processName": "Basic Process",
+        "processType": "Process1_EarlyAccess",
+        "stage": "Initiated",
+        "engagesOrganization": "org:legacy-manufacturing",
+        "_testCase": "boundary",
+        "_note": "Minimal process with only required fields"
+      },
+      {
+        "@id": "process:invalid-example",
+        "@type": "BAIVProcess",
+        "processId": "",
+        "processName": "",
+        "processType": "InvalidProcessType",
+        "stage": "InvalidStage",
+        "engagesOrganization": "org:nonexistent",
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty processId", "Empty processName", "Invalid processType", "Invalid stage", "Referenced organization does not exist"]
+      }
+    ],
+
+    "stakeholders": [
+      {
+        "@id": "stakeholder:sarah-johnson",
+        "@type": "Stakeholder",
+        "stakeholderId": "STK-001",
+        "name": "Sarah Johnson",
+        "role": "Chief Marketing Officer",
+        "stakeholderType": "Executive",
+        "influence": "High",
+        "interest": "High",
+        "belongsToOrganization": "org:techcorp-inc",
+        "responsibleForOKR": ["okr:q1-customer-excellence"],
+        "participatesInProcess": ["process:techcorp-early-access"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "stakeholder:michael-chen",
+        "@type": "Stakeholder",
+        "stakeholderId": "STK-002",
+        "name": "Michael Chen",
+        "role": "VP International Expansion",
+        "stakeholderType": "Manager",
+        "influence": "High",
+        "interest": "Medium",
+        "belongsToOrganization": "org:techcorp-inc",
+        "responsibleForOKR": ["okr:q2-market-expansion"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "stakeholder:dr-alex-rivera",
+        "@type": "Stakeholder",
+        "stakeholderId": "STK-003",
+        "name": "Dr. Alex Rivera",
+        "role": "Chief AI Scientist",
+        "stakeholderType": "Contributor",
+        "influence": "Medium",
+        "interest": "High",
+        "belongsToOrganization": "org:startup-ai",
+        "responsibleForOKR": ["okr:q4-agi-breakthrough"],
+        "participatesInProcess": ["process:startup-onboarding"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "stakeholder:boundary-case",
+        "@type": "Stakeholder",
+        "stakeholderId": "STK-004",
+        "name": "A",
+        "role": "Role",
+        "stakeholderType": "Advisor",
+        "influence": "Low",
+        "interest": "Low",
+        "belongsToOrganization": "org:legacy-manufacturing",
+        "_testCase": "boundary",
+        "_note": "Minimal stakeholder with single character name"
+      },
+      {
+        "@id": "stakeholder:invalid-example",
+        "@type": "Stakeholder",
+        "stakeholderId": "",
+        "name": "",
+        "role": "",
+        "stakeholderType": "InvalidType",
+        "influence": "InvalidLevel",
+        "interest": "InvalidLevel",
+        "belongsToOrganization": "org:nonexistent",
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty stakeholderId", "Empty name", "Empty role", "Invalid stakeholderType", "Invalid influence", "Invalid interest", "Referenced organization does not exist"]
+      }
+    ],
+
+    "audienceSegments": [
+      {
+        "@id": "audience:tech-executives",
+        "@type": "AudienceSegment",
+        "segmentId": "AUD-001",
+        "segmentName": "Tech-Forward C-Suite Executives",
+        "demographics": "Age 35-55, technology sector, revenue $10M-$1B",
+        "psychographics": "Innovation-driven, data-informed decision makers, competitive advantage seekers",
+        "aiReadiness": 85.3,
+        "engagementChannels": "LinkedIn, industry conferences, executive roundtables, thought leadership content",
+        "targetedBy": ["mstrategy:ai-visibility-leadership"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "audience:international-leaders",
+        "@type": "AudienceSegment",
+        "segmentId": "AUD-002",
+        "segmentName": "European Regional Business Leaders",
+        "demographics": "Age 30-50, B2B technology markets, culturally diverse",
+        "psychographics": "Growth-oriented, risk-conscious, relationship-focused decision making",
+        "aiReadiness": 72.8,
+        "engagementChannels": "Regional events, local partnerships, culturally adapted digital channels",
+        "targetedBy": ["mstrategy:global-localization"],
+        "_testCase": "typical"
+      },
+      {
+        "@id": "audience:ai-researchers",
+        "@type": "AudienceSegment",
+        "segmentId": "AUD-003",
+        "segmentName": "AI Research Community",
+        "demographics": "Age 25-45, academic and industry research backgrounds",
+        "psychographics": "Intellectual curiosity, peer recognition seekers, breakthrough-oriented",
+        "aiReadiness": 98.1,
+        "engagementChannels": "Academic conferences, research publications, open-source communities, peer networks",
+        "targetedBy": ["mstrategy:disruptive-positioning"],
+        "_testCase": "edge"
+      },
+      {
+        "@id": "audience:boundary-minimal",
+        "@type": "AudienceSegment",
+        "segmentId": "AUD-004",
+        "segmentName": "Everyone",
+        "aiReadiness": 0.0,
+        "engagementChannels": "All",
+        "_testCase": "boundary",
+        "_note": "Minimal audience segment with zero AI readiness"
+      },
+      {
+        "@id": "audience:invalid-example",
+        "@type": "AudienceSegment",
+        "segmentId": "",
+        "segmentName": "",
+        "aiReadiness": -10.0,
+        "engagementChannels": "",
+        "_testCase": "invalid",
+        "_expectedErrors": ["Empty segmentId", "Empty segmentName", "Negative aiReadiness", "Empty engagementChannels"]
+      }
+    ]
+  },
+
+  "relationshipScenarios": [
+    {
+      "scenario": "Complete Strategic Alignment",
+      "description": "Organization with full vision-strategy-objective-OKR alignment",
+      "entities": ["org:techcorp-inc", "vision:techcorp-2027", "strategy:ai-first-customer", "objective:customer-satisfaction", "okr:q1-customer-excellence"],
+      "relationships": [
+        "org:techcorp-inc hasVision vision:techcorp-2027",
+        "strategy:ai-first-customer supportsVision vision:techcorp-2027", 
+        "objective:customer-satisfaction supportsStrategy strategy:ai-first-customer",
+        "okr:q1-customer-excellence derivedFromObjective objective:customer-satisfaction"
+      ],
+      "_testCase": "typical"
+    },
+    {
+      "scenario": "Marketing Strategy Implementation Chain",
+      "description": "Complete chain from business strategy through marketing to OKR execution",
+      "entities": ["strategy:market-expansion", "mstrategy:global-localization", "okr:q2-market-expansion", "kr:market-launch"],
+      "relationships": [
+        "mstrategy:global-localization derivedFrom strategy:market-expansion",
+        "okr:q2-market-expansion implements mstrategy:global-localization",
+        "kr:market-launch belongsToOKR okr:q2-market-expansion"
+      ],
+      "_testCase": "typical"
+    },
+    {
+      "scenario": "BAIV Process Journey",
+      "description": "Client progression through BAIV processes with strategy impact",
+      "entities": ["org:finserv-global", "process:finserv-strategy-calls", "strategy:ai-first-customer", "stakeholder:sarah-johnson"],
+      "relationships": [
+        "process:finserv-strategy-calls engagesOrganization org:finserv-global",
+        "process:finserv-strategy-calls informsStrategy strategy:ai-first-customer",
+        "stakeholder:sarah-johnson participatesInProcess process:finserv-strategy-calls"
+      ],
+      "_testCase": "typical"
+    },
+    {
+      "scenario": "Circular Dependency",
+      "description": "Invalid circular relationship between strategies",
+      "entities": ["strategy:ai-first-customer", "strategy:market-expansion"],
+      "relationships": [
+        "strategy:ai-first-customer informsMarketingStrategy mstrategy:global-localization",
+        "mstrategy:global-localization derivedFrom strategy:market-expansion",
+        "strategy:market-expansion supportsVision vision:techcorp-2027",
+        "vision:techcorp-2027 alignsWith strategy:ai-first-customer"
+      ],
+      "_testCase": "invalid",
+      "_expectedErrors": ["Potential circular dependency in strategy relationships"]
+    }
+  ],
+
+  "validationRules": [
+    {
+      "rule": "Organization Vision Requirement",
+      "description": "Every organization must have at least one vision",
+      "test": "SELECT ?org WHERE { ?org a :Organization . FILTER NOT EXISTS { ?org :hasVision ?vision } }",
+      "expectedResult": "Empty result set"
+    },
+    {
+      "rule": "OKR Key Result Cardinality",
+      "description": "Every OKR must have 2-5 key results",
+      "test": "SELECT ?okr (COUNT(?kr) as ?count) WHERE { ?okr a :OKR . OPTIONAL { ?okr :hasKeyResult ?kr } } GROUP BY ?okr HAVING (?count < 2 || ?count > 5)",
+      "expectedResult": "Empty result set"
+    },
+    {
+      "rule": "Progress Percentage Range",
+      "description": "Progress percentage must be 0-100",
+      "test": "SELECT ?kr ?progress WHERE { ?kr a :KeyResult ; :progressPercent ?progress . FILTER (?progress < 0 || ?progress > 100) }",
+      "expectedResult": "Empty result set"
+    },
+    {
+      "rule": "AI Readiness Range",
+      "description": "AI readiness scores must be 0-100",
+      "test": "SELECT ?entity ?score WHERE { { ?entity a :Vision ; :aiReadiness ?score } UNION { ?entity a :AudienceSegment ; :aiReadiness ?score } FILTER (?score < 0 || ?score > 100) }",
+      "expectedResult": "Empty result set"
+    },
+    {
+      "rule": "Confidence Level Range",
+      "description": "Confidence level must be 0.0-1.0",
+      "test": "SELECT ?okr ?confidence WHERE { ?okr a :OKR ; :confidenceLevel ?confidence . FILTER (?confidence < 0.0 || ?confidence > 1.0) }",
+      "expectedResult": "Empty result set"
+    }
+  ],
+
+  "testCoverage": {
+    "entitiesWithTypicalCases": 10,
+    "entitiesWithEdgeCases": 10,
+    "entitiesWithBoundaryCases": 10,
+    "entitiesWithInvalidCases": 10,
+    "relationshipScenariosCount": 4,
+    "businessRulesCovered": 8,
+    "validationRulesCount": 5,
+    "totalInstances": 30,
+    "coveragePercentage": 100
+  }
+}

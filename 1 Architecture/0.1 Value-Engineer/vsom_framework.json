@@ -1,0 +1,216 @@
+{
+  "VSOM_Definition": {
+    "acronym": "Vision, Strategy, Objectives, Metrics",
+    "purpose": "Ontological framework for describing organizational strategic architecture",
+    "scope": "Corporate and Functional Strategies with cascading OKR implementation",
+    "temporal_nature": "Multi-temporal with different horizons for each component"
+  },
+  "Core_Components": {
+    "Vision": {
+      "definition": "Long-term aspirational statement of organizational purpose and desired future state",
+      "characteristics": [
+        "Inspirational",
+        "Directional",
+        "Enduring",
+        "Unifying"
+      ],
+      "temporal_horizon": "5-10 years",
+      "ontological_type": "Strategic_Intent",
+      "relationship": "Guides_Strategy"
+    },
+    "Strategy": {
+      "definition": "High-level approach and methodology for achieving the Vision through resource allocation and capability development",
+      "types": [
+        "Corporate_Strategy",
+        "Functional_Strategy"
+      ],
+      "temporal_horizon": "3-5 years",
+      "ontological_type": "Strategic_Method",
+      "relationship": "Implements_Vision, Defines_Objectives"
+    },
+    "Objectives": {
+      "definition": "Specific, qualitative statements of what must be achieved to execute Strategy",
+      "characteristics": [
+        "Specific",
+        "Directional",
+        "Action-oriented",
+        "Time-bound"
+      ],
+      "temporal_horizon": "1-3 years",
+      "ontological_type": "Strategic_Goal",
+      "relationship": "Operationalizes_Strategy, Measured_By_Metrics"
+    },
+    "Metrics": {
+      "definition": "Quantitative and qualitative measures that track progress toward Objectives",
+      "types": [
+        "KPIs",
+        "OKRs",
+        "BSC_Measures"
+      ],
+      "temporal_horizon": "Quarterly/Monthly",
+      "ontological_type": "Performance_Indicator",
+      "relationship": "Measures_Objectives, Drives_Activities"
+    }
+  },
+  "Organizational_Hierarchy": {
+    "Corporate_Level": {
+      "VSOM_Owner": "CEO",
+      "Strategic_Framework": "Corporate_VSOM",
+      "Cascade_Target": "Functional_Strategies"
+    },
+    "Functional_Level": {
+      "C_Suite_Roles": {
+        "CFO": {
+          "strategic_focus": "Financial Performance and Risk Management",
+          "key_frameworks": [
+            "BSC_Financial_Perspective",
+            "Financial_OKRs"
+          ],
+          "functional_strategy": "Financial_Strategy"
+        },
+        "COO": {
+          "strategic_focus": "Operational Excellence and Process Optimization",
+          "key_frameworks": [
+            "BSC_Internal_Process",
+            "Operational_OKRs"
+          ],
+          "functional_strategy": "Operations_Strategy"
+        },
+        "CMO": {
+          "strategic_focus": "Market Position and Customer Value",
+          "key_frameworks": [
+            "BSC_Customer_Perspective",
+            "Marketing_OKRs"
+          ],
+          "functional_strategy": "Marketing_Strategy"
+        },
+        "CHRO": {
+          "strategic_focus": "Talent Development and Organizational Capability",
+          "key_frameworks": [
+            "BSC_Learning_Growth",
+            "HR_OKRs"
+          ],
+          "functional_strategy": "Human_Capital_Strategy"
+        },
+        "CTO": {
+          "strategic_focus": "Technology Innovation and Digital Transformation",
+          "key_frameworks": [
+            "Technology_BSC",
+            "Innovation_OKRs"
+          ],
+          "functional_strategy": "Technology_Strategy"
+        }
+      }
+    }
+  },
+  "Work_Classification_Ontology": {
+    "Work_Types": {
+      "PROJECT": {
+        "definition": "Temporary endeavor with defined start/end dates to create unique deliverable",
+        "characteristics": [
+          "Temporary",
+          "Unique_Outcome",
+          "Progressive_Elaboration"
+        ],
+        "management_framework": "Project_Management_WBS",
+        "relationship_to_strategy": "Implements_Strategic_Initiatives"
+      },
+      "PROCESS": {
+        "definition": "Repeatable sequence of activities that transforms inputs into outputs",
+        "characteristics": [
+          "Repeatable",
+          "Measurable",
+          "Continuous_Improvement"
+        ],
+        "management_framework": "Process_Management_WBS",
+        "relationship_to_strategy": "Operationalizes_Strategic_Capabilities"
+      },
+      "CAMPAIGN": {
+        "definition": "Coordinated series of activities designed to achieve specific marketing/communication objectives",
+        "characteristics": [
+          "Time_Bound",
+          "Audience_Targeted",
+          "Message_Focused"
+        ],
+        "management_framework": "Campaign_Management_WBS",
+        "relationship_to_strategy": "Executes_Marketing_Strategy"
+      }
+    },
+    "WBS_Structure": {
+      "Level_1": "Work_Package",
+      "Level_2": "Activity",
+      "Level_3": "Task",
+      "Level_4": "Sub_Task",
+      "Decomposition_Rule": "100%_Rule_Applied"
+    }
+  },
+  "OKR_Integration": {
+    "OKR_Definition": {
+      "Objective": "Qualitative description of what is to be achieved",
+      "Key_Results": "Quantitative metrics that measure achievement of Objective"
+    },
+    "Cascade_Structure": {
+      "Corporate_OKRs": {
+        "source": "Corporate_VSOM",
+        "owner": "CEO",
+        "horizon": "Annual"
+      },
+      "Functional_OKRs": {
+        "source": "Functional_VSOM + Corporate_OKRs",
+        "owner": "C_Suite_Function_Leader",
+        "horizon": "Quarterly"
+      },
+      "Team_OKRs": {
+        "source": "Functional_OKRs",
+        "owner": "Department_Manager",
+        "horizon": "Quarterly"
+      },
+      "Individual_OKRs": {
+        "source": "Team_OKRs",
+        "owner": "Individual_Contributor",
+        "horizon": "Quarterly"
+      }
+    }
+  },
+  "Governance_Framework": {
+    "ROLES": {
+      "definition": "Defined positions with specific authorities and responsibilities",
+      "hierarchy": "CEO -> C_Suite -> VPs -> Directors -> Managers"
+    },
+    "RACI": {
+      "definition": "Responsibility Assignment Matrix",
+      "components": {
+        "Responsible": "Does the work",
+        "Accountable": "Owns the outcome",
+        "Consulted": "Provides input",
+        "Informed": "Receives updates"
+      }
+    },
+    "RBAC": {
+      "definition": "Role-Based Access Control",
+      "components": {
+        "Roles": "Collection of permissions",
+        "Permissions": "Specific access rights",
+        "Users": "Individuals assigned to roles"
+      }
+    }
+  },
+  "Strategic_Framework_Integration": {
+    "BSC_Integration": {
+      "Financial_Perspective": "Links to CFO Functional Strategy",
+      "Customer_Perspective": "Links to CMO Functional Strategy",
+      "Internal_Process": "Links to COO Functional Strategy",
+      "Learning_Growth": "Links to CHRO Functional Strategy"
+    },
+    "Blue_Ocean_Integration": {
+      "Four_Actions": [
+        "Eliminate",
+        "Reduce",
+        "Raise",
+        "Create"
+      ],
+      "Application": "Strategic differentiation within VSOM framework",
+      "Integration_Point": "Strategy component of VSOM"
+    }
+  }
+}

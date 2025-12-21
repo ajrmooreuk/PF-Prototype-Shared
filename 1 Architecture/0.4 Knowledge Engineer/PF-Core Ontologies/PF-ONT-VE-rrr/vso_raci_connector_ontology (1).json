@@ -1,0 +1,430 @@
+{
+  "@context": {
+    "@vocab": "https://ontology.example.com/vso-raci-connector#",
+    "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "vso": "https://ontology.example.com/vso-okr#",
+    "raci": "https://ontology.example.com/raci-daci#"
+  },
+  "@type": "owl:Ontology",
+  "rdfs:label": "VSO-OKR-RACI Connector Ontology v1.0",
+  "rdfs:comment": "Integration ontology connecting Vision-Strategy-Objectives-OKR framework with RACI/DACI organizational roles and responsibilities",
+  "owl:versionInfo": "1.0.0",
+  "owl:imports": [
+    "https://ontology.example.com/vso-okr",
+    "https://ontology.example.com/raci-daci",
+    "https://schema.org/"
+  ],
+
+  "classes": {
+    "StrategicAlignment": {
+      "@type": "owl:Class",
+      "rdfs:label": "Strategic Alignment",
+      "rdfs:comment": "Connection between organizational roles and strategic framework components",
+      "rdfs:subClassOf": "schema:StructuredValue",
+      "subClasses": [
+        "VisionAlignment",
+        "StrategyAlignment", 
+        "ObjectiveAlignment",
+        "OKRAlignment"
+      ]
+    },
+
+    "ResponsibilityMatrix": {
+      "@type": "owl:Class",
+      "rdfs:label": "Responsibility Matrix",
+      "rdfs:comment": "Matrix mapping roles to VSO-OKR components with RACI/DACI assignments",
+      "rdfs:subClassOf": "schema:Dataset",
+      "subClasses": [
+        "VSOResponsibilityMatrix",
+        "OKRResponsibilityMatrix",
+        "FunctionalResponsibilityMatrix"
+      ]
+    },
+
+    "StrategicGovernanceBody": {
+      "@type": "owl:Class",
+      "rdfs:label": "Strategic Governance Body",
+      "rdfs:comment": "Formal governance structure for strategic decision-making",
+      "rdfs:subClassOf": "schema:Organization",
+      "subClasses": [
+        "StrategicPlanningCommittee",
+        "OKRGovernanceCommittee",
+        "ExecutiveLeadershipTeam",
+        "FunctionalSteeringCommittee"
+      ]
+    },
+
+    "DecisionPoint": {
+      "@type": "owl:Class",
+      "rdfs:label": "Decision Point",
+      "rdfs:comment": "Critical decision moments in VSO-OKR lifecycle requiring role clarity",
+      "rdfs:subClassOf": "schema:Event",
+      "subClasses": [
+        "VisionApprovalPoint",
+        "StrategyDecisionPoint",
+        "ObjectiveValidationPoint", 
+        "OKRApprovalPoint",
+        "ResourceAllocationPoint"
+      ]
+    },
+
+    "EscalationPath": {
+      "@type": "owl:Class",
+      "rdfs:label": "Escalation Path",
+      "rdfs:comment": "Defined path for escalating strategic decisions through organizational hierarchy",
+      "subClasses": [
+        "StrategicEscalation",
+        "OKRConflictEscalation",
+        "ResourceEscalation",
+        "PerformanceEscalation"
+      ]
+    },
+
+    "StrategicInfluenceNetwork": {
+      "@type": "owl:Class",
+      "rdfs:label": "Strategic Influence Network",
+      "rdfs:comment": "Network of roles and their influence relationships in strategic context",
+      "rdfs:subClassOf": "schema:Organization"
+    }
+  },
+
+  "properties": {
+    "objectProperties": {
+      "hasStrategicAlignment": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "has strategic alignment",
+        "rdfs:domain": "raci:OrganizationalRole",
+        "rdfs:range": "StrategicAlignment"
+      },
+
+      "participatesInMatrix": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "participates in matrix", 
+        "rdfs:domain": "raci:OrganizationalRole",
+        "rdfs:range": "ResponsibilityMatrix"
+      },
+
+      "memberOfGovernanceBody": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "member of governance body",
+        "rdfs:subPropertyOf": "schema:memberOf",
+        "rdfs:domain": "raci:OrganizationalRole",
+        "rdfs:range": "StrategicGovernanceBody"
+      },
+
+      "ownsDecisionPoint": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "owns decision point",
+        "rdfs:domain": "raci:OrganizationalRole", 
+        "rdfs:range": "DecisionPoint"
+      },
+
+      "triggersEscalation": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "triggers escalation",
+        "rdfs:domain": "DecisionPoint",
+        "rdfs:range": "EscalationPath"
+      },
+
+      "influencesVSOComponent": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "influences VSO component",
+        "rdfs:domain": "raci:OrganizationalRole",
+        "rdfs:range": "vso:VSOFramework"
+      },
+
+      "accountableForOKR": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "accountable for OKR",
+        "rdfs:domain": "raci:OrganizationalRole",
+        "rdfs:range": "vso:OKRObjective"
+      },
+
+      "consultsOnStrategy": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "consults on strategy",
+        "rdfs:domain": "raci:OrganizationalRole",
+        "rdfs:range": "raci:FunctionalStrategy"
+      },
+
+      "informedOfProgress": {
+        "@type": "owl:ObjectProperty",
+        "rdfs:label": "informed of progress",
+        "rdfs:domain": "raci:OrganizationalRole", 
+        "rdfs:range": "vso:KeyResult"
+      }
+    },
+
+    "dataProperties": {
+      "hasVetoAuthority": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has veto authority",
+        "rdfs:domain": "raci:OrganizationalRole",
+        "rdfs:range": "xsd:boolean",
+        "rdfs:comment": "Whether role has veto power over strategic decisions"
+      },
+
+      "hasApprovalTimeframe": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has approval timeframe",
+        "rdfs:domain": "DecisionPoint",
+        "rdfs:range": "xsd:duration",
+        "rdfs:comment": "Maximum time allowed for decision approval"
+      },
+
+      "hasEscalationThreshold": {
+        "@type": "owl:DatatypeProperty",
+        "rdfs:label": "has escalation threshold",
+        "rdfs:domain": "EscalationPath",
+        "rdfs:range": "xsd:decimal",
+        "rdfs:comment": "Performance threshold that triggers escalation"
+      }
+    }
+  },
+
+  "strategicAlignmentMappings": {
+    "visionLevel": {
+      "boardRoles": {
+        "ChairmanOfBoard": {
+          "responsibility": "A", 
+          "influence": 1.0,
+          "vsoComponent": "Vision",
+          "decisionAuthority": "Final approval"
+        },
+        "BoardDirector": {
+          "responsibility": "A",
+          "influence": 0.9,
+          "vsoComponent": "Vision",
+          "decisionAuthority": "Approval voting"
+        }
+      },
+      "executiveRoles": {
+        "ChiefExecutiveOfficer": {
+          "responsibility": "R",
+          "influence": 0.95,
+          "vsoComponent": "Vision",
+          "decisionAuthority": "Development and recommendation"
+        },
+        "ChiefOperatingOfficer": {
+          "responsibility": "C",
+          "influence": 0.7,
+          "vsoComponent": "Vision",
+          "decisionAuthority": "Strategic consultation"
+        }
+      }
+    },
+
+    "strategyLevel": {
+      "executiveRoles": {
+        "ChiefExecutiveOfficer": {
+          "responsibility": "A",
+          "influence": 1.0,
+          "vsoComponent": "Strategy",
+          "decisionAuthority": "Final strategy approval"
+        },
+        "ChiefFinancialOfficer": {
+          "responsibility": "R", 
+          "influence": 0.8,
+          "vsoComponent": "FinancialStrategy",
+          "decisionAuthority": "Financial strategy ownership"
+        },
+        "ChiefMarketingOfficer": {
+          "responsibility": "R",
+          "influence": 0.8,
+          "vsoComponent": "MarketingStrategy", 
+          "decisionAuthority": "Marketing strategy ownership"
+        },
+        "ChiefTechnologyOfficer": {
+          "responsibility": "R",
+          "influence": 0.8,
+          "vsoComponent": "TechnologyStrategy",
+          "decisionAuthority": "Technology strategy ownership"
+        }
+      },
+      "seniorManagement": {
+        "VicePresident": {
+          "responsibility": "C",
+          "influence": 0.6,
+          "vsoComponent": "Strategy",
+          "decisionAuthority": "Functional input and consultation"
+        }
+      }
+    },
+
+    "objectiveLevel": {
+      "functionalRoles": {
+        "FinanceDirector": {
+          "responsibility": "R", 
+          "influence": 0.9,
+          "vsoComponent": "FinancialObjectives",
+          "decisionAuthority": "Financial objective setting"
+        },
+        "MarketingDirector": {
+          "responsibility": "R",
+          "influence": 0.9,
+          "vsoComponent": "MarketingObjectives",
+          "decisionAuthority": "Marketing objective setting"
+        },
+        "TechnologyDirector": {
+          "responsibility": "R",
+          "influence": 0.9,
+          "vsoComponent": "TechnologyObjectives", 
+          "decisionAuthority": "Technology objective setting"
+        }
+      }
+    },
+
+    "okrLevel": {
+      "allLevels": {
+        "cascadingModel": {
+          "companyOKRs": {
+            "responsible": "ChiefExecutiveOfficer",
+            "accountable": "BoardDirector",
+            "consulted": ["ExecutiveRole"],
+            "informed": ["SeniorManagementRole"]
+          },
+          "functionalOKRs": {
+            "responsible": "FunctionalRole",
+            "accountable": "ExecutiveRole", 
+            "consulted": ["TeamRole"],
+            "informed": ["IndividualContributorRole"]
+          },
+          "teamOKRs": {
+            "responsible": "TeamRole",
+            "accountable": "FunctionalRole",
+            "consulted": ["IndividualContributorRole"],
+            "informed": ["SeniorManagementRole"]
+          }
+        }
+      }
+    }
+  },
+
+  "governanceBodyDefinitions": {
+    "strategicPlanningCommittee": {
+      "composition": [
+        "ChiefExecutiveOfficer",
+        "ChiefFinancialOfficer", 
+        "ChiefMarketingOfficer",
+        "ChiefTechnologyOfficer",
+        "StrategyDirector"
+      ],
+      "responsibilities": [
+        "Annual strategic planning",
+        "Vision and mission refinement",
+        "Strategic priority setting",
+        "Resource allocation decisions"
+      ],
+      "meetingFrequency": "Quarterly",
+      "decisionMaking": "Consensus with CEO final authority"
+    },
+
+    "okrGovernanceCommittee": {
+      "composition": [
+        "ChiefExecutiveOfficer",
+        "ChiefOperatingOfficer",
+        "FunctionalRole"
+      ],
+      "responsibilities": [
+        "OKR framework oversight",
+        "Cross-functional OKR alignment",
+        "OKR performance review", 
+        "OKR methodology refinement"
+      ],
+      "meetingFrequency": "Monthly",
+      "decisionMaking": "Majority vote with COO tiebreaker"
+    },
+
+    "executiveLeadershipTeam": {
+      "composition": ["ExecutiveRole"],
+      "responsibilities": [
+        "Strategic execution oversight",
+        "Executive performance management",
+        "Major operational decisions",
+        "Crisis management and escalation"
+      ],
+      "meetingFrequency": "Bi-weekly",
+      "decisionMaking": "CEO authority with executive input"
+    }
+  },
+
+  "decisionPointTemplates": {
+    "visionApproval": {
+      "trigger": "New vision statement proposed",
+      "requiredRoles": ["ChairmanOfBoard", "BoardDirector", "ChiefExecutiveOfficer"],
+      "approvalProcess": "Board resolution",
+      "timeframe": "30 days",
+      "escalationCriteria": "Board deadlock or CEO disagreement"
+    },
+
+    "strategyDecision": {
+      "trigger": "Strategic direction change proposed",
+      "requiredRoles": ["ChiefExecutiveOfficer", "ExecutiveRole"], 
+      "approvalProcess": "Executive consensus",
+      "timeframe": "14 days",
+      "escalationCriteria": "Executive disagreement or resource conflict"
+    },
+
+    "okrApproval": {
+      "trigger": "Quarterly OKR proposals submitted",
+      "requiredRoles": ["FunctionalRole", "SeniorManagementRole"],
+      "approvalProcess": "Functional lead approval",
+      "timeframe": "7 days",
+      "escalationCriteria": "Cross-functional conflicts or resource disputes"
+    },
+
+    "resourceAllocation": {
+      "trigger": "Budget or resource request exceeds threshold",
+      "requiredRoles": ["ChiefFinancialOfficer", "ChiefExecutiveOfficer"],
+      "approvalProcess": "CFO recommendation, CEO approval",
+      "timeframe": "5 business days", 
+      "escalationCriteria": "Budget variance >10% or strategic misalignment"
+    }
+  },
+
+  "influenceNetworkDefinition": {
+    "centralNodes": [
+      {
+        "role": "ChiefExecutiveOfficer",
+        "influence": 1.0,
+        "connections": ["BoardDirector", "ExecutiveRole", "SeniorManagementRole"],
+        "decisionWeight": 0.4
+      },
+      {
+        "role": "ChairmanOfBoard", 
+        "influence": 0.95,
+        "connections": ["BoardDirector", "ChiefExecutiveOfficer"],
+        "decisionWeight": 0.3
+      },
+      {
+        "role": "ChiefFinancialOfficer",
+        "influence": 0.8,
+        "connections": ["ChiefExecutiveOfficer", "FunctionalRole"],
+        "decisionWeight": 0.2
+      }
+    ],
+    "influenceFlows": [
+      {
+        "from": "BoardDirector",
+        "to": "ChiefExecutiveOfficer", 
+        "type": "oversight",
+        "strength": 0.9
+      },
+      {
+        "from": "ChiefExecutiveOfficer",
+        "to": "ExecutiveRole",
+        "type": "directive",
+        "strength": 0.8
+      },
+      {
+        "from": "ExecutiveRole",
+        "to": "FunctionalRole",
+        "type": "strategic_guidance",
+        "strength": 0.7
+      }
+    ]
+  }
+}

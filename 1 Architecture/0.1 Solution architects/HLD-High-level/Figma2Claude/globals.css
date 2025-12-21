@@ -1,0 +1,385 @@
+/**
+ * BAIV Brand Design Tokens - CSS Custom Properties
+ * 
+ * Usage:
+ * 1. Import this file in your globals.css or layout
+ * 2. Use variables: background-color: var(--primary);
+ * 3. Switch themes by adding data-theme="baiv" to <html> or <body>
+ * 
+ * Default theme: NovaTech
+ * Alternate theme: Be AI Visible (BAIV)
+ */
+
+/* =============================================================================
+   PRIMITIVE TOKENS
+   Raw values - reference only, use semantic tokens in components
+   ============================================================================= */
+
+:root {
+  /* Primitive Colors - Blue */
+  --color-blue-400: #60A5FA;
+  --color-blue-500: #3B82F6;
+  --color-blue-600: #2563EB;
+  
+  /* Primitive Colors - Teal */
+  --color-teal-500: #00a4bf;
+  --color-teal-600: #005260;
+  
+  /* Primitive Colors - Purple */
+  --color-purple-500: #8B5CF6;
+  
+  /* Primitive Colors - Orange */
+  --color-orange-500: #e84e1c;
+  
+  /* Primitive Colors - Pink */
+  --color-pink-500: #EC4899;
+  --color-pink-600: #cf057d;
+  
+  /* Primitive Colors - Gold */
+  --color-gold-500: #cec528;
+  
+  /* Primitive Colors - Slate */
+  --color-slate-500: #64748B;
+  
+  /* Primitive Colors - Cyan */
+  --color-cyan-100: #cce8ee;
+  
+  /* Primitive Colors - Green */
+  --color-green-500: #10B981;
+  --color-green-600: #019587;
+  
+  /* Primitive Colors - Amber */
+  --color-amber-500: #F59E0B;
+  
+  /* Primitive Colors - Red */
+  --color-red-500: #EF4444;
+  
+  /* Primitive Colors - Navy */
+  --color-navy-700: #1c3e8e;
+}
+
+/* =============================================================================
+   NOVATECH THEME (Default)
+   Modern technology brand - Blue primary
+   ============================================================================= */
+
+:root,
+[data-theme="novatech"] {
+  /* Brand Identity */
+  --brand-name: "NovaTech";
+  --brand-slug: "novatech";
+  --brand-tagline: "Innovation at the speed of thought";
+  
+  /* Semantic Colors */
+  --primary: var(--color-blue-500);
+  --primary-light: var(--color-blue-400);
+  --primary-dark: var(--color-blue-600);
+  --primary-foreground: #ffffff;
+  
+  --secondary: var(--color-purple-500);
+  --secondary-foreground: #ffffff;
+  
+  --accent: var(--color-pink-500);
+  --accent-foreground: #ffffff;
+  
+  --neutral: var(--color-slate-500);
+  --neutral-foreground: #ffffff;
+  
+  --success: var(--color-green-500);
+  --success-foreground: #ffffff;
+  
+  --warning: var(--color-amber-500);
+  --warning-foreground: #000000;
+  
+  --error: var(--color-red-500);
+  --error-foreground: #ffffff;
+  
+  --info: var(--color-blue-500);
+  --info-foreground: #ffffff;
+  
+  /* Background & Surface */
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --surface: #f8fafc;
+  --surface-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  
+  /* Border & Divider */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --ring: var(--primary);
+  
+  /* Typography */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+  
+  /* Font URLs for @import */
+  --font-heading-url: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
+  --font-body-url: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap";
+}
+
+/* =============================================================================
+   BE AI VISIBLE (BAIV) THEME
+   AI visibility brand - Teal primary, warmer palette
+   ============================================================================= */
+
+[data-theme="baiv"],
+[data-theme="be-ai-visible"] {
+  /* Brand Identity */
+  --brand-name: "Be AI Visible";
+  --brand-slug: "be-ai-visible";
+  --brand-tagline: "innovative";
+  
+  /* Semantic Colors */
+  --primary: var(--color-teal-500);
+  --primary-light: var(--color-teal-500);
+  --primary-dark: var(--color-teal-600);
+  --primary-foreground: #ffffff;
+  
+  --secondary: var(--color-orange-500);
+  --secondary-foreground: #ffffff;
+  
+  --accent: var(--color-gold-500);
+  --accent-foreground: #000000;
+  
+  --neutral: var(--color-cyan-100);
+  --neutral-foreground: #0f172a;
+  
+  --success: var(--color-green-600);
+  --success-foreground: #ffffff;
+  
+  --warning: var(--color-pink-600);
+  --warning-foreground: #ffffff;
+  
+  --error: var(--color-gold-500);
+  --error-foreground: #000000;
+  
+  --info: var(--color-navy-700);
+  --info-foreground: #ffffff;
+  
+  /* Background & Surface - slightly warmer */
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+  --surface: #f0f9fa;
+  --surface-foreground: #1a1a2e;
+  --muted: #e6f4f6;
+  --muted-foreground: #4a5568;
+  
+  /* Border & Divider */
+  --border: #d1e7ea;
+  --border-strong: #a8d4d9;
+  --ring: var(--primary);
+  
+  /* Typography */
+  --font-heading: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Titillium Web', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+  
+  /* Font URLs for @import */
+  --font-heading-url: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap";
+  --font-body-url: "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap";
+}
+
+/* =============================================================================
+   SHARED TOKENS
+   Values that don't change between themes
+   ============================================================================= */
+
+:root {
+  /* Spacing Scale (8px grid) */
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  
+  /* Typography Scale */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  --font-size-5xl: 48px;
+  --font-size-6xl: 60px;
+  
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* Border Radius */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Default radius (component default) */
+  --radius: var(--radius-md);
+  
+  /* Border Width */
+  --border-width-0: 0px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  
+  /* Shadows */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-normal: 200ms;
+  --transition-slow: 300ms;
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  
+  /* Breakpoints (for reference in JS) */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  
+  /* Container Max Widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1400px;
+}
+
+/* =============================================================================
+   COMPONENT TOKENS
+   Specific component styling decisions
+   ============================================================================= */
+
+:root {
+  /* Button */
+  --button-radius: var(--radius);
+  --button-padding-x: var(--spacing-4);
+  --button-padding-y: var(--spacing-2);
+  --button-font-weight: var(--font-weight-medium);
+  
+  /* Input */
+  --input-radius: var(--radius);
+  --input-padding-x: var(--spacing-3);
+  --input-padding-y: var(--spacing-2);
+  --input-border-width: var(--border-width-1);
+  
+  /* Card */
+  --card-radius: var(--radius-lg);
+  --card-padding: var(--spacing-6);
+  --card-shadow: var(--shadow-md);
+  
+  /* Badge */
+  --badge-radius: var(--radius-full);
+  --badge-padding-x: var(--spacing-2);
+  --badge-padding-y: var(--spacing-1);
+  
+  /* Avatar */
+  --avatar-radius: var(--radius-full);
+  --avatar-size-sm: 32px;
+  --avatar-size-md: 40px;
+  --avatar-size-lg: 48px;
+}
+
+/* =============================================================================
+   DARK MODE VARIANTS
+   Add dark mode support for both themes
+   ============================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --surface: #1e293b;
+    --surface-foreground: #f8fafc;
+    --muted: #334155;
+    --muted-foreground: #94a3b8;
+    --border: #334155;
+    --border-strong: #475569;
+  }
+}
+
+[data-theme="novatech-dark"],
+.dark[data-theme="novatech"] {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --surface: #1e293b;
+  --surface-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --border: #334155;
+  --border-strong: #475569;
+  
+  --primary-light: var(--color-blue-400);
+}
+
+[data-theme="baiv-dark"],
+.dark[data-theme="baiv"] {
+  --background: #0d1b1e;
+  --foreground: #f0f9fa;
+  --surface: #1a2f33;
+  --surface-foreground: #f0f9fa;
+  --muted: #264348;
+  --muted-foreground: #8fb8be;
+  --border: #264348;
+  --border-strong: #3a6066;
+  
+  --primary-light: var(--color-teal-500);
+}
+
+/* =============================================================================
+   UTILITY CLASSES
+   Optional helper classes using tokens
+   ============================================================================= */
+
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-accent { color: var(--accent); }
+.text-muted { color: var(--muted-foreground); }
+
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+.bg-surface { background-color: var(--surface); }
+
+.border-primary { border-color: var(--primary); }
+.border-secondary { border-color: var(--secondary); }
+
+.shadow-card { box-shadow: var(--card-shadow); }
+.rounded-card { border-radius: var(--card-radius); }

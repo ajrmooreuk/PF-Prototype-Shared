@@ -1,0 +1,937 @@
+{
+  "@context": {
+    "@vocab": "https://baiv.co.uk/ontology/ai-strategy#",
+    "schema": "https://schema.org/",
+    "baiv": "https://baiv.co.uk/ontology/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@comment": "=== ORGANIZATION TEST DATA (5 instances) ===",
+      "@type": "Organization",
+      "@id": "baiv:test:org:001",
+      "organizationId": "ORG-001",
+      "name": "BAIV Consulting",
+      "description": "AI and digital transformation consultancy specializing in ontology-driven AI architecture and strategic advisory",
+      "organizationType": "Self",
+      "industry": "Management Consulting",
+      "size": "SME",
+      "url": "https://baiv.co.uk",
+      "foundingDate": "2020-01-01",
+      "strategicObjectives": [
+        "Become recognized leader in ontology-driven AI architecture",
+        "Expand client portfolio in financial services and healthcare",
+        "Build proprietary AI strategy frameworks",
+        "Achieve 40% YoY revenue growth"
+      ]
+    },
+    {
+      "@comment": "TYPICAL CASE: Client organization",
+      "@type": "Organization",
+      "@id": "baiv:test:org:002",
+      "organizationId": "ORG-002",
+      "name": "GlobalBank Financial Group",
+      "description": "International banking and financial services corporation",
+      "organizationType": "Client",
+      "industry": "Financial Services",
+      "size": "Enterprise",
+      "url": "https://globalbank-example.com",
+      "foundingDate": "1890-03-15",
+      "strategicObjectives": [
+        "Transform to AI-first bank by 2027",
+        "Achieve 30% operational efficiency gains through AI",
+        "Launch AI-powered personalized banking services",
+        "Lead industry in responsible AI adoption"
+      ]
+    },
+    {
+      "@comment": "TYPICAL CASE: Direct competitor",
+      "@type": "Competitor",
+      "@id": "baiv:test:comp:001",
+      "organizationId": "COMP-001",
+      "name": "AI Strategy Partners",
+      "description": "Boutique AI strategy consultancy",
+      "organizationType": "Competitor",
+      "industry": "Management Consulting",
+      "size": "SME",
+      "competitorType": "Direct",
+      "competitiveStrength": "Moderate",
+      "keyStrengths": [
+        "Strong brand in financial services sector",
+        "Large team of AI strategy consultants",
+        "Established methodologies and frameworks"
+      ],
+      "keyWeaknesses": [
+        "Limited technical depth in advanced AI",
+        "Traditional consulting approach",
+        "Slower to adopt new AI technologies"
+      ],
+      "recentMoves": [
+        "Launched AI readiness assessment tool",
+        "Partnership with major cloud provider",
+        "Hired 20 additional consultants"
+      ]
+    },
+    {
+      "@comment": "EDGE CASE: Indirect competitor (tech company)",
+      "@type": "Competitor",
+      "@id": "baiv:test:comp:002",
+      "organizationId": "COMP-002",
+      "name": "TechGiant AI Division",
+      "description": "AI division of major technology corporation",
+      "organizationType": "Competitor",
+      "industry": "Technology",
+      "size": "Global",
+      "competitorType": "Indirect",
+      "competitiveStrength": "Strong",
+      "keyStrengths": [
+        "Massive R&D budget and resources",
+        "Leading AI technology and platforms",
+        "Global brand recognition",
+        "Extensive partner ecosystem"
+      ],
+      "keyWeaknesses": [
+        "Focuses on product sales over consulting",
+        "Less personalized advisory approach",
+        "Conflicts of interest with proprietary tech"
+      ],
+      "recentMoves": [
+        "Launched enterprise AI consulting practice",
+        "Acquired specialized AI consultancy",
+        "Released new AI platform capabilities"
+      ]
+    },
+    {
+      "@comment": "BOUNDARY CASE: Startup organization",
+      "@type": "Organization",
+      "@id": "baiv:test:org:003",
+      "organizationId": "ORG-003",
+      "name": "AIStartup Innovations",
+      "description": "Early-stage AI startup in stealth mode",
+      "organizationType": "Target",
+      "industry": "Technology",
+      "size": "Startup",
+      "foundingDate": "2024-06-01",
+      "strategicObjectives": [
+        "Launch MVP by Q2 2026",
+        "Secure Series A funding",
+        "Validate product-market fit"
+      ]
+    },
+    {
+      "@comment": "=== CAPABILITY TEST DATA (6 instances) ===",
+      "@comment": "TYPICAL CASE: High-maturity core capability",
+      "@type": "Capability",
+      "@id": "baiv:test:cap:001",
+      "capabilityId": "CAP-001",
+      "capabilityName": "AI Strategy Formulation",
+      "capabilityDescription": "Ability to analyze organizational context, identify AI opportunities, and formulate comprehensive AI strategy roadmaps aligned with business objectives",
+      "capabilityType": "Strategic",
+      "maturityLevel": "Managed",
+      "strategicImportance": "Critical",
+      "currentState": "Well-established methodology, proven track record with 50+ clients, repeatable process, senior team expertise",
+      "targetState": "Industry-leading framework recognized by analyst firms, automated assessment tools, AI-powered strategy generation",
+      "dateAssessed": "2025-09-15T00:00:00Z"
+    },
+    {
+      "@comment": "TYPICAL CASE: Mid-maturity technical capability",
+      "@type": "Capability",
+      "@id": "baiv:test:cap:002",
+      "capabilityId": "CAP-002",
+      "capabilityName": "Machine Learning Model Development",
+      "capabilityDescription": "Ability to design, develop, train, and validate machine learning models for various business applications",
+      "capabilityType": "Technical",
+      "maturityLevel": "Defined",
+      "strategicImportance": "High",
+      "currentState": "Standard ML workflows established, experienced data science team, typical model types covered",
+      "targetState": "Advanced ML capabilities including large language models, reinforcement learning, multi-modal models",
+      "dateAssessed": "2025-08-20T00:00:00Z"
+    },
+    {
+      "@comment": "TYPICAL CASE: Emerging capability with dependencies",
+      "@type": "Capability",
+      "@id": "baiv:test:cap:003",
+      "capabilityId": "CAP-003",
+      "capabilityName": "Ontology-Driven AI Architecture",
+      "capabilityDescription": "Ability to design AI systems grounded in formal ontologies enabling semantic interoperability and knowledge-driven reasoning",
+      "capabilityType": "Technical",
+      "maturityLevel": "Developing",
+      "strategicImportance": "Critical",
+      "currentState": "Proprietary methodology developed, initial client engagements, growing expertise",
+      "targetState": "Industry-recognized practice, automated ontology generation, large-scale deployments",
+      "dependencies": ["CAP-001", "CAP-002"],
+      "dateAssessed": "2025-10-01T00:00:00Z"
+    },
+    {
+      "@comment": "EDGE CASE: Low-maturity capability flagged for development",
+      "@type": "Capability",
+      "@id": "baiv:test:cap:004",
+      "capabilityId": "CAP-004",
+      "capabilityName": "AI Model Explainability & Interpretability",
+      "capabilityDescription": "Ability to make AI models transparent and interpretable for stakeholders, ensuring trust and regulatory compliance",
+      "capabilityType": "Technical",
+      "maturityLevel": "Initial",
+      "strategicImportance": "High",
+      "currentState": "Basic logging and metrics, limited interpretability techniques, ad-hoc explanations",
+      "targetState": "Comprehensive explainability framework, automated explanation generation, stakeholder dashboards",
+      "dependencies": ["CAP-002"],
+      "dateAssessed": "2025-09-30T00:00:00Z"
+    },
+    {
+      "@comment": "BOUNDARY CASE: Optimizing maturity (highest level)",
+      "@type": "Capability",
+      "@id": "baiv:test:cap:005",
+      "capabilityId": "CAP-005",
+      "capabilityName": "Client Relationship Management",
+      "capabilityDescription": "Ability to build, maintain, and grow long-term strategic client relationships",
+      "capabilityType": "Organizational",
+      "maturityLevel": "Optimizing",
+      "strategicImportance": "Critical",
+      "currentState": "Continuously improving CRM processes, predictive analytics for client needs, proactive engagement, high satisfaction scores",
+      "targetState": "AI-driven relationship intelligence, automated opportunity identification, personalized engagement at scale",
+      "dateAssessed": "2025-10-05T00:00:00Z"
+    },
+    {
+      "@comment": "TYPICAL CASE: Data capability",
+      "@type": "Capability",
+      "@id": "baiv:test:cap:006",
+      "capabilityId": "CAP-006",
+      "capabilityName": "Data Engineering & Pipeline Development",
+      "capabilityDescription": "Ability to design and implement robust data pipelines for AI/ML workloads",
+      "capabilityType": "Data",
+      "maturityLevel": "Defined",
+      "strategicImportance": "Medium",
+      "currentState": "Standard ETL processes, cloud-based data platforms, automated pipelines for common scenarios",
+      "targetState": "Real-time streaming pipelines, advanced data quality monitoring, self-service data platforms",
+      "dateAssessed": "2025-09-10T00:00:00Z"
+    },
+    {
+      "@comment": "=== GAP TEST DATA (5 instances) ===",
+      "@comment": "TYPICAL CASE: Critical capability gap",
+      "@type": "Gap",
+      "@id": "baiv:test:gap:001",
+      "gapId": "GAP-001",
+      "gapName": "Insufficient AI Model Explainability",
+      "gapDescription": "Current AI models lack comprehensive explainability frameworks, creating risks for regulated industries and limiting stakeholder trust",
+      "gapType": "Capability",
+      "severity": "Critical",
+      "impactArea": ["Client Delivery", "Risk Management", "Regulatory Compliance"],
+      "currentState": "Basic model metrics and logging, ad-hoc explanations, no standardized framework",
+      "desiredState": "Comprehensive explainability framework with automated explanation generation, stakeholder dashboards, and regulatory compliance documentation",
+      "estimatedCostToClose": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "150000"
+      },
+      "timeToClose": "P6M",
+      "identifiedDate": "2025-09-30T00:00:00Z",
+      "status": "Acknowledged"
+    },
+    {
+      "@comment": "TYPICAL CASE: Technology gap",
+      "@type": "Gap",
+      "@id": "baiv:test:gap:002",
+      "gapId": "GAP-002",
+      "gapName": "No Real-Time Data Processing Platform",
+      "gapDescription": "Inability to process and analyze streaming data in real-time limits opportunities in time-sensitive AI applications",
+      "gapType": "Technology",
+      "severity": "High",
+      "impactArea": ["Technical Capabilities", "Market Opportunities"],
+      "currentState": "Batch processing only, data latency of hours to days",
+      "desiredState": "Real-time streaming data platform with millisecond latency, event-driven architecture",
+      "estimatedCostToClose": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "200000"
+      },
+      "timeToClose": "P9M",
+      "identifiedDate": "2025-08-15T00:00:00Z",
+      "status": "Planned"
+    },
+    {
+      "@comment": "EDGE CASE: Low severity gap",
+      "@type": "Gap",
+      "@id": "baiv:test:gap:003",
+      "gapId": "GAP-003",
+      "gapName": "Limited Marketing Automation",
+      "gapDescription": "Manual marketing processes limit scalability and efficiency of lead generation and nurturing",
+      "gapType": "Process",
+      "severity": "Low",
+      "impactArea": ["Marketing Efficiency", "Lead Generation"],
+      "currentState": "Largely manual email campaigns, basic CRM integration",
+      "desiredState": "Fully automated marketing workflows, AI-driven personalization, comprehensive attribution",
+      "estimatedCostToClose": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "30000"
+      },
+      "timeToClose": "P3M",
+      "identifiedDate": "2025-09-01T00:00:00Z",
+      "status": "Deferred"
+    },
+    {
+      "@comment": "TYPICAL CASE: Skills gap",
+      "@type": "Gap",
+      "@id": "baiv:test:gap:004",
+      "gapId": "GAP-004",
+      "gapName": "Shortage of LLM Engineering Expertise",
+      "gapDescription": "Limited in-house expertise in large language model fine-tuning, prompt engineering, and LLM application development",
+      "gapType": "Skills",
+      "severity": "High",
+      "impactArea": ["Service Offerings", "Technical Capabilities", "Competitive Position"],
+      "currentState": "2-3 team members with basic LLM experience, mostly using pre-trained models via APIs",
+      "desiredState": "5+ LLM specialists with expertise in fine-tuning, prompt engineering, RAG architectures, and production deployments",
+      "estimatedCostToClose": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "250000"
+      },
+      "timeToClose": "P12M",
+      "identifiedDate": "2025-07-20T00:00:00Z",
+      "status": "InProgress"
+    },
+    {
+      "@comment": "BOUNDARY CASE: Gap marked as closed",
+      "@type": "Gap",
+      "@id": "baiv:test:gap:005",
+      "gapId": "GAP-005",
+      "gapName": "Lack of Cloud Infrastructure Automation",
+      "gapDescription": "Manual cloud resource provisioning slowed project delivery and increased operational overhead",
+      "gapType": "Technology",
+      "severity": "Medium",
+      "impactArea": ["Operational Efficiency", "Project Delivery Speed"],
+      "currentState": "Infrastructure as Code implemented, automated CI/CD pipelines, self-service provisioning",
+      "desiredState": "Infrastructure as Code implemented, automated CI/CD pipelines, self-service provisioning",
+      "estimatedCostToClose": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "80000"
+      },
+      "timeToClose": "P6M",
+      "identifiedDate": "2024-11-01T00:00:00Z",
+      "status": "Closed"
+    },
+    {
+      "@comment": "=== OPPORTUNITY TEST DATA (6 instances) ===",
+      "@comment": "TYPICAL CASE: High-priority market opportunity",
+      "@type": "Opportunity",
+      "@id": "baiv:test:opp:001",
+      "opportunityId": "OPP-001",
+      "opportunityName": "Expand AI Governance & Ethics Advisory Services",
+      "opportunityDescription": "Growing regulatory requirements and stakeholder concerns create strong demand for AI governance frameworks, ethics advisory, and responsible AI implementation",
+      "opportunityType": "Market",
+      "valueProposition": "Differentiation through ethics leadership, premium pricing for specialized expertise, long-term advisory relationships",
+      "potentialValue": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "2000000"
+      },
+      "timeHorizon": "Horizon2_Emerging",
+      "feasibility": "Medium",
+      "requiredCapabilities": ["CAP-001", "CAP-004"],
+      "risks": [
+        "Rapidly evolving regulatory landscape",
+        "Requires significant expertise development",
+        "Competitive entry by larger firms"
+      ],
+      "competitiveAdvantage": "First-mover advantage, specialized expertise, client trust from existing relationships",
+      "priority": "High",
+      "identifiedDate": "2025-09-01T00:00:00Z",
+      "status": "Evaluated"
+    },
+    {
+      "@comment": "TYPICAL CASE: Technology-driven opportunity",
+      "@type": "Opportunity",
+      "@id": "baiv:test:opp:002",
+      "opportunityId": "OPP-002",
+      "opportunityName": "Launch Ontology-as-a-Service Platform",
+      "opportunityDescription": "Package ontology-driven AI architecture expertise into SaaS platform for enterprise clients, enabling scalable delivery and recurring revenue",
+      "opportunityType": "Innovation",
+      "valueProposition": "Transform consulting IP into scalable product, recurring revenue model, market differentiation",
+      "potentialValue": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "5000000"
+      },
+      "timeHorizon": "Horizon3_Future",
+      "feasibility": "Low",
+      "requiredCapabilities": ["CAP-003", "CAP-002", "CAP-006"],
+      "addressedGaps": ["GAP-004"],
+      "risks": [
+        "High development cost and time",
+        "Product-market fit uncertainty",
+        "Shift from service to product business model",
+        "Requires new skills in product management and SaaS operations"
+      ],
+      "competitiveAdvantage": "Unique IP in ontology-driven AI, no direct competitors in this niche",
+      "priority": "Medium",
+      "identifiedDate": "2025-08-15T00:00:00Z",
+      "status": "Identified"
+    },
+    {
+      "@comment": "EDGE CASE: Critical opportunity with high value",
+      "@type": "Opportunity",
+      "@id": "baiv:test:opp:003",
+      "opportunityId": "OPP-003",
+      "opportunityName": "Strategic Partnership with Major Cloud Provider",
+      "opportunityDescription": "Partner with major cloud provider to co-develop AI strategy methodology and gain preferred partner status for enterprise AI implementations",
+      "opportunityType": "Partnership",
+      "valueProposition": "Access to cloud provider's enterprise customer base, co-marketing opportunities, technical support and resources",
+      "potentialValue": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "10000000"
+      },
+      "timeHorizon": "Horizon1_Current",
+      "feasibility": "High",
+      "requiredCapabilities": ["CAP-001", "CAP-002", "CAP-005"],
+      "risks": [
+        "Dependency on partner relationship",
+        "Potential conflicts with other cloud providers",
+        "Revenue sharing reduces margins"
+      ],
+      "competitiveAdvantage": "Exclusive or preferred partner status, brand association with major tech company",
+      "priority": "Critical",
+      "identifiedDate": "2025-09-20T00:00:00Z",
+      "status": "Approved"
+    },
+    {
+      "@comment": "TYPICAL CASE: Efficiency opportunity",
+      "@type": "Opportunity",
+      "@id": "baiv:test:opp:004",
+      "opportunityId": "OPP-004",
+      "opportunityName": "Automate Strategy Assessment Process",
+      "opportunityDescription": "Develop AI-powered tools to automate parts of client strategy assessment, reducing delivery time and cost while maintaining quality",
+      "opportunityType": "Efficiency",
+      "valueProposition": "30% reduction in delivery time, higher margins, ability to serve more clients simultaneously",
+      "potentialValue": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "500000"
+      },
+      "timeHorizon": "Horizon1_Current",
+      "feasibility": "High",
+      "requiredCapabilities": ["CAP-002", "CAP-001"],
+      "risks": [
+        "Client perception of reduced quality",
+        "Requires upfront development investment",
+        "May commoditize core service"
+      ],
+      "competitiveAdvantage": "Lower cost structure enables competitive pricing or higher margins",
+      "priority": "High",
+      "identifiedDate": "2025-08-01T00:00:00Z",
+      "status": "InProgress"
+    },
+    {
+      "@comment": "BOUNDARY CASE: Abandoned opportunity",
+      "@type": "Opportunity",
+      "@id": "baiv:test:opp:005",
+      "opportunityId": "OPP-005",
+      "opportunityName": "Enter AI Training & Certification Market",
+      "opportunityDescription": "Develop and sell AI training programs and certifications for enterprise clients",
+      "opportunityType": "Market",
+      "valueProposition": "Recurring education revenue, brand building, lead generation for consulting services",
+      "potentialValue": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "800000"
+      },
+      "timeHorizon": "Horizon2_Emerging",
+      "feasibility": "Medium",
+      "risks": [
+        "Crowded market with established players",
+        "Requires content development expertise",
+        "Distracts from core consulting business"
+      ],
+      "priority": "Low",
+      "identifiedDate": "2025-06-01T00:00:00Z",
+      "status": "Abandoned"
+    },
+    {
+      "@comment": "TYPICAL CASE: Capability-building opportunity",
+      "@type": "Opportunity",
+      "@id": "baiv:test:opp:006",
+      "opportunityName": "Build Real-Time AI Analytics Capability",
+      "opportunityDescription": "Develop capability to deliver real-time AI analytics solutions, addressing gap and opening new market segments",
+      "opportunityType": "Capability",
+      "valueProposition": "Access to time-sensitive AI application markets (fraud detection, predictive maintenance, etc.)",
+      "potentialValue": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "3000000"
+      },
+      "timeHorizon": "Horizon2_Emerging",
+      "feasibility": "Medium",
+      "addressedGaps": ["GAP-002"],
+      "risks": [
+        "Significant infrastructure investment required",
+        "Need to develop new technical expertise",
+        "Competitive market with established players"
+      ],
+      "competitiveAdvantage": "Combine real-time capabilities with strategy consulting for unique offering",
+      "priority": "High",
+      "identifiedDate": "2025-09-15T00:00:00Z",
+      "status": "Evaluated"
+    },
+    {
+      "@comment": "=== POSITION TEST DATA (4 instances) ===",
+      "@comment": "TYPICAL CASE: Challenger position",
+      "@type": "Position",
+      "@id": "baiv:test:pos:001",
+      "positionId": "POS-001",
+      "positionName": "Challenger in Enterprise AI Strategy Consulting",
+      "positionType": "Challenger",
+      "marketSegment": "baiv:test:mkt:001",
+      "relativeTo": ["baiv:test:comp:001"],
+      "strengthAreas": [
+        "Ontology-driven AI architecture expertise",
+        "Deep technical knowledge combined with business acumen",
+        "Agile and responsive to client needs",
+        "Innovative methodologies"
+      ],
+      "weaknessAreas": [
+        "Smaller brand recognition vs. established firms",
+        "Limited geographic presence",
+        "Smaller team constrains capacity"
+      ],
+      "differentiators": [
+        "Ontology-driven approach to AI architecture",
+        "Combination of strategic and deep technical expertise",
+        "Boutique firm agility and customization"
+      ],
+      "marketShare": 3.5,
+      "positioningStatement": "We challenge traditional AI consulting approaches with ontology-driven architecture that delivers sustainable competitive advantage through knowledge-centric AI systems",
+      "assessmentDate": "2025-10-01T00:00:00Z",
+      "trendDirection": "Improving"
+    },
+    {
+      "@comment": "TYPICAL CASE: Nicher position",
+      "@type": "Position",
+      "@id": "baiv:test:pos:002",
+      "positionId": "POS-002",
+      "positionName": "Nicher in Ontology-Driven AI",
+      "positionType": "Nicher",
+      "marketSegment": "baiv:test:mkt:002",
+      "strengthAreas": [
+        "Specialized expertise no competitors can match",
+        "Proprietary methodologies and frameworks",
+        "Thought leadership and market education"
+      ],
+      "weaknessAreas": [
+        "Small addressable market currently",
+        "Need to educate market on value proposition"
+      ],
+      "differentiators": [
+        "Only specialized consultancy focused on ontology-driven AI",
+        "Deep expertise in semantic technologies and knowledge graphs"
+      ],
+      "marketShare": 25.0,
+      "positioningStatement": "The recognized expert in ontology-driven AI architecture, enabling knowledge-centric AI systems that go beyond pattern recognition to true understanding",
+      "assessmentDate": "2025-10-01T00:00:00Z",
+      "trendDirection": "Emerging"
+    },
+    {
+      "@comment": "EDGE CASE: Follower position (weaker position)",
+      "@type": "Position",
+      "@id": "baiv:test:pos:003",
+      "positionId": "POS-003",
+      "positionName": "Follower in General AI Consulting",
+      "positionType": "Follower",
+      "marketSegment": "baiv:test:mkt:003",
+      "relativeTo": ["baiv:test:comp:001", "baiv:test:comp:002"],
+      "strengthAreas": [
+        "Growing expertise",
+        "Competitive pricing"
+      ],
+      "weaknessAreas": [
+        "Less established than major players",
+        "Smaller reference base",
+        "Limited brand awareness in this segment"
+      ],
+      "differentiators": [
+        "More affordable than top-tier firms",
+        "More technically deep than pure strategy firms"
+      ],
+      "marketShare": 1.2,
+      "positioningStatement": "Delivering high-quality AI consulting with technical depth at accessible price points for mid-market enterprises",
+      "assessmentDate": "2025-10-01T00:00:00Z",
+      "trendDirection": "Stable"
+    },
+    {
+      "@comment": "TYPICAL CASE: Innovator position (emerging)",
+      "@type": "Position",
+      "@id": "baiv:test:pos:004",
+      "positionId": "POS-004",
+      "positionName": "Innovator in AI Governance & Ethics",
+      "positionType": "Innovator",
+      "marketSegment": "baiv:test:mkt:004",
+      "strengthAreas": [
+        "Early adoption of responsible AI frameworks",
+        "Thought leadership in AI ethics",
+        "Proactive approach to governance"
+      ],
+      "weaknessAreas": [
+        "Limited delivery track record",
+        "Still building capabilities"
+      ],
+      "differentiators": [
+        "Pioneering ontology-based governance frameworks",
+        "Integration of ethics into technical architecture"
+      ],
+      "marketShare": 5.0,
+      "positioningStatement": "Pioneering the future of responsible AI through governance frameworks integrated into the foundation of AI systems",
+      "assessmentDate": "2025-10-01T00:00:00Z",
+      "trendDirection": "Emerging"
+    },
+    {
+      "@comment": "=== MARKET TEST DATA (4 instances) ===",
+      "@comment": "TYPICAL CASE: Growth stage market",
+      "@type": "Market",
+      "@id": "baiv:test:mkt:001",
+      "marketId": "MKT-001",
+      "marketName": "Enterprise AI Strategy Consulting",
+      "marketDescription": "Strategic advisory services for enterprise AI transformation, including strategy formulation, roadmap development, and organizational change management",
+      "marketSize": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "USD",
+        "value": "8500000000"
+      },
+      "growthRate": 22.5,
+      "maturity": "Growth",
+      "keyTrends": [
+        "Shift from experimental AI to production deployments at scale",
+        "Increasing focus on AI governance and responsible AI",
+        "Integration of generative AI into enterprise strategies",
+        "Growing demand for industry-specific AI solutions"
+      ],
+      "barriers": [
+        "Requires both deep technical and strategic expertise",
+        "Client relationships and trust are critical",
+        "Competitive market with established players"
+      ],
+      "geography": "Global, concentrated in North America and Europe"
+    },
+    {
+      "@comment": "TYPICAL CASE: Emerging niche market",
+      "@type": "Market",
+      "@id": "baiv:test:mkt:002",
+      "marketId": "MKT-002",
+      "marketName": "Ontology-Driven AI Architecture",
+      "marketDescription": "Specialized consulting for AI systems grounded in formal ontologies, knowledge graphs, and semantic technologies",
+      "marketSize": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "USD",
+        "value": "450000000"
+      },
+      "growthRate": 35.0,
+      "maturity": "Emerging",
+      "keyTrends": [
+        "Growing recognition of limitations of pure pattern recognition AI",
+        "Regulatory requirements driving need for explainable AI",
+        "Interest in combining symbolic and neural approaches",
+        "Enterprise knowledge management evolution"
+      ],
+      "barriers": [
+        "Market education required",
+        "Limited number of experts",
+        "Higher upfront complexity",
+        "Longer sales cycles"
+      ],
+      "geography": "Early adoption in Europe, growing in North America"
+    },
+    {
+      "@comment": "EDGE CASE: Mature market",
+      "@type": "Market",
+      "@id": "baiv:test:mkt:003",
+      "marketId": "MKT-003",
+      "marketName": "General IT Consulting",
+      "marketDescription": "Broad IT advisory and implementation services",
+      "marketSize": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "USD",
+        "value": "550000000000"
+      },
+      "growthRate": 5.2,
+      "maturity": "Mature",
+      "keyTrends": [
+        "Cloud migration",
+        "Digital transformation",
+        "Cybersecurity focus"
+      ],
+      "barriers": [
+        "Highly competitive",
+        "Commoditization pressure",
+        "Price competition"
+      ],
+      "geography": "Global"
+    },
+    {
+      "@comment": "TYPICAL CASE: Emerging regulatory-driven market",
+      "@type": "Market",
+      "@id": "baiv:test:mkt:004",
+      "marketId": "MKT-004",
+      "marketName": "AI Governance & Ethics Advisory",
+      "marketDescription": "Advisory services for AI governance frameworks, responsible AI implementation, and regulatory compliance",
+      "marketSize": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "USD",
+        "value": "2100000000"
+      },
+      "growthRate": 45.0,
+      "maturity": "Emerging",
+      "keyTrends": [
+        "Proliferation of AI regulations globally (EU AI Act, etc.)",
+        "Board-level focus on AI risk management",
+        "Stakeholder pressure for responsible AI",
+        "Integration of ethics into AI development lifecycle"
+      ],
+      "barriers": [
+        "Rapidly evolving regulatory landscape",
+        "Requires interdisciplinary expertise (legal, technical, ethical)",
+        "Standards and best practices still developing"
+      ],
+      "geography": "Europe leading, North America and Asia-Pacific following"
+    },
+    {
+      "@comment": "=== INITIATIVE TEST DATA (5 instances) ===",
+      "@comment": "TYPICAL CASE: Capability building initiative",
+      "@type": "Initiative",
+      "@id": "baiv:test:init:001",
+      "initiativeId": "INIT-001",
+      "name": "AI Explainability Framework Development",
+      "description": "Develop comprehensive AI explainability framework and tools to address critical capability gap in model interpretability",
+      "initiativeType": "Capability Building",
+      "status": "Approved",
+      "startDate": "2025-11-01",
+      "endDate": "2026-04-30",
+      "budget": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "180000"
+      },
+      "addressesGaps": ["baiv:test:gap:001"],
+      "buildsCapabilities": ["baiv:test:cap:004"],
+      "expectedOutcomes": [
+        "Production-ready explainability framework",
+        "Automated explanation generation for common model types",
+        "Client-facing interpretability dashboards",
+        "Documentation and training materials",
+        "Enhanced capability to serve regulated industries"
+      ]
+    },
+    {
+      "@comment": "TYPICAL CASE: Opportunity pursuit initiative",
+      "@type": "Initiative",
+      "@id": "baiv:test:init:002",
+      "initiativeId": "INIT-002",
+      "name": "AI Governance Practice Launch",
+      "description": "Launch dedicated AI governance and ethics advisory practice to pursue high-growth market opportunity",
+      "initiativeType": "Opportunity Pursuit",
+      "status": "InProgress",
+      "startDate": "2025-09-15",
+      "endDate": "2026-06-30",
+      "budget": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "300000"
+      },
+      "pursuesOpportunities": ["baiv:test:opp:001"],
+      "buildsCapabilities": ["baiv:test:cap:004"],
+      "expectedOutcomes": [
+        "Formal AI governance service offering",
+        "3-5 governance framework engagements",
+        "Thought leadership content and market positioning",
+        "Hire 2 governance specialists",
+        "Partnership with legal/compliance firms"
+      ]
+    },
+    {
+      "@comment": "EDGE CASE: Initiative on hold",
+      "@type": "Initiative",
+      "@id": "baiv:test:init:003",
+      "initiativeId": "INIT-003",
+      "name": "Ontology-as-a-Service Platform Development",
+      "description": "Develop SaaS platform for ontology-driven AI architecture - PHASE 1 market validation",
+      "initiativeType": "Innovation",
+      "status": "OnHold",
+      "startDate": "2025-10-01",
+      "budget": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "500000"
+      },
+      "pursuesOpportunities": ["baiv:test:opp:002"],
+      "expectedOutcomes": [
+        "Market validation study",
+        "Prototype platform",
+        "Beta customer commitments",
+        "Product roadmap and business case"
+      ]
+    },
+    {
+      "@comment": "TYPICAL CASE: Gap closure initiative",
+      "@type": "Initiative",
+      "@id": "baiv:test:init:004",
+      "initiativeId": "INIT-004",
+      "name": "LLM Engineering Capability Development",
+      "description": "Build in-house expertise in large language models through hiring, training, and pilot projects",
+      "initiativeType": "Capability Building",
+      "status": "InProgress",
+      "startDate": "2025-08-01",
+      "endDate": "2026-07-31",
+      "budget": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "275000"
+      },
+      "addressesGaps": ["baiv:test:gap:004"],
+      "expectedOutcomes": [
+        "Hire 3 LLM engineers/specialists",
+        "Complete 2-3 LLM pilot projects",
+        "Develop LLM service offering",
+        "Internal training program",
+        "Partnership with LLM platform provider"
+      ]
+    },
+    {
+      "@comment": "BOUNDARY CASE: Completed initiative",
+      "@type": "Initiative",
+      "@id": "baiv:test:init:005",
+      "initiativeId": "INIT-005",
+      "name": "Cloud Infrastructure Automation",
+      "description": "Implement infrastructure as code and automated CI/CD pipelines",
+      "initiativeType": "Optimization",
+      "status": "Completed",
+      "startDate": "2024-11-01",
+      "endDate": "2025-05-31",
+      "budget": {
+        "@type": "schema:MonetaryAmount",
+        "currency": "GBP",
+        "value": "95000"
+      },
+      "addressesGaps": ["baiv:test:gap:005"],
+      "expectedOutcomes": [
+        "Terraform-based infrastructure as code",
+        "Automated deployment pipelines",
+        "50% reduction in provisioning time",
+        "Improved reliability and consistency"
+      ]
+    },
+    {
+      "@comment": "=== TECHNOLOGY TEST DATA (5 instances) ===",
+      "@comment": "TYPICAL CASE: Adopted AI/ML platform",
+      "@type": "Technology",
+      "@id": "baiv:test:tech:001",
+      "technologyId": "TECH-001",
+      "name": "TensorFlow",
+      "description": "Open-source machine learning framework for building and deploying ML models",
+      "technologyType": "AI/ML Platform",
+      "vendor": "Google",
+      "maturity": "Mature",
+      "adoptionStatus": "Standard",
+      "enablesCapabilities": ["baiv:test:cap:002"],
+      "url": "https://tensorflow.org"
+    },
+    {
+      "@comment": "TYPICAL CASE: Cloud infrastructure (adopted)",
+      "@type": "Technology",
+      "@id": "baiv:test:tech:002",
+      "technologyId": "TECH-002",
+      "name": "Amazon Web Services (AWS)",
+      "description": "Cloud infrastructure platform for compute, storage, and managed services",
+      "technologyType": "Cloud Infrastructure",
+      "vendor": "Amazon",
+      "maturity": "Mature",
+      "adoptionStatus": "Standard",
+      "enablesCapabilities": ["baiv:test:cap:002", "baiv:test:cap:006"],
+      "url": "https://aws.amazon.com"
+    },
+    {
+      "@comment": "EDGE CASE: Evaluating new technology",
+      "@type": "Technology",
+      "@id": "baiv:test:tech:003",
+      "technologyId": "TECH-003",
+      "name": "Apache Kafka",
+      "description": "Distributed event streaming platform for real-time data pipelines",
+      "technologyType": "Data Platform",
+      "vendor": "Apache Software Foundation",
+      "maturity": "Established",
+      "adoptionStatus": "Evaluating",
+      "url": "https://kafka.apache.org"
+    },
+    {
+      "@comment": "TYPICAL CASE: Knowledge graph database",
+      "@type": "Technology",
+      "@id": "baiv:test:tech:004",
+      "technologyId": "TECH-004",
+      "name": "Neo4j",
+      "description": "Graph database platform for connected data and knowledge graphs",
+      "technologyType": "Data Platform",
+      "vendor": "Neo4j",
+      "maturity": "Established",
+      "adoptionStatus": "Adopted",
+      "enablesCapabilities": ["baiv:test:cap:003"],
+      "url": "https://neo4j.com"
+    },
+    {
+      "@comment": "BOUNDARY CASE: Emerging technology (not adopted)",
+      "@type": "Technology",
+      "@id": "baiv:test:tech:005",
+      "technologyId": "TECH-005",
+      "name": "Quantum Computing Platform",
+      "description": "Quantum computing capabilities for specific optimization problems",
+      "technologyType": "Cloud Infrastructure",
+      "maturity": "Experimental",
+      "adoptionStatus": "NotAdopted",
+      "url": "https://example-quantum.com"
+    },
+    {
+      "@comment": "=== RELATIONSHIP INSTANCES (establishing connections) ===",
+      "@comment": "These are implicit in the entity definitions above via property references, but documenting key relationships explicitly here for test data completeness"
+    },
+    {
+      "@comment": "=== INVALID TEST CASE (for validation testing) ===",
+      "@comment": "INVALID: Capability with circular dependency",
+      "@type": "Capability",
+      "@id": "baiv:test:cap:invalid:001",
+      "capabilityId": "CAP-INVALID-001",
+      "capabilityName": "Circular Dependency Test",
+      "capabilityDescription": "This capability has an invalid circular dependency",
+      "capabilityType": "Technical",
+      "maturityLevel": "Defined",
+      "strategicImportance": "Low",
+      "currentState": "Test case for validation",
+      "targetState": "Should fail validation",
+      "dependencies": ["baiv:test:cap:003", "baiv:test:cap:invalid:001"],
+      "dateAssessed": "2025-10-12T00:00:00Z",
+      "@validationNote": "SHOULD FAIL: Circular dependency (depends on itself)"
+    },
+    {
+      "@comment": "INVALID: Gap without current and desired state",
+      "@type": "Gap",
+      "@id": "baiv:test:gap:invalid:001",
+      "gapId": "GAP-INVALID-001",
+      "gapName": "Incomplete Gap",
+      "gapDescription": "This gap is missing required fields",
+      "gapType": "Capability",
+      "severity": "High",
+      "impactArea": ["Test"],
+      "identifiedDate": "2025-10-12T00:00:00Z",
+      "status": "Identified",
+      "@validationNote": "SHOULD FAIL: Missing currentState and desiredState (BR-002)"
+    },
+    {
+      "@comment": "INVALID: Initiative with end date before start date",
+      "@type": "Initiative",
+      "@id": "baiv:test:init:invalid:001",
+      "initiativeId": "INIT-INVALID-001",
+      "name": "Invalid Timeline Initiative",
+      "description": "Initiative with invalid timeline",
+      "initiativeType": "Capability Building",
+      "status": "Proposed",
+      "startDate": "2026-06-01",
+      "endDate": "2026-01-01",
+      "@validationNote": "SHOULD FAIL: End date before start date (BR-009)"
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "oaa": "https://platform.foundation/oaa-registry/v3/"
+  },
+  "name": "PF-Core: VE Value Proposition REG-OAA v3.0.0",
+  "alternateName": "OAA Registry Entries for Value Engineering Module",
+  "identifier": "PF-Core_VE_ValueProposition_Registry-OAA_v3.0.0",
+  "registryVersion": "3.0.0",
+  "lastUpdated": "2025-12-01",
+  "maintainer": {
+    "@type": "Organization",
+    "name": "Platform Foundation Core"
+  },
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "PF-Core Value Engineering Module"
+  },
+  "ontologies": [
+    {
+      "@id": "oaa:registry-entry:value-proposition-v1",
+      "@type": "oaa:OntologyRegistryEntry",
+      "ontologyId": "PF-Core_VE_ValueProposition_Ontology_v1.0.0",
+      "name": "PF-Core: VE Value Proposition ONT v1.0.0",
+      "version": "1.0.0",
+      "status": "Production",
+      "domain": "Value Engineering",
+      "description": "Generic, market-agnostic Value Proposition Development Framework enabling systematic hypothesis formulation, validation, and value articulation for AI-driven platforms",
+      "schemaOrgAlignment": 0.85,
+      "entityCount": 12,
+      "relationshipCount": 18,
+      "businessRuleCount": 5,
+      "artifacts": {
+        "ontologyDefinition": "ontologies/value-proposition-ontology-v1.0.0.jsonld",
+        "glossary": "documentation/value-proposition-glossary.md",
+        "testData": "test-data/value-proposition-test-data.json",
+        "diagrams": ["diagrams/value-proposition-mindmap.mermaid"]
+      },
+      "integrations": {
+        "upstream": ["pf-core:ontology:vsom-v1"],
+        "downstream": ["pf-core:ontology:okr-v1"],
+        "crossReference": ["pf-core:ontology:roles-raci-rbac-v3"]
+      },
+      "qualityMetrics": {
+        "validationPassRate": 0.96,
+        "documentationCompleteness": 0.92,
+        "testCoverage": 0.88
+      },
+      "dateCreated": "2025-11-16",
+      "dateModified": "2025-11-30"
+    },
+    {
+      "@id": "oaa:registry-entry:vsom-v1",
+      "@type": "oaa:OntologyRegistryEntry",
+      "ontologyId": "pf-core:ontology:vsom-v1",
+      "name": "Vision, Strategy, Objectives & Metrics (VSOM) Ontology",
+      "version": "1.0.0",
+      "status": "Production",
+      "domain": "Strategic Planning",
+      "description": "Top-level Value Engineering module providing four-layer strategic planning framework: Vision & Mission, Strategic Objectives (BSC), Operational Strategies & OKRs, Metrics & KPIs",
+      "schemaOrgAlignment": 0.88,
+      "entityCount": 9,
+      "relationshipCount": 15,
+      "businessRuleCount": 5,
+      "artifacts": {
+        "ontologyDefinition": "ontologies/vsom-ontology-v1.0.0.jsonld",
+        "prd": "prds/PRD-VSOM-Module-v1.0.md"
+      },
+      "integrations": {
+        "upstream": [],
+        "downstream": ["pf-core:ontology:okr-v1", "pf-core:ontology:value-proposition-v1"],
+        "crossReference": ["pf-core:ontology:roles-raci-rbac-v3"]
+      },
+      "qualityMetrics": {
+        "validationPassRate": 0.94,
+        "documentationCompleteness": 0.90,
+        "testCoverage": 0.85
+      },
+      "dateCreated": "2025-11-16",
+      "dateModified": "2025-11-30"
+    },
+    {
+      "@id": "oaa:registry-entry:okr-v1",
+      "@type": "oaa:OntologyRegistryEntry",
+      "ontologyId": "pf-core:ontology:okr-v1",
+      "name": "OKR (Objectives and Key Results) Ontology",
+      "version": "1.0.0",
+      "status": "Production",
+      "domain": "Performance Management",
+      "description": "Comprehensive ontology for Objectives and Key Results framework enabling AI-driven goal management, VSOM alignment tracking, and performance optimization",
+      "schemaOrgAlignment": 0.87,
+      "entityCount": 7,
+      "relationshipCount": 12,
+      "businessRuleCount": 6,
+      "artifacts": {
+        "ontologyDefinition": "ontologies/okr-ontology-v1.0.0.jsonld",
+        "diagrams": ["diagrams/vsom-okr-integration.mermaid"]
+      },
+      "integrations": {
+        "upstream": ["pf-core:ontology:vsom-v1"],
+        "downstream": [],
+        "crossReference": ["pf-core:ontology:roles-raci-rbac-v3", "pf-core:ontology:metrics-library-v1"]
+      },
+      "qualityMetrics": {
+        "validationPassRate": 0.95,
+        "documentationCompleteness": 0.88,
+        "testCoverage": 0.82
+      },
+      "dateCreated": "2025-11-16",
+      "dateModified": "2025-11-30"
+    },
+    {
+      "@id": "oaa:registry-entry:roles-raci-rbac-v3",
+      "@type": "oaa:OntologyRegistryEntry",
+      "ontologyId": "pf-core:ontology:roles-raci-rbac-v3",
+      "name": "Roles, RACI & RBAC Ontology",
+      "version": "3.0.0",
+      "status": "Production",
+      "domain": "Organizational Governance",
+      "description": "Comprehensive ROLES/RACI/RBAC ontology with C-Suite role definitions, RACI matrix implementation, and RBAC permission resolution. Integrates with 6 other ontologies",
+      "schemaOrgAlignment": 0.85,
+      "entityCount": 15,
+      "relationshipCount": 22,
+      "businessRuleCount": 8,
+      "artifacts": {
+        "ontologyDefinition": "ontologies/roles-raci-rbac-ontology-v3.0.0.jsonld",
+        "glossary": "documentation/roles-raci-rbac-glossary.md",
+        "testData": "test-data/roles-raci-rbac-test-data.json",
+        "diagrams": ["diagrams/raci-permission-flow.mermaid"],
+        "narrative": "documentation/roles-raci-rbac-narrative.md"
+      },
+      "integrations": {
+        "upstream": [],
+        "downstream": [],
+        "crossReference": ["pf-core:ontology:vsom-v1", "pf-core:ontology:okr-v1", "pf-core:ontology:value-proposition-v1"]
+      },
+      "qualityMetrics": {
+        "validationPassRate": 0.98,
+        "documentationCompleteness": 0.95,
+        "testCoverage": 0.90
+      },
+      "dateCreated": "2025-10-26",
+      "dateModified": "2025-11-30"
+    }
+  ],
+  "agents": [
+    {
+      "@id": "oaa:registry-entry:agent:value-proposition-wizard-v1",
+      "@type": "oaa:AgentRegistryEntry",
+      "agentId": "pf-core:agent:value-proposition-wizard-v1",
+      "name": "Value Proposition Wizard Agent",
+      "version": "1.0.0",
+      "status": "Development",
+      "cluster": "Generation",
+      "description": "Guides users through systematic value proposition development with AI-powered suggestions",
+      "capabilities": 7,
+      "ontologiesConsumed": ["pf-core:ontology:value-proposition-v1", "pf-core:ontology:vsom-v1"],
+      "artifacts": {
+        "agentDefinition": "agents/value-proposition-wizard-agent.json",
+        "prd": "prds/PRD-Value-Proposition-Wizard-v2.0.md"
+      },
+      "dateCreated": "2025-11-16",
+      "dateModified": "2025-11-30"
+    }
+  ],
+  "cascadeDefinition": {
+    "name": "Value Engineering Cascade",
+    "version": "1.0.0",
+    "layers": [
+      {
+        "layer": 1,
+        "name": "VSOM Strategic Foundation",
+        "ontology": "pf-core:ontology:vsom-v1",
+        "entities": ["Vision", "Mission", "StrategicObjective", "OperationalStrategy", "Metric"]
+      },
+      {
+        "layer": 2,
+        "name": "RACI Accountability Matrix",
+        "ontology": "pf-core:ontology:roles-raci-rbac-v3",
+        "entities": ["ExecutiveRole", "RACIAssignment", "BusinessRole"]
+      },
+      {
+        "layer": 3,
+        "name": "OKR Domain Scoping",
+        "ontology": "pf-core:ontology:okr-v1",
+        "entities": ["Objective", "KeyResult", "TimePeriod", "AlignmentScore"]
+      },
+      {
+        "layer": 4,
+        "name": "Value Proposition Module",
+        "ontology": "pf-core:ontology:value-proposition-v1",
+        "entities": ["ValueProposition", "CustomerSegment", "ProblemDefinition", "ValueDriver", "Hypothesis"]
+      },
+      {
+        "layer": 5,
+        "name": "Context Engineering",
+        "description": "Cross-ontology context assembly for AI agents",
+        "components": ["MarketContext", "OrganizationalContext", "CompetitiveContext"]
+      },
+      {
+        "layer": 6,
+        "name": "PRD Generation",
+        "description": "Automated requirements documentation from value proposition",
+        "outputs": ["PRD", "UserStories", "AcceptanceCriteria", "TDDSpecifications"]
+      },
+      {
+        "layer": 7,
+        "name": "TDD-Driven Execution",
+        "description": "Test-first implementation with 80%+ coverage target",
+        "outputs": ["TestSpecifications", "Implementation", "BenefitsValidation"]
+      }
+    ],
+    "diagram": "diagrams/value-engineering-cascade.mermaid"
+  }
+}

@@ -1,0 +1,1000 @@
+{
+  "ppm_ontology_schema": {
+    "version": "1.0",
+    "description": "Portfolio, Program & Project Management Ontology encoded with organizational relationships",
+    "entities": {
+      "organization": {
+        "primary_key": "org_id",
+        "attributes": {
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique organizational identifier",
+            "required": true
+          },
+          "org_name": {
+            "type": "string",
+            "description": "Organization name",
+            "required": true
+          },
+          "org_type": {
+            "type": "enum",
+            "values": ["enterprise", "business_unit", "department", "subsidiary"],
+            "description": "Type of organizational entity"
+          },
+          "parent_org_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Parent organization identifier for hierarchical structures",
+            "foreign_key": "organization.org_id"
+          },
+          "industry_sector": {
+            "type": "string",
+            "description": "Industry classification"
+          },
+          "ppm_maturity_level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "PPM maturity assessment level"
+          },
+          "strategic_objectives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "objective_id": {"type": "string"},
+                "objective_name": {"type": "string"},
+                "priority": {"type": "integer"},
+                "target_date": {"type": "string", "format": "date"}
+              }
+            }
+          },
+          "created_date": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "portfolio": {
+        "primary_key": "portfolio_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "attributes": {
+          "portfolio_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "Organization this portfolio belongs to"
+          },
+          "portfolio_name": {
+            "type": "string",
+            "required": true
+          },
+          "portfolio_type": {
+            "type": "enum",
+            "values": ["strategic", "operational", "innovation", "transformation"]
+          },
+          "strategic_alignment": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "References to org strategic objectives"
+            }
+          },
+          "portfolio_sponsor_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "portfolio_manager_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "budget_allocated": {
+            "type": "number",
+            "minimum": 0
+          },
+          "budget_currency": {
+            "type": "string",
+            "default": "USD"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "target_end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "enum",
+            "values": ["active", "planning", "on_hold", "closed"]
+          },
+          "risk_tolerance": {
+            "type": "enum",
+            "values": ["low", "medium", "high"]
+          },
+          "governance_model": {
+            "type": "string",
+            "description": "Reference to governance framework"
+          }
+        }
+      },
+      "program": {
+        "primary_key": "program_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "portfolio_id": "portfolio.portfolio_id"
+        },
+        "attributes": {
+          "program_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "portfolio_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Parent portfolio (optional for standalone programs)"
+          },
+          "program_name": {
+            "type": "string",
+            "required": true
+          },
+          "program_type": {
+            "type": "enum",
+            "values": ["transformation", "improvement", "compliance", "innovation", "ai_implementation"]
+          },
+          "program_vision": {
+            "type": "string",
+            "description": "Program vision statement"
+          },
+          "expected_benefits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "benefit_id": {"type": "string"},
+                "benefit_type": {"type": "enum", "values": ["financial", "operational", "strategic", "customer"]},
+                "description": {"type": "string"},
+                "target_value": {"type": "number"},
+                "measurement_unit": {"type": "string"},
+                "target_date": {"type": "string", "format": "date"}
+              }
+            }
+          },
+          "program_sponsor_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "program_manager_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "budget_allocated": {
+            "type": "number",
+            "minimum": 0
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "target_end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "enum",
+            "values": ["initiating", "planning", "executing", "closing", "closed"]
+          },
+          "complexity_level": {
+            "type": "enum",
+            "values": ["low", "medium", "high", "very_high"]
+          }
+        }
+      },
+      "project": {
+        "primary_key": "project_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "portfolio_id": "portfolio.portfolio_id",
+          "program_id": "program.program_id"
+        },
+        "attributes": {
+          "project_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "portfolio_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Parent portfolio (optional)"
+          },
+          "program_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Parent program (optional)"
+          },
+          "project_name": {
+            "type": "string",
+            "required": true
+          },
+          "project_type": {
+            "type": "enum",
+            "values": ["delivery", "enabler", "research", "ai_development", "cloud_migration", "automation"]
+          },
+          "project_objectives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deliverables": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "deliverable_id": {"type": "string"},
+                "deliverable_name": {"type": "string"},
+                "deliverable_type": {"type": "string"},
+                "target_date": {"type": "string", "format": "date"},
+                "acceptance_criteria": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "project_sponsor_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "project_manager_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "budget_allocated": {
+            "type": "number",
+            "minimum": 0
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "target_end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "actual_end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "enum",
+            "values": ["not_started", "planning", "executing", "monitoring", "closing", "closed", "cancelled"]
+          },
+          "priority": {
+            "type": "enum",
+            "values": ["critical", "high", "medium", "low"]
+          },
+          "methodology": {
+            "type": "enum",
+            "values": ["waterfall", "agile", "hybrid", "lean", "devops"]
+          }
+        }
+      },
+      "stakeholder": {
+        "primary_key": "stakeholder_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "attributes": {
+          "stakeholder_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "stakeholder_name": {
+            "type": "string",
+            "required": true
+          },
+          "stakeholder_type": {
+            "type": "enum",
+            "values": ["internal", "external", "vendor", "customer", "regulator"]
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "enum",
+              "values": [
+                "portfolio_sponsor", "portfolio_manager", "portfolio_board_member",
+                "program_sponsor", "program_manager", "program_board_member",
+                "project_sponsor", "project_manager", "project_team_member",
+                "business_analyst", "technical_lead", "architect", "consultant"
+              ]
+            }
+          },
+          "contact_information": {
+            "type": "object",
+            "properties": {
+              "email": {"type": "string", "format": "email"},
+              "phone": {"type": "string"},
+              "department": {"type": "string"},
+              "location": {"type": "string"}
+            }
+          },
+          "competencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "competency_name": {"type": "string"},
+                "proficiency_level": {"type": "enum", "values": ["beginner", "intermediate", "advanced", "expert"]},
+                "certification": {"type": "string"}
+              }
+            }
+          },
+          "availability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Percentage availability"
+          }
+        }
+      },
+      "governance_body": {
+        "primary_key": "governance_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "attributes": {
+          "governance_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "governance_name": {
+            "type": "string",
+            "required": true
+          },
+          "governance_type": {
+            "type": "enum",
+            "values": ["portfolio_steering_committee", "program_board", "project_board", "pmo", "change_control_board"]
+          },
+          "governance_level": {
+            "type": "enum",
+            "values": ["strategic", "tactical", "operational"]
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "stakeholder_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                "role": {"type": "string"},
+                "voting_rights": {"type": "boolean"}
+              }
+            }
+          },
+          "decision_authority": {
+            "type": "array",
+            "items": {
+              "type": "enum",
+              "values": ["investment_approval", "resource_allocation", "scope_change", "risk_escalation", "closure_approval"]
+            }
+          },
+          "meeting_frequency": {
+            "type": "string",
+            "description": "e.g., weekly, monthly, quarterly"
+          }
+        }
+      },
+      "business_case": {
+        "primary_key": "business_case_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "attributes": {
+          "business_case_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project"]
+          },
+          "business_need": {
+            "type": "string",
+            "description": "Description of business need or opportunity"
+          },
+          "investment_required": {
+            "type": "number",
+            "minimum": 0
+          },
+          "expected_benefits": {
+            "type": "object",
+            "properties": {
+              "financial_benefits": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "benefit_type": {"type": "string"},
+                    "value": {"type": "number"},
+                    "timeframe": {"type": "string"}
+                  }
+                }
+              },
+              "non_financial_benefits": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "risks_and_assumptions": {
+            "type": "object",
+            "properties": {
+              "key_risks": {"type": "array", "items": {"type": "string"}},
+              "key_assumptions": {"type": "array", "items": {"type": "string"}}
+            }
+          },
+          "alternatives_considered": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "alternative_name": {"type": "string"},
+                "description": {"type": "string"},
+                "pros": {"type": "array", "items": {"type": "string"}},
+                "cons": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "recommendation": {
+            "type": "string"
+          },
+          "approval_status": {
+            "type": "enum",
+            "values": ["draft", "submitted", "under_review", "approved", "rejected"]
+          },
+          "roi_percentage": {
+            "type": "number"
+          },
+          "payback_period_months": {
+            "type": "number"
+          },
+          "npv": {
+            "type": "number"
+          }
+        }
+      },
+      "risk": {
+        "primary_key": "risk_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "attributes": {
+          "risk_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project"]
+          },
+          "risk_title": {
+            "type": "string",
+            "required": true
+          },
+          "risk_description": {
+            "type": "string"
+          },
+          "risk_category": {
+            "type": "enum",
+            "values": ["strategic", "operational", "financial", "technical", "regulatory", "market", "resource"]
+          },
+          "probability": {
+            "type": "enum",
+            "values": ["very_low", "low", "medium", "high", "very_high"]
+          },
+          "impact": {
+            "type": "enum",
+            "values": ["very_low", "low", "medium", "high", "very_high"]
+          },
+          "risk_score": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Calculated risk score (probability × impact)"
+          },
+          "risk_owner_id": {
+            "type": "string",
+            "foreign_key": "stakeholder.stakeholder_id"
+          },
+          "mitigation_strategies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "strategy_type": {"type": "enum", "values": ["avoid", "mitigate", "transfer", "accept"]},
+                "description": {"type": "string"},
+                "action_owner_id": {"type": "string", "foreign_key": "stakeholder.stakeholder_id"},
+                "target_date": {"type": "string", "format": "date"},
+                "cost": {"type": "number"}
+              }
+            }
+          },
+          "status": {
+            "type": "enum",
+            "values": ["open", "in_progress", "mitigated", "closed", "occurred"]
+          },
+          "identified_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "target_closure_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "milestone": {
+        "primary_key": "milestone_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "attributes": {
+          "milestone_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project"]
+          },
+          "milestone_name": {
+            "type": "string",
+            "required": true
+          },
+          "milestone_type": {
+            "type": "enum",
+            "values": ["gate", "checkpoint", "deliverable", "decision_point", "go_live"]
+          },
+          "planned_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "actual_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "enum",
+            "values": ["not_started", "in_progress", "completed", "overdue", "cancelled"]
+          },
+          "success_criteria": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dependency_type": {"type": "enum", "values": ["finish_to_start", "start_to_start", "finish_to_finish", "start_to_finish"]},
+                "dependent_milestone_id": {"type": "string", "foreign_key": "milestone.milestone_id"},
+                "description": {"type": "string"}
+              }
+            }
+          }
+        }
+      },
+      "resource": {
+        "primary_key": "resource_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id"
+        },
+        "attributes": {
+          "resource_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "resource_name": {
+            "type": "string",
+            "required": true
+          },
+          "resource_type": {
+            "type": "enum",
+            "values": ["human", "financial", "technology", "facility", "equipment"]
+          },
+          "resource_category": {
+            "type": "string",
+            "description": "e.g., developer, analyst, server, software_license"
+          },
+          "total_capacity": {
+            "type": "number",
+            "description": "Total available capacity (hours, units, etc.)"
+          },
+          "allocated_capacity": {
+            "type": "number",
+            "description": "Currently allocated capacity"
+          },
+          "unit_cost": {
+            "type": "number",
+            "description": "Cost per unit of resource"
+          },
+          "cost_currency": {
+            "type": "string",
+            "default": "USD"
+          },
+          "availability_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "availability_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "skills_certifications": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      },
+      "resource_allocation": {
+        "primary_key": "allocation_id",
+        "foreign_keys": {
+          "org_id": "organization.org_id",
+          "resource_id": "resource.resource_id"
+        },
+        "attributes": {
+          "allocation_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "org_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "resource_id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "References portfolio, program, or project"
+          },
+          "entity_type": {
+            "type": "enum",
+            "values": ["portfolio", "program", "project"]
+          },
+          "allocated_capacity": {
+            "type": "number",
+            "description": "Amount of capacity allocated"
+          },
+          "allocation_percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "allocation_status": {
+            "type": "enum",
+            "values": ["planned", "confirmed", "active", "completed", "cancelled"]
+          },
+          "cost_center": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationships": {
+      "hierarchical": {
+        "organization_to_portfolio": {
+          "type": "one_to_many",
+          "parent": "organization",
+          "child": "portfolio",
+          "description": "An organization can have multiple portfolios"
+        },
+        "portfolio_to_program": {
+          "type": "one_to_many",
+          "parent": "portfolio",
+          "child": "program",
+          "description": "A portfolio can contain multiple programs"
+        },
+        "program_to_project": {
+          "type": "one_to_many",
+          "parent": "program",
+          "child": "project",
+          "description": "A program can contain multiple projects"
+        },
+        "organization_to_standalone_program": {
+          "type": "one_to_many",
+          "parent": "organization",
+          "child": "program",
+          "description": "Organizations can have standalone programs"
+        },
+        "organization_to_standalone_project": {
+          "type": "one_to_many",
+          "parent": "organization",
+          "child": "project",
+          "description": "Organizations can have standalone projects"
+        }
+      },
+      "governance": {
+        "organization_to_governance_body": {
+          "type": "one_to_many",
+          "parent": "organization",
+          "child": "governance_body",
+          "description": "Organizations establish governance bodies"
+        },
+        "stakeholder_to_governance_member": {
+          "type": "many_to_many",
+          "entities": ["stakeholder", "governance_body"],
+          "description": "Stakeholders participate in governance bodies"
+        }
+      },
+      "management": {
+        "organization_to_stakeholder": {
+          "type": "one_to_many",
+          "parent": "organization",
+          "child": "stakeholder",
+          "description": "Organizations have stakeholders"
+        },
+        "entity_to_business_case": {
+          "type": "one_to_one",
+          "entities": ["portfolio", "program", "project", "business_case"],
+          "description": "Each PPM entity can have a business case"
+        },
+        "entity_to_risk": {
+          "type": "one_to_many",
+          "entities": ["portfolio", "program", "project", "risk"],
+          "description": "PPM entities can have multiple risks"
+        },
+        "entity_to_milestone": {
+          "type": "one_to_many",
+          "entities": ["portfolio", "program", "project", "milestone"],
+          "description": "PPM entities have milestones"
+        }
+      },
+      "resource_management": {
+        "organization_to_resource": {
+          "type": "one_to_many",
+          "parent": "organization",
+          "child": "resource",
+          "description": "Organizations own resources"
+        },
+        "resource_to_allocation": {
+          "type": "one_to_many",
+          "parent": "resource",
+          "child": "resource_allocation",
+          "description": "Resources can have multiple allocations"
+        },
+        "entity_to_resource_allocation": {
+          "type": "one_to_many",
+          "entities": ["portfolio", "program", "project", "resource_allocation"],
+          "description": "PPM entities receive resource allocations"
+        }
+      }
+    },
+    "constraints": {
+      "data_integrity": [
+        {
+          "constraint_type": "foreign_key",
+          "description": "All entities must reference valid org_id",
+          "rule": "Every entity must have a valid organization reference"
+        },
+        {
+          "constraint_type": "hierarchy",
+          "description": "Project must belong to same org as parent program/portfolio",
+          "rule": "project.org_id = program.org_id = portfolio.org_id"
+        },
+        {
+          "constraint_type": "dates",
+          "description": "Child entity dates must be within parent entity dates",
+          "rule": "project dates ⊆ program dates ⊆ portfolio dates"
+        },
+        {
+          "constraint_type": "budget",
+          "description": "Sum of child budgets cannot exceed parent budget",
+          "rule": "Σ(child.budget) ≤ parent.budget"
+        }
+      ],
+      "business_rules": [
+        {
+          "rule_type": "resource_allocation",
+          "description": "Total resource allocation cannot exceed 100%",
+          "rule": "Σ(allocation_percentage) ≤ 100 per resource"
+        },
+        {
+          "rule_type": "governance",
+          "description": "Each PPM entity must have appropriate governance",
+          "rule": "portfolio → steering committee, program → board, project → board"
+        },
+        {
+          "rule_type": "status_progression",
+          "description": "Status changes must follow defined progression",
+          "rule": "Status transitions must follow workflow rules"
+        }
+      ]
+    },
+    "query_patterns": {
+      "organizational_queries": [
+        {
+          "pattern_name": "org_portfolio_summary",
+          "description": "Get all portfolios for an organization",
+          "query_template": "SELECT * FROM portfolio WHERE org_id = {org_id}"
+        },
+        {
+          "pattern_name": "org_resource_utilization",
+          "description": "Calculate resource utilization across organization",
+          "query_template": "SELECT resource_id, SUM(allocation_percentage) as utilization FROM resource_allocation WHERE org_id = {org_id} GROUP BY resource_id"
+        },
+        {
+          "pattern_name": "org_risk_exposure",
+          "description": "Aggregate risk exposure across organization",
+          "query_template": "SELECT entity_type, COUNT(*) as risk_count, AVG(risk_score) as avg_risk FROM risk WHERE org_id = {org_id} GROUP BY entity_type"
+        }
+      ],
+      "cross_entity_queries": [
+        {
+          "pattern_name": "portfolio_hierarchy",
+          "description": "Get complete hierarchy for a portfolio",
+          "query_template": "WITH RECURSIVE hierarchy AS (SELECT portfolio_id, program_id, project_id FROM portfolio_program_project_view WHERE portfolio_id = {portfolio_id}) SELECT * FROM hierarchy"
+        },
+        {
+          "pattern_name": "stakeholder_involvement",
+          "description": "Find all PPM entities where stakeholder is involved",
+          "query_template": "SELECT entity_type, entity_id FROM stakeholder_entity_mapping WHERE stakeholder_id = {stakeholder_id} AND org_id = {org_id}"
+        }
+      ]
+    },
+    "api_endpoints": {
+      "base_url": "/api/v1/ppm",
+      "endpoints": [
+        {
+          "path": "/organizations/{org_id}/portfolios",
+          "method": "GET",
+          "description": "List all portfolios for organization"
+        },
+        {
+          "path": "/organizations/{org_id}/portfolios/{portfolio_id}/hierarchy",
+          "method": "GET",
+          "description": "Get complete portfolio hierarchy"
+        },
+        {
+          "path": "/organizations/{org_id}/resources/utilization",
+          "method": "GET",
+          "description": "Get resource utilization summary"
+        },
+        {
+          "path": "/organizations/{org_id}/risks/dashboard",
+          "method": "GET",
+          "description": "Get risk dashboard data"
+        },
+        {
+          "path": "/organizations/{org_id}/performance/kpis",
+          "method": "GET",
+          "description": "Get organization PPM KPIs"
+        }
+      ]
+    },
+    "ai_automation_hooks": {
+      "ml_models": [
+        {
+          "model_type": "risk_prediction",
+          "input_entities": ["project", "risk", "stakeholder"],
+          "description": "Predict project risk likelihood based on historical data"
+        },
+        {
+          "model_type": "resource_optimization",
+          "input_entities": ["resource", "resource_allocation", "project"],
+          "description": "Optimize resource allocation across projects"
+        },
+        {
+          "model_type": "benefits_realization",
+          "input_entities": ["program", "business_case", "milestone"],
+          "description": "Predict benefits realization success"
+        }
+      ],
+      "automation_triggers": [
+        {
+          "trigger_type": "status_change",
+          "entities": ["project", "program", "portfolio"],
+          "actions": ["update_dashboard", "notify_stakeholders", "recalculate_metrics"]
+        },
+        {
+          "trigger_type": "milestone_overdue",
+          "entities": ["milestone"],
+          "actions": ["escalate_risk", "notify_governance", "trigger_intervention"]
+        },
+        {
+          "trigger_type": "budget_variance",
+          "entities": ["project", "program", "portfolio"],
+          "actions": ["flag_exception", "request_forecast_update", "trigger_review"]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,998 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "w4m": "https://w4m.ai/ontology/core#",
+    "vsom": "https://w4m.ai/ontology/vsom#",
+    "claude": "https://anthropic.com/claude/skills#"
+  },
+  
+  "metadata": {
+    "name": "W4M VSOM Claude Skills Agent Ecosystem",
+    "version": "1.0.0",
+    "dateCreated": "2025-11-14T15:00:00Z",
+    "framework": "W4M Core Capability and Business Framework",
+    "description": "Comprehensive agent specifications for VSOM framework automation using Claude Skills",
+    "timezone": "Europe/London"
+  },
+
+  "architecture": {
+    "pattern": "Hierarchical Orchestration",
+    "principle": "Business Impact as Driver, Outcomes as Goal, Value as Measure",
+    "approach": "Quasi-object-oriented with vertical/horizontal matrix support"
+  },
+
+  "agents": {
+    "master_orchestrator": {
+      "agentId": "VSOM-ORCH-001",
+      "name": "Master VSOM Orchestrator Agent",
+      "role": "Primary Coordinator",
+      "description": "Orchestrates all VSOM agents to deliver end-to-end strategic planning and execution",
+      "ontologyMapping": "vsom:VSOMFramework",
+      
+      "capabilities": [
+        {
+          "id": "workflow_orchestration",
+          "name": "Workflow Orchestration",
+          "functions": [
+            "Agent sequencing and coordination",
+            "Data flow management across agents",
+            "Cross-agent consistency validation",
+            "Quality assurance checkpoints"
+          ]
+        },
+        {
+          "id": "integration_management",
+          "name": "Cross-Agent Integration",
+          "functions": [
+            "Ensure alignment across all agents",
+            "Resolve inter-agent conflicts",
+            "Maintain end-to-end traceability",
+            "Aggregate and synthesize outputs"
+          ]
+        },
+        {
+          "id": "stakeholder_interface",
+          "name": "Stakeholder Interface",
+          "functions": [
+            "User interaction management",
+            "Executive report generation",
+            "Recommendations synthesis",
+            "Strategic decision support"
+          ]
+        }
+      ],
+      
+      "subAgents": [
+        "vision_architect_agent",
+        "strategy_formulation_agent",
+        "objectives_specification_agent",
+        "metrics_design_agent",
+        "okr_orchestration_agent"
+      ],
+      
+      "orchestrationPatterns": {
+        "sequential_cascade": {
+          "description": "Vision → Strategy → Objectives → Metrics → OKRs",
+          "useCase": "Initial VSOM framework development"
+        },
+        "parallel_processing": {
+          "description": "Multiple functional strategies developed simultaneously",
+          "useCase": "Multi-domain strategy formulation"
+        },
+        "iterative_refinement": {
+          "description": "Cyclic improvement based on validation feedback",
+          "useCase": "Strategy optimization and alignment"
+        },
+        "validation_loop": {
+          "description": "Cross-agent consistency checking",
+          "useCase": "Quality assurance and governance"
+        }
+      },
+      
+      "inputs": {
+        "primary": [
+          {
+            "name": "strategic_planning_request",
+            "type": "schema:Action",
+            "source": "User/Stakeholder"
+          },
+          {
+            "name": "organizational_context",
+            "type": "schema:Organization",
+            "source": "Client Profile"
+          },
+          {
+            "name": "market_intelligence",
+            "type": "vsom:Market",
+            "source": "External Data"
+          }
+        ],
+        "configuration": [
+          "planning_horizon",
+          "stakeholder_roles",
+          "governance_requirements",
+          "output_format_preferences"
+        ]
+      },
+      
+      "outputs": {
+        "primary": [
+          {
+            "name": "complete_vsom_framework",
+            "type": "vsom:VSOMFramework",
+            "format": "JSON-LD"
+          },
+          {
+            "name": "strategic_alignment_report",
+            "type": "schema:Report",
+            "format": "Markdown/PDF"
+          },
+          {
+            "name": "implementation_roadmap",
+            "type": "schema:Schedule",
+            "format": "Gantt/Timeline"
+          },
+          {
+            "name": "executive_summary",
+            "type": "schema:Article",
+            "format": "Document"
+          }
+        ]
+      },
+      
+      "governance": {
+        "versionControl": "GitHub integration with semantic versioning",
+        "changeTracking": "Full audit trail with UK timestamps",
+        "collaborationProtocol": "Multi-client, multi-platform support"
+      },
+      
+      "developmentPhase": "Phase 4",
+      "estimatedEffort": "High",
+      "priority": 1
+    },
+
+    "vision_architect_agent": {
+      "agentId": "VSOM-VIS-001",
+      "name": "Vision Architect Agent",
+      "role": "Vision Statement Specialist",
+      "description": "Guides users through vision statement creation, validation, and alignment",
+      "ontologyMapping": "vsom:VisionComponent",
+      
+      "capabilities": [
+        {
+          "id": "vision_discovery",
+          "name": "Vision Discovery",
+          "functions": [
+            "Stakeholder aspiration elicitation",
+            "Future state scenario development",
+            "Core value identification",
+            "Purpose alignment analysis"
+          ]
+        },
+        {
+          "id": "vision_formulation",
+          "name": "Vision Formulation",
+          "functions": [
+            "Apply INSPIRE framework",
+            "Generate vision statement options",
+            "Validate against quality criteria",
+            "Test for stakeholder resonance"
+          ]
+        },
+        {
+          "id": "vision_alignment",
+          "name": "Vision Alignment",
+          "functions": [
+            "Ensure market relevance",
+            "Validate achievability",
+            "Check differentiation clarity",
+            "Confirm time horizon appropriateness"
+          ]
+        }
+      ],
+      
+      "tools": [
+        {
+          "toolId": "vision_template_generator",
+          "description": "Generates structured vision statement templates based on context",
+          "inputParams": ["organization_type", "industry", "time_horizon"],
+          "outputFormat": "Template with guided prompts"
+        },
+        {
+          "toolId": "inspire_framework_validator",
+          "description": "Validates vision statements against INSPIRE criteria",
+          "inputParams": ["vision_statement", "stakeholder_context"],
+          "outputFormat": "Quality score with improvement recommendations"
+        },
+        {
+          "toolId": "stakeholder_alignment_analyzer",
+          "description": "Assesses vision resonance across stakeholder groups",
+          "inputParams": ["vision_statement", "stakeholder_profiles"],
+          "outputFormat": "Alignment matrix with gap analysis"
+        },
+        {
+          "toolId": "vision_anti_pattern_detector",
+          "description": "Identifies common vision statement mistakes",
+          "inputParams": ["vision_statement"],
+          "outputFormat": "Anti-pattern warnings with corrections"
+        }
+      ],
+      
+      "inputs": {
+        "required": [
+          {
+            "name": "stakeholder_aspirations",
+            "type": "schema:ItemList",
+            "description": "Collection of stakeholder future state desires"
+          },
+          {
+            "name": "organizational_purpose",
+            "type": "schema:Text",
+            "description": "Core mission and reason for existence"
+          }
+        ],
+        "optional": [
+          {
+            "name": "market_context",
+            "type": "vsom:Market",
+            "description": "Market intelligence and positioning"
+          },
+          {
+            "name": "competitive_landscape",
+            "type": "schema:ItemList",
+            "description": "Key competitor positioning"
+          },
+          {
+            "name": "time_horizon_preference",
+            "type": "schema:Duration",
+            "description": "Preferred vision timeframe"
+          }
+        ]
+      },
+      
+      "outputs": {
+        "primary": [
+          {
+            "name": "vision_statement_options",
+            "type": "schema:ItemList",
+            "description": "3-5 validated vision statement alternatives"
+          },
+          {
+            "name": "vision_quality_score",
+            "type": "schema:Rating",
+            "description": "INSPIRE framework quality assessment"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "alignment_report",
+            "type": "schema:Report",
+            "description": "Stakeholder alignment analysis"
+          },
+          {
+            "name": "stakeholder_validation_plan",
+            "type": "schema:Action",
+            "description": "Recommended validation activities"
+          }
+        ]
+      },
+      
+      "integrations": {
+        "baivProcess": "P1_Configuration",
+        "downstreamAgents": ["strategy_formulation_agent"],
+        "externalSignals": ["value_proposition_development (output only)"]
+      },
+      
+      "promptPatterns": {
+        "discovery": "Let's explore your aspirations for the future. In 5-10 years, what would success look like for [Organization]? What impact do you want to have on [Market/Customers]?",
+        "formulation": "Based on our discussion, here are vision statement options that capture your aspirations. Each emphasizes different aspects: [Options with rationale]",
+        "validation": "Let's test this vision against the INSPIRE framework. Is it Inspirational? Does it provide Navigation? Is it Specific enough to guide decisions?..."
+      },
+      
+      "developmentPhase": "Phase 1",
+      "estimatedEffort": "Medium",
+      "priority": 2
+    },
+
+    "strategy_formulation_agent": {
+      "agentId": "VSOM-STR-001",
+      "name": "Strategy Formulation Agent",
+      "role": "Strategic Planning Specialist",
+      "description": "Develops corporate and functional strategies aligned to vision",
+      "ontologyMapping": "vsom:StrategyComponent",
+      
+      "capabilities": [
+        {
+          "id": "corporate_strategy_development",
+          "name": "Corporate Strategy Development",
+          "functions": [
+            "Market analysis and selection",
+            "Competitive positioning determination",
+            "Growth pathway identification",
+            "Resource allocation modelling"
+          ]
+        },
+        {
+          "id": "functional_strategy_translation",
+          "name": "Functional Strategy Translation",
+          "functions": [
+            "Corporate-to-functional alignment",
+            "Cross-functional coordination mapping",
+            "Capability gap analysis",
+            "Strategy documentation generation"
+          ]
+        },
+        {
+          "id": "strategy_validation",
+          "name": "Strategy Validation",
+          "functions": [
+            "Internal consistency checking",
+            "Resource feasibility assessment",
+            "Risk identification and mitigation",
+            "Stakeholder alignment verification"
+          ]
+        }
+      ],
+      
+      "tools": [
+        {
+          "toolId": "strategy_framework_templates",
+          "description": "Pre-built templates for common strategy frameworks",
+          "frameworks": ["Porter Five Forces", "Ansoff Matrix", "BCG Matrix", "SWOT", "PESTLE"]
+        },
+        {
+          "toolId": "porter_five_forces_analyzer",
+          "description": "Automated competitive forces analysis",
+          "inputParams": ["industry", "market_data"],
+          "outputFormat": "Force ratings with strategic implications"
+        },
+        {
+          "toolId": "ansoff_matrix_builder",
+          "description": "Growth strategy option generator",
+          "inputParams": ["current_products", "current_markets", "growth_appetite"],
+          "outputFormat": "Growth pathway recommendations"
+        },
+        {
+          "toolId": "resource_allocation_optimizer",
+          "description": "Optimal resource distribution calculator",
+          "inputParams": ["strategic_priorities", "available_resources", "constraints"],
+          "outputFormat": "Allocation recommendations with trade-off analysis"
+        }
+      ],
+      
+      "inputs": {
+        "required": [
+          {
+            "name": "vision_statement",
+            "type": "vsom:VisionComponent",
+            "source": "vision_architect_agent"
+          },
+          {
+            "name": "organizational_capabilities",
+            "type": "schema:ItemList",
+            "description": "Current capability inventory"
+          }
+        ],
+        "optional": [
+          {
+            "name": "market_intelligence",
+            "type": "vsom:Market",
+            "description": "Market size, growth, dynamics"
+          },
+          {
+            "name": "competitive_analysis",
+            "type": "schema:ItemList",
+            "description": "Competitor positioning and capabilities"
+          },
+          {
+            "name": "resource_constraints",
+            "type": "schema:MonetaryAmount",
+            "description": "Budget and resource limitations"
+          }
+        ]
+      },
+      
+      "outputs": {
+        "primary": [
+          {
+            "name": "corporate_strategy_document",
+            "type": "schema:CreativeWork",
+            "description": "Complete corporate strategy specification"
+          },
+          {
+            "name": "functional_strategy_set",
+            "type": "schema:ItemList",
+            "description": "Marketing, Product, Technology, Revenue, Data strategies"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "strategy_alignment_matrix",
+            "type": "schema:Table",
+            "description": "Corporate to functional alignment mapping"
+          },
+          {
+            "name": "capability_gap_report",
+            "type": "schema:Report",
+            "description": "Required vs current capabilities"
+          },
+          {
+            "name": "risk_assessment",
+            "type": "vsom:RiskProfile",
+            "description": "Strategic risks and mitigation plans"
+          }
+        ]
+      },
+      
+      "integrations": {
+        "baivProcess": "P2_Discovery",
+        "upstreamAgents": ["vision_architect_agent"],
+        "downstreamAgents": ["objectives_specification_agent"]
+      },
+      
+      "strategyTypes": {
+        "corporate": {
+          "owner": "CEO/Executive Leadership",
+          "horizon": "3-5 years",
+          "focus": "Where to compete, how to win"
+        },
+        "functional": {
+          "types": ["Marketing", "Product", "Technology", "Revenue", "Data", "Operations"],
+          "owner": "Functional Leaders (CMO, CTO, etc.)",
+          "horizon": "1-3 years",
+          "focus": "How to execute within domain"
+        }
+      },
+      
+      "developmentPhase": "Phase 2",
+      "estimatedEffort": "High",
+      "priority": 3
+    },
+
+    "objectives_specification_agent": {
+      "agentId": "VSOM-OBJ-001",
+      "name": "Objectives Specification Agent",
+      "role": "Goal Setting Specialist",
+      "description": "Translates strategies into measurable strategic objectives",
+      "ontologyMapping": "vsom:ObjectivesComponent",
+      
+      "capabilities": [
+        {
+          "id": "objective_decomposition",
+          "name": "Objective Decomposition",
+          "functions": [
+            "Strategy-to-objective mapping",
+            "Objective hierarchy creation",
+            "Dependency identification",
+            "Priority ranking algorithms"
+          ]
+        },
+        {
+          "id": "objective_specification",
+          "name": "Objective Specification",
+          "functions": [
+            "SMART+ criteria application",
+            "Target setting methodologies",
+            "Milestone definition",
+            "Owner assignment protocols"
+          ]
+        },
+        {
+          "id": "objective_validation",
+          "name": "Objective Validation",
+          "functions": [
+            "Strategic alignment verification",
+            "Feasibility assessment",
+            "Resource requirement analysis",
+            "Risk identification"
+          ]
+        }
+      ],
+      
+      "tools": [
+        {
+          "toolId": "smart_plus_validator",
+          "description": "Validates objectives against SMART+ criteria",
+          "criteria": ["Specific", "Measurable", "Achievable", "Relevant", "Time-bound", "Aligned", "Accountable"],
+          "outputFormat": "Validation score with improvement suggestions"
+        },
+        {
+          "toolId": "objective_template_generator",
+          "description": "Creates structured objective specifications",
+          "inputParams": ["strategy_reference", "objective_type", "target_timeframe"],
+          "outputFormat": "Complete objective template with all required fields"
+        },
+        {
+          "toolId": "dependency_analyzer",
+          "description": "Identifies inter-objective dependencies",
+          "inputParams": ["objectives_list"],
+          "outputFormat": "Dependency graph with critical path"
+        },
+        {
+          "toolId": "priority_matrix_builder",
+          "description": "Ranks objectives by impact and urgency",
+          "inputParams": ["objectives_list", "strategic_priorities"],
+          "outputFormat": "Priority matrix with recommendations"
+        },
+        {
+          "toolId": "baseline_gap_calculator",
+          "description": "Computes gap between current state and target",
+          "inputParams": ["baseline_value", "target_value", "timeframe"],
+          "outputFormat": "Gap analysis with milestone recommendations"
+        }
+      ],
+      
+      "inputs": {
+        "required": [
+          {
+            "name": "corporate_strategy",
+            "type": "vsom:StrategyComponent",
+            "source": "strategy_formulation_agent"
+          },
+          {
+            "name": "functional_strategies",
+            "type": "schema:ItemList",
+            "source": "strategy_formulation_agent"
+          }
+        ],
+        "optional": [
+          {
+            "name": "resource_availability",
+            "type": "schema:MonetaryAmount",
+            "description": "Available budget and capacity"
+          },
+          {
+            "name": "organizational_constraints",
+            "type": "schema:ItemList",
+            "description": "Limitations and constraints"
+          },
+          {
+            "name": "baseline_performance_data",
+            "type": "schema:Dataset",
+            "description": "Current performance metrics"
+          }
+        ]
+      },
+      
+      "outputs": {
+        "primary": [
+          {
+            "name": "strategic_objectives_catalogue",
+            "type": "schema:ItemList",
+            "description": "Complete set of validated objectives"
+          },
+          {
+            "name": "objective_hierarchy_map",
+            "type": "schema:Table",
+            "description": "Strategic → Tactical → Operational hierarchy"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "dependency_matrix",
+            "type": "schema:Table",
+            "description": "Inter-objective dependencies"
+          },
+          {
+            "name": "resource_requirements_report",
+            "type": "schema:Report",
+            "description": "Resource needs per objective"
+          },
+          {
+            "name": "milestone_timeline",
+            "type": "schema:Schedule",
+            "description": "Key milestones with dates"
+          }
+        ]
+      },
+      
+      "integrations": {
+        "baivProcess": "P6_GapAnalysis",
+        "upstreamAgents": ["strategy_formulation_agent"],
+        "downstreamAgents": ["metrics_design_agent", "okr_orchestration_agent"]
+      },
+      
+      "objectiveTypes": {
+        "strategic": "Annual enterprise-level goals",
+        "tactical": "Quarterly functional-level goals",
+        "operational": "Monthly team-level goals"
+      },
+      
+      "developmentPhase": "Phase 2",
+      "estimatedEffort": "Medium",
+      "priority": 4
+    },
+
+    "metrics_design_agent": {
+      "agentId": "VSOM-MET-001",
+      "name": "Metrics Design Agent",
+      "role": "Performance Measurement Specialist",
+      "description": "Defines KPIs and metrics that measure objective achievement and value delivery",
+      "ontologyMapping": "vsom:MetricsComponent",
+      
+      "capabilities": [
+        {
+          "id": "metric_selection",
+          "name": "Metric Selection",
+          "functions": [
+            "Objective-to-metric mapping",
+            "Balanced scorecard alignment",
+            "Leading/lagging indicator selection",
+            "Data source identification"
+          ]
+        },
+        {
+          "id": "metric_specification",
+          "name": "Metric Specification",
+          "functions": [
+            "Calculation method definition",
+            "Threshold setting methodologies",
+            "Target calibration techniques",
+            "Reporting requirements specification"
+          ]
+        },
+        {
+          "id": "metric_governance",
+          "name": "Metric Governance",
+          "functions": [
+            "Data quality assessment",
+            "Owner assignment protocols",
+            "Review cadence establishment",
+            "Dashboard specification design"
+          ]
+        }
+      ],
+      
+      "tools": [
+        {
+          "toolId": "kpi_template_generator",
+          "description": "Creates comprehensive KPI specifications",
+          "inputParams": ["objective_reference", "kpi_name", "kpi_type"],
+          "outputFormat": "Complete KPI specification document"
+        },
+        {
+          "toolId": "balanced_scorecard_builder",
+          "description": "Aligns metrics across BSC perspectives",
+          "perspectives": ["Financial", "Customer", "Internal Process", "Learning & Growth"],
+          "outputFormat": "Balanced metric portfolio"
+        },
+        {
+          "toolId": "threshold_calculator",
+          "description": "Computes appropriate metric thresholds",
+          "inputParams": ["baseline", "target", "historical_data", "industry_benchmarks"],
+          "outputFormat": "Critical/Warning/Target/Stretch thresholds"
+        },
+        {
+          "toolId": "data_source_validator",
+          "description": "Validates data availability and quality",
+          "inputParams": ["metric_definition", "available_systems"],
+          "outputFormat": "Data source recommendation with quality score"
+        },
+        {
+          "toolId": "benchmark_comparator",
+          "description": "Compares targets against industry benchmarks",
+          "inputParams": ["metric", "target", "industry"],
+          "outputFormat": "Benchmark comparison with percentile ranking"
+        }
+      ],
+      
+      "inputs": {
+        "required": [
+          {
+            "name": "strategic_objectives",
+            "type": "schema:ItemList",
+            "source": "objectives_specification_agent"
+          },
+          {
+            "name": "available_data_sources",
+            "type": "schema:ItemList",
+            "description": "Systems and data repositories"
+          }
+        ],
+        "optional": [
+          {
+            "name": "organizational_maturity",
+            "type": "vsom:OrganizationalMaturity",
+            "description": "Data and analytics maturity level"
+          },
+          {
+            "name": "industry_benchmarks",
+            "type": "schema:Dataset",
+            "description": "Industry standard metrics"
+          },
+          {
+            "name": "measurement_capabilities",
+            "type": "schema:ItemList",
+            "description": "Current measurement infrastructure"
+          }
+        ]
+      },
+      
+      "outputs": {
+        "primary": [
+          {
+            "name": "kpi_specifications",
+            "type": "schema:ItemList",
+            "description": "Complete KPI documentation"
+          },
+          {
+            "name": "metrics_dashboard_design",
+            "type": "schema:CreativeWork",
+            "description": "Dashboard layout and visualization specifications"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "data_collection_plan",
+            "type": "schema:Action",
+            "description": "Data gathering requirements and schedule"
+          },
+          {
+            "name": "threshold_recommendations",
+            "type": "schema:ItemList",
+            "description": "Performance thresholds per metric"
+          },
+          {
+            "name": "reporting_schedule",
+            "type": "schema:Schedule",
+            "description": "Metric reporting cadence"
+          }
+        ]
+      },
+      
+      "integrations": {
+        "baivProcess": "P5_Analytics",
+        "upstreamAgents": ["objectives_specification_agent"],
+        "downstreamAgents": ["okr_orchestration_agent"]
+      },
+      
+      "metricTypes": {
+        "leading": "Predicts future performance",
+        "lagging": "Confirms past results",
+        "diagnostic": "Explains performance drivers",
+        "outcome": "Measures end result"
+      },
+      
+      "developmentPhase": "Phase 3",
+      "estimatedEffort": "Medium",
+      "priority": 5
+    },
+
+    "okr_orchestration_agent": {
+      "agentId": "VSOM-OKR-001",
+      "name": "OKR Orchestration Agent",
+      "role": "OKR Lifecycle Manager",
+      "description": "Translates strategic objectives into quarterly OKRs and manages the OKR lifecycle",
+      "ontologyMapping": "vsom:OKRFramework",
+      
+      "capabilities": [
+        {
+          "id": "okr_creation",
+          "name": "OKR Creation",
+          "functions": [
+            "Objective-to-OKR translation",
+            "Key result specification",
+            "Stretch target setting",
+            "Initiative identification"
+          ]
+        },
+        {
+          "id": "okr_management",
+          "name": "OKR Management",
+          "functions": [
+            "Progress tracking automation",
+            "Check-in facilitation",
+            "Scoring and grading algorithms",
+            "Retrospective analysis"
+          ]
+        },
+        {
+          "id": "okr_optimization",
+          "name": "OKR Optimization",
+          "functions": [
+            "Pattern identification",
+            "Best practice recommendations",
+            "Continuous improvement suggestions",
+            "Cross-quarter learning synthesis"
+          ]
+        }
+      ],
+      
+      "tools": [
+        {
+          "toolId": "okr_template_generator",
+          "description": "Creates structured OKR specifications",
+          "inputParams": ["objective_reference", "quarter", "owner"],
+          "outputFormat": "Complete OKR template with scoring rubric"
+        },
+        {
+          "toolId": "key_result_validator",
+          "description": "Validates key results for measurability and stretch",
+          "criteria": ["Quantifiable", "Stretch (70% = success)", "Outcome-focused"],
+          "outputFormat": "Validation score with improvement suggestions"
+        },
+        {
+          "toolId": "progress_tracker",
+          "description": "Automated progress monitoring",
+          "inputParams": ["okr_set", "current_data"],
+          "outputFormat": "Progress dashboard with confidence levels"
+        },
+        {
+          "toolId": "scoring_calculator",
+          "description": "Computes OKR achievement scores",
+          "scoringMethod": "0.0 - 1.0 scale",
+          "outputFormat": "Scores with achievement analysis"
+        },
+        {
+          "toolId": "retrospective_facilitator",
+          "description": "Guides OKR retrospective analysis",
+          "inputParams": ["completed_okrs", "performance_data"],
+          "outputFormat": "Lessons learned and next quarter recommendations"
+        }
+      ],
+      
+      "inputs": {
+        "required": [
+          {
+            "name": "strategic_objectives",
+            "type": "schema:ItemList",
+            "source": "objectives_specification_agent"
+          },
+          {
+            "name": "quarterly_priorities",
+            "type": "schema:ItemList",
+            "description": "Focus areas for the quarter"
+          }
+        ],
+        "optional": [
+          {
+            "name": "kpi_baselines",
+            "type": "schema:Dataset",
+            "source": "metrics_design_agent"
+          },
+          {
+            "name": "resource_capacity",
+            "type": "schema:QuantitativeValue",
+            "description": "Available team capacity"
+          },
+          {
+            "name": "previous_okr_performance",
+            "type": "schema:Dataset",
+            "description": "Historical OKR achievement data"
+          }
+        ]
+      },
+      
+      "outputs": {
+        "primary": [
+          {
+            "name": "quarterly_okrs",
+            "type": "schema:ItemList",
+            "description": "Complete OKR set for the quarter"
+          },
+          {
+            "name": "initiative_plan",
+            "type": "schema:Action",
+            "description": "Activities to achieve OKRs"
+          }
+        ],
+        "secondary": [
+          {
+            "name": "check_in_schedule",
+            "type": "schema:Schedule",
+            "description": "Weekly/monthly review cadence"
+          },
+          {
+            "name": "progress_reports",
+            "type": "schema:Report",
+            "description": "Regular progress updates"
+          },
+          {
+            "name": "retrospective_insights",
+            "type": "schema:Report",
+            "description": "End-of-quarter learning synthesis"
+          }
+        ]
+      },
+      
+      "integrations": {
+        "baivProcess": "P7_Ideation",
+        "upstreamAgents": ["objectives_specification_agent", "metrics_design_agent"],
+        "downstreamAgents": ["master_orchestrator"]
+      },
+      
+      "okrCadence": {
+        "setting": "Quarterly (Q1, Q2, Q3, Q4)",
+        "checkIns": "Weekly",
+        "midQuarterReview": "Week 6",
+        "endQuarterScoring": "Last week of quarter"
+      },
+      
+      "scoringRubric": {
+        "0.0-0.3": "Missed - Significant gap from target",
+        "0.4-0.6": "Partial - Some progress, needs adjustment",
+        "0.7-1.0": "Achieved - On track or exceeded"
+      },
+      
+      "developmentPhase": "Phase 3",
+      "estimatedEffort": "Medium",
+      "priority": 6
+    }
+  },
+
+  "developmentRoadmap": {
+    "phase1": {
+      "name": "Foundation",
+      "timeline": "Q1",
+      "deliverables": [
+        "Vision Architect Agent (MVP)",
+        "Basic templates and frameworks",
+        "Single-user interface"
+      ],
+      "agents": ["vision_architect_agent"]
+    },
+    "phase2": {
+      "name": "Core Functionality",
+      "timeline": "Q2",
+      "deliverables": [
+        "Strategy Formulation Agent",
+        "Objectives Specification Agent",
+        "Cross-agent data flow"
+      ],
+      "agents": ["strategy_formulation_agent", "objectives_specification_agent"]
+    },
+    "phase3": {
+      "name": "Measurement",
+      "timeline": "Q3",
+      "deliverables": [
+        "Metrics Design Agent",
+        "OKR Orchestration Agent",
+        "Dashboard integration"
+      ],
+      "agents": ["metrics_design_agent", "okr_orchestration_agent"]
+    },
+    "phase4": {
+      "name": "Orchestration",
+      "timeline": "Q4",
+      "deliverables": [
+        "Master Orchestrator Agent",
+        "Full workflow automation",
+        "Multi-stakeholder support"
+      ],
+      "agents": ["master_orchestrator"]
+    },
+    "phase5": {
+      "name": "Intelligence",
+      "timeline": "Q1+",
+      "deliverables": [
+        "Machine learning insights",
+        "Predictive recommendations",
+        "Continuous optimization"
+      ],
+      "enhancements": ["Pattern recognition", "Automated suggestions", "Learning from outcomes"]
+    }
+  },
+
+  "integrationRequirements": {
+    "baivProcess": {
+      "description": "Integration with BAIV P1-P7 Process Framework",
+      "mappings": {
+        "P1_Configuration": "vision_architect_agent",
+        "P2_Discovery": "strategy_formulation_agent",
+        "P5_Analytics": "metrics_design_agent",
+        "P6_GapAnalysis": "objectives_specification_agent",
+        "P7_Ideation": "okr_orchestration_agent"
+      }
+    },
+    "ontology": {
+      "reference": "W4M VSOM Ontology v1.0",
+      "format": "JSON-LD",
+      "schemaCompliance": "Schema.org foundation"
+    },
+    "versionControl": {
+      "system": "GitHub",
+      "timezone": "Europe/London",
+      "changeTracking": "Full audit trail"
+    }
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.org/SoftwareSourceCode/FigmaComponent/Breadcrumb",
+  "title": "ShadcnBreadcrumbComponentSchema",
+  "description": "Schema.org aligned definition for generating shadcn Breadcrumb as Figma components",
+  "type": "object",
+  "properties": {
+    "@context": {
+      "type": "string",
+      "const": "https://schema.org"
+    },
+    "@type": {
+      "type": "string",
+      "const": "SoftwareSourceCode"
+    },
+    "name": {
+      "type": "string",
+      "const": "shadcn/ui Breadcrumb"
+    },
+    "programmingLanguage": {
+      "type": "string",
+      "enum": ["TypeScript", "JavaScript"]
+    },
+    "codeRepository": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://github.com/shadcn-ui/ui"
+    },
+    "designTokens": {
+      "type": "object",
+      "description": "Design tokens mapped from Tailwind/CSS to Figma",
+      "properties": {
+        "colors": {
+          "type": "object",
+          "properties": {
+            "foreground": {
+              "$ref": "#/definitions/ColorToken"
+            },
+            "mutedForeground": {
+              "$ref": "#/definitions/ColorToken"
+            }
+          }
+        },
+        "spacing": {
+          "type": "object",
+          "properties": {
+            "gap-1.5": {
+              "type": "integer",
+              "const": 6,
+              "description": "6px - used for item spacing"
+            },
+            "gap-2": {
+              "type": "integer",
+              "const": 8,
+              "description": "8px - alternative spacing"
+            }
+          }
+        },
+        "typography": {
+          "type": "object",
+          "properties": {
+            "fontSize": {
+              "type": "integer",
+              "const": 14,
+              "description": "text-sm = 14px"
+            },
+            "fontFamily": {
+              "type": "string",
+              "const": "Inter"
+            },
+            "fontWeight": {
+              "type": "object",
+              "properties": {
+                "normal": { "type": "integer", "const": 400 },
+                "medium": { "type": "integer", "const": 500 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "componentHierarchy": {
+      "type": "object",
+      "description": "Atomic design hierarchy for the component",
+      "properties": {
+        "atoms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FigmaComponent"
+          }
+        },
+        "molecules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FigmaComponent"
+          }
+        },
+        "organisms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FigmaComponent"
+          }
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FigmaComponent"
+          }
+        }
+      }
+    },
+    "figmaMapping": {
+      "type": "object",
+      "description": "Maps React/HTML elements to Figma node types",
+      "properties": {
+        "nav": {
+          "type": "string",
+          "const": "FRAME",
+          "description": "Container with aria-label='breadcrumb'"
+        },
+        "ol": {
+          "type": "string",
+          "const": "FRAME",
+          "description": "Auto-layout horizontal list"
+        },
+        "li": {
+          "type": "string",
+          "const": "FRAME",
+          "description": "Item container"
+        },
+        "a": {
+          "type": "string",
+          "const": "TEXT",
+          "description": "Link with hover states"
+        },
+        "span": {
+          "type": "string",
+          "const": "TEXT",
+          "description": "Static text"
+        },
+        "svg": {
+          "type": "string",
+          "const": "VECTOR",
+          "description": "Icon from Lucide"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ColorToken": {
+      "type": "object",
+      "properties": {
+        "light": {
+          "type": "object",
+          "properties": {
+            "r": { "type": "number", "minimum": 0, "maximum": 1 },
+            "g": { "type": "number", "minimum": 0, "maximum": 1 },
+            "b": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "required": ["r", "g", "b"]
+        },
+        "dark": {
+          "type": "object",
+          "properties": {
+            "r": { "type": "number", "minimum": 0, "maximum": 1 },
+            "g": { "type": "number", "minimum": 0, "maximum": 1 },
+            "b": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "required": ["r", "g", "b"]
+        },
+        "cssVariable": {
+          "type": "string",
+          "pattern": "^--[a-z-]+$"
+        },
+        "hsl": {
+          "type": "string",
+          "pattern": "^hsl\\([0-9.]+ [0-9.]+% [0-9.]+%\\)$"
+        }
+      }
+    },
+    "FigmaComponent": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Component name in Figma"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["COMPONENT", "COMPONENT_SET", "INSTANCE"]
+        },
+        "reactEquivalent": {
+          "type": "string",
+          "description": "Corresponding shadcn React component"
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "property": { "type": "string" },
+              "value": { "type": "string" }
+            }
+          }
+        },
+        "autoLayout": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["HORIZONTAL", "VERTICAL", "NONE"]
+            },
+            "itemSpacing": { "type": "integer" },
+            "padding": {
+              "type": "object",
+              "properties": {
+                "top": { "type": "integer" },
+                "right": { "type": "integer" },
+                "bottom": { "type": "integer" },
+                "left": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FigmaComponent"
+          }
+        }
+      },
+      "required": ["name", "type"]
+    }
+  },
+  "examples": [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "shadcn/ui Breadcrumb",
+      "programmingLanguage": "TypeScript",
+      "codeRepository": "https://github.com/shadcn-ui/ui",
+      "designTokens": {
+        "colors": {
+          "foreground": {
+            "light": { "r": 0.024, "g": 0.024, "b": 0.027 },
+            "dark": { "r": 0.98, "g": 0.98, "b": 0.98 },
+            "cssVariable": "--foreground",
+            "hsl": "hsl(240 10% 3.9%)"
+          },
+          "mutedForeground": {
+            "light": { "r": 0.455, "g": 0.455, "b": 0.478 },
+            "dark": { "r": 0.64, "g": 0.64, "b": 0.66 },
+            "cssVariable": "--muted-foreground",
+            "hsl": "hsl(240 3.8% 46.1%)"
+          }
+        }
+      },
+      "componentHierarchy": {
+        "atoms": [
+          {
+            "name": "BreadcrumbLink / Default",
+            "type": "COMPONENT",
+            "reactEquivalent": "BreadcrumbLink",
+            "autoLayout": { "mode": "HORIZONTAL" }
+          },
+          {
+            "name": "BreadcrumbSeparator",
+            "type": "COMPONENT",
+            "reactEquivalent": "BreadcrumbSeparator",
+            "autoLayout": { "mode": "HORIZONTAL" }
+          }
+        ],
+        "molecules": [
+          {
+            "name": "BreadcrumbItem",
+            "type": "COMPONENT",
+            "reactEquivalent": "BreadcrumbItem",
+            "autoLayout": { "mode": "HORIZONTAL", "itemSpacing": 6 }
+          }
+        ],
+        "organisms": [
+          {
+            "name": "BreadcrumbList",
+            "type": "COMPONENT",
+            "reactEquivalent": "BreadcrumbList",
+            "autoLayout": { "mode": "HORIZONTAL", "itemSpacing": 6 }
+          }
+        ],
+        "templates": [
+          {
+            "name": "Breadcrumb",
+            "type": "COMPONENT",
+            "reactEquivalent": "Breadcrumb",
+            "autoLayout": { "mode": "HORIZONTAL" }
+          }
+        ]
+      }
+    }
+  ]
+}

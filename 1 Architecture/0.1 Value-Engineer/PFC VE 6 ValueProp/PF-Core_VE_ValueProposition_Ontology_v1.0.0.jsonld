@@ -1,0 +1,627 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "vp": "https://platform.foundation/ontology/value-proposition/v1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@graph": [
+    {
+      "@id": "vp:Ontology",
+      "@type": "CreativeWork",
+      "name": "PF-Core: VE Value Proposition ONT v1.0.0",
+      "alternateName": "Value Proposition Development Framework Ontology",
+      "version": "1.0.0",
+      "identifier": "PF-Core_VE_ValueProposition_Ontology_v1.0.0",
+      "dateCreated": "2025-11-16",
+      "dateModified": "2025-12-01",
+      "author": {
+        "@type": "Organization",
+        "name": "Platform Foundation Core"
+      },
+      "description": "Generic, market-agnostic Value Proposition Development Framework enabling systematic hypothesis formulation, validation, and value articulation for AI-driven platforms",
+      "keywords": ["value proposition", "problem definition", "hypothesis validation", "value engineering", "AI visibility"],
+      "license": "https://platform.foundation/licenses/pf-core-participant",
+      "isPartOf": {
+        "@type": "SoftwareApplication",
+        "name": "PF-Core Value Engineering Module"
+      }
+    },
+    {
+      "@id": "vp:ValueProposition",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "ValueProposition",
+      "description": "A clear statement of how a product, service, or initiative creates value for a specific customer segment by addressing their pain points and delivering measurable benefits",
+      "properties": [
+        {
+          "@id": "vp:propositionId",
+          "name": "propositionId",
+          "rangeIncludes": "Text",
+          "required": true,
+          "example": "VP-2025-001"
+        },
+        {
+          "@id": "vp:propositionName",
+          "name": "propositionName",
+          "rangeIncludes": "Text",
+          "required": true,
+          "maxLength": 100
+        },
+        {
+          "@id": "vp:propositionStatement",
+          "name": "propositionStatement",
+          "description": "Full value proposition statement using IF-FOR-THEN-BECAUSE format",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:propositionType",
+          "name": "propositionType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Product", "Service", "Project", "Process", "Initiative"],
+          "required": true
+        },
+        {
+          "@id": "vp:targetSegment",
+          "name": "targetSegment",
+          "rangeIncludes": "vp:CustomerSegment",
+          "required": true
+        },
+        {
+          "@id": "vp:problemAddressed",
+          "name": "problemAddressed",
+          "rangeIncludes": "vp:ProblemDefinition",
+          "required": true
+        },
+        {
+          "@id": "vp:valueDrivers",
+          "name": "valueDrivers",
+          "rangeIncludes": "vp:ValueDriver",
+          "cardinality": "1..*"
+        },
+        {
+          "@id": "vp:differentiators",
+          "name": "differentiators",
+          "rangeIncludes": "vp:Differentiator",
+          "cardinality": "0..*"
+        },
+        {
+          "@id": "vp:validationStatus",
+          "name": "validationStatus",
+          "rangeIncludes": "Text",
+          "enumValues": ["Hypothesis", "Tested", "Validated", "Invalidated", "Refined"]
+        },
+        {
+          "@id": "vp:vsomAlignment",
+          "name": "vsomAlignment",
+          "description": "Link to VSOM strategic objective this proposition supports",
+          "rangeIncludes": "URL"
+        }
+      ]
+    },
+    {
+      "@id": "vp:CustomerSegment",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Audience",
+      "name": "CustomerSegment",
+      "description": "A defined group of potential customers with shared characteristics, needs, and behaviors",
+      "properties": [
+        {
+          "@id": "vp:segmentId",
+          "name": "segmentId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:segmentName",
+          "name": "segmentName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:segmentDescription",
+          "name": "segmentDescription",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vp:industry",
+          "name": "industry",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vp:companySize",
+          "name": "companySize",
+          "rangeIncludes": "Text",
+          "enumValues": ["Startup", "SMB", "Mid-Market", "Enterprise", "Global Enterprise"]
+        },
+        {
+          "@id": "vp:decisionMakers",
+          "name": "decisionMakers",
+          "description": "Roles involved in purchase/adoption decisions",
+          "rangeIncludes": "Text",
+          "cardinality": "1..*"
+        },
+        {
+          "@id": "vp:influencers",
+          "name": "influencers",
+          "description": "Roles that influence but don't make final decisions",
+          "rangeIncludes": "Text",
+          "cardinality": "0..*"
+        },
+        {
+          "@id": "vp:painPoints",
+          "name": "painPoints",
+          "rangeIncludes": "vp:PainPoint",
+          "cardinality": "1..*"
+        },
+        {
+          "@id": "vp:goals",
+          "name": "goals",
+          "rangeIncludes": "vp:CustomerGoal",
+          "cardinality": "1..*"
+        }
+      ]
+    },
+    {
+      "@id": "vp:ProblemDefinition",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "ProblemDefinition",
+      "description": "A structured definition of the problem or challenge that the value proposition addresses",
+      "properties": [
+        {
+          "@id": "vp:problemId",
+          "name": "problemId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:problemStatement",
+          "name": "problemStatement",
+          "description": "Clear articulation using format: [TARGET] struggles with [CHALLENGE] when trying to [OUTCOME], resulting in [CONSEQUENCES]",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:problemCategory",
+          "name": "problemCategory",
+          "rangeIncludes": "Text",
+          "enumValues": ["Functional", "Economic", "Emotional", "Social", "Strategic"]
+        },
+        {
+          "@id": "vp:severity",
+          "name": "severity",
+          "rangeIncludes": "Text",
+          "enumValues": ["Critical", "High", "Medium", "Low"]
+        },
+        {
+          "@id": "vp:frequency",
+          "name": "frequency",
+          "description": "How often the problem occurs",
+          "rangeIncludes": "Text",
+          "enumValues": ["Constant", "Daily", "Weekly", "Monthly", "Occasional"]
+        },
+        {
+          "@id": "vp:consequences",
+          "name": "consequences",
+          "rangeIncludes": "vp:Consequence",
+          "cardinality": "1..*"
+        },
+        {
+          "@id": "vp:currentSolutions",
+          "name": "currentSolutions",
+          "description": "How the problem is currently being addressed",
+          "rangeIncludes": "vp:CurrentSolution",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    {
+      "@id": "vp:PainPoint",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "PainPoint",
+      "description": "A specific frustration, challenge, or unmet need experienced by a customer segment",
+      "properties": [
+        {
+          "@id": "vp:painPointId",
+          "name": "painPointId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:painPointDescription",
+          "name": "painPointDescription",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:painType",
+          "name": "painType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Economic", "Functional", "Emotional", "Social", "Process"]
+        },
+        {
+          "@id": "vp:intensity",
+          "name": "intensity",
+          "rangeIncludes": "Integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        {
+          "@id": "vp:willingnessToPayToSolve",
+          "name": "willingnessToPayToSolve",
+          "rangeIncludes": "Text",
+          "enumValues": ["Very High", "High", "Medium", "Low", "None"]
+        }
+      ]
+    },
+    {
+      "@id": "vp:ValueDriver",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "ValueDriver",
+      "description": "A specific way in which the solution creates value for the customer",
+      "properties": [
+        {
+          "@id": "vp:driverId",
+          "name": "driverId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:driverName",
+          "name": "driverName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:driverType",
+          "name": "driverType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Cost Reduction", "Revenue Growth", "Risk Mitigation", "Efficiency Gain", "Capability Enhancement", "Competitive Advantage"]
+        },
+        {
+          "@id": "vp:quantifiableValue",
+          "name": "quantifiableValue",
+          "rangeIncludes": "vp:QuantifiableValue"
+        },
+        {
+          "@id": "vp:qualitativeValue",
+          "name": "qualitativeValue",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vp:evidenceType",
+          "name": "evidenceType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Case Study", "Metric", "Testimonial", "Benchmark", "Research"]
+        }
+      ]
+    },
+    {
+      "@id": "vp:QuantifiableValue",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "QuantitativeValue",
+      "name": "QuantifiableValue",
+      "description": "A measurable value outcome with specific metrics",
+      "properties": [
+        {
+          "@id": "vp:metricName",
+          "name": "metricName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:baselineValue",
+          "name": "baselineValue",
+          "rangeIncludes": "Number"
+        },
+        {
+          "@id": "vp:targetValue",
+          "name": "targetValue",
+          "rangeIncludes": "Number"
+        },
+        {
+          "@id": "vp:improvementPercentage",
+          "name": "improvementPercentage",
+          "rangeIncludes": "Number"
+        },
+        {
+          "@id": "vp:unit",
+          "name": "unit",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vp:timeToValue",
+          "name": "timeToValue",
+          "rangeIncludes": "Duration"
+        }
+      ]
+    },
+    {
+      "@id": "vp:Differentiator",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "Differentiator",
+      "description": "A unique characteristic that distinguishes the solution from alternatives",
+      "properties": [
+        {
+          "@id": "vp:differentiatorId",
+          "name": "differentiatorId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:differentiatorName",
+          "name": "differentiatorName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:differentiatorType",
+          "name": "differentiatorType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Feature", "Technology", "Methodology", "Experience", "Integration", "Support", "Pricing"]
+        },
+        {
+          "@id": "vp:competitiveGap",
+          "name": "competitiveGap",
+          "description": "What competitors cannot easily replicate",
+          "rangeIncludes": "Text"
+        },
+        {
+          "@id": "vp:sustainabilityPeriod",
+          "name": "sustainabilityPeriod",
+          "description": "How long this advantage can be maintained",
+          "rangeIncludes": "Duration"
+        },
+        {
+          "@id": "vp:blueOceanStrategy",
+          "name": "blueOceanStrategy",
+          "description": "Blue Ocean Strategy element (Eliminate, Reduce, Raise, Create)",
+          "rangeIncludes": "Text",
+          "enumValues": ["Eliminate", "Reduce", "Raise", "Create"]
+        }
+      ]
+    },
+    {
+      "@id": "vp:Hypothesis",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "Hypothesis",
+      "description": "A testable assumption about the value proposition using IF-FOR-THEN-BECAUSE format",
+      "properties": [
+        {
+          "@id": "vp:hypothesisId",
+          "name": "hypothesisId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:hypothesisStatement",
+          "name": "hypothesisStatement",
+          "description": "Full hypothesis: IF [solution] FOR [segment] THEN [outcome] BECAUSE [rationale]",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:ifComponent",
+          "name": "ifComponent",
+          "description": "The solution or action being proposed",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:forComponent",
+          "name": "forComponent",
+          "description": "The target customer segment",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:thenComponent",
+          "name": "thenComponent",
+          "description": "The expected outcome or benefit",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:becauseComponent",
+          "name": "becauseComponent",
+          "description": "The underlying rationale or mechanism",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:validationMethod",
+          "name": "validationMethod",
+          "rangeIncludes": "Text",
+          "enumValues": ["Customer Interview", "A/B Test", "Prototype Test", "Market Research", "Pilot Program"]
+        },
+        {
+          "@id": "vp:validationStatus",
+          "name": "validationStatus",
+          "rangeIncludes": "Text",
+          "enumValues": ["Untested", "In Progress", "Validated", "Invalidated", "Needs Refinement"]
+        },
+        {
+          "@id": "vp:confidenceLevel",
+          "name": "confidenceLevel",
+          "rangeIncludes": "Number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      ]
+    },
+    {
+      "@id": "vp:Consequence",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "Consequence",
+      "description": "A negative outcome resulting from the problem not being solved",
+      "properties": [
+        {
+          "@id": "vp:consequenceId",
+          "name": "consequenceId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:consequenceDescription",
+          "name": "consequenceDescription",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:consequenceType",
+          "name": "consequenceType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Direct Cost", "Opportunity Cost", "Risk", "Reputation", "Compliance"]
+        },
+        {
+          "@id": "vp:estimatedImpact",
+          "name": "estimatedImpact",
+          "rangeIncludes": "MonetaryAmount"
+        }
+      ]
+    },
+    {
+      "@id": "vp:CurrentSolution",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "CurrentSolution",
+      "description": "An existing approach or workaround used to address the problem",
+      "properties": [
+        {
+          "@id": "vp:solutionName",
+          "name": "solutionName",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:solutionType",
+          "name": "solutionType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Competitor Product", "Manual Process", "Internal Build", "Status Quo", "Workaround"]
+        },
+        {
+          "@id": "vp:gaps",
+          "name": "gaps",
+          "description": "Limitations of the current solution",
+          "rangeIncludes": "Text",
+          "cardinality": "0..*"
+        },
+        {
+          "@id": "vp:satisfactionLevel",
+          "name": "satisfactionLevel",
+          "rangeIncludes": "Integer",
+          "minimum": 1,
+          "maximum": 10
+        }
+      ]
+    },
+    {
+      "@id": "vp:CustomerGoal",
+      "@type": "rdfs:Class",
+      "rdfs:subClassOf": "Intangible",
+      "name": "CustomerGoal",
+      "description": "A desired outcome or objective that the customer wants to achieve",
+      "properties": [
+        {
+          "@id": "vp:goalId",
+          "name": "goalId",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:goalDescription",
+          "name": "goalDescription",
+          "rangeIncludes": "Text",
+          "required": true
+        },
+        {
+          "@id": "vp:goalType",
+          "name": "goalType",
+          "rangeIncludes": "Text",
+          "enumValues": ["Functional", "Social", "Emotional", "Strategic"]
+        },
+        {
+          "@id": "vp:priority",
+          "name": "priority",
+          "rangeIncludes": "Text",
+          "enumValues": ["Critical", "High", "Medium", "Low"]
+        }
+      ]
+    }
+  ],
+  "businessRules": [
+    {
+      "ruleId": "BR-VP-001",
+      "name": "Value Proposition Completeness",
+      "description": "A ValueProposition must have at least one CustomerSegment, one ProblemDefinition, and one ValueDriver",
+      "constraint": "ValueProposition.targetSegment IS NOT NULL AND ValueProposition.problemAddressed IS NOT NULL AND COUNT(ValueProposition.valueDrivers) >= 1"
+    },
+    {
+      "ruleId": "BR-VP-002",
+      "name": "Hypothesis Format Validation",
+      "description": "Hypothesis must include all four components: IF, FOR, THEN, BECAUSE",
+      "constraint": "Hypothesis.ifComponent IS NOT NULL AND Hypothesis.forComponent IS NOT NULL AND Hypothesis.thenComponent IS NOT NULL AND Hypothesis.becauseComponent IS NOT NULL"
+    },
+    {
+      "ruleId": "BR-VP-003",
+      "name": "Customer Segment Pain Point Requirement",
+      "description": "Each CustomerSegment must have at least one identified PainPoint",
+      "constraint": "COUNT(CustomerSegment.painPoints) >= 1"
+    },
+    {
+      "ruleId": "BR-VP-004",
+      "name": "Problem Severity Consequence Link",
+      "description": "Critical problems must have at least one documented Consequence",
+      "constraint": "IF ProblemDefinition.severity = 'Critical' THEN COUNT(ProblemDefinition.consequences) >= 1"
+    },
+    {
+      "ruleId": "BR-VP-005",
+      "name": "Differentiator Sustainability",
+      "description": "Differentiators must specify sustainability period for competitive gap assessment",
+      "constraint": "IF Differentiator.competitiveGap IS NOT NULL THEN Differentiator.sustainabilityPeriod IS NOT NULL"
+    }
+  ],
+  "integrationPoints": {
+    "vsom": {
+      "ontologyId": "pf-core:ontology:vsom-v1",
+      "integrationType": "upstream_dependency",
+      "connections": [
+        {
+          "entity": "ValueProposition",
+          "property": "vsomAlignment",
+          "references": "vsom:StrategicObjective",
+          "description": "Value propositions align with VSOM strategic objectives"
+        }
+      ]
+    },
+    "okr": {
+      "ontologyId": "pf-core:ontology:okr-v1",
+      "integrationType": "downstream_consumer",
+      "connections": [
+        {
+          "entity": "ValueProposition",
+          "feeds": "okr:Objective",
+          "description": "Validated value propositions inform OKR objective setting"
+        }
+      ]
+    },
+    "roles_raci_rbac": {
+      "ontologyId": "pf-core:ontology:roles-raci-rbac-v3",
+      "integrationType": "cross_reference",
+      "connections": [
+        {
+          "entity": "CustomerSegment.decisionMakers",
+          "references": "rrr:ExecutiveRole",
+          "description": "Decision makers map to organizational roles"
+        }
+      ]
+    }
+  }
+}

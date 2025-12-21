@@ -1,0 +1,719 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "reg": "https://registry.example.com/v1#",
+    "ont": "https://ontology.example.com/v1#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "CreativeWork",
+  "additionalType": "ont:Ontology",
+  "@id": "reg:OntologySchemaRegistry",
+  
+  "identifier": "system:meta:ontology:registry-v3",
+  "name": "Ontology Schema Registry Meta-Ontology",
+  "description": "Meta-ontology that defines the structure and semantics of the Ontology Schema Registry itself. This ontology describes how ontologies are registered, managed, versioned, and governed within the enterprise ecosystem. It is self-referential - the registry uses this ontology to describe itself.",
+  "version": "3.0.0",
+  "dateCreated": "2025-10-11T17:10:00Z",
+  "dateModified": "2025-10-11T17:10:00Z",
+  "datePublished": "2025-10-11T17:10:00Z",
+  
+  "creator": {
+    "@type": "Person",
+    "name": "Ontology Architect Agent",
+    "identifier": "oaa-v1"
+  },
+  
+  "tenant": {
+    "@type": "Organization",
+    "identifier": "system",
+    "name": "System Tenant",
+    "description": "Special tenant for system-level ontologies accessible to all"
+  },
+  
+  "status": "active",
+  "visibility": "public",
+  
+  "domain": {
+    "@type": "DefinedTerm",
+    "termCode": "knowledge-management",
+    "name": "Knowledge Management & Ontology Governance",
+    "inDefinedTermSet": "BusinessDomainTaxonomy"
+  },
+  
+  "businessObjectives": [
+    "Enable systematic ontology creation and management",
+    "Ensure consistency and quality across enterprise ontologies",
+    "Facilitate ontology discovery and reuse",
+    "Support multi-tenant ontology governance",
+    "Enable AI/agent capabilities through structured metadata"
+  ],
+  
+  "useCases": [
+    {
+      "identifier": "uc-reg-001",
+      "name": "Ontology Registration",
+      "description": "Register a new ontology in the registry with complete metadata",
+      "priority": "critical",
+      "actors": ["Ontology Architect", "OAA Agent", "Development Teams"]
+    },
+    {
+      "identifier": "uc-reg-002",
+      "name": "Ontology Discovery",
+      "description": "Search and discover ontologies by domain, tenant, or capability",
+      "priority": "high",
+      "actors": ["Developers", "Data Scientists", "AI Agents"]
+    },
+    {
+      "identifier": "uc-reg-003",
+      "name": "Dependency Management",
+      "description": "Track and manage dependencies between ontologies",
+      "priority": "high",
+      "actors": ["OAA Agent", "System Administrators"]
+    },
+    {
+      "identifier": "uc-reg-004",
+      "name": "Self-Description",
+      "description": "Registry describes and validates itself using its own ontology",
+      "priority": "critical",
+      "actors": ["OAA Agent", "Registry System"]
+    }
+  ],
+  
+  "entities": [
+    {
+      "@type": "DefinedTerm",
+      "identifier": "reg:OntologyRegistryEntry",
+      "name": "OntologyRegistryEntry",
+      "termCode": "OntologyRegistryEntry",
+      "description": "A registered ontology entry in the registry. Represents a complete ontology with all its metadata, entities, relationships, and governance information.",
+      "entityType": "owl:Class",
+      
+      "schemaOrgAlignment": {
+        "baseType": "CreativeWork",
+        "mappingType": "extension",
+        "rationale": "An ontology is fundamentally a creative work - it's authored intellectual property that describes a domain. CreativeWork provides properties for authorship, versioning, and lifecycle management which are essential for ontology governance.",
+        "extensions": [
+          "entities",
+          "relationships",
+          "businessRules",
+          "tenant",
+          "visibility",
+          "qualityMetrics",
+          "aiAgentCapabilities"
+        ],
+        "alternativesConsidered": [
+          "DefinedTermSet - too narrow, doesn't capture creative authorship",
+          "Dataset - implies data rather than schema/structure",
+          "SoftwareSourceCode - too specific to code"
+        ],
+        "confidence": 0.95
+      },
+      
+      "properties": [
+        {
+          "@type": "Property",
+          "identifier": "reg:identifier",
+          "name": "identifier",
+          "description": "Unique identifier for the ontology following pattern: {tenant}:{domain}:ontology:{name}-v{major}",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "constraints": {
+            "pattern": "^[a-z][a-z0-9-]*:[a-z][a-z0-9-]*:ontology:[a-z][a-z0-9-]*-v[0-9]+$"
+          },
+          "schemaOrgProperty": "identifier",
+          "example": "acme:marketing:ontology:ai-visibility-v1"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:tenant",
+          "name": "tenant",
+          "description": "The tenant (organization/business unit) that owns this ontology",
+          "dataType": "reg:Tenant",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "schemaOrgProperty": "provider",
+          "example": {"@type": "Organization", "identifier": "acme-marketing-jv"}
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:version",
+          "name": "version",
+          "description": "Semantic version (MAJOR.MINOR.PATCH) of the ontology",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "constraints": {
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "schemaOrgProperty": "version",
+          "example": "3.0.0"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:status",
+          "name": "status",
+          "description": "Current lifecycle status of the ontology",
+          "dataType": "reg:OntologyStatus",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "constraints": {
+            "enumeration": ["in_development", "active", "deprecated", "archived", "superseded"]
+          },
+          "schemaOrgProperty": null,
+          "example": "active"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:visibility",
+          "name": "visibility",
+          "description": "Access visibility level for this ontology",
+          "dataType": "reg:VisibilityLevel",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "constraints": {
+            "enumeration": ["private", "organization", "public", "shared_tenants"]
+          },
+          "example": "organization"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:entities",
+          "name": "entities",
+          "description": "Collection of entities defined in this ontology",
+          "dataType": "reg:OntologyEntity",
+          "cardinality": {"min": 1, "max": "unbounded"},
+          "required": true,
+          "example": []
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:relationships",
+          "name": "relationships",
+          "description": "Collection of relationships between entities",
+          "dataType": "reg:OntologyRelationship",
+          "cardinality": {"min": 0, "max": "unbounded"},
+          "required": false,
+          "example": []
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:qualityMetrics",
+          "name": "qualityMetrics",
+          "description": "Quality metrics for this ontology",
+          "dataType": "reg:QualityMetrics",
+          "cardinality": {"min": 0, "max": 1},
+          "required": false
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:aiAgentCapabilities",
+          "name": "aiAgentCapabilities",
+          "description": "AI/agent capability metadata for this ontology",
+          "dataType": "reg:AIAgentCapabilities",
+          "cardinality": {"min": 0, "max": 1},
+          "required": false
+        }
+      ],
+      
+      "aiCapabilities": {
+        "queryable": true,
+        "inferencePatterns": ["registry-search", "dependency-resolution", "quality-validation"],
+        "reasoningComplexity": "moderate",
+        "embeddingCompatible": true,
+        "semanticSearchWeight": 1.0
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "reg:Tenant",
+      "name": "Tenant",
+      "termCode": "Tenant",
+      "description": "An organization or business unit that owns and manages ontologies. Provides multi-tenant isolation and resource management.",
+      "entityType": "owl:Class",
+      
+      "schemaOrgAlignment": {
+        "baseType": "Organization",
+        "mappingType": "extension",
+        "rationale": "A tenant is fundamentally an organization that operates within the system. Organization provides foundational properties for name, identifier, and organizational structure.",
+        "extensions": [
+          "tenantId",
+          "subscriptionTier",
+          "resourceQuotas",
+          "usageTracking"
+        ],
+        "alternativesConsidered": [
+          "Person - too narrow, tenants are typically organizations",
+          "Project - doesn't capture organizational structure"
+        ],
+        "confidence": 0.98
+      },
+      
+      "properties": [
+        {
+          "@type": "Property",
+          "identifier": "reg:tenantId",
+          "name": "tenantId",
+          "description": "Unique identifier for the tenant",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "constraints": {
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "example": "acme-marketing-jv"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:subscriptionTier",
+          "name": "subscriptionTier",
+          "description": "Subscription tier determining resource limits",
+          "dataType": "reg:SubscriptionTier",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "constraints": {
+            "enumeration": ["free", "starter", "professional", "enterprise"]
+          },
+          "example": "professional"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:resourceQuotas",
+          "name": "resourceQuotas",
+          "description": "Resource limits for this tenant",
+          "dataType": "reg:ResourceQuota",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true
+        }
+      ],
+      
+      "aiCapabilities": {
+        "queryable": true,
+        "inferencePatterns": ["tenant-isolation", "quota-enforcement"],
+        "reasoningComplexity": "simple",
+        "embeddingCompatible": true,
+        "semanticSearchWeight": 0.7
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "reg:OntologyEntity",
+      "name": "OntologyEntity",
+      "termCode": "OntologyEntity",
+      "description": "An entity (class/concept) defined within an ontology. Represents a business or domain concept with properties and relationships.",
+      "entityType": "owl:Class",
+      
+      "schemaOrgAlignment": {
+        "baseType": "DefinedTerm",
+        "mappingType": "extension",
+        "rationale": "An ontology entity is fundamentally a defined term with formal semantics. DefinedTerm provides properties for term definitions and taxonomy membership.",
+        "extensions": [
+          "entityType",
+          "schemaOrgBase",
+          "properties",
+          "aiCapabilities"
+        ],
+        "alternativesConsidered": [
+          "Class - too technical/OWL-specific",
+          "Thing - too generic"
+        ],
+        "confidence": 0.92
+      },
+      
+      "properties": [
+        {
+          "@type": "Property",
+          "identifier": "reg:entityId",
+          "name": "entityId",
+          "description": "Unique identifier for the entity within its ontology",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "example": "ent-001"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:entityName",
+          "name": "entityName",
+          "description": "Human-readable name of the entity",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "example": "ContentAsset"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:schemaOrgBase",
+          "name": "schemaOrgBase",
+          "description": "Base schema.org type this entity extends or maps to",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "example": "CreativeWork"
+        }
+      ],
+      
+      "aiCapabilities": {
+        "queryable": true,
+        "inferencePatterns": ["entity-classification", "schema-org-mapping"],
+        "reasoningComplexity": "moderate",
+        "embeddingCompatible": true,
+        "semanticSearchWeight": 0.9
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "reg:OntologyRelationship",
+      "name": "OntologyRelationship",
+      "termCode": "OntologyRelationship",
+      "description": "A relationship connecting two entities in an ontology. Defines the semantic connection and cardinality constraints.",
+      "entityType": "owl:ObjectProperty",
+      
+      "schemaOrgAlignment": {
+        "baseType": "Property",
+        "mappingType": "extension",
+        "rationale": "A relationship is a special type of property that connects entities. Property provides foundational semantics for relationships.",
+        "extensions": [
+          "sourceEntity",
+          "targetEntity",
+          "relationType",
+          "cardinality",
+          "inverse"
+        ],
+        "confidence": 0.90
+      },
+      
+      "properties": [
+        {
+          "@type": "Property",
+          "identifier": "reg:relationshipId",
+          "name": "relationshipId",
+          "description": "Unique identifier for the relationship",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "example": "rel-001"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:sourceEntity",
+          "name": "sourceEntity",
+          "description": "Source entity of the relationship",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "example": "ent-001"
+        },
+        {
+          "@type": "Property",
+          "identifier": "reg:targetEntity",
+          "name": "targetEntity",
+          "description": "Target entity of the relationship",
+          "dataType": "xsd:string",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "example": "ent-002"
+        }
+      ],
+      
+      "aiCapabilities": {
+        "queryable": true,
+        "inferencePatterns": ["relationship-traversal", "graph-navigation"],
+        "reasoningComplexity": "moderate",
+        "embeddingCompatible": true,
+        "semanticSearchWeight": 0.85
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "identifier": "reg:OntologyArtifact",
+      "name": "OntologyArtifact",
+      "termCode": "OntologyArtifact",
+      "description": "Generated artifact from an ontology (glossary, test data, documentation, etc.)",
+      "entityType": "owl:Class",
+      
+      "schemaOrgAlignment": {
+        "baseType": "MediaObject",
+        "mappingType": "exact_match",
+        "rationale": "An artifact is a digital file/object with format, encoding, and URL properties that MediaObject provides.",
+        "extensions": [
+          "artifactType",
+          "generatedBy"
+        ],
+        "confidence": 0.97
+      },
+      
+      "properties": [
+        {
+          "@type": "Property",
+          "identifier": "reg:artifactType",
+          "name": "artifactType",
+          "description": "Type of artifact generated",
+          "dataType": "reg:ArtifactType",
+          "cardinality": {"min": 1, "max": 1},
+          "required": true,
+          "constraints": {
+            "enumeration": ["glossary", "test_data", "documentation", "visualization", "schema_file", "validation_report"]
+          },
+          "example": "glossary"
+        }
+      ],
+      
+      "aiCapabilities": {
+        "queryable": true,
+        "inferencePatterns": ["artifact-generation", "documentation-lookup"],
+        "reasoningComplexity": "simple",
+        "embeddingCompatible": true,
+        "semanticSearchWeight": 0.6
+      }
+    }
+  ],
+  
+  "relationships": [
+    {
+      "@type": "Property",
+      "identifier": "reg:ownedBy",
+      "name": "ownedBy",
+      "description": "Ontology is owned by a Tenant",
+      "relationType": "composition",
+      "sourceEntity": "reg:OntologyRegistryEntry",
+      "targetEntity": "reg:Tenant",
+      "cardinality": {
+        "source": "1..1",
+        "target": "0..*"
+      },
+      "directionality": "unidirectional",
+      "inverse": "owns",
+      "properties": {
+        "transitivity": false,
+        "symmetry": false,
+        "reflexivity": false,
+        "functional": true
+      }
+    },
+    {
+      "@type": "Property",
+      "identifier": "reg:definesEntity",
+      "name": "definesEntity",
+      "description": "Ontology defines one or more entities",
+      "relationType": "composition",
+      "sourceEntity": "reg:OntologyRegistryEntry",
+      "targetEntity": "reg:OntologyEntity",
+      "cardinality": {
+        "source": "1..*",
+        "target": "0..*"
+      },
+      "directionality": "unidirectional",
+      "inverse": "definedIn",
+      "properties": {
+        "transitivity": false,
+        "symmetry": false,
+        "reflexivity": false,
+        "functional": false
+      }
+    },
+    {
+      "@type": "Property",
+      "identifier": "reg:definesRelationship",
+      "name": "definesRelationship",
+      "description": "Ontology defines relationships between entities",
+      "relationType": "composition",
+      "sourceEntity": "reg:OntologyRegistryEntry",
+      "targetEntity": "reg:OntologyRelationship",
+      "cardinality": {
+        "source": "0..*",
+        "target": "0..*"
+      },
+      "directionality": "unidirectional",
+      "inverse": "definedIn"
+    },
+    {
+      "@type": "Property",
+      "identifier": "reg:generatesArtifact",
+      "name": "generatesArtifact",
+      "description": "Ontology generates artifacts (glossary, test data, etc.)",
+      "relationType": "aggregation",
+      "sourceEntity": "reg:OntologyRegistryEntry",
+      "targetEntity": "reg:OntologyArtifact",
+      "cardinality": {
+        "source": "0..*",
+        "target": "1..1"
+      },
+      "directionality": "unidirectional",
+      "inverse": "generatedFrom"
+    },
+    {
+      "@type": "Property",
+      "identifier": "reg:dependsOn",
+      "name": "dependsOn",
+      "description": "Ontology depends on another ontology",
+      "relationType": "dependency",
+      "sourceEntity": "reg:OntologyRegistryEntry",
+      "targetEntity": "reg:OntologyRegistryEntry",
+      "cardinality": {
+        "source": "0..*",
+        "target": "0..*"
+      },
+      "directionality": "unidirectional",
+      "inverse": "requiredBy",
+      "properties": {
+        "transitivity": true,
+        "symmetry": false,
+        "reflexivity": false,
+        "functional": false
+      }
+    }
+  ],
+  
+  "businessRules": [
+    {
+      "identifier": "rule-reg-001",
+      "name": "UniqueOntologyIdentifier",
+      "description": "Each ontology must have a unique identifier within its tenant",
+      "ruleType": "constraint",
+      "formalExpression": "FORALL o1, o2: OntologyRegistryEntry WHERE o1.tenant = o2.tenant IMPLIES o1.identifier != o2.identifier",
+      "humanReadable": "No two ontologies within the same tenant can have the same identifier",
+      "severity": "error",
+      "appliesTo": ["reg:OntologyRegistryEntry.identifier", "reg:OntologyRegistryEntry.tenant"],
+      "executionContext": "create"
+    },
+    {
+      "identifier": "rule-reg-002",
+      "name": "TenantIsolation",
+      "description": "Ontologies are isolated by tenant unless explicitly shared",
+      "ruleType": "constraint",
+      "formalExpression": "FORALL o: OntologyRegistryEntry WHERE o.visibility = 'private' IMPLIES accessible_by(o, o.tenant) ONLY",
+      "humanReadable": "Private ontologies can only be accessed by their owning tenant",
+      "severity": "error",
+      "appliesTo": ["reg:OntologyRegistryEntry.visibility", "reg:OntologyRegistryEntry.tenant"],
+      "executionContext": "query"
+    },
+    {
+      "identifier": "rule-reg-003",
+      "name": "MinimumEntityCount",
+      "description": "Ontology must define at least one entity",
+      "ruleType": "validation",
+      "formalExpression": "FORALL o: OntologyRegistryEntry IMPLIES COUNT(o.entities) >= 1",
+      "humanReadable": "Every ontology must define at least one entity",
+      "severity": "error",
+      "appliesTo": ["reg:OntologyRegistryEntry.entities"],
+      "executionContext": "create"
+    },
+    {
+      "identifier": "rule-reg-004",
+      "name": "NoCyclicDependencies",
+      "description": "Ontology dependencies must not form cycles",
+      "ruleType": "validation",
+      "formalExpression": "FORALL o: OntologyRegistryEntry IMPLIES NOT EXISTS path: o -[dependsOn*]-> o",
+      "humanReadable": "Ontologies cannot have circular dependencies",
+      "severity": "error",
+      "appliesTo": ["reg:OntologyRegistryEntry.dependencies"],
+      "executionContext": "create"
+    },
+    {
+      "identifier": "rule-reg-005",
+      "name": "SchemaOrgGrounding",
+      "description": "At least 80% of entities should be grounded in schema.org",
+      "ruleType": "validation",
+      "formalExpression": "FORALL o: OntologyRegistryEntry IMPLIES (COUNT(o.entities WHERE schemaOrgBase != null) / COUNT(o.entities)) >= 0.80",
+      "humanReadable": "Ontology should have at least 80% schema.org alignment for quality",
+      "severity": "warning",
+      "appliesTo": ["reg:OntologyEntity.schemaOrgBase"],
+      "executionContext": "create"
+    }
+  ],
+  
+  "qualityMetrics": {
+    "entityReuseRate": {
+      "value": 1.0,
+      "threshold": 0.80,
+      "description": "Registry entities are reused by all ontologies"
+    },
+    "schemaOrgAlignmentRate": {
+      "value": 1.0,
+      "threshold": 0.80,
+      "description": "All registry entities grounded in schema.org"
+    },
+    "validationPassRate": {
+      "value": 1.0,
+      "threshold": 0.95,
+      "description": "Registry validates itself without errors"
+    },
+    "documentationCompletenessRate": {
+      "value": 1.0,
+      "threshold": 0.95,
+      "description": "All entities and properties documented"
+    },
+    "namingConventionCompliance": {
+      "value": 1.0,
+      "threshold": 1.0,
+      "description": "All names follow conventions"
+    },
+    "lastCalculated": "2025-10-11T17:10:00Z"
+  },
+  
+  "aiAgentCapabilities": {
+    "graphOperations": {
+      "traversalSupport": true,
+      "maxTraversalDepth": "unlimited",
+      "pathFindingAlgorithms": ["breadth-first", "depth-first", "shortest-path"]
+    },
+    "reasoning": {
+      "inferenceEnabled": true,
+      "inferenceEngines": ["OWL-DL", "Custom Rule Engine"],
+      "reasoningLevel": "advanced",
+      "supportedLogic": ["first-order", "description-logic"]
+    },
+    "queryCapabilities": {
+      "supportedLanguages": [
+        {"language": "SPARQL", "version": "1.1"},
+        {"language": "GraphQL", "version": "2023"}
+      ],
+      "queryComplexity": {
+        "maxJoins": 10,
+        "maxSubqueries": 5,
+        "aggregationSupport": true,
+        "recursionSupport": true
+      }
+    },
+    "semanticSearch": {
+      "embeddingCompatible": true,
+      "embeddingModel": {
+        "provider": "OpenAI",
+        "model": "text-embedding-3-large",
+        "dimensions": 3072
+      },
+      "vectorSearchEnabled": true,
+      "similarityMetrics": ["cosine", "euclidean"]
+    }
+  },
+  
+  "dependencies": [
+    {
+      "dependencyType": "extends",
+      "targetOntology": {
+        "identifier": "external:schema-org:v26",
+        "name": "Schema.org Core Ontology",
+        "version": "26.0"
+      },
+      "optional": false,
+      "reason": "Foundation for all entity types",
+      "entities": ["Thing", "CreativeWork", "Organization", "Person", "DefinedTerm", "Property", "MediaObject"]
+    }
+  ],
+  
+  "technical": {
+    "namespaceUri": "https://registry.example.com/v1#",
+    "preferredPrefix": "reg",
+    "formatVersion": "JSON-LD 1.1",
+    "serializations": [
+      {
+        "format": "json-ld",
+        "url": "https://registry.example.com/ontology/registry-v3.jsonld",
+        "primary": true
+      }
+    ]
+  }
+}
