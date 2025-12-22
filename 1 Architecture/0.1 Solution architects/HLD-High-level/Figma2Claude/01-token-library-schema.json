@@ -1,0 +1,375 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.org/extensions/figma-token-library",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "tokens": "https://design-tokens.github.io/community-group/format/",
+    "figma": "https://www.figma.com/developers/api"
+  },
+  "title": "FigmaTokenLibrary",
+  "description": "Schema for a callable token library that can be imported into any Figma file via API",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "DesignSystem"
+    },
+    "@id": {
+      "type": "string",
+      "format": "uri",
+      "description": "Unique identifier for this token library"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for the token library"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the token library"
+    },
+    "figmaLibrary": {
+      "type": "object",
+      "description": "Figma-specific library configuration",
+      "properties": {
+        "fileKey": {
+          "type": "string",
+          "description": "The Figma file key where this library is published"
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "variableCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableCollection"
+          }
+        }
+      },
+      "required": ["fileKey"]
+    },
+    "tokens": {
+      "type": "object",
+      "description": "Design tokens organized by category",
+      "properties": {
+        "colors": {
+          "$ref": "#/definitions/ColorTokens"
+        },
+        "typography": {
+          "$ref": "#/definitions/TypographyTokens"
+        },
+        "spacing": {
+          "$ref": "#/definitions/SpacingTokens"
+        },
+        "sizing": {
+          "$ref": "#/definitions/SizingTokens"
+        },
+        "borderRadius": {
+          "$ref": "#/definitions/BorderRadiusTokens"
+        },
+        "shadows": {
+          "$ref": "#/definitions/ShadowTokens"
+        },
+        "opacity": {
+          "$ref": "#/definitions/OpacityTokens"
+        }
+      }
+    },
+    "modes": {
+      "type": "array",
+      "description": "Variable modes (e.g., light/dark, brand variants)",
+      "items": {
+        "$ref": "#/definitions/Mode"
+      }
+    },
+    "brands": {
+      "type": "array",
+      "description": "Brand configurations for multi-tenant support",
+      "items": {
+        "$ref": "#/definitions/Brand"
+      }
+    }
+  },
+  "required": ["name", "version", "tokens"],
+  "definitions": {
+    "VariableCollection": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "modes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "modeId": { "type": "string" },
+              "name": { "type": "string" }
+            }
+          }
+        },
+        "variableIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Mode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "examples": ["light", "dark", "high-contrast"]
+        },
+        "modeId": {
+          "type": "string",
+          "description": "Figma mode identifier"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": ["name"]
+    },
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "@type": { "const": "Brand" },
+        "name": { "type": "string" },
+        "identifier": { "type": "string" },
+        "tokenOverrides": {
+          "type": "object",
+          "description": "Token path to override value mapping"
+        }
+      },
+      "required": ["name", "identifier"]
+    },
+    "ColorTokens": {
+      "type": "object",
+      "properties": {
+        "primitive": {
+          "type": "object",
+          "description": "Base color palette",
+          "additionalProperties": {
+            "$ref": "#/definitions/ColorScale"
+          }
+        },
+        "semantic": {
+          "type": "object",
+          "description": "Semantic color assignments",
+          "properties": {
+            "background": { "$ref": "#/definitions/SemanticColorSet" },
+            "foreground": { "$ref": "#/definitions/SemanticColorSet" },
+            "border": { "$ref": "#/definitions/SemanticColorSet" },
+            "interactive": { "$ref": "#/definitions/InteractiveColorSet" }
+          }
+        },
+        "component": {
+          "type": "object",
+          "description": "Component-specific color tokens",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ColorScale": {
+      "type": "object",
+      "patternProperties": {
+        "^(50|100|200|300|400|500|600|700|800|900|950)$": {
+          "$ref": "#/definitions/ColorToken"
+        }
+      }
+    },
+    "ColorToken": {
+      "type": "object",
+      "properties": {
+        "$type": { "const": "color" },
+        "$value": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6,8}$|^rgba?\\(.*\\)$|^hsla?\\(.*\\)$"
+        },
+        "$description": { "type": "string" },
+        "figmaVariableId": { "type": "string" },
+        "modes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["$type", "$value"]
+    },
+    "SemanticColorSet": {
+      "type": "object",
+      "properties": {
+        "default": { "$ref": "#/definitions/ColorToken" },
+        "subtle": { "$ref": "#/definitions/ColorToken" },
+        "muted": { "$ref": "#/definitions/ColorToken" },
+        "emphasis": { "$ref": "#/definitions/ColorToken" }
+      }
+    },
+    "InteractiveColorSet": {
+      "type": "object",
+      "properties": {
+        "default": { "$ref": "#/definitions/ColorToken" },
+        "hover": { "$ref": "#/definitions/ColorToken" },
+        "active": { "$ref": "#/definitions/ColorToken" },
+        "focus": { "$ref": "#/definitions/ColorToken" },
+        "disabled": { "$ref": "#/definitions/ColorToken" }
+      }
+    },
+    "TypographyTokens": {
+      "type": "object",
+      "properties": {
+        "fontFamilies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FontFamilyToken"
+          }
+        },
+        "fontWeights": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FontWeightToken"
+          }
+        },
+        "fontSizes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DimensionToken"
+          }
+        },
+        "lineHeights": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DimensionToken"
+          }
+        },
+        "letterSpacing": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DimensionToken"
+          }
+        },
+        "textStyles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TextStyleToken"
+          }
+        }
+      }
+    },
+    "FontFamilyToken": {
+      "type": "object",
+      "properties": {
+        "$type": { "const": "fontFamily" },
+        "$value": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        }
+      }
+    },
+    "FontWeightToken": {
+      "type": "object",
+      "properties": {
+        "$type": { "const": "fontWeight" },
+        "$value": {
+          "oneOf": [
+            { "type": "number", "minimum": 100, "maximum": 900 },
+            { "type": "string" }
+          ]
+        }
+      }
+    },
+    "DimensionToken": {
+      "type": "object",
+      "properties": {
+        "$type": { "const": "dimension" },
+        "$value": { "type": "string" }
+      }
+    },
+    "TextStyleToken": {
+      "type": "object",
+      "properties": {
+        "$type": { "const": "typography" },
+        "$value": {
+          "type": "object",
+          "properties": {
+            "fontFamily": { "type": "string" },
+            "fontWeight": { "type": ["string", "number"] },
+            "fontSize": { "type": "string" },
+            "lineHeight": { "type": "string" },
+            "letterSpacing": { "type": "string" }
+          }
+        }
+      }
+    },
+    "SpacingTokens": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/DimensionToken"
+      }
+    },
+    "SizingTokens": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/DimensionToken"
+      }
+    },
+    "BorderRadiusTokens": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/DimensionToken"
+      }
+    },
+    "ShadowTokens": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ShadowToken"
+      }
+    },
+    "ShadowToken": {
+      "type": "object",
+      "properties": {
+        "$type": { "const": "shadow" },
+        "$value": {
+          "oneOf": [
+            { "$ref": "#/definitions/ShadowValue" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ShadowValue" }
+            }
+          ]
+        }
+      }
+    },
+    "ShadowValue": {
+      "type": "object",
+      "properties": {
+        "color": { "type": "string" },
+        "offsetX": { "type": "string" },
+        "offsetY": { "type": "string" },
+        "blur": { "type": "string" },
+        "spread": { "type": "string" },
+        "inset": { "type": "boolean" }
+      }
+    },
+    "OpacityTokens": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "$type": { "const": "opacity" },
+          "$value": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    }
+  }
+}

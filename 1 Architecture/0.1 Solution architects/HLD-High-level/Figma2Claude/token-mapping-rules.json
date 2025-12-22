@@ -1,0 +1,401 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "baiv": "https://baiv.io/schema/"
+  },
+  "@type": "DesignTokenMappingRules",
+  "name": "BAIV Token Mapping Rules",
+  "version": "1.0.0",
+  "description": "Rules for mapping Figma Make outputs to design token library",
+
+  "colorMappingRules": {
+    "backgrounds": {
+      "white": {
+        "patterns": ["#FFFFFF", "#FFF", "rgb(255, 255, 255)", "rgba(255, 255, 255, 1)"],
+        "mapTo": "semantic/color/background/default"
+      },
+      "lightGray": {
+        "patterns": ["#F9FAFB", "#F3F4F6", "#F5F5F5"],
+        "mapTo": "semantic/color/background/subtle"
+      },
+      "mediumGray": {
+        "patterns": ["#E5E7EB", "#E0E0E0"],
+        "mapTo": "semantic/color/background/muted"
+      }
+    },
+    "text": {
+      "dark": {
+        "patterns": ["#000000", "#111827", "#1F2937", "#111", "#000"],
+        "mapTo": "semantic/color/foreground/default"
+      },
+      "medium": {
+        "patterns": ["#4B5563", "#6B7280", "#666", "#555"],
+        "mapTo": "semantic/color/foreground/muted"
+      },
+      "light": {
+        "patterns": ["#9CA3AF", "#999", "#888"],
+        "mapTo": "semantic/color/foreground/subtle"
+      }
+    },
+    "primary": {
+      "default": {
+        "patterns": ["#2563EB", "#3B82F6", "#1D4ED8"],
+        "mapTo": "semantic/color/primary/default"
+      }
+    },
+    "destructive": {
+      "default": {
+        "patterns": ["#DC2626", "#EF4444", "#B91C1C"],
+        "mapTo": "semantic/color/destructive/default"
+      }
+    },
+    "success": {
+      "default": {
+        "patterns": ["#16A34A", "#22C55E", "#15803D"],
+        "mapTo": "semantic/color/success/default"
+      }
+    },
+    "warning": {
+      "default": {
+        "patterns": ["#EAB308", "#FACC15", "#CA8A04"],
+        "mapTo": "semantic/color/warning/default"
+      }
+    }
+  },
+
+  "spacingMappingRules": {
+    "snapToNearest": true,
+    "scale": [
+      { "value": 0, "token": "primitive/spacing/0" },
+      { "value": 1, "token": "primitive/spacing/px" },
+      { "value": 2, "token": "primitive/spacing/0.5" },
+      { "value": 4, "token": "primitive/spacing/1" },
+      { "value": 6, "token": "primitive/spacing/1.5" },
+      { "value": 8, "token": "primitive/spacing/2" },
+      { "value": 10, "token": "primitive/spacing/2.5" },
+      { "value": 12, "token": "primitive/spacing/3" },
+      { "value": 14, "token": "primitive/spacing/3.5" },
+      { "value": 16, "token": "primitive/spacing/4" },
+      { "value": 20, "token": "primitive/spacing/5" },
+      { "value": 24, "token": "primitive/spacing/6" },
+      { "value": 28, "token": "primitive/spacing/7" },
+      { "value": 32, "token": "primitive/spacing/8" },
+      { "value": 36, "token": "primitive/spacing/9" },
+      { "value": 40, "token": "primitive/spacing/10" },
+      { "value": 44, "token": "primitive/spacing/11" },
+      { "value": 48, "token": "primitive/spacing/12" },
+      { "value": 56, "token": "primitive/spacing/14" },
+      { "value": 64, "token": "primitive/spacing/16" },
+      { "value": 80, "token": "primitive/spacing/20" },
+      { "value": 96, "token": "primitive/spacing/24" }
+    ]
+  },
+
+  "borderRadiusMappingRules": {
+    "snapToNearest": true,
+    "scale": [
+      { "value": 0, "token": "primitive/borderRadius/none" },
+      { "value": 2, "token": "primitive/borderRadius/sm" },
+      { "value": 4, "token": "primitive/borderRadius/default" },
+      { "value": 6, "token": "primitive/borderRadius/md" },
+      { "value": 8, "token": "primitive/borderRadius/lg" },
+      { "value": 12, "token": "primitive/borderRadius/xl" },
+      { "value": 16, "token": "primitive/borderRadius/2xl" },
+      { "value": 24, "token": "primitive/borderRadius/3xl" },
+      { "value": 9999, "token": "primitive/borderRadius/full" }
+    ]
+  },
+
+  "typographyMappingRules": {
+    "fontFamily": {
+      "sans": {
+        "patterns": ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+        "mapTo": "primitive/typography/fontFamily/sans"
+      },
+      "serif": {
+        "patterns": ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+        "mapTo": "primitive/typography/fontFamily/serif"
+      },
+      "mono": {
+        "patterns": ["JetBrains Mono", "Fira Code", "Menlo", "Monaco", "Consolas", "monospace"],
+        "mapTo": "primitive/typography/fontFamily/mono"
+      }
+    },
+    "fontSize": {
+      "snapToNearest": true,
+      "scale": [
+        { "value": 12, "token": "primitive/typography/fontSize/xs" },
+        { "value": 14, "token": "primitive/typography/fontSize/sm" },
+        { "value": 16, "token": "primitive/typography/fontSize/base" },
+        { "value": 18, "token": "primitive/typography/fontSize/lg" },
+        { "value": 20, "token": "primitive/typography/fontSize/xl" },
+        { "value": 24, "token": "primitive/typography/fontSize/2xl" },
+        { "value": 30, "token": "primitive/typography/fontSize/3xl" },
+        { "value": 36, "token": "primitive/typography/fontSize/4xl" },
+        { "value": 48, "token": "primitive/typography/fontSize/5xl" },
+        { "value": 60, "token": "primitive/typography/fontSize/6xl" },
+        { "value": 72, "token": "primitive/typography/fontSize/7xl" }
+      ]
+    },
+    "fontWeight": {
+      "100": "primitive/typography/fontWeight/thin",
+      "200": "primitive/typography/fontWeight/extralight",
+      "300": "primitive/typography/fontWeight/light",
+      "400": "primitive/typography/fontWeight/regular",
+      "500": "primitive/typography/fontWeight/medium",
+      "600": "primitive/typography/fontWeight/semibold",
+      "700": "primitive/typography/fontWeight/bold",
+      "800": "primitive/typography/fontWeight/extrabold",
+      "900": "primitive/typography/fontWeight/black"
+    },
+    "lineHeight": {
+      "snapToNearest": true,
+      "scale": [
+        { "value": 1, "token": "primitive/typography/lineHeight/none" },
+        { "value": 1.25, "token": "primitive/typography/lineHeight/tight" },
+        { "value": 1.375, "token": "primitive/typography/lineHeight/snug" },
+        { "value": 1.5, "token": "primitive/typography/lineHeight/normal" },
+        { "value": 1.625, "token": "primitive/typography/lineHeight/relaxed" },
+        { "value": 2, "token": "primitive/typography/lineHeight/loose" }
+      ]
+    }
+  },
+
+  "componentDetectionRules": {
+    "button": {
+      "layerNamePatterns": [
+        "button",
+        "btn",
+        "cta",
+        "action",
+        "submit",
+        "cancel"
+      ],
+      "variants": {
+        "primary": {
+          "patterns": ["primary", "main", "cta", "submit"],
+          "tokenMap": {
+            "fills.0.color": "component/button/primary/background",
+            "children.text.fills.0.color": "component/button/primary/text",
+            "strokes.0.color": "component/button/primary/border",
+            "cornerRadius": "component/button/borderRadius",
+            "paddingLeft": "component/button/paddingX",
+            "paddingRight": "component/button/paddingX",
+            "paddingTop": "component/button/paddingY",
+            "paddingBottom": "component/button/paddingY"
+          }
+        },
+        "secondary": {
+          "patterns": ["secondary", "outline", "ghost"],
+          "tokenMap": {
+            "fills.0.color": "component/button/secondary/background",
+            "children.text.fills.0.color": "component/button/secondary/text",
+            "strokes.0.color": "component/button/secondary/border"
+          }
+        },
+        "destructive": {
+          "patterns": ["destructive", "danger", "delete", "remove"],
+          "tokenMap": {
+            "fills.0.color": "component/button/destructive/background",
+            "children.text.fills.0.color": "component/button/destructive/text"
+          }
+        }
+      }
+    },
+    "input": {
+      "layerNamePatterns": [
+        "input",
+        "textfield",
+        "text-field",
+        "field",
+        "form-control",
+        "text-input"
+      ],
+      "tokenMap": {
+        "fills.0.color": "component/input/background",
+        "strokes.0.color": "component/input/border",
+        "children.text.fills.0.color": "component/input/text",
+        "children.placeholder.fills.0.color": "component/input/placeholder",
+        "cornerRadius": "component/input/borderRadius",
+        "paddingLeft": "component/input/paddingX",
+        "paddingRight": "component/input/paddingX",
+        "paddingTop": "component/input/paddingY",
+        "paddingBottom": "component/input/paddingY"
+      }
+    },
+    "card": {
+      "layerNamePatterns": [
+        "card",
+        "panel",
+        "tile",
+        "container",
+        "box"
+      ],
+      "tokenMap": {
+        "fills.0.color": "component/card/background",
+        "strokes.0.color": "component/card/border",
+        "cornerRadius": "component/card/borderRadius",
+        "effects.shadow": "component/card/shadow",
+        "paddingLeft": "component/card/padding",
+        "paddingRight": "component/card/padding",
+        "paddingTop": "component/card/padding",
+        "paddingBottom": "component/card/padding"
+      }
+    },
+    "avatar": {
+      "layerNamePatterns": [
+        "avatar",
+        "profile-pic",
+        "profile-image",
+        "user-image",
+        "user-avatar"
+      ],
+      "sizeVariants": {
+        "xs": { "maxSize": 28, "token": "semantic/sizing/avatar/xs" },
+        "sm": { "maxSize": 36, "token": "semantic/sizing/avatar/sm" },
+        "md": { "maxSize": 44, "token": "semantic/sizing/avatar/md" },
+        "lg": { "maxSize": 52, "token": "semantic/sizing/avatar/lg" },
+        "xl": { "maxSize": 9999, "token": "semantic/sizing/avatar/xl" }
+      },
+      "tokenMap": {
+        "cornerRadius": "component/avatar/borderRadius"
+      }
+    },
+    "icon": {
+      "layerNamePatterns": [
+        "icon",
+        "ico-",
+        "svg-",
+        "glyph"
+      ],
+      "sizeVariants": {
+        "xs": { "maxSize": 14, "token": "semantic/sizing/icon/xs" },
+        "sm": { "maxSize": 18, "token": "semantic/sizing/icon/sm" },
+        "md": { "maxSize": 22, "token": "semantic/sizing/icon/md" },
+        "lg": { "maxSize": 28, "token": "semantic/sizing/icon/lg" },
+        "xl": { "maxSize": 9999, "token": "semantic/sizing/icon/xl" }
+      },
+      "tokenMap": {
+        "fills.0.color": "semantic/color/foreground/muted"
+      }
+    },
+    "badge": {
+      "layerNamePatterns": [
+        "badge",
+        "tag",
+        "chip",
+        "label",
+        "pill"
+      ],
+      "tokenMap": {
+        "cornerRadius": "component/badge/borderRadius",
+        "paddingLeft": "component/badge/paddingX",
+        "paddingRight": "component/badge/paddingX",
+        "paddingTop": "component/badge/paddingY",
+        "paddingBottom": "component/badge/paddingY"
+      }
+    },
+    "modal": {
+      "layerNamePatterns": [
+        "modal",
+        "dialog",
+        "popup",
+        "overlay"
+      ],
+      "tokenMap": {
+        "fills.0.color": "component/modal/background",
+        "cornerRadius": "component/modal/borderRadius",
+        "effects.shadow": "component/modal/shadow"
+      }
+    }
+  },
+
+  "semanticContextRules": {
+    "pageBackground": {
+      "detection": {
+        "isRootFrame": true,
+        "or": {
+          "layerNamePatterns": ["page", "screen", "view", "layout"]
+        }
+      },
+      "tokenMap": {
+        "fills.0.color": "semantic/color/background/default"
+      }
+    },
+    "sectionBackground": {
+      "detection": {
+        "isDirectChildOfRoot": true,
+        "layerNamePatterns": ["section", "hero", "header", "footer", "sidebar"]
+      },
+      "tokenMap": {
+        "fills.0.color": "semantic/color/background/subtle"
+      }
+    },
+    "headingText": {
+      "detection": {
+        "isTextNode": true,
+        "fontSizeGreaterThan": 20,
+        "or": {
+          "layerNamePatterns": ["heading", "title", "h1", "h2", "h3"]
+        }
+      },
+      "tokenMap": {
+        "fills.0.color": "semantic/color/foreground/default"
+      }
+    },
+    "bodyText": {
+      "detection": {
+        "isTextNode": true,
+        "fontSizeBetween": [14, 18]
+      },
+      "tokenMap": {
+        "fills.0.color": "semantic/color/foreground/default"
+      }
+    },
+    "captionText": {
+      "detection": {
+        "isTextNode": true,
+        "fontSizeLessThan": 14,
+        "or": {
+          "layerNamePatterns": ["caption", "helper", "hint", "subtitle"]
+        }
+      },
+      "tokenMap": {
+        "fills.0.color": "semantic/color/foreground/muted"
+      }
+    }
+  },
+
+  "codeGenerationRules": {
+    "react": {
+      "componentNaming": "PascalCase",
+      "fileExtension": ".tsx",
+      "propsInterface": true,
+      "tokenFormat": "cssVariables",
+      "styling": "tailwind",
+      "imports": [
+        "import { cn } from '@/lib/utils';"
+      ]
+    },
+    "cssVariables": {
+      "prefix": "--",
+      "separator": "-",
+      "caseTransform": "kebab-case"
+    },
+    "tailwind": {
+      "useArbitrary": true,
+      "arbitraryPrefix": "[var(",
+      "arbitrarySuffix": ")]"
+    }
+  },
+
+  "validationRules": {
+    "requireTokenForColors": true,
+    "requireTokenForSpacing": true,
+    "requireTokenForBorderRadius": true,
+    "allowHardcodedText": true,
+    "warnOnUnmappedProperties": true,
+    "errorOnMissingTokenReference": false
+  }
+}
