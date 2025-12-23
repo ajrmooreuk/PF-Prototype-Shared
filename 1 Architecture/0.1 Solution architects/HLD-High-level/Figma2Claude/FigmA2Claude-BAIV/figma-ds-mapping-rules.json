@@ -1,0 +1,347 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "@context": {
+    "@vocab": "https://schema.org/"
+  },
+  "@type": "SoftwareApplication",
+  "@id": "urn:baiv:token-mapping-rules:v2.0.0",
+  "name": "BAIV Token Mapping Rules",
+  "version": "2.0.0",
+  "description": "Auto-mapping configuration for BAIV design tokens in Figma Make to code workflow",
+  "dateModified": "2024-12-23",
+  "creator": {
+    "@type": "Organization",
+    "name": "BAIV - Be AI Visible"
+  },
+
+  "baivBrandColors": {
+    "primary": "#00A4BF",
+    "primaryLight": "#00A4BF",
+    "primaryDark": "#005260",
+    "secondary": "#E84E1C",
+    "accent": "#CEC528",
+    "neutral": "#CCE8EE",
+    "success": "#019587",
+    "warning": "#CF057D",
+    "error": "#CEC528",
+    "info": "#1C3E8E"
+  },
+
+  "colorMapping": {
+    "description": "Map Figma colors to BAIV semantic tokens",
+    "rules": [
+      {
+        "pattern": "#FFFFFF",
+        "alternates": ["white", "rgb(255,255,255)"],
+        "mapsTo": "semantic/color/background/default",
+        "cssVariable": "--baiv-bg-default"
+      },
+      {
+        "pattern": "#00A4BF",
+        "alternates": ["#00a4bf", "rgb(0,164,191)"],
+        "mapsTo": "semantic/color/primary/default",
+        "cssVariable": "--baiv-primary",
+        "description": "BAIV Primary Teal"
+      },
+      {
+        "pattern": "#005260",
+        "alternates": ["#005260", "rgb(0,82,96)"],
+        "mapsTo": "semantic/color/primary/active",
+        "cssVariable": "--baiv-primary-dark",
+        "description": "BAIV Primary Dark"
+      },
+      {
+        "pattern": "#E84E1C",
+        "alternates": ["#e84e1c", "rgb(232,78,28)"],
+        "mapsTo": "semantic/color/secondary/default",
+        "cssVariable": "--baiv-secondary",
+        "description": "BAIV Secondary Orange"
+      },
+      {
+        "pattern": "#CEC528",
+        "alternates": ["#cec528", "rgb(206,197,40)"],
+        "mapsTo": "semantic/color/accent/default",
+        "cssVariable": "--baiv-accent",
+        "description": "BAIV Accent Gold"
+      },
+      {
+        "pattern": "#CCE8EE",
+        "alternates": ["#cce8ee", "rgb(204,232,238)"],
+        "mapsTo": "semantic/color/background/brand",
+        "cssVariable": "--baiv-neutral",
+        "description": "BAIV Neutral Background"
+      },
+      {
+        "pattern": "#019587",
+        "alternates": ["#019587", "rgb(1,149,135)"],
+        "mapsTo": "semantic/color/success/default",
+        "cssVariable": "--baiv-success",
+        "description": "BAIV Success"
+      },
+      {
+        "pattern": "#CF057D",
+        "alternates": ["#cf057d", "rgb(207,5,125)"],
+        "mapsTo": "semantic/color/warning/default",
+        "cssVariable": "--baiv-warning",
+        "description": "BAIV Warning"
+      },
+      {
+        "pattern": "#1C3E8E",
+        "alternates": ["#1c3e8e", "rgb(28,62,142)"],
+        "mapsTo": "semantic/color/info/default",
+        "cssVariable": "--baiv-info",
+        "description": "BAIV Info"
+      },
+      {
+        "pattern": "#F8FAFB",
+        "mapsTo": "semantic/color/background/subtle",
+        "cssVariable": "--baiv-bg-subtle"
+      },
+      {
+        "pattern": "#111518",
+        "mapsTo": "semantic/color/foreground/default",
+        "cssVariable": "--baiv-fg-default"
+      },
+      {
+        "pattern": "#64747F",
+        "mapsTo": "semantic/color/foreground/muted",
+        "cssVariable": "--baiv-fg-muted"
+      },
+      {
+        "pattern": "#E2E8EB",
+        "mapsTo": "semantic/color/border/default",
+        "cssVariable": "--baiv-border-default"
+      }
+    ],
+
+    "primaryScale": [
+      { "pattern": "#E6F7FA", "mapsTo": "primitive/color/primary/50" },
+      { "pattern": "#CCE8EE", "mapsTo": "primitive/color/primary/100" },
+      { "pattern": "#99D6E2", "mapsTo": "primitive/color/primary/200" },
+      { "pattern": "#66C4D6", "mapsTo": "primitive/color/primary/300" },
+      { "pattern": "#33B4CA", "mapsTo": "primitive/color/primary/400" },
+      { "pattern": "#00A4BF", "mapsTo": "primitive/color/primary/500" },
+      { "pattern": "#008A9F", "mapsTo": "primitive/color/primary/600" },
+      { "pattern": "#006F7F", "mapsTo": "primitive/color/primary/700" },
+      { "pattern": "#005260", "mapsTo": "primitive/color/primary/800" },
+      { "pattern": "#003640", "mapsTo": "primitive/color/primary/900" }
+    ],
+
+    "secondaryScale": [
+      { "pattern": "#FEF0EC", "mapsTo": "primitive/color/secondary/50" },
+      { "pattern": "#E84E1C", "mapsTo": "primitive/color/secondary/500" },
+      { "pattern": "#551808", "mapsTo": "primitive/color/secondary/900" }
+    ],
+
+    "accentScale": [
+      { "pattern": "#FDFCE8", "mapsTo": "primitive/color/accent/50" },
+      { "pattern": "#CEC528", "mapsTo": "primitive/color/accent/500" },
+      { "pattern": "#36300B", "mapsTo": "primitive/color/accent/900" }
+    ]
+  },
+
+  "spacingMapping": {
+    "description": "Snap Figma spacing to nearest BAIV token",
+    "rules": [
+      { "range": [0, 0], "mapsTo": "primitive/spacing/0", "value": "0px" },
+      { "range": [1, 1], "mapsTo": "primitive/spacing/px", "value": "1px" },
+      { "range": [2, 3], "mapsTo": "primitive/spacing/0.5", "value": "2px" },
+      { "range": [4, 5], "mapsTo": "primitive/spacing/1", "value": "4px" },
+      { "range": [6, 7], "mapsTo": "primitive/spacing/1.5", "value": "6px" },
+      { "range": [8, 9], "mapsTo": "primitive/spacing/2", "value": "8px" },
+      { "range": [10, 11], "mapsTo": "primitive/spacing/2.5", "value": "10px" },
+      { "range": [12, 13], "mapsTo": "primitive/spacing/3", "value": "12px" },
+      { "range": [14, 15], "mapsTo": "primitive/spacing/3.5", "value": "14px" },
+      { "range": [16, 17], "mapsTo": "primitive/spacing/4", "value": "16px" },
+      { "range": [18, 21], "mapsTo": "primitive/spacing/5", "value": "20px" },
+      { "range": [22, 27], "mapsTo": "primitive/spacing/6", "value": "24px" },
+      { "range": [28, 31], "mapsTo": "primitive/spacing/7", "value": "28px" },
+      { "range": [32, 35], "mapsTo": "primitive/spacing/8", "value": "32px" },
+      { "range": [36, 39], "mapsTo": "primitive/spacing/9", "value": "36px" },
+      { "range": [40, 43], "mapsTo": "primitive/spacing/10", "value": "40px" },
+      { "range": [44, 47], "mapsTo": "primitive/spacing/11", "value": "44px" },
+      { "range": [48, 55], "mapsTo": "primitive/spacing/12", "value": "48px" },
+      { "range": [56, 63], "mapsTo": "primitive/spacing/14", "value": "56px" },
+      { "range": [64, 79], "mapsTo": "primitive/spacing/16", "value": "64px" },
+      { "range": [80, 95], "mapsTo": "primitive/spacing/20", "value": "80px" },
+      { "range": [96, 127], "mapsTo": "primitive/spacing/24", "value": "96px" },
+      { "range": [128, 159], "mapsTo": "primitive/spacing/32", "value": "128px" },
+      { "range": [160, 191], "mapsTo": "primitive/spacing/40", "value": "160px" },
+      { "range": [192, 255], "mapsTo": "primitive/spacing/48", "value": "192px" }
+    ]
+  },
+
+  "borderRadiusMapping": {
+    "description": "Map Figma radii to BAIV tokens",
+    "rules": [
+      { "range": [0, 0], "mapsTo": "primitive/borderRadius/none", "value": "0px" },
+      { "range": [1, 2], "mapsTo": "primitive/borderRadius/sm", "value": "2px" },
+      { "range": [3, 4], "mapsTo": "primitive/borderRadius/default", "value": "4px" },
+      { "range": [5, 6], "mapsTo": "primitive/borderRadius/md", "value": "6px" },
+      { "range": [7, 8], "mapsTo": "primitive/borderRadius/lg", "value": "8px" },
+      { "range": [9, 12], "mapsTo": "primitive/borderRadius/xl", "value": "12px" },
+      { "range": [13, 16], "mapsTo": "primitive/borderRadius/2xl", "value": "16px" },
+      { "range": [17, 24], "mapsTo": "primitive/borderRadius/3xl", "value": "24px" },
+      { "range": [25, 9999], "mapsTo": "primitive/borderRadius/full", "value": "9999px" }
+    ]
+  },
+
+  "typographyMapping": {
+    "description": "Map Figma fonts to BAIV typography tokens",
+    "fontFamily": [
+      {
+        "patterns": ["Open Sans", "open sans", "OpenSans"],
+        "mapsTo": "primitive/typography/fontFamily/primary",
+        "cssVariable": "--font-primary",
+        "value": "'Open Sans', system-ui, sans-serif"
+      },
+      {
+        "patterns": ["Titillium Web", "titillium web", "TitilliumWeb", "Titillium"],
+        "mapsTo": "primitive/typography/fontFamily/heading",
+        "cssVariable": "--font-heading",
+        "value": "'Titillium Web', system-ui, sans-serif"
+      },
+      {
+        "patterns": ["JetBrains Mono", "jetbrains mono", "Menlo", "Monaco", "monospace"],
+        "mapsTo": "primitive/typography/fontFamily/mono",
+        "cssVariable": "--font-mono",
+        "value": "'JetBrains Mono', Menlo, monospace"
+      }
+    ],
+    "fontSize": [
+      { "range": [10, 12], "mapsTo": "primitive/typography/fontSize/xs", "value": "12px" },
+      { "range": [13, 14], "mapsTo": "primitive/typography/fontSize/sm", "value": "14px" },
+      { "range": [15, 16], "mapsTo": "primitive/typography/fontSize/base", "value": "16px" },
+      { "range": [17, 18], "mapsTo": "primitive/typography/fontSize/lg", "value": "18px" },
+      { "range": [19, 20], "mapsTo": "primitive/typography/fontSize/xl", "value": "20px" },
+      { "range": [21, 24], "mapsTo": "primitive/typography/fontSize/2xl", "value": "24px" },
+      { "range": [25, 30], "mapsTo": "primitive/typography/fontSize/3xl", "value": "30px" },
+      { "range": [31, 36], "mapsTo": "primitive/typography/fontSize/4xl", "value": "36px" },
+      { "range": [37, 48], "mapsTo": "primitive/typography/fontSize/5xl", "value": "48px" },
+      { "range": [49, 60], "mapsTo": "primitive/typography/fontSize/6xl", "value": "60px" }
+    ],
+    "fontWeight": [
+      { "range": [300, 400], "mapsTo": "primitive/typography/fontWeight/regular", "value": 400 },
+      { "range": [401, 500], "mapsTo": "primitive/typography/fontWeight/medium", "value": 500 },
+      { "range": [501, 600], "mapsTo": "primitive/typography/fontWeight/semibold", "value": 600 },
+      { "range": [601, 900], "mapsTo": "primitive/typography/fontWeight/bold", "value": 700 }
+    ]
+  },
+
+  "componentDetection": {
+    "description": "Detect BAIV components from layer names",
+    "rules": [
+      {
+        "patterns": ["button", "btn", "cta"],
+        "componentType": "Button",
+        "tokenPrefix": "component/button",
+        "defaultVariant": "primary",
+        "variants": ["primary", "secondary", "accent", "outline", "ghost", "destructive"]
+      },
+      {
+        "patterns": ["input", "field", "textfield", "text-input"],
+        "componentType": "Input",
+        "tokenPrefix": "component/input",
+        "variants": ["text", "password", "search", "email"]
+      },
+      {
+        "patterns": ["card", "panel", "tile"],
+        "componentType": "Card",
+        "tokenPrefix": "component/card",
+        "variants": ["default", "stat", "feature"]
+      },
+      {
+        "patterns": ["badge", "tag", "chip", "label"],
+        "componentType": "Badge",
+        "tokenPrefix": "component/badge",
+        "variants": ["default", "success", "warning", "error", "info"]
+      },
+      {
+        "patterns": ["alert", "notification", "toast", "message"],
+        "componentType": "Alert",
+        "tokenPrefix": "component/alert",
+        "variants": ["success", "warning", "error", "info"]
+      },
+      {
+        "patterns": ["avatar", "profile-pic", "user-image"],
+        "componentType": "Avatar",
+        "tokenPrefix": "component/avatar",
+        "variants": ["xs", "sm", "md", "lg", "xl"]
+      },
+      {
+        "patterns": ["nav", "navigation", "menu"],
+        "componentType": "Nav",
+        "tokenPrefix": "component/nav",
+        "variants": ["primary", "sidebar", "footer"]
+      },
+      {
+        "patterns": ["modal", "dialog", "popup", "overlay"],
+        "componentType": "Modal",
+        "tokenPrefix": "component/modal"
+      },
+      {
+        "patterns": ["header", "topbar", "navbar"],
+        "componentType": "Header",
+        "tokenPrefix": "component/header"
+      },
+      {
+        "patterns": ["footer", "bottom-bar"],
+        "componentType": "Footer",
+        "tokenPrefix": "component/footer"
+      }
+    ]
+  },
+
+  "codeGeneration": {
+    "description": "Code output configuration for BAIV",
+    "cssVariables": {
+      "prefix": "--baiv",
+      "output": [
+        "/* BAIV Brand Colors */",
+        "--baiv-primary: #00A4BF;",
+        "--baiv-primary-light: #00A4BF;",
+        "--baiv-primary-dark: #005260;",
+        "--baiv-secondary: #E84E1C;",
+        "--baiv-accent: #CEC528;",
+        "--baiv-neutral: #CCE8EE;",
+        "",
+        "/* Status Colors */",
+        "--baiv-success: #019587;",
+        "--baiv-warning: #CF057D;",
+        "--baiv-error: #CEC528;",
+        "--baiv-info: #1C3E8E;",
+        "",
+        "/* Typography */",
+        "--font-primary: 'Open Sans', system-ui, sans-serif;",
+        "--font-heading: 'Titillium Web', system-ui, sans-serif;",
+        "--font-mono: 'JetBrains Mono', Menlo, monospace;"
+      ]
+    },
+    "fontImport": {
+      "google": "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Titillium+Web:wght@400;600;700&display=swap",
+      "html": "<link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Titillium+Web:wght@400;600;700&display=swap\" rel=\"stylesheet\">"
+    },
+    "tailwindConfig": {
+      "colors": {
+        "baiv": {
+          "primary": {
+            "DEFAULT": "var(--baiv-primary)",
+            "dark": "var(--baiv-primary-dark)"
+          },
+          "secondary": "var(--baiv-secondary)",
+          "accent": "var(--baiv-accent)",
+          "neutral": "var(--baiv-neutral)",
+          "success": "var(--baiv-success)",
+          "warning": "var(--baiv-warning)",
+          "error": "var(--baiv-error)",
+          "info": "var(--baiv-info)"
+        }
+      },
+      "fontFamily": {
+        "primary": ["Open Sans", "system-ui", "sans-serif"],
+        "heading": ["Titillium Web", "system-ui", "sans-serif"],
+        "mono": ["JetBrains Mono", "Menlo", "monospace"]
+      }
+    }
+  }
+}
