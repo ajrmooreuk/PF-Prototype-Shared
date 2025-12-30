@@ -538,6 +538,945 @@ Source Documents: 5
 
 ---
 
+## Appendix A: Problem Resolution Through Template Design
+
+This appendix demonstrates how the HLD and Universal Agent Template resolve the stated problem statement when implemented for PF Instance-specific agents and PFC agents.
+
+### A.1 Problem Statement Recap
+
+**Original Problem (from HLD Section 1):**
+> "The HLD-High-level directory contains comprehensive specifications for agentic solutions including Value Engineering frameworks, Agent specifications, OAA Registry integration, Figma design systems, and security requirements. These need consolidation into a unified template that addresses all aspects of agent-based solution implementation while maintaining design consistency and security standards."
+
+**Identified Gaps:**
+1. No unified template for agent implementation
+2. Design system not integrated with agent specifications
+3. Security patterns not linked to Value Engineering workflow
+4. No consolidated build order or dependency management
+
+---
+
+### A.2 Resolution Architecture
+
+```mermaid
+graph TB
+    subgraph PROBLEM["PROBLEM DOMAIN"]
+        P1[Fragmented Specifications]
+        P2[Design-Code Disconnect]
+        P3[Security-VE Gap]
+        P4[Unclear Dependencies]
+    end
+    
+    subgraph SOLUTION["SOLUTION: TEMPLATE DESIGN"]
+        HLD[HLD Agentic Solution Template<br/>6 Unified Layers]
+        UAT[Universal Agent Template<br/>Standardized Structure]
+        GUIDE[Implementation Guide<br/>Step-by-Step Process]
+        MATRIX[Traceability Matrix<br/>Change Management]
+    end
+    
+    subgraph IMPLEMENTATION["IMPLEMENTATION DOMAINS"]
+        PFC[PF-Core Agents<br/>OAA • VE • PM • Architect]
+        BAIV[BAIV Instance Agents<br/>Citation • Discovery • Content]
+        W4M[W4M Instance Agents<br/>Client-Specific Tools]
+        AIR[AIR Instance Agents<br/>Domain Specialists]
+    end
+    
+    P1 --> HLD
+    P2 --> HLD
+    P3 --> HLD
+    P4 --> HLD
+    
+    HLD --> UAT
+    UAT --> GUIDE
+    GUIDE --> MATRIX
+    
+    UAT --> PFC
+    UAT --> BAIV
+    UAT --> W4M
+    UAT --> AIR
+    
+    style PROBLEM fill:#EF4444,color:#fff
+    style SOLUTION fill:#10B981,color:#fff
+    style IMPLEMENTATION fill:#3B82F6,color:#fff
+```
+
+---
+
+### A.3 Gap Resolution by Template Component
+
+#### Gap 1: No Unified Template → Resolved by HLD + Universal Agent Template
+
+| Problem Aspect | Template Solution | Implementation Evidence |
+|----------------|-------------------|------------------------|
+| Inconsistent agent structure | UAT Section 1-2: Standardized metadata + JSON-LD spec | All agents follow agent-{domain}-{name}-{version} naming |
+| No common patterns | UAT Section 6: TypeScript class template | Consistent BaseAgent class with execute() pattern |
+| Missing integration points | UAT Section 4: Ontology bindings | Semantic integration via consumes/produces/requires/validates |
+| Unclear lifecycle | UAT Section 3: State machine diagram | Idle→Validating→Processing→Complete→Error states |
+
+**PFC Agent Example: OAA Agent**
+- Metadata: `agent_id: "agent-pf-core-oaa-v1.0.0"`
+- Type: `orchestrator` (tier 1)
+- Ontology bindings:
+  - Consumes: `discovery-ontology`, `content-ontology`
+  - Produces: `oaa-registry-entry`, `validated-ontology`
+  - Requires: `ve-context` (RRR + VSOM + OKR + VP + PMF + GTM)
+  - Validates: `ontology-schema-compliance`
+
+**BAIV Agent Example: Citation Tester**
+- Metadata: `agent_id: "agent-baiv-citation-tester-v1.0.0"`
+- Type: `domain_specialist` (tier 3)
+- Ontology bindings:
+  - Consumes: `query-ontology`, `platform-ontology`
+  - Produces: `citation-test-results`, `rpi-scores`
+  - Requires: `client-context`, `icp-profile`
+  - Validates: `citation-data-quality`
+
+---
+
+#### Gap 2: Design System Not Integrated → Resolved by HLD Layer 4
+
+| Problem Aspect | Template Solution | Implementation Evidence |
+|----------------|-------------------|------------------------|
+| Figma-to-code disconnect | HLD Layer 4: Design System & UI | 9-domain ontology (primitives→production) |
+| No token standardization | UAT: Design token integration | 3-tier token hierarchy (primitive→semantic→component) |
+| UI generation inconsistent | HLD Section 6: MCP extraction workflow | Figma Make → MCP → Claude → Code pipeline |
+| No design validation | UAT Section 7: Testing requirements | Design system compliance tests |
+
+**PFC Agent Example: UI Generation Agent**
+- Domain: `pf-core`
+- Consumes: `figma-design-ontology`, `baiv-token-ontology`
+- Produces: `react-components`, `tailwind-styles`
+- Validates: `design-token-compliance`, `accessibility-standards`
+- Implementation: Reads Figma via MCP, applies BAIV tokens (#00A4BF, #E84E1C, #CEC528), generates Next.js components
+
+**BAIV Agent Example: Dashboard Generator**
+- Domain: `baiv`
+- Consumes: `citation-data-ontology`, `baiv-design-ontology`
+- Produces: `dashboard-components`, `chart-visualizations`
+- Validates: `baiv-design-system-compliance`
+- Implementation: Uses BAIV design tokens, generates citation dashboards with consistent styling
+
+---
+
+#### Gap 3: Security Not Linked to VE → Resolved by HLD Layer 1 + Layer 5 Integration
+
+| Problem Aspect | Template Solution | Implementation Evidence |
+|----------------|-------------------|------------------------|
+| RLS not tied to governance | UAT Section 5: Authority Boundary + HLD Layer 1 RRR | RACI matrix drives approval requirements |
+| No tenant isolation pattern | UAT: tenant_id in all operations | Supabase RLS policies per client/organization |
+| Audit logging disconnected | UAT: Agent execution logging + VE metrics | All mutations logged with VE context |
+| Security not in definition of done | UAT Section 10: Quality checklist | Security verification required for agent activation |
+
+**PFC Agent Example: VE Context Agent**
+- Authority Boundary:
+  - `can_read`: ["ve_context", "rrr_assignments", "okr_trees"]
+  - `can_write`: ["ve_context"] (with PM approval)
+  - `can_delete`: [] (no delete permissions)
+  - `requires_approval`: true (RRR: PM Accountable)
+- Security Implementation:
+  - All reads: `set_tenant_context(tenant_id)`
+  - All writes: `audit_log.insert({action: 've_context_update', user_id, tenant_id, ve_component})`
+  - RLS Policy: `tenant_id = current_setting('app.tenant_id')::uuid`
+
+**BAIV Agent Example: Citation Data Agent**
+- Authority Boundary:
+  - `can_read`: ["citation_tests", "client_context"]
+  - `can_write`: ["citation_tests", "citation_results"]
+  - `can_delete`: ["test_drafts"] (only own drafts)
+  - `requires_approval`: false (automated testing)
+- Security Implementation:
+  - Per-client isolation: `/baiv/foot-scientific/`, `/baiv/sierra-dreams/` separate directories
+  - All database operations include `tenant_id` filter
+  - Citation data never crosses client boundaries
+
+---
+
+#### Gap 4: No Consolidated Build Order → Resolved by HLD Section 5 + Tier System
+
+| Problem Aspect | Template Solution | Implementation Evidence |
+|----------------|-------------------|------------------------|
+| Unclear critical path | HLD Layer 2: OAA Agent as critical path | Week 1-2 priority (tier 1) |
+| Missing dependencies | UAT Section 2: dependencies field | Agent/tool/service deps explicitly declared |
+| No phased implementation | HLD Section 5: 6-week roadmap | Tier 1 (Weeks 1-2) → Tier 2 (3-4) → Tier 3 (5-6) |
+| Agent interaction undefined | UAT Section 3: Context diagram | Explicit agent-to-agent communication patterns |
+
+**Build Order for PFC Agents:**
+
+**Tier 1 (Weeks 1-2): Foundation**
+1. OAA Agent (critical path)
+   - Creates and validates ontologies
+   - Registers in OAA Registry
+   - Enables all other agents
+   
+2. VE Context Agent
+   - Loads RRR + VSOM + OKR + VP + PMF + GTM
+   - Provides strategic context to all agents
+   - Dependencies: OAA Agent (for ve-context-ontology)
+
+**Tier 2 (Weeks 3-4): Planning**
+3. PM Agent (PRD Generator)
+   - Consumes: ve-context-ontology
+   - Produces: prd-ontology, user-story-ontology
+   - Dependencies: OAA Agent, VE Context Agent
+
+4. Solution Architect Agent
+   - Consumes: prd-ontology, ve-context-ontology
+   - Produces: technical-specification-ontology
+   - Dependencies: PM Agent
+
+**Tier 3 (Weeks 5-6): Execution**
+5. Developer Agent
+   - Consumes: technical-specification-ontology, design-ontology
+   - Produces: code-artifacts, api-definitions
+   - Dependencies: Solution Architect Agent, UI Generation Agent
+
+6. Test Agent
+   - Consumes: code-artifacts, test-specification-ontology
+   - Produces: test-results, coverage-reports
+   - Dependencies: Developer Agent
+
+**Build Order for BAIV Instance Agents:**
+
+**Phase 1: Foundation (Same as PFC)**
+1. Discovery Agent
+   - Consumes: client-url, competitor-list
+   - Produces: client-context-ontology, discovery-report
+   - Dependencies: OAA Agent (for client-context-ontology)
+
+2. ICP Discovery Agent
+   - Consumes: client-context-ontology
+   - Produces: icp-profile-ontology
+   - Dependencies: Discovery Agent
+
+**Phase 2: Analysis**
+3. Citation Tester Agent
+   - Consumes: client-context-ontology, icp-profile-ontology, query-ontology
+   - Produces: citation-test-results, rpi-scores
+   - Dependencies: Discovery Agent, ICP Discovery Agent
+
+4. Query Expansion Agent
+   - Consumes: core-queries, icp-profile-ontology
+   - Produces: query-variations, query-clusters
+   - Dependencies: ICP Discovery Agent
+
+**Phase 3: Content Generation**
+5. FAQ Generator Agent
+   - Consumes: query-clusters, client-context-ontology
+   - Produces: faq-content, schema-markup
+   - Dependencies: Query Expansion Agent
+
+6. Blog Creator Agent
+   - Consumes: query-clusters, client-context-ontology, faq-content (optional)
+   - Produces: blog-posts, meta-tags
+   - Dependencies: Query Expansion Agent (can call FAQ Generator)
+
+---
+
+### A.4 Implementation Pattern: Standalone + Callable
+
+**Problem:** Agents have complex dependencies but need flexibility.
+
+**Solution:** Every agent is standalone (can run independently) but can also be called by other agents.
+
+#### Example: BAIV Blog Creator Agent
+
+**Standalone Mode:**
+```bash
+# Run independently with all context
+cd /baiv/foot-scientific
+./run_blog_creator.sh --topic "foot surgery recovery" --context client_context.json
+```
+
+**Callable Mode:**
+```typescript
+// Called by orchestrator agent
+const blogCreator = new BlogCreatorAgent({
+  tenant_id: 'foot-scientific',
+  domain: 'baiv'
+});
+
+// Can optionally call FAQ generator
+const faqContent = await this.callAgent('faq-generator', {
+  queries: expandedQueries
+});
+
+const blogPost = await blogCreator.execute({
+  topic: 'foot surgery recovery',
+  client_context: context,
+  faq_content: faqContent // optional
+});
+```
+
+**UAT Implementation:**
+- Section 2: `dependencies.agents` = `["faq-generator"]` (optional)
+- Section 6.2: Agent class includes `callAgent(agentId, params)` method
+- Section 5: Authority boundary allows calling other agents in same tenant
+
+---
+
+### A.5 Per-Client Isolation Pattern
+
+**Problem:** Multiple clients (Foot Scientific, Sierra Dreams, Ecco AI, etc.) must not share data.
+
+**Solution:** Template enforces tenant isolation at all levels.
+
+#### Directory Structure (from AGENT_BUILD_MASTER_LIST.md)
+
+```
+/baiv
+  /foot-scientific
+    /agents
+      discovery.py
+      citation_tester.py
+      faq_generator.py
+    /config
+      client_context.json
+      airtable_config.json
+    /outputs
+    run_discovery.sh
+    
+  /sierra-dreams
+    /agents
+      discovery.py
+      citation_tester.py
+      faq_generator.py
+    /config
+      client_context.json
+      airtable_config.json
+    /outputs
+    run_discovery.sh
+```
+
+#### Database Isolation (from SECURITY_PLAN)
+
+**RLS Policy (Applied to All Tables):**
+```sql
+CREATE POLICY tenant_isolation ON citation_tests
+  FOR ALL
+  TO authenticated
+  USING (tenant_id = current_setting('app.tenant_id')::uuid);
+```
+
+**Agent Implementation (from UAT Section 6.2):**
+```typescript
+export class CitationTesterAgent extends BaseAgent {
+  async execute(params: CitationTestParams) {
+    // Set tenant context FIRST
+    await this.setTenantContext(params.tenant_id);
+    
+    // All queries now automatically filtered by tenant_id
+    const tests = await db.citation_tests.select();
+    // Returns only records for this tenant
+  }
+}
+```
+
+**UAT Enforcement:**
+- Section 5: Authority Boundary requires `tenant_id` in all operations
+- Section 7: Security tests verify tenant isolation
+- Section 10: Quality checklist item: "Tenant isolation verified"
+
+---
+
+### A.6 Value Engineering Integration
+
+**Problem:** Agents built without strategic alignment lead to products nobody wants.
+
+**Solution:** Every agent consumes VE context via ontology bindings.
+
+#### VE Context Ontology Structure
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "ValueEngineeringContext",
+  "@id": "ve-context:baiv:foot-scientific",
+  
+  "strategic_foundation": {
+    "rrr": {
+      "roles": ["PM", "Solution Architect", "Developer"],
+      "raci_matrix": {...}
+    },
+    "vsom": {
+      "vision": "Become the #1 cited source for foot surgery recovery",
+      "strategy": "AI visibility through citation optimization",
+      "objectives": [...],
+      "metrics": ["citation_count", "rpi_score", "share_of_voice"]
+    },
+    "okr": {
+      "objective": "Achieve 50% citation rate in top 10 queries",
+      "key_results": [...]
+    }
+  },
+  
+  "market_strategy": {
+    "value_proposition": {
+      "problem": "Foot surgery patients can't find trustworthy recovery information",
+      "solution": "AI-optimized, medically accurate content cited by LLMs",
+      "benefits": ["Trust", "Visibility", "Patient education"],
+      "differentiation": "Medical accuracy + AI optimization"
+    },
+    "pmf": {
+      "signals": ["citation_growth", "patient_engagement"],
+      "validation_status": "in_progress",
+      "target_metrics": {...}
+    },
+    "gtm": {
+      "channels": ["LLM citations", "SEO", "Medical forums"],
+      "pricing": "Value-based on citation performance",
+      "launch_strategy": "Phased: Core queries → Long-tail"
+    }
+  }
+}
+```
+
+#### Agent Consumption of VE Context
+
+**PFC PM Agent (PRD Generator):**
+```typescript
+// UAT Section 4: Ontology Bindings
+ontologyBindings: {
+  requires: [
+    {
+      ontology_id: 've-context-ontology',
+      version: '^1.0.0',
+      purpose: 'Ensure PRD aligns with VP, PMF, GTM'
+    }
+  ]
+}
+
+// Implementation
+async generatePRD(params: PRDParams) {
+  const veContext = await this.ontologyLoader.load('ve-context-ontology');
+  
+  // PRD must address the problem from VP
+  const problem = veContext.market_strategy.value_proposition.problem;
+  
+  // PRD must include PMF validation criteria
+  const pmfSignals = veContext.market_strategy.pmf.signals;
+  
+  // PRD must align with GTM channels
+  const channels = veContext.market_strategy.gtm.channels;
+  
+  return {
+    problem_statement: problem,
+    success_criteria: pmfSignals,
+    distribution_strategy: channels,
+    ...
+  };
+}
+```
+
+**BAIV Citation Tester Agent:**
+```typescript
+// UAT Section 4: Ontology Bindings
+ontologyBindings: {
+  requires: [
+    {
+      ontology_id: 'client-context-ontology',
+      version: '^1.0.0',
+      purpose: 'Load client ICP and target queries'
+    },
+    {
+      ontology_id: 've-context-ontology',
+      version: '^1.0.0',
+      purpose: 'Measure against PMF signals'
+    }
+  ]
+}
+
+// Implementation
+async runCitationTests(params: CitationTestParams) {
+  const clientContext = await this.ontologyLoader.load('client-context-ontology');
+  const veContext = await this.ontologyLoader.load('ve-context-ontology');
+  
+  // Test queries aligned with ICP
+  const queries = clientContext.icp_queries;
+  
+  // Measure against PMF signals (e.g., target citation rate)
+  const targetCitationRate = veContext.market_strategy.pmf.target_metrics.citation_rate;
+  
+  const results = await this.testPlatforms(queries);
+  
+  // Report against PMF criteria
+  return {
+    results,
+    pmf_status: results.citation_rate >= targetCitationRate ? 'on_track' : 'needs_improvement'
+  };
+}
+```
+
+---
+
+### A.7 Design System Integration for UI Agents
+
+**Problem:** UI components generated by agents don't match design system.
+
+**Solution:** Design token ontology consumed by all UI-generating agents.
+
+#### BAIV Design Token Ontology
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "DesignTokenOntology",
+  "@id": "design-tokens:baiv:v1.0.0",
+  
+  "primitive_tokens": {
+    "colors": {
+      "teal": "#00A4BF",
+      "orange": "#E84E1C",
+      "gold": "#CEC528",
+      "success": "#019587",
+      "warning": "#CF057D",
+      "error": "#CEC528",
+      "info": "#1C3E8E"
+    },
+    "typography": {
+      "heading": "Titillium Web",
+      "body": "Open Sans"
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px"
+    }
+  },
+  
+  "semantic_tokens": {
+    "primary": "$colors.teal",
+    "secondary": "$colors.orange",
+    "accent": "$colors.gold"
+  },
+  
+  "component_tokens": {
+    "button.primary.bg": "$semantic.primary",
+    "button.primary.text": "#FFFFFF",
+    "card.padding": "$spacing.lg"
+  }
+}
+```
+
+#### PFC UI Generation Agent
+
+```typescript
+// UAT Section 4: Ontology Bindings
+ontologyBindings: {
+  consumes: [
+    {
+      ontology_id: 'figma-design-ontology',
+      version: '^1.0.0',
+      purpose: 'Read Figma design structure'
+    },
+    {
+      ontology_id: 'design-tokens:baiv',
+      version: '^1.0.0',
+      purpose: 'Apply BAIV design tokens'
+    }
+  ],
+  produces: [
+    {
+      ontology_id: 'react-component-ontology',
+      version: '^1.0.0',
+      purpose: 'Generate React components'
+    }
+  ],
+  validates: [
+    {
+      ontology_id: 'design-token-compliance',
+      version: '^1.0.0',
+      purpose: 'Ensure generated code uses correct tokens'
+    }
+  ]
+}
+
+// Implementation
+async generateComponent(figmaNodeId: string) {
+  const figmaDesign = await this.mcp.getDesignContext(figmaNodeId);
+  const tokens = await this.ontologyLoader.load('design-tokens:baiv');
+  
+  // Map Figma colors to BAIV tokens
+  const mappedColors = this.mapColors(figmaDesign.fills, tokens.primitive_tokens.colors);
+  
+  // Generate React component with Tailwind classes
+  const component = `
+    <button className="bg-[${tokens.semantic_tokens.primary}] text-white px-${tokens.component_tokens['button.primary.padding']}">
+      {children}
+    </button>
+  `;
+  
+  // Validate token compliance
+  const validation = await this.validate(component, 'design-token-compliance');
+  
+  if (!validation.isValid) {
+    throw new Error('Component does not comply with design tokens');
+  }
+  
+  return component;
+}
+```
+
+---
+
+### A.8 Complete Implementation Example: BAIV Citation Tester
+
+This example demonstrates all template components working together for a real BAIV agent.
+
+#### Step 1: Agent Metadata (UAT Section 1)
+
+```yaml
+# agent-metadata.yaml
+agent_id: agent-baiv-citation-tester-v1.0.0
+name: Citation Tester Agent
+version: 1.0.0
+domain: baiv
+tier: 3
+agent_type: domain_specialist
+status: active
+owner: BAIV Platform Team
+description: Tests AI platform citations for client queries across ChatGPT, Claude, Gemini, Perplexity
+```
+
+#### Step 2: Agent Specification (UAT Section 2)
+
+```json
+{
+  "@context": [
+    "https://schema.org",
+    {"baiv": "https://baiv.ai/ontology/"}
+  ],
+  "@type": "AgentSpecification",
+  "@id": "agent-baiv-citation-tester-v1.0.0",
+  
+  "ontologyBindings": {
+    "consumes": [
+      {
+        "ontology_id": "client-context-ontology",
+        "version": "^1.0.0",
+        "purpose": "Load client ICP and target queries"
+      },
+      {
+        "ontology_id": "query-ontology",
+        "version": "^1.0.0",
+        "purpose": "Query structure and variations"
+      },
+      {
+        "ontology_id": "platform-ontology",
+        "version": "^1.0.0",
+        "purpose": "AI platform specifications (ChatGPT, Claude, etc.)"
+      }
+    ],
+    "produces": [
+      {
+        "ontology_id": "citation-test-results",
+        "version": "^1.0.0",
+        "purpose": "Citation test outcomes per platform"
+      },
+      {
+        "ontology_id": "rpi-scores",
+        "version": "^1.0.0",
+        "purpose": "Relevance Position Index calculations"
+      }
+    ],
+    "requires": [
+      {
+        "ontology_id": "ve-context-ontology",
+        "version": "^1.0.0",
+        "purpose": "PMF signals for success criteria"
+      }
+    ],
+    "validates": [
+      {
+        "ontology_id": "citation-data-quality",
+        "version": "^1.0.0",
+        "purpose": "Ensure citation data is complete and accurate"
+      }
+    ]
+  },
+  
+  "authorityBoundary": {
+    "can_read": ["citation_tests", "client_context", "queries"],
+    "can_write": ["citation_tests", "citation_results"],
+    "can_delete": ["test_drafts"],
+    "requires_approval": false,
+    "timeConstraints": {
+      "maxExecutionTime": 600
+    },
+    "resourceLimits": {
+      "maxTokens": 50000,
+      "maxAPICalls": 100,
+      "maxStorageMB": 500
+    }
+  },
+  
+  "dependencies": {
+    "agents": [],
+    "tools": ["dataforseo-api"],
+    "services": ["supabase", "airtable"]
+  }
+}
+```
+
+#### Step 3: Implementation (UAT Section 6)
+
+```typescript
+// src/agents/citation-tester.ts
+import { BaseAgent, AgentExecutionParams, AgentResult } from '@pf-core/agent-sdk';
+import { OntologyLoader } from '@pf-core/ontology-loader';
+import { DataForSEOClient } from '@pf-core/dataforseo';
+
+export interface CitationTestParams extends AgentExecutionParams {
+  tenant_id: string;
+  queries: string[];
+  platforms: ('chatgpt' | 'claude' | 'gemini' | 'perplexity')[];
+}
+
+export class CitationTesterAgent extends BaseAgent {
+  private ontologyLoader: OntologyLoader;
+  private dataForSEO: DataForSEOClient;
+  
+  constructor(config: AgentConfig) {
+    super(config);
+    this.ontologyLoader = new OntologyLoader();
+    this.dataForSEO = new DataForSEOClient(process.env.DATAFORSEO_API_KEY);
+  }
+  
+  async execute(params: CitationTestParams): Promise<AgentResult> {
+    // Step 1: Set tenant context (SECURITY)
+    await this.setTenantContext(params.tenant_id);
+    
+    // Step 2: Load ontologies
+    const clientContext = await this.ontologyLoader.load('client-context-ontology');
+    const veContext = await this.ontologyLoader.load('ve-context-ontology');
+    const platformSpecs = await this.ontologyLoader.load('platform-ontology');
+    
+    // Step 3: Validate input
+    const validation = await this.validate(params, 'citation-test-params');
+    if (!validation.isValid) {
+      throw new Error(`Invalid params: ${validation.errors}`);
+    }
+    
+    // Step 4: Run tests
+    const results = [];
+    for (const query of params.queries) {
+      for (const platform of params.platforms) {
+        const result = await this.testPlatform(query, platform, platformSpecs[platform]);
+        results.push(result);
+        
+        // Save to database (RLS automatically filters by tenant_id)
+        await this.db.citation_tests.insert({
+          tenant_id: params.tenant_id,
+          query,
+          platform,
+          citations: result.citations,
+          rpi_score: result.rpi_score,
+          tested_at: new Date()
+        });
+      }
+    }
+    
+    // Step 5: Calculate metrics
+    const citationRate = results.filter(r => r.citations.length > 0).length / results.length;
+    const avgRPIScore = results.reduce((sum, r) => sum + r.rpi_score, 0) / results.length;
+    
+    // Step 6: Check against PMF criteria
+    const targetCitationRate = veContext.market_strategy.pmf.target_metrics.citation_rate;
+    const pmfStatus = citationRate >= targetCitationRate ? 'on_track' : 'needs_improvement';
+    
+    // Step 7: Audit log
+    await this.auditLog({
+      action: 'citation_test_completed',
+      tenant_id: params.tenant_id,
+      query_count: params.queries.length,
+      platform_count: params.platforms.length,
+      citation_rate: citationRate,
+      pmf_status: pmfStatus
+    });
+    
+    return {
+      success: true,
+      results,
+      metrics: {
+        citation_rate: citationRate,
+        avg_rpi_score: avgRPIScore,
+        pmf_status: pmfStatus
+      }
+    };
+  }
+  
+  private async testPlatform(query: string, platform: string, platformSpec: any) {
+    const response = await this.dataForSEO.testQuery({
+      query,
+      platform,
+      ...platformSpec.api_params
+    });
+    
+    const citations = this.extractCitations(response, platformSpec.citation_patterns);
+    const rpiScore = this.calculateRPI(citations, query);
+    
+    return { query, platform, citations, rpi_score: rpiScore };
+  }
+}
+```
+
+#### Step 4: Testing (UAT Section 7)
+
+```typescript
+// tests/integration/citation-tester.test.ts
+import { CitationTesterAgent } from '@/agents/citation-tester';
+import { setupTestTenant, cleanupTestTenant } from '@/test-utils';
+
+describe('CitationTesterAgent', () => {
+  let agent: CitationTesterAgent;
+  let testTenantId: string;
+  
+  beforeEach(async () => {
+    testTenantId = await setupTestTenant('foot-scientific-test');
+    agent = new CitationTesterAgent({ domain: 'baiv' });
+  });
+  
+  afterEach(async () => {
+    await cleanupTestTenant(testTenantId);
+  });
+  
+  it('should test citations across all platforms', async () => {
+    const result = await agent.execute({
+      tenant_id: testTenantId,
+      queries: ['foot surgery recovery'],
+      platforms: ['chatgpt', 'claude', 'gemini', 'perplexity']
+    });
+    
+    expect(result.success).toBe(true);
+    expect(result.results).toHaveLength(4); // 1 query × 4 platforms
+    expect(result.metrics.citation_rate).toBeGreaterThanOrEqual(0);
+  });
+  
+  it('should enforce tenant isolation', async () => {
+    // Create second tenant
+    const tenant2Id = await setupTestTenant('sierra-dreams-test');
+    
+    // Agent 1 creates data for tenant 1
+    await agent.execute({
+      tenant_id: testTenantId,
+      queries: ['test query 1'],
+      platforms: ['chatgpt']
+    });
+    
+    // Agent 2 should NOT see tenant 1's data
+    const agent2 = new CitationTesterAgent({ domain: 'baiv' });
+    await agent2.setTenantContext(tenant2Id);
+    
+    const tenant2Data = await agent2.db.citation_tests.select();
+    expect(tenant2Data).toHaveLength(0); // Should see NO data from tenant 1
+    
+    await cleanupTestTenant(tenant2Id);
+  });
+  
+  it('should validate against PMF criteria', async () => {
+    const result = await agent.execute({
+      tenant_id: testTenantId,
+      queries: ['foot surgery recovery', 'foot pain treatment'],
+      platforms: ['chatgpt', 'claude']
+    });
+    
+    expect(result.metrics.pmf_status).toMatch(/on_track|needs_improvement/);
+  });
+});
+```
+
+#### Step 5: Deployment (UAT Section 8)
+
+```bash
+# .env.production
+ANTHROPIC_API_KEY=<redacted>
+DATAFORSEO_API_KEY=<redacted>
+SUPABASE_URL=https://baiv-prod.supabase.co
+SUPABASE_ANON_KEY=<redacted>
+AIRTABLE_API_KEY=<redacted>
+```
+
+```typescript
+// app/api/agents/citation-tester/route.ts
+import { CitationTesterAgent } from '@/agents/citation-tester';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(req: NextRequest) {
+  try {
+    const params = await req.json();
+    
+    const agent = new CitationTesterAgent({
+      domain: 'baiv',
+      tenant_id: params.tenant_id
+    });
+    
+    const result = await agent.execute(params);
+    
+    return NextResponse.json(result);
+  } catch (error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
+}
+```
+
+---
+
+### A.9 Resolution Summary
+
+The HLD and Universal Agent Template resolve all identified gaps:
+
+| Gap | Resolution | Implementation Evidence |
+|-----|------------|------------------------|
+| **Gap 1: No Unified Template** | UAT provides standardized structure for all agents | Citation Tester follows exact template pattern |
+| **Gap 2: Design Not Integrated** | HLD Layer 4 + design token ontology | UI agents consume design-tokens:baiv |
+| **Gap 3: Security Not Linked to VE** | Authority Boundary + VE Context requirement | Citation Tester enforces tenant isolation + measures PMF |
+| **Gap 4: No Consolidated Build Order** | HLD Tier system + dependency declarations | OAA Agent (tier 1) → PM Agent (tier 2) → Domain agents (tier 3) |
+
+### A.10 Validation Criteria
+
+An agent implementation is considered complete when:
+
+✅ **Template Adherence**
+- [ ] Metadata follows UAT Section 1 format
+- [ ] JSON-LD specification follows UAT Section 2
+- [ ] All 4 architecture diagrams created (UAT Section 3)
+- [ ] Ontology bindings declared (UAT Section 4)
+- [ ] Authority boundary defined (UAT Section 5)
+
+✅ **VE Integration**
+- [ ] Agent requires ve-context-ontology or client-context-ontology
+- [ ] Agent measures against PMF signals
+- [ ] Agent respects RRR approval requirements
+
+✅ **Security Compliance**
+- [ ] Tenant isolation enforced (set_tenant_context)
+- [ ] RLS policies applied to all database operations
+- [ ] Audit logging for all mutations
+- [ ] Security tests pass (tenant isolation verified)
+
+✅ **Design System Compliance** (if UI-related)
+- [ ] Agent consumes design-tokens ontology
+- [ ] Generated code uses correct token references
+- [ ] Design validation tests pass
+
+✅ **Quality Gates**
+- [ ] 80%+ test coverage (unit + integration)
+- [ ] All quality checklist items complete (UAT Section 10)
+- [ ] Documentation complete (README, architecture diagrams)
+- [ ] Registered in OAA Registry
+
+---
+
+**Appendix Version:** 1.0.0  
+**Date Added:** December 30, 2025  
+**Purpose:** Demonstrate problem resolution through template implementation  
+**Scope:** PFC agents and PF Instance-specific agents (BAIV, W4M, AIR)
+
+---
+
 **Matrix Version:** 1.0.0  
 **Last Updated:** December 30, 2025  
 **Maintained By:** PF-Core Platform Team  
