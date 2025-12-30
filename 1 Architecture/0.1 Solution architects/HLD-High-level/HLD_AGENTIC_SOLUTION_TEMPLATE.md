@@ -1,8 +1,10 @@
 # High-Level Design: Agentic Solution Implementation Template
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Date:** December 30, 2025  
-**Changelog:** v1.1.0 - Fixed mermaid diagram rendering issues
+**Changelog:**
+- v1.2.0 - Fixed Layer 3-6 mermaid diagrams
+- v1.1.0 - Fixed initial mermaid diagram rendering issues
 **Scope:** Complete template for agentic solution implementation  
 **References:** PFC_AGENTIC_MVP_VISUAL_GUIDE_v2.2.md, AGENT_BUILD_MASTER_LIST.md, PF-CORE-OAA-AGENT-REGISTRY-INTEGRATION.md
 
@@ -329,36 +331,36 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "AGENT ECOSYSTEM"
-        subgraph "TIER 1: CORE (Week 1-2)"
-            OAA_A[OAA Agent<br/>Ontology Management]
-            VE_A[VE Agent<br/>VSOM + OKR + VP + PMF + GTM Context]
+    subgraph ECOSYSTEM["AGENT ECOSYSTEM"]
+        subgraph TIER1["TIER 1 CORE Week 1-2"]
+            OAA_A["OAA Agent<br/>Ontology Management"]
+            VE_A["VE Agent<br/>VSOM plus OKR plus VP plus PMF plus GTM Context"]
         end
         
-        subgraph "TIER 2: PLANNING (Week 3-4)"
-            PM_A[PM Agent<br/>PRD & Stories Generation]
-            ARCH_A[Architect Agent<br/>Technical Design]
+        subgraph TIER2["TIER 2 PLANNING Week 3-4"]
+            PM_A["PM Agent<br/>PRD and Stories Generation"]
+            ARCH_A["Architect Agent<br/>Technical Design"]
         end
         
-        subgraph "TIER 3: EXECUTION (Week 5-6)"
-            DEV_A[Developer Agent<br/>TDD Implementation]
-            TEST_A[Test Agent<br/>Quality Validation]
+        subgraph TIER3["TIER 3 EXECUTION Week 5-6"]
+            DEV_A["Developer Agent<br/>TDD Implementation"]
+            TEST_A["Test Agent<br/>Quality Validation"]
         end
         
-        subgraph "DOMAIN AGENTS (7 PHASES)"
-            PHASE1[Phase 1: Foundation<br/>Discovery • ICP]
-            PHASE2[Phase 2: Analysis<br/>Citation • Gap • Turn]
-            PHASE3[Phase 3: Monitoring<br/>Reddit • Bluesky • YouTube]
-            PHASE4[Phase 4: Content<br/>Blog • FAQ • Schema]
-            PHASE5[Phase 5: Publishing<br/>Postiz • WordPress]
-            PHASE6[Phase 6: Lead Gen<br/>Hunter • LinkedIn]
-            PHASE7[Phase 7: Advanced<br/>Gemini 3 • Interactive]
+        subgraph DOMAIN["DOMAIN AGENTS 7 PHASES"]
+            PHASE1["Phase 1: Foundation<br/>Discovery • ICP"]
+            PHASE2["Phase 2: Analysis<br/>Citation • Gap • Turn"]
+            PHASE3["Phase 3: Monitoring<br/>Reddit • Bluesky • YouTube"]
+            PHASE4["Phase 4: Content<br/>Blog • FAQ • Schema"]
+            PHASE5["Phase 5: Publishing<br/>Postiz • WordPress"]
+            PHASE6["Phase 6: Lead Gen<br/>Hunter • LinkedIn"]
+            PHASE7["Phase 7: Advanced<br/>Gemini 3 • Interactive"]
         end
         
-        subgraph "ORCHESTRATION"
-            CONTEXT[Shared Context<br/>CLAUDE.md + Memory]
-            HANDOFF[Agent Handoff Protocol]
-            STATE[State Management]
+        subgraph ORCHESTRATION["ORCHESTRATION"]
+            CONTEXT["Shared Context<br/>CLAUDE.md plus Memory"]
+            HANDOFF["Agent Handoff Protocol"]
+            STATE["State Management"]
         end
     end
     
@@ -385,10 +387,10 @@ graph TB
     
     STATE --> TEST_A
     
-    style TIER 1 fill:#DC2626,color:#fff
-    style TIER 2 fill:#F59E0B,color:#fff
-    style TIER 3 fill:#10B981,color:#fff
-    style DOMAIN_AGENTS fill:#3B82F6,color:#fff
+    style TIER1 fill:#DC2626,color:#fff
+    style TIER2 fill:#F59E0B,color:#fff
+    style TIER3 fill:#10B981,color:#fff
+    style DOMAIN fill:#3B82F6,color:#fff
     style ORCHESTRATION fill:#8B5CF6,color:#fff
 ```
 
@@ -406,37 +408,37 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "FIGMA DESIGN-TO-CODE PIPELINE"
-        subgraph "DESIGN TOKENS (3-TIER)"
-            PRIMITIVE[Primitive Tokens<br/>primitive/color/brand/primary → #00A4BF]
-            SEMANTIC[Semantic Tokens<br/>semantic/color/primary/default → {brand/primary}]
-            COMPONENT[Component Tokens<br/>component/button/primary/background → {primary/default}]
+    subgraph PIPELINE["FIGMA DESIGN-TO-CODE PIPELINE"]
+        subgraph TOKENS["DESIGN TOKENS 3-TIER"]
+            PRIMITIVE["Primitive Tokens<br/>primitive color brand primary to #00A4BF"]
+            SEMANTIC["Semantic Tokens<br/>semantic color primary default to brand primary"]
+            COMPONENT["Component Tokens<br/>component button primary background to primary default"]
         end
         
-        subgraph "DESIGN DOMAINS"
-            D1[Primitives<br/>Colors • Dimensions • Typography]
-            D2[Semantics<br/>Naming • Hierarchy • Purpose]
-            D3[Components<br/>Atoms • Molecules • Organisms]
-            D4[Layout<br/>Auto Layout → Flexbox/Grid]
-            D5[Behaviour<br/>States • Transitions • Animations]
+        subgraph DOMAINS["DESIGN DOMAINS"]
+            D1["Primitives<br/>Colors • Dimensions • Typography"]
+            D2["Semantics<br/>Naming • Hierarchy • Purpose"]
+            D3["Components<br/>Atoms • Molecules • Organisms"]
+            D4["Layout<br/>Auto Layout to Flexbox Grid"]
+            D5["Behaviour<br/>States • Transitions • Animations"]
         end
         
-        subgraph "MCP EXTRACTION"
-            MCP_DESIGN[get_design_context<br/>Layer Hierarchy • Styles • Layout]
-            MCP_VAR[get_variable_defs<br/>Collections • Variables • Modes]
+        subgraph MCP["MCP EXTRACTION"]
+            MCP_DESIGN["get_design_context<br/>Layer Hierarchy • Styles • Layout"]
+            MCP_VAR["get_variable_defs<br/>Collections • Variables • Modes"]
         end
         
-        subgraph "CODE GENERATION"
-            REACT[React/Next.js<br/>Components + TypeScript]
-            TAILWIND[Tailwind CSS<br/>Utility Classes + Config]
-            SHADCN[shadcn/ui<br/>Component Library]
+        subgraph CODEGEN["CODE GENERATION"]
+            REACT["React Next.js<br/>Components plus TypeScript"]
+            TAILWIND["Tailwind CSS<br/>Utility Classes plus Config"]
+            SHADCN["shadcn ui<br/>Component Library"]
         end
         
-        subgraph "UI PANELS"
-            PM_PANEL[Program Manager<br/>VE Strategic + Market + Context]
-            PLAN_PANEL[Plan<br/>VE Summary + PRD + Stories]
-            BUILD_PANEL[Build<br/>OAA + Data + TDD + Actions]
-            TRACK_PANEL[Track<br/>Progress + Quality + PMF Signals]
+        subgraph PANELS["UI PANELS"]
+            PM_PANEL["Program Manager<br/>VE Strategic plus Market plus Context"]
+            PLAN_PANEL["Plan<br/>VE Summary plus PRD plus Stories"]
+            BUILD_PANEL["Build<br/>OAA plus Data plus TDD plus Actions"]
+            TRACK_PANEL["Track<br/>Progress plus Quality plus PMF Signals"]
         end
     end
     
@@ -463,11 +465,11 @@ graph TB
     SHADCN --> BUILD_PANEL
     SHADCN --> TRACK_PANEL
     
-    style DESIGN_TOKENS fill:#00A4BF,color:#fff
-    style DESIGN_DOMAINS fill:#E84E1C,color:#fff
-    style MCP_EXTRACTION fill:#CEC528,color:#000
-    style CODE_GENERATION fill:#019587,color:#fff
-    style UI_PANELS fill:#6366F1,color:#fff
+    style TOKENS fill:#00A4BF,color:#fff
+    style DOMAINS fill:#E84E1C,color:#fff
+    style MCP fill:#CEC528,color:#000
+    style CODEGEN fill:#019587,color:#fff
+    style PANELS fill:#6366F1,color:#fff
 ```
 
 **BAIV Design Tokens:**
@@ -481,31 +483,31 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "DATA & API ARCHITECTURE"
-        subgraph "DATABASE (Supabase PostgreSQL)"
-            TABLES[Standard Table Pattern<br/>id • tenant_id • metadata JSONB • data JSONB]
-            RLS[Row Level Security<br/>Tenant Isolation + Service Bypass]
-            INDEXES[Indexes<br/>Performance Optimization]
+    subgraph DATAAPI["DATA AND API ARCHITECTURE"]
+        subgraph DB["DATABASE Supabase PostgreSQL"]
+            TABLES["Standard Table Pattern<br/>id • tenant_id • metadata JSONB • data JSONB"]
+            RLS["Row Level Security<br/>Tenant Isolation plus Service Bypass"]
+            INDEXES["Indexes<br/>Performance Optimization"]
         end
         
-        subgraph "SECURITY FOUNDATION"
-            CONTEXT_FN[set_tenant_context()<br/>Session Management]
-            AUDIT_LOG[audit_log<br/>All Mutations Tracked]
-            ORG_STATE[organization_cycle_state<br/>Workflow Management]
-            PRESENCE[user_presence<br/>Real-time Collaboration]
-            LOCKS[dataset_edit_locks<br/>Concurrent Editing]
+        subgraph SECURITY["SECURITY FOUNDATION"]
+            CONTEXT_FN["set_tenant_context<br/>Session Management"]
+            AUDIT_LOG["audit_log<br/>All Mutations Tracked"]
+            ORG_STATE["organization_cycle_state<br/>Workflow Management"]
+            PRESENCE["user_presence<br/>Real-time Collaboration"]
+            LOCKS["dataset_edit_locks<br/>Concurrent Editing"]
         end
         
-        subgraph "API LAYER"
-            REST[REST Endpoints<br/>Generated from Ontologies]
-            ZOD[Zod Validation<br/>Runtime Schema Checks]
-            TYPES[TypeScript Types<br/>Compile-time Safety]
-            TRANSFORM[Data Transform<br/>Ontology Mapping]
+        subgraph API["API LAYER"]
+            REST["REST Endpoints<br/>Generated from Ontologies"]
+            ZOD["Zod Validation<br/>Runtime Schema Checks"]
+            TYPES["TypeScript Types<br/>Compile-time Safety"]
+            TRANSFORM["Data Transform<br/>Ontology Mapping"]
         end
         
-        subgraph "ONTOLOGY-DRIVEN FLOW"
-            ONT[JSON-LD Ontology]
-            GEN[Code Generator]
+        subgraph ONTO["ONTOLOGY-DRIVEN FLOW"]
+            ONT["JSON-LD Ontology"]
+            GEN["Code Generator"]
         end
     end
     
@@ -529,10 +531,10 @@ graph TB
     ZOD --> TYPES
     TYPES --> TRANSFORM
     
-    style DATABASE fill:#0891B2,color:#fff
-    style SECURITY_FOUNDATION fill:#DC2626,color:#fff
-    style API_LAYER fill:#F59E0B,color:#fff
-    style ONTOLOGY_DRIVEN_FLOW fill:#10B981,color:#fff
+    style DB fill:#0891B2,color:#fff
+    style SECURITY fill:#DC2626,color:#fff
+    style API fill:#F59E0B,color:#fff
+    style ONTO fill:#10B981,color:#fff
 ```
 
 **Database Table Pattern:**
@@ -561,26 +563,26 @@ CREATE TABLE {table_name} (
 
 ```mermaid
 graph TB
-    subgraph "INTEGRATION & ORCHESTRATION"
-        subgraph "AGENT ORCHESTRATION"
-            SHARED[Shared Context<br/>CLAUDE.md + Memory]
-            HANDOFF[Agent Handoff Protocol<br/>State Transfer]
-            STATE_MGR[State Management<br/>Workflow Progress]
-            TOOL_ACCESS[Tool Access<br/>MCP Integration]
+    subgraph INTEGRATION["INTEGRATION AND ORCHESTRATION"]
+        subgraph AGENT_ORCH["AGENT ORCHESTRATION"]
+            SHARED["Shared Context<br/>CLAUDE.md plus Memory"]
+            HANDOFF["Agent Handoff Protocol<br/>State Transfer"]
+            STATE_MGR["State Management<br/>Workflow Progress"]
+            TOOL_ACCESS["Tool Access<br/>MCP Integration"]
         end
         
-        subgraph "EXTERNAL INTEGRATIONS"
-            FIGMA_INT[Figma MCP<br/>Design Extraction]
-            DATAFOR[DataForSEO<br/>AI Platform Testing]
-            AIRTABLE[Airtable<br/>Client Data Storage]
-            GITHUB[GitHub<br/>Code Management]
-            POSTIZ[Postiz<br/>Social Publishing]
+        subgraph EXTERNAL["EXTERNAL INTEGRATIONS"]
+            FIGMA_INT["Figma MCP<br/>Design Extraction"]
+            DATAFOR["DataForSEO<br/>AI Platform Testing"]
+            AIRTABLE["Airtable<br/>Client Data Storage"]
+            GITHUB["GitHub<br/>Code Management"]
+            POSTIZ["Postiz<br/>Social Publishing"]
         end
         
-        subgraph "EVENT SYSTEM"
-            EVENTS[Event Bus<br/>Agent Communication]
-            WEBHOOK[Webhooks<br/>External Notifications]
-            QUEUE[Job Queue<br/>Async Processing]
+        subgraph EVENTS["EVENT SYSTEM"]
+            EVENT_BUS["Event Bus<br/>Agent Communication"]
+            WEBHOOK["Webhooks<br/>External Notifications"]
+            QUEUE["Job Queue<br/>Async Processing"]
         end
     end
     
@@ -594,13 +596,13 @@ graph TB
     TOOL_ACCESS --> GITHUB
     TOOL_ACCESS --> POSTIZ
     
-    STATE_MGR --> EVENTS
-    EVENTS --> WEBHOOK
+    STATE_MGR --> EVENT_BUS
+    EVENT_BUS --> WEBHOOK
     WEBHOOK --> QUEUE
     
-    style AGENT_ORCHESTRATION fill:#8B5CF6,color:#fff
-    style EXTERNAL_INTEGRATIONS fill:#3B82F6,color:#fff
-    style EVENT_SYSTEM fill:#10B981,color:#fff
+    style AGENT_ORCH fill:#8B5CF6,color:#fff
+    style EXTERNAL fill:#3B82F6,color:#fff
+    style EVENTS fill:#10B981,color:#fff
 ```
 
 ---
@@ -651,24 +653,24 @@ gantt
 
 ```mermaid
 graph LR
-    subgraph "Days 1-2: Strategic Foundation"
-        A1[Setup VE Modules<br/>RRR, VSOM, OKR]
-        A2[Client-Org Context Schema]
-        A3[PF-Instance Configuration]
+    subgraph DAYS12["Days 1-2 Strategic Foundation"]
+        A1["Setup VE Modules<br/>RRR VSOM OKR"]
+        A2["Client-Org Context Schema"]
+        A3["PF-Instance Configuration"]
     end
     
-    subgraph "Days 3-4: Market Strategy"
-        B1[Value Proposition Module]
-        B2[PMF Tracking Module]
-        B3[GTM Strategy Module]
-        B4[PMF Signals Schema]
+    subgraph DAYS34["Days 3-4 Market Strategy"]
+        B1["Value Proposition Module"]
+        B2["PMF Tracking Module"]
+        B3["GTM Strategy Module"]
+        B4["PMF Signals Schema"]
     end
     
-    subgraph "Day 5: OAA Start"
-        C1[OAA Agent Interface]
-        C2[Schema.org Parser]
-        C3[Ontology Generator]
-        C4[Validation Engine]
+    subgraph DAY5["Day 5 OAA Start"]
+        C1["OAA Agent Interface"]
+        C2["Schema.org Parser"]
+        C3["Ontology Generator"]
+        C4["Validation Engine"]
     end
     
     A1 --> A2 --> A3
@@ -677,41 +679,41 @@ graph LR
     B4 --> C1
     C1 --> C2 --> C3 --> C4
     
-    style Days_1-2 fill:#6366F1,color:#fff
-    style Days_3-4 fill:#EC4899,color:#fff
-    style Day_5 fill:#DC2626,color:#fff
+    style DAYS12 fill:#6366F1,color:#fff
+    style DAYS34 fill:#EC4899,color:#fff
+    style DAY5 fill:#DC2626,color:#fff
 ```
 
 #### Week 2: OAA Agent & Ontologies
 
 ```mermaid
 graph LR
-    subgraph "Days 1-2: OAA Core"
-        A[Ontology Creation API]
-        B[JSON-LD Generator]
-        C[Schema.org Mapping]
-        D[Registry Integration]
+    subgraph DAYS12W2["Days 1-2 OAA Core"]
+        A["Ontology Creation API"]
+        B["JSON-LD Generator"]
+        C["Schema.org Mapping"]
+        D["Registry Integration"]
     end
     
-    subgraph "Days 3-4: BAIV Ontologies"
-        E[Discovery Ontologies]
-        F[Content Ontologies]
-        G[Visibility Ontologies]
+    subgraph DAYS34W2["Days 3-4 BAIV Ontologies"]
+        E["Discovery Ontologies"]
+        F["Content Ontologies"]
+        G["Visibility Ontologies"]
     end
     
-    subgraph "Day 5: VE Ontologies"
-        H[VP Ontology]
-        I[PMF Ontology]
-        J[GTM Ontology]
+    subgraph DAY5W2["Day 5 VE Ontologies"]
+        H["VP Ontology"]
+        I["PMF Ontology"]
+        J["GTM Ontology"]
     end
     
     A --> B --> C --> D
     D --> E --> F --> G
     G --> H --> I --> J
     
-    style Days_1-2 fill:#DC2626,color:#fff
-    style Days_3-4 fill:#3B82F6,color:#fff
-    style Day_5 fill:#EC4899,color:#fff
+    style DAYS12W2 fill:#DC2626,color:#fff
+    style DAYS34W2 fill:#3B82F6,color:#fff
+    style DAY5W2 fill:#EC4899,color:#fff
 ```
 
 ---
@@ -722,29 +724,29 @@ graph LR
 
 ```mermaid
 graph TB
-    subgraph "BEFORE CODE GENERATION"
-        B1[BAIV Token Library Published]
-        B2[Library Enabled in Figma Make]
-        B3[BAIV Colors in Prompt]
-        B4[MCP Extraction Configured]
-        B5[Variable Definitions Extracted]
+    subgraph BEFORE["BEFORE CODE GENERATION"]
+        B1["BAIV Token Library Published"]
+        B2["Library Enabled in Figma Make"]
+        B3["BAIV Colors in Prompt"]
+        B4["MCP Extraction Configured"]
+        B5["Variable Definitions Extracted"]
     end
     
-    subgraph "DURING CODE GENERATION"
-        D1[React/Next.js + TypeScript]
-        D2[Tailwind CSS + BAIV Config]
-        D3[shadcn/ui Components]
-        D4[CSS Variables Mapped]
-        D5[Fonts Imported]
-        D6[Component Variants Match]
+    subgraph DURING["DURING CODE GENERATION"]
+        D1["React Next.js plus TypeScript"]
+        D2["Tailwind CSS plus BAIV Config"]
+        D3["shadcn ui Components"]
+        D4["CSS Variables Mapped"]
+        D5["Fonts Imported"]
+        D6["Component Variants Match"]
     end
     
-    subgraph "AFTER CODE GENERATION"
-        A1[Auto Layout → Flexbox Verified]
-        A2[Token Bindings Preserved]
-        A3[Responsive Breakpoints]
-        A4[Interactive States]
-        A5[Accessibility Semantics]
+    subgraph AFTER["AFTER CODE GENERATION"]
+        A1["Auto Layout to Flexbox Verified"]
+        A2["Token Bindings Preserved"]
+        A3["Responsive Breakpoints"]
+        A4["Interactive States"]
+        A5["Accessibility Semantics"]
     end
     
     B1 --> B2 --> B3 --> B4 --> B5
@@ -766,34 +768,34 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "MVP SUCCESS CRITERIA"
-        subgraph "FOUNDATION"
-            F1[✓ OAA Agent: Create, Test, Document]
-            F2[✓ VE Strategic: RRR, VSOM, OKR]
-            F3[✓ VE Market: VP, PMF, GTM]
-            F4[✓ VE to PRD Flow Complete]
+    subgraph CRITERIA["MVP SUCCESS CRITERIA"]
+        subgraph FOUNDATION["FOUNDATION"]
+            F1["Complete OAA Agent: Create Test Document"]
+            F2["Complete VE Strategic: RRR VSOM OKR"]
+            F3["Complete VE Market: VP PMF GTM"]
+            F4["Complete VE to PRD Flow"]
         end
         
-        subgraph "DEVELOPMENT"
-            D1[✓ PRD Generation Automated]
-            D2[✓ Plan Phase: Specs & Stories]
-            D3[✓ Security: RLS + Audit]
-            D4[✓ Build Phase: DB + API from Ontologies]
-            D5[✓ TDD: 80%+ Coverage]
+        subgraph DEVELOPMENT["DEVELOPMENT"]
+            D1["Complete PRD Generation Automated"]
+            D2["Complete Plan Phase: Specs and Stories"]
+            D3["Complete Security: RLS plus Audit"]
+            D4["Complete Build Phase: DB plus API from Ontologies"]
+            D5["Complete TDD: 80 percent plus Coverage"]
         end
         
-        subgraph "DESIGN & TRACKING"
-            DS1[✓ Design System: BAIV Tokens in Code]
-            DS2[✓ Figma→Code Verified]
-            DS3[✓ Track Phase: Progress + PMF Signals]
-            DS4[✓ PMF Feedback Loop Active]
+        subgraph DESIGN["DESIGN AND TRACKING"]
+            DS1["Complete Design System: BAIV Tokens in Code"]
+            DS2["Complete Figma to Code Verified"]
+            DS3["Complete Track Phase: Progress plus PMF Signals"]
+            DS4["Complete PMF Feedback Loop Active"]
         end
         
-        subgraph "INTEGRATION"
-            I1[✓ End-to-End Workflow Operational]
-            I2[✓ Agent Orchestration Working]
-            I3[✓ Security Verified]
-            I4[✓ Documentation Complete]
+        subgraph INTEGRATION["INTEGRATION"]
+            I1["Complete End-to-End Workflow Operational"]
+            I2["Complete Agent Orchestration Working"]
+            I3["Complete Security Verified"]
+            I4["Complete Documentation Complete"]
         end
     end
     
@@ -807,7 +809,7 @@ graph TB
     
     style FOUNDATION fill:#6366F1,color:#fff
     style DEVELOPMENT fill:#F59E0B,color:#fff
-    style DESIGN_TRACKING fill:#00A4BF,color:#fff
+    style DESIGN fill:#00A4BF,color:#fff
     style INTEGRATION fill:#10B981,color:#fff
 ```
 
@@ -874,22 +876,21 @@ CREATE TRIGGER {table_name}_audit
 
 ```mermaid
 graph LR
-    subgraph "RISKS & MITIGATIONS"
-        R1[OAA Agent Complexity] -->|Mitigate| M1[Build Incrementally<br/>Test Each Ontology]
-        R2[Agent Orchestration State] -->|Mitigate| M2[Use Proven Patterns<br/>CLAUDE.md Context]
-        R3[RLS Performance] -->|Mitigate| M3[Proper Indexing<br/>Batch Operations]
-        R4[Design Token Drift] -->|Mitigate| M4[Ontology-Driven<br/>Regeneration]
+    subgraph RISKS["RISKS AND MITIGATIONS"]
+        R1["OAA Agent Complexity"] --> M1["Build Incrementally<br/>Test Each Ontology"]
+        R2["Agent Orchestration State"] --> M2["Use Proven Patterns<br/>CLAUDE.md Context"]
+        R3["RLS Performance"] --> M3["Proper Indexing<br/>Batch Operations"]
+        R4["Design Token Drift"] --> M4["Ontology-Driven<br/>Regeneration"]
     end
     
-    subgraph "PROCESS RISKS"
-        P1[Skipping VE Validation] -->|Mitigate| MP1[Gate PRD on<br/>VE Completeness]
-        P2[Building Without Ontologies] -->|Mitigate| MP2[OAA Agent Week 1-2<br/>Blocking]
-        P3[Design-Code Mismatch] -->|Mitigate| MP3[MCP Extraction +<br/>Token Binding Verification]
+    subgraph PROCESS["PROCESS RISKS"]
+        P1["Skipping VE Validation"] --> MP1["Gate PRD on<br/>VE Completeness"]
+        P2["Building Without Ontologies"] --> MP2["OAA Agent Week 1-2<br/>Blocking"]
+        P3["Design-Code Mismatch"] --> MP3["MCP Extraction plus<br/>Token Binding Verification"]
     end
     
     style RISKS fill:#EF4444,color:#fff
-    style MITIGATIONS fill:#10B981,color:#fff
-    style PROCESS_RISKS fill:#F59E0B,color:#fff
+    style PROCESS fill:#F59E0B,color:#fff
 ```
 
 ---
@@ -932,37 +933,37 @@ gantt
 
 ```mermaid
 graph TB
-    subgraph "KEY METRICS"
-        subgraph "VELOCITY"
-            V1[Time: VE Complete → PRD]
-            V2[Time: Ontology Change → Schema Regen]
-            V3[Time: Design → Code]
+    subgraph METRICS["KEY METRICS"]
+        subgraph VELOCITY["VELOCITY"]
+            V1["Time: VE Complete to PRD"]
+            V2["Time: Ontology Change to Schema Regen"]
+            V3["Time: Design to Code"]
         end
         
-        subgraph "QUALITY"
-            Q1[Test Coverage %]
-            Q2[Ontology Validation Pass Rate]
-            Q3[Security Audit Score]
+        subgraph QUALITY["QUALITY"]
+            Q1["Test Coverage Percent"]
+            Q2["Ontology Validation Pass Rate"]
+            Q3["Security Audit Score"]
         end
         
-        subgraph "PMF SIGNALS"
-            P1[Retention Rate]
-            P2[NPS Score]
-            P3[Organic Growth Rate]
-            P4[Usage Frequency]
+        subgraph PMF_SIG["PMF SIGNALS"]
+            P1["Retention Rate"]
+            P2["NPS Score"]
+            P3["Organic Growth Rate"]
+            P4["Usage Frequency"]
         end
         
-        subgraph "AGENT PERFORMANCE"
-            A1[Agent Execution Success Rate]
-            A2[Average Execution Time]
-            A3[Error Rate]
+        subgraph AGENT_PERF["AGENT PERFORMANCE"]
+            A1["Agent Execution Success Rate"]
+            A2["Average Execution Time"]
+            A3["Error Rate"]
         end
     end
     
     style VELOCITY fill:#3B82F6,color:#fff
     style QUALITY fill:#10B981,color:#fff
-    style PMF_SIGNALS fill:#F59E0B,color:#fff
-    style AGENT_PERFORMANCE fill:#8B5CF6,color:#fff
+    style PMF_SIG fill:#F59E0B,color:#fff
+    style AGENT_PERF fill:#8B5CF6,color:#fff
 ```
 
 ---
