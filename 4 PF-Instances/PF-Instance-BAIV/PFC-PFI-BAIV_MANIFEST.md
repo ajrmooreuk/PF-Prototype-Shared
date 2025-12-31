@@ -1,10 +1,10 @@
-# PFC-PFI-BAIV Artifact Manifest & Traceability Matrix v1.0.0
+# PFC-PFI-BAIV Artifact Manifest & Traceability Matrix v1.1.0
 
 **Complete documentation manifest with GitHub links and PFC↔BAIV traceability**
 
 | Attribute | Value |
 |-----------|-------|
-| **Document Version** | 1.0.0 |
+| **Document Version** | 1.1.0 |
 | **Date** | December 31, 2025 |
 | **Purpose** | Comprehensive manifest and traceability for all PFC-PFI-BAIV artifacts |
 | **Status** | 🟢 Active |
@@ -28,8 +28,10 @@ This manifest catalogs **15 key artifacts** across 3 implementation phases (Phas
 1. [Phase 1: PFC-PFI-BAIV Integration](#phase-1-pfc-pfi-baiv-integration)
 2. [Phase 2: BAIV-Specific Documentation](#phase-2-baiv-specific-documentation)
 3. [Phase 3: Implementation Planning](#phase-3-implementation-planning)
-4. [Traceability Matrix](#traceability-matrix)
-5. [Quick Reference](#quick-reference)
+4. [Dependency Diagrams](#dependency-diagrams)
+5. [Traceability Matrix](#traceability-matrix)
+6. [Version Control History](#version-control-history)
+7. [Quick Reference](#quick-reference)
 
 ---
 
@@ -273,6 +275,343 @@ This manifest catalogs **15 key artifacts** across 3 implementation phases (Phas
 
 ---
 
+## Dependency Diagrams
+
+### 4.1 Document Dependency Flow
+
+```mermaid
+graph TD
+    %% Phase 1 - Foundation
+    A[PFC-PFI-BAIV_MODULE_CATALOG]
+    B[PFC-PFI-BAIV_INTEGRATION_BRIDGES]
+    C[PFC-PFI-BAIV_AGENTIC_BUILDER_GUIDE]
+    D[PFC-PFI-BAIV_GAP_ANALYSIS_ARCHITECTURE]
+    E[HLD_AGENTIC_SOLUTION_TEMPLATE v1.3.0]
+    
+    %% Phase 2 - Documentation
+    F[BAIV_AGENT_INVENTORY]
+    G[DASHBOARD_TEMPLATES]
+    H[BAIV_ONTOLOGY_REGISTRY]
+    I[BAIV_SECURITY_IMPLEMENTATION]
+    J[BAIV_COMPLIANCE_CHECKLIST]
+    
+    %% Phase 3 - Implementation
+    K[BAIV_DATABASE_SCHEMA]
+    L[BAIV_API_SPECIFICATION]
+    M[BAIV_DEPLOYMENT_GUIDE]
+    N[BAIV_TESTING_STRATEGY]
+    O[BAIV_MVP_ROADMAP]
+    
+    %% Manifest
+    P[PFC-PFI-BAIV_MANIFEST v1.1.0]
+    
+    %% Phase 1 Dependencies
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    B --> E
+    
+    %% Phase 1 to Phase 2
+    A --> F
+    A --> H
+    B --> I
+    B --> G
+    C --> F
+    D --> H
+    
+    %% Phase 2 to Phase 3
+    H --> K
+    H --> L
+    I --> K
+    B --> K
+    K --> L
+    L --> M
+    L --> N
+    F --> O
+    H --> L
+    K --> I
+    I --> J
+    
+    %% Phase 2 Internal
+    H --> F
+    G --> O
+    
+    %% Phase 3 Dependencies
+    K --> N
+    L --> N
+    M --> O
+    N --> O
+    
+    %% All to Manifest
+    A --> P
+    B --> P
+    C --> P
+    D --> P
+    E --> P
+    F --> P
+    G --> P
+    H --> P
+    I --> P
+    J --> P
+    K --> P
+    L --> P
+    M --> P
+    N --> P
+    O --> P
+    
+    %% Styling
+    classDef phase1 fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef phase2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef phase3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef manifest fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    
+    class A,B,C,D,E phase1
+    class F,G,H,I,J phase2
+    class K,L,M,N,O phase3
+    class P manifest
+```
+
+### 4.2 PF-Core Module Integration Architecture
+
+```mermaid
+graph LR
+    %% PF-Core Modules
+    subgraph PFC["PF-Core Platform Modules"]
+        VE["Value Engineering<br/>10 modules"]
+        SEC["Security<br/>4 modules"]
+        DSN["Design<br/>6 modules"]
+        CRM["CRM<br/>2 modules"]
+        OAA["Agent Core<br/>2 modules"]
+        AB["Agentic Builder<br/>6 modules"]
+    end
+    
+    %% Integration Bridges
+    subgraph BRIDGES["Integration Bridges"]
+        VE_BR["Value Engineering<br/>Bridge"]
+        SEC_BR["Security<br/>Bridge"]
+        DSN_BR["Design<br/>Bridge"]
+        OAA_BR["Agent Orchestration<br/>Bridge"]
+    end
+    
+    %% BAIV Components
+    subgraph BAIV["BAIV Instance"]
+        AGENTS["16 Agents<br/>7 Phases"]
+        ONT["30+ Ontologies<br/>5 Categories"]
+        DB["Database<br/>11 Tables"]
+        API["API<br/>13 Endpoints"]
+        DASH["Dashboard<br/>5 Perspectives"]
+    end
+    
+    %% Connections
+    VE --> VE_BR
+    SEC --> SEC_BR
+    DSN --> DSN_BR
+    OAA --> OAA_BR
+    AB --> OAA_BR
+    CRM --> VE_BR
+    
+    VE_BR --> ONT
+    VE_BR --> DB
+    VE_BR --> DASH
+    
+    SEC_BR --> DB
+    SEC_BR --> API
+    
+    DSN_BR --> DASH
+    
+    OAA_BR --> AGENTS
+    OAA_BR --> ONT
+    OAA_BR --> DB
+    
+    AGENTS --> ONT
+    ONT --> DB
+    DB --> API
+    API --> DASH
+    
+    %% Styling
+    classDef pfcStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef bridgeStyle fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef baivStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    
+    class VE,SEC,DSN,CRM,OAA,AB pfcStyle
+    class VE_BR,SEC_BR,DSN_BR,OAA_BR bridgeStyle
+    class AGENTS,ONT,DB,API,DASH baivStyle
+```
+
+### 4.3 Implementation Timeline & Dependencies
+
+```mermaid
+gantt
+    title BAIV MVP Implementation Timeline (6 Weeks)
+    dateFormat YYYY-MM-DD
+    section Phase 1 (Complete)
+    Module Catalog           :done, p1a, 2025-12-01, 2d
+    Integration Bridges      :done, p1b, 2025-12-03, 2d
+    Agentic Builder Guide    :done, p1c, 2025-12-05, 2d
+    Gap Analysis Arch        :done, p1d, 2025-12-07, 1d
+    HLD Template v1.3.0      :done, p1e, 2025-12-08, 1d
+    
+    section Phase 2 (Complete)
+    Agent Inventory          :done, p2a, 2025-12-09, 2d
+    Dashboard Templates      :done, p2b, 2025-12-11, 2d
+    Ontology Registry        :done, p2c, 2025-12-13, 2d
+    Security Implementation  :done, p2d, 2025-12-15, 1d
+    Compliance Checklist     :done, p2e, 2025-12-16, 1d
+    
+    section Phase 3 (Complete)
+    Database Schema          :done, p3a, 2025-12-17, 2d
+    API Specification        :done, p3b, 2025-12-19, 2d
+    Deployment Guide         :done, p3c, 2025-12-21, 1d
+    Testing Strategy         :done, p3d, 2025-12-22, 1d
+    MVP Roadmap              :done, p3e, 2025-12-23, 1d
+    Manifest v1.1.0          :done, p3f, 2025-12-31, 1d
+    
+    section Week 1-2: Foundation
+    Database Setup           :crit, w1a, 2026-01-06, 3d
+    API Foundation           :crit, w1b, 2026-01-09, 2d
+    Authentication           :crit, w2a, 2026-01-13, 2d
+    Ontology CRUD            :w2b, 2026-01-15, 3d
+    
+    section Week 3-4: Core Agents
+    Agent Registry           :crit, w3a, 2026-01-20, 2d
+    Discovery Agent          :crit, w3b, 2026-01-22, 3d
+    Citation Tester          :w4a, 2026-01-27, 2d
+    Gap Analyzer             :w4b, 2026-01-29, 3d
+    
+    section Week 5-6: Dashboard & Launch
+    Dashboard Implementation :w5a, 2026-02-03, 3d
+    Deployment               :crit, w5b, 2026-02-06, 2d
+    Integration Testing      :crit, w6a, 2026-02-10, 2d
+    UAT & Launch             :milestone, w6b, 2026-02-14, 1d
+```
+
+### 4.4 Agent Dependency Graph
+
+```mermaid
+graph TD
+    %% Foundation Agents
+    DISC["Discovery Agent<br/>P1"]
+    ICP["ICP Discovery Agent<br/>P1"]
+    
+    %% Analysis Agents
+    CT["Citation Tester<br/>P2"]
+    QE["Query Expansion<br/>P2"]
+    GA["Gap Analyzer<br/>P2"]
+    TA["Turn Analysis<br/>P2"]
+    LLM["LLM Mentions<br/>P2"]
+    AM["Attribution Metrics<br/>P2"]
+    
+    %% Data Collection Agents
+    RS["Reddit Scraper<br/>P3"]
+    BS["Bluesky Scraper<br/>P3"]
+    YT["YouTube Analyzer<br/>P3"]
+    
+    %% Content Creation Agents
+    BC["Blog Creator<br/>P4"]
+    SMC["Social Media Creator<br/>P4"]
+    
+    %% Publishing Agent
+    PP["Postiz Publisher<br/>P5"]
+    
+    %% Lead Generation
+    HLF["Hunter Lead Finder<br/>P6"]
+    
+    %% Testing Agent
+    GAIT["Google AI Mode Tester<br/>P7"]
+    
+    %% PF-Core Dependencies
+    PFC_VE["PF-Core:<br/>Value Engineering"]
+    PFC_SEC["PF-Core:<br/>Security"]
+    PFC_OAA["PF-Core:<br/>Agent Core"]
+    PFC_CRM["PF-Core:<br/>CRM"]
+    
+    %% BAIV Infrastructure
+    ONT["Ontology Registry<br/>30+ Ontologies"]
+    DB["Database<br/>11 Tables"]
+    API["API Layer<br/>13 Endpoints"]
+    
+    %% Foundation Dependencies
+    PFC_OAA --> DISC
+    PFC_CRM --> DISC
+    PFC_VE --> ICP
+    PFC_CRM --> ICP
+    ONT --> DISC
+    ONT --> ICP
+    
+    %% Discovery to Analysis
+    DISC --> CT
+    DISC --> QE
+    DISC --> GA
+    ICP --> GA
+    ICP --> QE
+    
+    %% Analysis Dependencies
+    PFC_OAA --> CT
+    ONT --> CT
+    ONT --> GA
+    QE --> CT
+    CT --> AM
+    GA --> BC
+    PFC_VE --> TA
+    
+    %% Scraper Dependencies
+    CT --> RS
+    CT --> BS
+    CT --> YT
+    LLM --> RS
+    LLM --> BS
+    
+    %% Content Creation
+    GA --> BC
+    GA --> SMC
+    PFC_CRM --> BC
+    PFC_CRM --> SMC
+    
+    %% Publishing
+    BC --> PP
+    SMC --> PP
+    PFC_SEC --> PP
+    
+    %% Lead Generation
+    AM --> HLF
+    ICP --> HLF
+    
+    %% Testing
+    CT --> GAIT
+    QE --> GAIT
+    
+    %% Infrastructure
+    DB --> API
+    API --> DISC
+    API --> ICP
+    API --> CT
+    API --> GA
+    
+    %% Styling
+    classDef p1 fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef p2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef p3 fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef p4 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef p5 fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef p6 fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+    classDef p7 fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+    classDef pfc fill:#ede7f6,stroke:#512da8,stroke-width:2px
+    classDef infra fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    
+    class DISC,ICP p1
+    class CT,QE,GA,TA,LLM,AM p2
+    class RS,BS,YT p3
+    class BC,SMC p4
+    class PP p5
+    class HLF p6
+    class GAIT p7
+    class PFC_VE,PFC_SEC,PFC_OAA,PFC_CRM pfc
+    class ONT,DB,API infra
+```
+
+---
+
 ## Traceability Matrix
 
 ### PF-Core Module → BAIV Capability Mapping
@@ -331,6 +670,58 @@ This manifest catalogs **15 key artifacts** across 3 implementation phases (Phas
 | **DASHBOARD_TEMPLATES** | ONTOLOGY_REGISTRY, INTEGRATION_BRIDGES (Design) | MVP_ROADMAP (Week 5) |
 | **BAIV_TESTING_STRATEGY** | API_SPECIFICATION, DATABASE_SCHEMA | MVP_ROADMAP (Week 6) |
 | **BAIV_MVP_ROADMAP** | All Phase 3 artifacts | Implementation execution |
+
+---
+
+## Version Control History
+
+### 6.1 Document Versions
+
+| Version | Date | Changes | Author |
+|---------|------|---------|--------|
+| **1.1.0** | 2025-12-31 | Added 4 Mermaid dependency diagrams, version control section, updated TOC | BAIV Team + Warp |
+| **1.0.0** | 2025-12-31 | Initial manifest with 15 artifacts, traceability matrices, GitHub links | BAIV Team + Warp |
+
+### 6.2 Referenced Document Versions
+
+**Phase 1 Documents:**
+- PFC-PFI-BAIV_MODULE_CATALOG.md - v1.0.0
+- PFC-PFI-BAIV_INTEGRATION_BRIDGES.md - v1.0.0
+- PFC-PFI-BAIV_AGENTIC_BUILDER_GUIDE.md - v1.0.0
+- PFC-PFI-BAIV_GAP_ANALYSIS_ARCHITECTURE.md - v1.0.0
+- HLD_AGENTIC_SOLUTION_TEMPLATE.md - v1.3.0 (updated from v1.2.0)
+
+**Phase 2 Documents:**
+- BAIV_AGENT_INVENTORY.md - v1.0.0
+- DASHBOARD_TEMPLATES.md - v1.0.0
+- BAIV_ONTOLOGY_REGISTRY.md - v1.0.0
+- BAIV_SECURITY_IMPLEMENTATION.md - v1.0.0
+- BAIV_COMPLIANCE_CHECKLIST.md - v1.0.0
+
+**Phase 3 Documents:**
+- BAIV_DATABASE_SCHEMA.sql - v1.0.0
+- BAIV_API_SPECIFICATION.yaml - v1.0.0
+- BAIV_DEPLOYMENT_GUIDE.md - v1.0.0
+- BAIV_TESTING_STRATEGY.md - v1.0.0
+- BAIV_MVP_ROADMAP.md - v1.0.0
+
+### 6.3 Change Control Policy
+
+**Version Numbering:** Semantic versioning (MAJOR.MINOR.PATCH)
+- **MAJOR:** Breaking changes, architectural shifts, major scope changes
+- **MINOR:** New sections, diagrams, or significant content additions
+- **PATCH:** Typo fixes, clarifications, minor updates
+
+**Review Process:**
+1. All document changes require version increment
+2. Major version changes require architecture review
+3. All commits include co-author attribution: `Co-Authored-By: Warp <agent@warp.dev>`
+4. GitHub serves as source of truth for all versions
+
+**Related Registry Entries:**
+- System prompts and artifacts should be registered as change-controlled entities
+- Ontologies and documentation follow same version control standards
+- Registry entity: `PF-Document-Control` manages all artifact versioning
 
 ---
 
@@ -428,8 +819,12 @@ This manifest provides complete traceability between **PF-Core platform modules*
 
 ---
 
-**Document Version:** 1.0.0  
+**Document Version:** 1.1.0  
 **Status:** 🟢 Active  
 **Last Updated:** December 31, 2025  
 **Repository:** https://github.com/ajrmooreuk/PF-Prototype-Shared  
 **Maintained By:** BAIV Product Team
+
+**Version History:**
+- v1.1.0 (2025-12-31): Added dependency diagrams and version control
+- v1.0.0 (2025-12-31): Initial release
