@@ -11,6 +11,8 @@
 | **Timeline** | 6 weeks (Q1 2026) |
 | **Base Documents** | BAIV_MVP_ROADMAP v1.0.0, PFC-PFI-BAIV_MODULE_CATALOG v1.0.0, BAIV_PRD_PFC_Integration v2.0 |
 | **Integration Pattern** | 4 Bridges (VE, Security, Design, Agent Orchestration) |
+| **Agent Template** | PF-Core Agentic Framework Agent-PRD-14-Section v2.0.0 |
+| **Design/UI Specs** | DASHBOARD_TEMPLATES.md v1.0.0, PFC-DSN-Design-System, PFC-DSN-Component-Library |
 
 ---
 
@@ -25,6 +27,8 @@ This updated MVP To-Do Plan integrates **Platform Foundation Core (PF-Core)** mo
 - ✅ Multi-tenant configuration with VE-PF Instance Config Management
 - ✅ Design-to-Code pipeline integration
 - ✅ Enhanced testing strategy with TDD approach
+- ✅ Universal Agent PRD Template v2.0.0 (14-Section) compliance for all 3 agents
+- ✅ Complete UI/UX specifications via DASHBOARD_TEMPLATES.md
 
 **MVP Scope (6 Weeks):**
 - **Foundation:** PF-Core bridges + Database + API + Authentication
@@ -91,15 +95,23 @@ Enable B2B SaaS companies to achieve measurable AI Visibility through ontology-d
 
 3. **Agent Orchestration** (PFC-OAA-Agent-Registry)
    - Agent registry (16 agents defined, 3 MVP priority)
+   - All agents follow **PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0**
    - Execution tracking (agent_executions table)
    - Resource limits enforcement
    - Async execution with status polling
+   - **Template Sections:** P0.1-P0.14 (Identity, Objectives, Input, Processing, Output, Error Handling, Performance, Security, Testing, Deployment, Monitoring, Documentation, Versioning, Compliance)
 
 4. **Dashboard** (PFC-DSN-Design-System, PFC-DSN-Component-Library)
-   - 5-Perspective Balanced Scorecard
+   - 5-Perspective Balanced Scorecard (see **DASHBOARD_TEMPLATES.md v1.0.0**)
    - Real-time metrics via WebSocket
    - Responsive 12-column grid
    - React + TypeScript components
+   - **UI/UX Specifications:**
+     - Executive Overview: 5 KPI cards (AI Visibility Score, Citation Rate, Content Velocity, Gap Closure, Client Health)
+     - BSC Perspectives: Financial, Customer, Process, Learning, Stakeholder
+     - Widget Library: 20+ reusable widgets (see DASHBOARD_TEMPLATES.md Section 3)
+     - Design tokens: BAIV color palette, spacing scale, typography (see DASHBOARD_TEMPLATES.md Section 6)
+     - Responsive breakpoints: mobile (320px), tablet (768px), desktop (1024px, 1440px)
 
 ### 1.4 Non-Functional Requirements
 
@@ -188,16 +200,19 @@ BAIV MVP (v1.0)
 │   ├── 3.1.3 Resource Limits
 │   └── 3.1.4 Error Handling
 ├── 3.2 Discovery Agent (P1)
+│   ├── Agent PRD: Follows 14-Section Template v2.0.0
 │   ├── 3.2.1 Website Crawling
 │   ├── 3.2.2 Schema.org Parsing
 │   ├── 3.2.3 Context Extraction
 │   └── 3.2.4 Client-Context Ontology Creation
 ├── 3.3 Citation Tester Agent (P2)
+│   ├── Agent PRD: Follows 14-Section Template v2.0.0
 │   ├── 3.3.1 Multi-Platform Integration (4 platforms)
 │   ├── 3.3.2 Query Execution
 │   ├── 3.3.3 Citation Detection
 │   └── 3.3.4 RPI Score Calculation
 └── 3.4 Gap Analyzer Agent (P2)
+    ├── Agent PRD: Follows 14-Section Template v2.0.0
     ├── 3.4.1 Citation Result Analysis
     ├── 3.4.2 Gap Identification
     ├── 3.4.3 Priority Scoring (P0, P1, P2)
@@ -209,16 +224,16 @@ BAIV MVP (v1.0)
 4.0 Dashboard Services
 ├── 4.1 Frontend Application
 │   ├── 4.1.1 React + TypeScript Setup
-│   ├── 4.1.2 Component Library (20+ widgets)
+│   ├── 4.1.2 Component Library (20+ widgets per DASHBOARD_TEMPLATES.md)
 │   ├── 4.1.3 State Management (Context API)
 │   └── 4.1.4 Routing
-├── 4.2 5-Perspective Balanced Scorecard
-│   ├── 4.2.1 Executive Overview
-│   ├── 4.2.2 Financial Perspective
-│   ├── 4.2.3 Customer Perspective
-│   ├── 4.2.4 Process Perspective
-│   ├── 4.2.5 Learning Perspective
-│   └── 4.2.6 Stakeholder Perspective
+├── 4.2 5-Perspective Balanced Scorecard (per DASHBOARD_TEMPLATES.md Section 2)
+│   ├── 4.2.1 Executive Overview (5 KPI cards)
+│   ├── 4.2.2 Financial Perspective (MRR, LTV, Revenue/Client)
+│   ├── 4.2.3 Customer Perspective (Citation Rate, NPS, Retention)
+│   ├── 4.2.4 Process Perspective (Audit Velocity, Content Throughput)
+│   ├── 4.2.5 Learning Perspective (Agent Accuracy, Model Improvements)
+│   └── 4.2.6 Stakeholder Perspective (Partner Revenue, Affiliates)
 ├── 4.3 Data Views
 │   ├── 4.3.1 Audit Results Table
 │   ├── 4.3.2 Gap Analysis List
@@ -484,13 +499,21 @@ BAIV MVP (v1.0)
 
 #### Monday-Tuesday: Design Bridge (WBS 1.3)
 - [ ] **1.3.1 Import Design System Tokens** (4 hours)
-  - Extract tokens from DASHBOARD_TEMPLATES.md
-  - Create tokens.ts file (colors, spacing, typography)
+  - Extract tokens from **DASHBOARD_TEMPLATES.md v1.0.0 Section 6**
+  - BAIV color palette (primary: #00A4BF, secondary: #019587, accent: #E84E1C, etc.)
+  - Spacing scale (4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px)
+  - Typography (Headings: Inter, Body: Inter, Mono: JetBrains Mono)
+  - Create tokens.ts file
   - **Deliverable:** Design tokens file
 
 - [ ] **1.3.2 Build Component Library** (8 hours)
-  - Implement 20+ widgets (KPICard, MetricsChart, DataTable, etc.)
-  - Use Tailwind CSS with token variables
+  - Implement 20+ widgets per **DASHBOARD_TEMPLATES.md v1.0.0 Section 3**
+  - **Citation Widgets:** CitationRateCard, PlatformComparisonChart, RPITrendLine
+  - **Gap Widgets:** GapPriorityList, TopicCoverageHeatmap, OpportunityScoreGauge
+  - **Content Widgets:** ContentVelocityChart, PublishingCalendar, ContentPerformanceTable
+  - **Performance Widgets:** AuditVelocityTrend, AgentAccuracyGauge, ErrorRateSparkline
+  - **Business Widgets:** MRRTrendChart, ClientHealthScore, NPS Widget
+  - Use Tailwind CSS with BAIV design tokens
   - **Deliverable:** Reusable component library
 
 - [ ] **1.3.3 Setup Figma Integration** (2 hours)
@@ -542,6 +565,13 @@ BAIV MVP (v1.0)
 **Sprint Goal:** 3 core agents (Discovery, Citation Tester, Gap Analyzer) fully functional
 
 #### Monday-Tuesday: Discovery Agent (WBS 3.2)
+
+**Agent PRD Reference:** Create agent PRD following **PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0**
+- Agent ID: `BAIV-discovery-client-context-agent`
+- Tier: Primary
+- Cluster: Discovery
+- 14-Section compliance: P0.1-P0.14 complete
+
 - [ ] **3.2.1 Website Crawling** (6 hours)
   - Implement website fetcher (axios/cheerio)
   - Handle redirects, timeouts
@@ -565,6 +595,13 @@ BAIV MVP (v1.0)
 **Deliverable:** Discovery Agent operational
 
 #### Wednesday-Thursday: Citation Tester Agent (WBS 3.3)
+
+**Agent PRD Reference:** Create agent PRD following **PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0**
+- Agent ID: `BAIV-analysis-citation-tester-agent`
+- Tier: Primary
+- Cluster: Analysis
+- 14-Section compliance: P0.1-P0.14 complete
+
 - [ ] **3.3.1 Multi-Platform Integration** (8 hours)
   - OpenAI API (ChatGPT)
   - Anthropic API (Claude)
@@ -591,6 +628,13 @@ BAIV MVP (v1.0)
 **Deliverable:** Citation Tester Agent operational
 
 #### Friday: Gap Analyzer Agent (WBS 3.4)
+
+**Agent PRD Reference:** Create agent PRD following **PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0**
+- Agent ID: `BAIV-analysis-gap-analyzer-agent`
+- Tier: Primary
+- Cluster: Analysis
+- 14-Section compliance: P0.1-P0.14 complete
+
 - [ ] **3.4.1 Citation Result Analysis** (4 hours)
   - Load audit results from JSONB
   - Group by query/topic
@@ -634,14 +678,19 @@ BAIV MVP (v1.0)
   - State management (Context API)
   - **Deliverable:** React app running
 
-- [ ] **4.2 5-Perspective BSC** (2 days)
-  - Executive Overview (5 KPI cards)
-  - Financial Perspective (revenue, MRR, LTV)
-  - Customer Perspective (citation rate, NPS, retention)
-  - Process Perspective (audit velocity, content coverage)
-  - Learning Perspective (agent accuracy, model updates)
-  - Stakeholder Perspective (partner revenue)
-  - **Deliverable:** BSC dashboard complete
+- [ ] **4.2 5-Perspective BSC** (2 days) - **Reference: DASHBOARD_TEMPLATES.md Section 2**
+  - Executive Overview (5 KPI cards per Section 2.1)
+    - AI Visibility Score (0-100)
+    - Citation Rate (%)
+    - Content Velocity (pieces/week)
+    - Gap Closure Rate (%)
+    - Client Health (NPS)
+  - Financial Perspective (Section 2.2.1): MRR Trend, LTV, Revenue/Client, LTV:CAC Ratio
+  - Customer Perspective (Section 2.2.2): Citation Rate, NPS, Retention, Citation Satisfaction
+  - Process Perspective (Section 2.2.3): Audit Velocity, Content Throughput, Gap Closure Rate
+  - Learning Perspective (Section 2.2.4): Agent Accuracy, Model Improvements, Error Rate
+  - Stakeholder Perspective (Section 2.2.5): Partner Revenue, Affiliate Conversions, Agency Count
+  - **Deliverable:** BSC dashboard complete per specifications
 
 - [ ] **4.3 Data Views** (1 day)
   - Audit Results Table (citation data)
@@ -1255,4 +1304,15 @@ This updated MVP To-Do Plan integrates **22 PF-Core modules** with the **BAIV in
 **Duration:** 6 weeks  
 **Budget:** ~$200/month  
 **Team:** 1-2 developers + 1 part-time designer  
-**Related Documents:** BAIV_MVP_ROADMAP v1.0.0, PFC-PFI-BAIV_MODULE_CATALOG v1.0.0, BAIV_PRD_PFC_Integration v2.0, BAIV_TESTING_STRATEGY.md, BAIV_DEPLOYMENT_GUIDE.md
+
+**Related Documents:**
+- BAIV_MVP_ROADMAP v1.0.0
+- PFC-PFI-BAIV_MODULE_CATALOG v1.0.0
+- BAIV_PRD_PFC_Integration v2.0
+- **PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0** (Universal Agent Template)
+- **DASHBOARD_TEMPLATES.md v1.0.0** (UI/UX Specifications)
+- BAIV_ONTOLOGY_REGISTRY.md v1.0.0
+- BAIV_DATABASE_SCHEMA.sql v1.0.0
+- BAIV_API_SPECIFICATION.yaml v1.0.0
+- BAIV_TESTING_STRATEGY.md v1.0.0
+- BAIV_DEPLOYMENT_GUIDE.md v1.0.0
