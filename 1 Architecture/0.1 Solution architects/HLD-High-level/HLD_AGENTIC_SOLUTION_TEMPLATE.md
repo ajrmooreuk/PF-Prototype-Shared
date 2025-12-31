@@ -1,12 +1,13 @@
 # High-Level Design: Agentic Solution Implementation Template
 
-**Version:** 1.2.0  
-**Date:** December 30, 2025  
+**Version:** 1.3.0  
+**Date:** December 31, 2025  
 **Changelog:**
+- v1.3.0 - Added Instance Integration Architecture and PF-Core Module Catalog
 - v1.2.0 - Fixed Layer 3-6 mermaid diagrams
 - v1.1.0 - Fixed initial mermaid diagram rendering issues
 **Scope:** Complete template for agentic solution implementation  
-**References:** PFC_AGENTIC_MVP_VISUAL_GUIDE_v2.2.md, AGENT_BUILD_MASTER_LIST.md, PF-CORE-OAA-AGENT-REGISTRY-INTEGRATION.md
+**References:** PFC_AGENTIC_MVP_VISUAL_GUIDE_v2.2.md, AGENT_BUILD_MASTER_LIST.md, PF-CORE-OAA-AGENT-REGISTRY-INTEGRATION.md, PFC-PFI-BAIV_MODULE_CATALOG.md, PFC-PFI-BAIV_INTEGRATION_BRIDGES.md
 
 ---
 
@@ -14,14 +15,15 @@
 
 1. [Problem Statement](#problem-statement)
 2. [Current State Analysis](#current-state-analysis)
-3. [Architecture Overview](#architecture-overview)
-4. [Architecture Layers](#architecture-layers)
-5. [Implementation Roadmap](#implementation-roadmap)
-6. [Design System Integration](#design-system-integration)
-7. [Success Criteria](#success-criteria)
-8. [Templates & Patterns](#templates--patterns)
-9. [Risk Mitigation](#risk-mitigation)
-10. [Measurement & Tracking](#measurement--tracking)
+3. [Instance Integration Architecture](#instance-integration-architecture)
+4. [Architecture Overview](#architecture-overview)
+5. [Architecture Layers](#architecture-layers)
+6. [Implementation Roadmap](#implementation-roadmap)
+7. [Design System Integration](#design-system-integration)
+8. [Success Criteria](#success-criteria)
+9. [Templates & Patterns](#templates--patterns)
+10. [Risk Mitigation](#risk-mitigation)
+11. [Measurement & Tracking](#measurement--tracking)
 
 ---
 
@@ -73,6 +75,150 @@ graph TB
 | Design system not integrated | UI/code mismatch | Integrate Figma tokens with agent specs |
 | Security patterns not linked | Compliance risks | Connect RLS to VE workflow |
 | No consolidated build order | Dependencies unclear | Define critical path and tiers |
+
+---
+
+## Instance Integration Architecture
+
+### Platform Foundation Core (PF-Core) Integration
+
+Every PF-Instance (BAIV, W4M, AIR) leverages a shared **Platform Foundation Core (PF-Core)** containing reusable modules, integration bridges, and patterns. This architecture enables rapid instance deployment while maintaining consistency and reducing duplication.
+
+```mermaid
+graph TB
+    subgraph PFCORE["PF-CORE Platform Foundation"]
+        subgraph MODULES["Shared Modules (30+)"]
+            VE_MODS["Value Engineering<br/>10 modules"]
+            SEC_MODS["Security<br/>4 modules"]
+            DESIGN_MODS["Design System<br/>6 modules"]
+            CRM_MODS["CRM<br/>2 modules"]
+            AGENT_MODS["Agent Core<br/>2 modules"]
+            BUILDER_MODS["Agentic Builder<br/>6 meta-agents"]
+        end
+        
+        subgraph BRIDGES["Integration Bridges (4)"]
+            VE_BRIDGE["Value Engineering Bridge<br/>VSOM • OKR • Metrics"]
+            SEC_BRIDGE["Security Bridge<br/>Auth • RBAC • Audit"]
+            DESIGN_BRIDGE["Design Bridge<br/>Tokens • Layouts • Widgets"]
+            AGENT_BRIDGE["Agent Orchestration Bridge<br/>Registration • Context • Workflows"]
+        end
+        
+        subgraph PATTERNS["Reusable Patterns"]
+            ONTOLOGY["Ontology-Driven Dev"]
+            RLS["Multi-Tenant Security"]
+            CONTEXT["Context Loading"]
+            ORCHESTRATION["Agent Orchestration"]
+        end
+    end
+    
+    subgraph INSTANCES["PF-Instances"]
+        BAIV["BAIV Instance<br/>AI Visibility"]
+        W4M["W4M Instance<br/>Workforce Management"]
+        AIR["AIR Instance<br/>AI Research"]
+    end
+    
+    VE_MODS --> VE_BRIDGE
+    SEC_MODS --> SEC_BRIDGE
+    DESIGN_MODS --> DESIGN_BRIDGE
+    AGENT_MODS --> AGENT_BRIDGE
+    
+    VE_BRIDGE --> BAIV
+    SEC_BRIDGE --> BAIV
+    DESIGN_BRIDGE --> BAIV
+    AGENT_BRIDGE --> BAIV
+    
+    VE_BRIDGE --> W4M
+    SEC_BRIDGE --> W4M
+    AGENT_BRIDGE --> W4M
+    
+    VE_BRIDGE --> AIR
+    SEC_BRIDGE --> AIR
+    AGENT_BRIDGE --> AIR
+    
+    ONTOLOGY --> BAIV
+    RLS --> BAIV
+    CONTEXT --> BAIV
+    ORCHESTRATION --> BAIV
+    
+    style PFCORE fill:#6366F1,color:#fff
+    style MODULES fill:#10B981,color:#fff
+    style BRIDGES fill:#F59E0B,color:#fff
+    style PATTERNS fill:#8B5CF6,color:#fff
+    style BAIV fill:#00A4BF,color:#fff
+    style W4M fill:#EC4899,color:#fff
+    style AIR fill:#3B82F6,color:#fff
+```
+
+### PF-Core Module Catalog
+
+For complete module inventory and specifications, see **PFC-PFI-BAIV_MODULE_CATALOG.md** which documents:
+
+**Value Engineering Modules (10):**
+- VE-VSOM, VE-OKR-Objectives, VE-OKR-Key-Results, VE-Value-Proposition, VE-PMF-Product-Market-Fit, VE-PMF-Signals, VE-GTM-Strategy, VE-GTM-Channels, VE-GTM-Pricing, VE-Business-Models (planned)
+
+**Security Modules (4):**
+- SEC-Authentication, SEC-RBAC-Authorization, SEC-Multi-User-Collaboration, SEC-Audit-Logging
+
+**Design System Modules (6):**
+- DESIGN-Design-Tokens, DESIGN-Component-Library, DESIGN-Layout-System, DESIGN-Figma-Integration, DESIGN-Theme-Management, DESIGN-Accessibility
+
+**CRM Modules (2):**
+- CRM-Customer-Organization, CRM-Universal-Brand
+
+**Agent Core Modules (2):**
+- AGENT-OAA-Agent, AGENT-Agent-Orchestrator
+
+**Agentic Builder Meta-Agents (6):**
+- META-Program-Manager, META-Platform-Manager, META-Product-Manager, META-Solution-Architect, META-Solution-Builder, META-Test-Driven-Design
+
+### Integration Bridge Configuration
+
+Each bridge provides a **4-level configuration hierarchy**:
+
+1. **Platform Level** - PF-Core defaults (all instances inherit)
+2. **Instance Level** - Instance-specific overrides (BAIV, W4M, AIR)
+3. **Tenant Level** - Client-specific configuration
+4. **User Level** - Personal preferences
+
+**Example: Value Engineering Bridge**
+```typescript
+interface VEBridgeConfig {
+  // Platform → Instance → Tenant → User cascade
+  vsom_template: VsomTemplate;      // Customizable at all levels
+  okr_structure: OkrStructure;      // Instance and tenant configurable
+  pmf_thresholds: PmfThresholds;    // Tenant configurable
+  role_mappings: RoleMapping[];     // All levels
+}
+```
+
+For complete bridge specifications, see:
+- **PFC-PFI-BAIV_INTEGRATION_BRIDGES.md** - All 4 bridge architectures
+- **PFC-PFI-BAIV_AGENTIC_BUILDER_GUIDE.md** - Meta-agent usage patterns
+- **PFC-PFI-BAIV_GAP_ANALYSIS_ARCHITECTURE.md** - Platform vs product gap analysis
+
+### Instance Implementation Pattern
+
+**Step 1: Select PF-Core Modules**
+- Review module catalog
+- Identify required modules for instance
+- Configure bridges
+
+**Step 2: Configure Integration Bridges**
+- Value Engineering Bridge (required)
+- Security Bridge (required)
+- Design Bridge (UI instances)
+- Agent Orchestration Bridge (agentic instances)
+
+**Step 3: Extend with Instance-Specific Agents**
+- Domain specialists (BAIV: Citation Tester, Gap Analyzer, Content Generator)
+- Instance workflows
+- Custom ontologies
+
+**Step 4: Apply Reusable Patterns**
+- Ontology-driven development
+- Multi-tenant security (RLS)
+- Context loading
+- Agent orchestration
 
 ---
 
@@ -200,6 +346,8 @@ sequenceDiagram
 
 ### Layer 1: Value Engineering Foundation
 
+**PF-Core Modules:** VE-VSOM, VE-OKR-Objectives, VE-OKR-Key-Results, VE-Value-Proposition, VE-PMF-Product-Market-Fit, VE-PMF-Signals, VE-GTM-Strategy, VE-GTM-Channels, VE-GTM-Pricing, VE-Business-Models
+
 ```mermaid
 graph TB
     subgraph VE["VALUE ENGINEERING"]
@@ -213,6 +361,12 @@ graph TB
             VP["Value Proposition<br/>Problem • Solution • Benefits • Differentiation"]
             PMF["PMF Product-Market Fit<br/>Hypothesis to Experiment to Measure to Decide"]
             GTM["GTM Go-to-Market<br/>Channels • Pricing • Launch • Growth"]
+        end
+        
+        subgraph BUSINESS["BUSINESS MODELS"]
+            PRICING["Pricing Tiers<br/>Free • Starter • Pro • Enterprise"]
+            REVENUE["Revenue Streams<br/>Subscription • Usage • Services"]
+            COSTS["Cost Structure<br/>Fixed • Variable • CAC"]
         end
         
         subgraph CONTEXT["CONTEXT"]
@@ -237,6 +391,9 @@ graph TB
     
     VP --> PMF
     PMF --> GTM
+    GTM --> PRICING
+    PRICING --> REVENUE
+    REVENUE --> COSTS
     
     PMF --> RETENTION
     PMF --> NPS
@@ -250,10 +407,11 @@ graph TB
     
     DOMAIN --> RRR
     
-    GTM --> PRD["PRD Generation"]
+    COSTS --> PRD["PRD Generation"]
     
     style STRATEGIC fill:#6366F1,color:#fff
     style MARKET fill:#EC4899,color:#fff
+    style BUSINESS fill:#F59E0B,color:#fff
     style CONTEXT fill:#3B82F6,color:#fff
     style PMF_SIGNALS fill:#10B981,color:#fff
 ```
@@ -261,6 +419,8 @@ graph TB
 **Key Principle:** VP, PMF, and GTM are WITHIN VE, not separate phases. Must complete before PRD generation.
 
 **PMF Gate:** Only proceed to PRD when PMF signals are strong (retention > 40%, NPS > 40, organic growth evident).
+
+**Business Models:** Define pricing tiers, revenue streams, and cost structure as part of GTM strategy using VE-Business-Models module (planned for Q1 2025).
 
 ---
 
@@ -978,11 +1138,15 @@ graph TB
 
 ---
 
-**Document Version:** 1.0.0  
-**Last Updated:** December 30, 2025  
+**Document Version:** 1.3.0  
+**Last Updated:** December 31, 2025  
 **Maintained By:** PF-Core Platform Team  
 **Related Documents:**
 - `UNIVERSAL_AGENT_TEMPLATE.md` - Standard agent implementation template
 - `PFC_AGENTIC_MVP_VISUAL_GUIDE_v2.2.md` - Detailed VE framework
 - `AGENT_BUILD_MASTER_LIST.md` - Complete agent inventory
 - `PF-CORE-OAA-AGENT-REGISTRY-INTEGRATION.md` - Registry integration specs
+- `PFC-PFI-BAIV_MODULE_CATALOG.md` - Complete PF-Core module inventory
+- `PFC-PFI-BAIV_INTEGRATION_BRIDGES.md` - Integration bridge specifications
+- `PFC-PFI-BAIV_AGENTIC_BUILDER_GUIDE.md` - Meta-agent build patterns
+- `PFC-PFI-BAIV_GAP_ANALYSIS_ARCHITECTURE.md` - Dual-layer gap analysis
