@@ -1,0 +1,621 @@
+openapi: 3.0.3
+info:
+  title: BAIV Platform API
+  description: |
+    Minimal MVP API for BAIV (BeAIVisible) platform.
+    
+    **Design Principles:**
+    - Simple REST endpoints
+    - JWT authentication
+    - JSONB for flexible data
+    - Minimal endpoints for MVP
+    
+  version: 1.0.0
+  contact:
+    name: BAIV API Support
+    email: api@baiv.co.uk
+
+servers:
+  - url: https://api.baiv.co.uk/v1
+    description: Production
+  - url: http://localhost:3000/v1
+    description: Local development
+
+tags:
+  - name: Auth
+    description: Authentication and authorization
+  - name: Ontology
+    description: Ontology data operations (all types)
+  - name: Agents
+    description: Agent execution
+  - name: Audits
+    description: Test runs and audits
+
+security:
+  - bearerAuth: []
+
+paths:
+  # ============================================================================
+  # AUTHENTICATION
+  # ============================================================================
+  
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: User login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Get current user
+      responses:
+        '200':
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  # ============================================================================
+  # ONTOLOGY DATA (Single endpoint for all ontology types)
+  # ============================================================================
+  
+  /ontology:
+    post:
+      tags: [Ontology]
+      summary: Create ontology instance
+      description: Create any ontology type (client-context, query-category, gap, blog-post, etc.)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ontology_type, data]
+              properties:
+                ontology_type:
+                  type: string
+                  description: Type of ontology
+                  enum:
+                    - client-context
+                    - discovery-report
+                    - icp-profile
+                    - query-category
+                    - query-fanout
+                    - citation-result
+                    - gap-analysis
+                    - rrf-score
+                    - blog-post
+                    - social-post
+                    - visibility-score
+                ontology_id:
+                  type: string
+                  description: Optional external ID (e.g., gap-baiv-001)
+                data:
+                  type: object
+                  description: Ontology instance data (flexible JSONB)
+            example:
+              ontology_type: client-context
+              data:
+                client_name: "Acme Corp"
+                client_url: "https://acme.com"
+                industry: "SaaS"
+                competitor_urls: ["https://competitor1.com"]
+      responses:
+        '201':
+          description: Ontology created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OntologyData'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+    get:
+      tags: [Ontology]
+      summary: List ontology instances
+      parameters:
+        - name: ontology_type
+          in: query
+          schema:
+            type: string
+          description: Filter by ontology type
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of ontology instances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OntologyData'
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+
+  /ontology/{id}:
+    get:
+      tags: [Ontology]
+      summary: Get ontology instance
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Ontology instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OntologyData'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Ontology]
+      summary: Update ontology instance
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OntologyData'
+
+    delete:
+      tags: [Ontology]
+      summary: Delete ontology instance
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Deleted
+
+  # ============================================================================
+  # AGENTS
+  # ============================================================================
+  
+  /agents:
+    get:
+      tags: [Agents]
+      summary: List available agents
+      responses:
+        '200':
+          description: List of agents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+
+  /agents/{agent_id}/execute:
+    post:
+      tags: [Agents]
+      summary: Execute agent
+      parameters:
+        - name: agent_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: agent-baiv-discovery-v1.0.0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: object
+                  description: Agent-specific input data
+            example:
+              input:
+                client_url: "https://example.com"
+      responses:
+        '200':
+          description: Agent executed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentExecution'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /agents/executions/{execution_id}:
+    get:
+      tags: [Agents]
+      summary: Get agent execution status
+      parameters:
+        - name: execution_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Execution details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentExecution'
+
+  # ============================================================================
+  # AUDITS
+  # ============================================================================
+  
+  /audits:
+    post:
+      tags: [Audits]
+      summary: Create audit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [audit_name, audit_type]
+              properties:
+                audit_name:
+                  type: string
+                audit_type:
+                  type: string
+                  enum: [citation, gap_analysis, full]
+                metadata:
+                  type: object
+            example:
+              audit_name: "Q1 2025 Citation Test"
+              audit_type: citation
+              metadata:
+                queries: ["best CRM software", "top project management tools"]
+                platforms: ["ChatGPT", "Claude", "Perplexity"]
+      responses:
+        '201':
+          description: Audit created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audit'
+
+    get:
+      tags: [Audits]
+      summary: List audits
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, running, completed, failed]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of audits
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Audit'
+
+  /audits/{audit_id}:
+    get:
+      tags: [Audits]
+      summary: Get audit details
+      parameters:
+        - name: audit_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Audit details with results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audit'
+
+    delete:
+      tags: [Audits]
+      summary: Delete audit
+      parameters:
+        - name: audit_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Deleted
+
+# ============================================================================
+# COMPONENTS
+# ============================================================================
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        tenant:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            tier:
+              type: string
+              enum: [free, starter, professional, enterprise]
+        roles:
+          type: array
+          items:
+            type: string
+            enum: [admin, manager, analyst, viewer]
+
+    OntologyData:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+          format: uuid
+        ontology_type:
+          type: string
+          example: client-context
+        ontology_id:
+          type: string
+          nullable: true
+          example: gap-baiv-001
+        data:
+          type: object
+          description: Complete ontology instance (flexible JSONB)
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        agent_id:
+          type: string
+          example: agent-baiv-discovery-v1.0.0
+        name:
+          type: string
+          example: Discovery Agent
+        version:
+          type: string
+          example: 1.0.0
+        agent_type:
+          type: string
+          enum: [operational, analytical, creative]
+        tier:
+          type: string
+          enum: [P0, P1, P2]
+        status:
+          type: string
+          enum: [active, deprecated, disabled]
+        resource_limits:
+          type: object
+          properties:
+            maxExecutionTime:
+              type: integer
+              description: Max execution time in milliseconds
+            maxMemory:
+              type: integer
+              description: Max memory in bytes
+            maxApiCalls:
+              type: integer
+
+    AgentExecution:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        agent_id:
+          type: string
+        status:
+          type: string
+          enum: [running, success, failure, timeout]
+        input_data:
+          type: object
+        output_data:
+          type: object
+          nullable: true
+        duration_ms:
+          type: integer
+          nullable: true
+        error_message:
+          type: string
+          nullable: true
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    Audit:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        audit_name:
+          type: string
+        audit_type:
+          type: string
+          enum: [citation, gap_analysis, full]
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        results:
+          type: object
+          description: All audit results (flexible JSONB)
+        started_at:
+          type: string
+          format: date-time
+          nullable: true
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        metadata:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          nullable: true
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Bad Request
+            message: Invalid input data
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Unauthorized
+            message: Invalid or expired token
+
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Forbidden
+            message: Insufficient permissions
+
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Not Found
+            message: Resource not found
