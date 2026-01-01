@@ -1,21 +1,60 @@
-# BAIV MVP To-Do Plan v2.2.0
+# BAIV MVP To-Do Plan v2.3.0
 
 **PFC-PFI-BAIV Integrated Implementation Plan**
 
 | Attribute | Value |
 |-----------|-------|
-| **Document Version** | 2.2.0 |
+| **Document Version** | 2.3.0 |
 | **Date** | January 1, 2026 |
 | **Purpose** | Updated MVP To-Do Plan with Unified Registry Architecture |
 | **Status** | 🟢 Active |
 | **Timeline** | 6 weeks (Q1 2026) |
 | **Audit Document** | BAIV_ARCHITECTURE_AUDIT_v1.0.md |
 | **Corrections** | Database (Supabase), Auth (Supabase Auth), Deployment (Supabase + frontend hosting) |
+| **New in v2.3.0** | Agent Template updated to Unified Template v3.0.0 (95% aligned) |
 | **New in v2.2.0** | Unified Registry & Orchestration Bridge (agents + ontologies + data contracts) |
 | **Base Documents** | BAIV_MVP_ROADMAP v1.0.0, PFC-PFI-BAIV_MODULE_CATALOG v1.0.0, ARCHITECTURE_MASTER.md v0.1.0, runtime-agentic-backend-architecture.md v1.0 |
 | **Integration Pattern** | 4 Bridges (VE, Security, Design, Agent Orchestration) |
-| **Agent Template** | PF-Core Agentic Framework Agent-PRD-14-Section v2.0.0 |
+| **Agent Template** | PF-Core Unified Agent Specification Template v3.0.0 (14-Section + Appendices) |
+| **Alignment Analysis** | BAIV_MVP_TEMPLATE_v3.0.0_ALIGNMENT_ANALYSIS.md |
 | **Design/UI Specs** | DASHBOARD_TEMPLATES.md v1.0.0, PFC-DSN-Design-System, PFC-DSN-Component-Library |
+
+---
+
+## Change Control Note
+
+**Version 2.3.0 Update - January 1, 2026**
+
+**Change Summary:** Agent template alignment with PF-Core Unified Agent Specification Template v3.0.0
+
+**Rationale:**
+- PF-Core templates merged: Solution Architect v2.0 + Agentic Framework v2.1.0 → Unified v3.0.0
+- Unified template includes database schema, JSON-LD format, RBAC, Claude config, agent catalog
+- 100% backward compatible with v2.0.0 (all 14 sections preserved)
+
+**Impact Assessment:**
+- **Alignment Status:** ✅ 95% aligned (BAIV_MVP_TEMPLATE_v3.0.0_ALIGNMENT_ANALYSIS.md)
+- **Breaking Changes:** None - v3.0.0 is additive only
+- **Code Changes Required:** None - documentation updates only
+- **Benefits:** Enhanced agent governance, clearer RBAC model, improved registry integration
+
+**Changes Made:**
+1. **Line 17:** Agent Template reference updated from v2.0.0 → v3.0.0
+2. **Line 18:** Added alignment analysis document reference
+3. **Line 47:** Updated agent compliance note to v3.0.0 (14-Section + Appendices)
+4. **Line 115:** Updated agent orchestration template reference to v3.0.0
+5. **Line 119:** Added appendices note (Database Schema, JSON-LD, Agent Catalog, Code Examples)
+6. **Line 169:** Updated implementation standards reference to v3.0.0
+
+**Next Steps (Recommended - Optional):**
+- Phase 1 (P0): Add BAIV agents to unified template Appendix C catalog (30 min)
+- Phase 2 (P1-P2): Enhance agent specs with RBAC, bindings, Claude config (2 hours)
+- Phase 3 (P3): Create full v3.0.0 PRDs for 3 agents (6 hours)
+
+**Approval:**
+- **Author:** Agentic Engineer + Solution Architect
+- **Reviewed By:** Template Consolidation Analysis v1.0.0
+- **Status:** Approved - v3.0.0 adoption confirms alignment with unified registry architecture
 
 ---
 
@@ -37,6 +76,16 @@ This updated MVP To-Do Plan integrates **Platform Foundation Core (PF-Core)** mo
 - ✅ Deployment: DigitalOcean App Platform → **Supabase + frontend hosting**
 - ✅ Cost optimization: $25/mo → **$0-20/mo** (6 days saved, $60-300/year savings)
 
+**Key Updates from v2.2.0 (Agent Template v3.0.0 Alignment):**
+- ✅ **Agent Template Updated**: PF-Core Unified Agent Specification Template v3.0.0
+- ✅ **Alignment Status**: 95% aligned (BAIV_MVP_TEMPLATE_v3.0.0_ALIGNMENT_ANALYSIS.md)
+- ✅ **Enhanced Features**: RBAC authority boundaries, consumes/produces/requires bindings, Claude configuration
+- ✅ **Database Schema**: Appendix A (unified_registry, agent_ontology_bindings, data_contracts)
+- ✅ **JSON-LD Format**: Appendix B (semantic web compliance with @context)
+- ✅ **Agent Catalog**: Appendix C (3 BAIV agents ready for catalog entry)
+- ✅ **Integration Code**: Appendix D (UnifiedRegistryLoader patterns)
+- ✅ **Backward Compatible**: 100% compatible with v2.0.0 specifications
+
 **Key Updates from v1.0:**
 - ✅ Integration of 22 PF-Core modules via 4 integration bridges
 - ✅ PRD-PBS-WBS work breakdown structure
@@ -44,7 +93,7 @@ This updated MVP To-Do Plan integrates **Platform Foundation Core (PF-Core)** mo
 - ✅ Multi-tenant configuration with VE-PF Instance Config Management
 - ✅ Design-to-Code pipeline integration
 - ✅ Enhanced testing strategy with TDD approach
-- ✅ Universal Agent PRD Template v2.0.0 (14-Section) compliance for all 3 agents
+- ✅ Unified Agent Template v3.0.0 (14-Section + Appendices) compliance for all 3 agents
 - ✅ Complete UI/UX specifications via DASHBOARD_TEMPLATES.md
 
 **MVP Scope (6 Weeks):**
@@ -112,11 +161,12 @@ Enable B2B SaaS companies to achieve measurable AI Visibility through ontology-d
 
 3. **Agent Orchestration** (PFC-OAA-Agent-Registry)
    - Agent registry (16 agents defined, 3 MVP priority)
-   - All agents follow **PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0**
+   - All agents follow **PF-Core Unified Agent Specification Template v3.0.0**
    - Execution tracking (agent_executions table)
    - Resource limits enforcement
    - Async execution with status polling
-   - **Template Sections:** P0.1-P0.14 (Identity, Objectives, Input, Processing, Output, Error Handling, Performance, Security, Testing, Deployment, Monitoring, Documentation, Versioning, Compliance)
+   - **Template Sections:** P0.1-P0.14 (Identity, Objectives, Input, Processing, Output, Error Handling, Performance, Security, Testing, Deployment, Monitoring, Documentation, Versioning, Compliance) + Appendices (Database Schema, JSON-LD, Agent Catalog, Code Examples)
+   - **v3.0.0 Enhancements:** RBAC authority boundaries (tier1/tier2/tier3), consumes/produces/requires ontology bindings, Claude configuration (model + tools)
 
 4. **Dashboard** (PFC-DSN-Design-System, PFC-DSN-Component-Library)
    - 5-Perspective Balanced Scorecard (see **DASHBOARD_TEMPLATES.md v1.0.0**)
@@ -166,7 +216,8 @@ Each PBS component maintains **full traceability** to:
 - **PF-Core Integration Documents**: PFC-PFI-BAIV_MODULE_CATALOG v1.0.0 (22 modules), PFC-PFI-BAIV_INTEGRATION_BRIDGES.md v1.0.0 (4 bridges)
 - **Architecture Documents**: ARCHITECTURE_MASTER.md v0.1.0 (Supabase backend), runtime-agentic-backend-architecture.md v1.0 (agent workflows)
 - **Design Specifications**: DASHBOARD_TEMPLATES.md v1.0.0 (UI/UX, 20+ widgets), BAIV_ONTOLOGY_REGISTRY.md v1.0.0 (30+ ontologies)
-- **Implementation Standards**: PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0 (agent specifications)
+- **Implementation Standards**: PF-Core Unified Agent Specification Template v3.0.0 (agent specifications with appendices)
+- **Alignment Analysis**: BAIV_MVP_TEMPLATE_v3.0.0_ALIGNMENT_ANALYSIS.md (95% aligned, backward compatible)
 
 The PBS decomposition follows **Work Breakdown Structure (WBS)** principles, enabling effort estimation, dependency tracking, and resource allocation across the 6-week MVP timeline. All 5 Level-1 components (Integration Layer, Foundation Services, Agent Services, Dashboard Services, Deployment & Operations) collectively deliver the complete BAIV product capabilities defined in the PRD, with explicit dependencies and integration points documented in Section 3 (WBS Dictionary).
 
