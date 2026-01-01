@@ -137,8 +137,82 @@ Enable B2B SaaS companies to achieve measurable AI Visibility through ontology-d
 
 ## 2. PBS: Product Breakdown Structure
 
-### 2.1 Level 1: BAIV MVP Product
+### Overview: PBS Context & Traceability
 
+The **Product Breakdown Structure (PBS)** decomposes the BAIV MVP into hierarchical deliverable-oriented components, tracing directly to the **Product Requirements Document (PRD)** functional and non-functional requirements defined in Section 1. The PBS serves as the bridge between strategic product vision and tactical implementation, ensuring every component maps to specific business capabilities, PF-Core module integrations, and measurable outcomes.
+
+Each PBS component maintains **full traceability** to:
+- **PRD Section 1.3 (Functional Requirements)**: Authentication & Authorization (PBS 2.3), Ontology Management (PBS 2.4), Agent Orchestration (PBS 3.0), Dashboard (PBS 4.0)
+- **PF-Core Integration Documents**: PFC-PFI-BAIV_MODULE_CATALOG v1.0.0 (22 modules), PFC-PFI-BAIV_INTEGRATION_BRIDGES.md v1.0.0 (4 bridges)
+- **Architecture Documents**: ARCHITECTURE_MASTER.md v0.1.0 (Supabase backend), runtime-agentic-backend-architecture.md v1.0 (agent workflows)
+- **Design Specifications**: DASHBOARD_TEMPLATES.md v1.0.0 (UI/UX, 20+ widgets), BAIV_ONTOLOGY_REGISTRY.md v1.0.0 (30+ ontologies)
+- **Implementation Standards**: PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0 (agent specifications)
+
+The PBS decomposition follows **Work Breakdown Structure (WBS)** principles, enabling effort estimation, dependency tracking, and resource allocation across the 6-week MVP timeline. All 5 Level-1 components (Integration Layer, Foundation Services, Agent Services, Dashboard Services, Deployment & Operations) collectively deliver the complete BAIV product capabilities defined in the PRD, with explicit dependencies and integration points documented in Section 3 (WBS Dictionary).
+
+### 2.0 PRD Summary for PBS Context
+
+**Product Vision (PRD 1.1):** Enable B2B SaaS companies to achieve measurable AI Visibility through ontology-driven content optimization, powered by PF-Core strategic alignment and 16 specialized agents.
+
+**Core Capabilities Mapped to PBS:**
+- **Authentication & Authorization** (PRD 1.3.1) → PBS 2.3: Supabase Auth with RLS-based RBAC, multi-tenant isolation
+- **Ontology Management** (PRD 1.3.2) → PBS 2.4: 30+ BAIV ontologies with JSONB storage, JSON-LD validation
+- **Agent Orchestration** (PRD 1.3.3) → PBS 3.0: 16 agents (3 MVP priority), execution tracking, resource limits
+- **Dashboard** (PRD 1.3.4) → PBS 4.0: 5-Perspective Balanced Scorecard, 20+ widgets, real-time updates
+
+**Non-Functional Requirements Mapped to PBS:**
+- **Performance** (<2 sec response) → PBS 2.2 (Supabase Client SDK), PBS 3.1 (Resource Limits)
+- **Security** (SOC 2, GDPR) → PBS 2.3 (Supabase Auth + RLS), PBS 1.2 (Security Bridge)
+- **Scalability** (100 concurrent users) → PBS 2.1 (Supabase Database), PBS 5.1 (Infrastructure)
+- **Test Coverage** (70% minimum) → PBS 5.3 (Testing Strategy), PBS 5.4 (Documentation)
+
+### 2.1 PBS Level 1: Visual Architecture
+
+```mermaid
+graph TD
+    BAIV["BAIV MVP v1.0<br/>AI Visibility Platform"]
+    
+    BAIV --> L1["1.0 PF-Core Integration Layer<br/>4 Bridges + Config Management"]
+    BAIV --> L2["2.0 Foundation Services<br/>Supabase Backend + Auth"]
+    BAIV --> L3["3.0 Agent Services<br/>3 Core Agents (Discovery, Citation, Gap)"]
+    BAIV --> L4["4.0 Dashboard Services<br/>5-Perspective BSC + Widgets"]
+    BAIV --> L5["5.0 Deployment & Operations<br/>Supabase + Frontend Hosting"]
+    
+    L1 --> L1A["Value Engineering Bridge"]
+    L1 --> L1B["Security Bridge"]
+    L1 --> L1C["Design Bridge"]
+    L1 --> L1D["Agent Orchestration Bridge"]
+    
+    L2 --> L2A["Database Layer<br/>(Supabase)"]
+    L2 --> L2B["API Layer<br/>(Supabase SDK)"]
+    L2 --> L2C["Authentication<br/>(Supabase Auth)"]
+    L2 --> L2D["Ontology Service<br/>(30+ Ontologies)"]
+    
+    L3 --> L3A["Agent Infrastructure"]
+    L3 --> L3B["Discovery Agent"]
+    L3 --> L3C["Citation Tester"]
+    L3 --> L3D["Gap Analyzer"]
+    
+    L4 --> L4A["Frontend App<br/>(React + TypeScript)"]
+    L4 --> L4B["5-Perspective BSC"]
+    L4 --> L4C["Data Views"]
+    L4 --> L4D["Real-Time Updates"]
+    
+    L5 --> L5A["Infrastructure Setup"]
+    L5 --> L5B["CI/CD Pipeline"]
+    L5 --> L5C["Monitoring & Logging"]
+    L5 --> L5D["Documentation"]
+    
+    classDef level1 fill:#e3f2fd,stroke:#1976d2,stroke-width:3px,color:#000
+    classDef level2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000
+    classDef main fill:#fff9c4,stroke:#f57f17,stroke-width:4px,color:#000
+    
+    class BAIV main
+    class L1,L2,L3,L4,L5 level1
+    class L1A,L1B,L1C,L1D,L2A,L2B,L2C,L2D,L3A,L3B,L3C,L3D,L4A,L4B,L4C,L4D,L5A,L5B,L5C,L5D level2
+```
+
+**Text Format:**
 ```
 BAIV MVP (v1.0)
 ├── 1.0 PF-Core Integration Layer
@@ -278,6 +352,108 @@ BAIV MVP (v1.0)
     ├── 5.4.3 Deployment Guide
     └── 5.4.4 Runbook
 ```
+
+### 2.3 PBS-to-PRD Traceability Matrix
+
+```mermaid
+graph LR
+    subgraph PRD["PRD Section 1: Requirements"]
+        PRD1["1.3.1 Authentication<br/>& Authorization"]
+        PRD2["1.3.2 Ontology<br/>Management"]
+        PRD3["1.3.3 Agent<br/>Orchestration"]
+        PRD4["1.3.4 Dashboard<br/>(5-Perspective BSC)"]
+        NFR1["1.4 Performance<br/>(<2 sec)"]
+        NFR2["1.4 Security<br/>(SOC 2, GDPR)"]
+    end
+    
+    subgraph PBS["PBS Section 2: Product Components"]
+        PBS1["1.0 PF-Core Integration<br/>(4 Bridges)"]
+        PBS2["2.0 Foundation Services<br/>(Supabase Backend)"]
+        PBS3["3.0 Agent Services<br/>(3 Core Agents)"]
+        PBS4["4.0 Dashboard Services<br/>(React + BSC)"]
+        PBS5["5.0 Deployment<br/>(Supabase + Hosting)"]
+    end
+    
+    subgraph DOCS["Reference Documents"]
+        DOC1["PFC-PFI-BAIV<br/>MODULE_CATALOG"]
+        DOC2["INTEGRATION<br/>BRIDGES"]
+        DOC3["ARCHITECTURE<br/>MASTER"]
+        DOC4["DASHBOARD<br/>TEMPLATES"]
+        DOC5["ONTOLOGY<br/>REGISTRY"]
+    end
+    
+    PRD1 --> PBS2
+    PRD2 --> PBS2
+    PRD3 --> PBS3
+    PRD4 --> PBS4
+    NFR1 --> PBS2
+    NFR2 --> PBS2
+    
+    PBS1 --> DOC1
+    PBS1 --> DOC2
+    PBS2 --> DOC3
+    PBS3 --> DOC5
+    PBS4 --> DOC4
+    PBS5 --> DOC3
+    
+    PBS1 --> PBS2
+    PBS2 --> PBS3
+    PBS2 --> PBS4
+    PBS3 --> PBS4
+    PBS4 --> PBS5
+    
+    classDef prd fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef pbs fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef docs fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    
+    class PRD1,PRD2,PRD3,PRD4,NFR1,NFR2 prd
+    class PBS1,PBS2,PBS3,PBS4,PBS5 pbs
+    class DOC1,DOC2,DOC3,DOC4,DOC5 docs
+```
+
+### 2.4 WBS Timeline & Dependencies
+
+```mermaid
+gantt
+    title BAIV MVP Implementation Timeline (6 Weeks)
+    dateFormat YYYY-MM-DD
+    section Week 1
+    PF-Core Integration Layer (WBS 1.0)     :active, w1a, 2026-01-06, 2d
+    Database Layer (WBS 2.1)                :active, w1b, 2026-01-08, 1d
+    API Layer Start (WBS 2.2)               :active, w1c, 2026-01-09, 2d
+    
+    section Week 2
+    Authentication Service (WBS 2.3)        :w2a, 2026-01-13, 2d
+    Ontology Service (WBS 2.4)              :w2b, 2026-01-15, 3d
+    
+    section Week 3
+    Design Bridge (WBS 1.3)                 :w3a, 2026-01-20, 2d
+    Agent Infrastructure (WBS 3.1)          :w3b, 2026-01-22, 2d
+    Discovery Agent Start (WBS 3.2)         :w3c, 2026-01-24, 1d
+    
+    section Week 4
+    Discovery Agent Complete (WBS 3.2)      :w4a, 2026-01-27, 2d
+    Citation Tester Agent (WBS 3.3)         :w4b, 2026-01-29, 3d
+    
+    section Week 5
+    Gap Analyzer Agent (WBS 3.4)            :w5a, 2026-02-03, 2d
+    Dashboard Implementation (WBS 4.0)      :w5b, 2026-02-05, 3d
+    Infrastructure Setup (WBS 5.1)          :w5c, 2026-02-08, 1d
+    
+    section Week 6
+    Testing & Validation (WBS 5.3)          :w6a, 2026-02-10, 2d
+    Documentation (WBS 5.4)                 :w6b, 2026-02-12, 2d
+    Launch                                   :milestone, w6c, 2026-02-14, 1d
+```
+
+**Document References Legend:**
+- **PFC-PFI-BAIV_MODULE_CATALOG v1.0.0**: 22 PF-Core modules mapped to BAIV capabilities
+- **PFC-PFI-BAIV_INTEGRATION_BRIDGES v1.0.0**: 4 integration bridges (VE, Security, Design, Agent Orchestration)
+- **ARCHITECTURE_MASTER v0.1.0**: Supabase backend architecture, component specifications
+- **DASHBOARD_TEMPLATES v1.0.0**: UI/UX specifications, 20+ widgets, 5-Perspective BSC
+- **BAIV_ONTOLOGY_REGISTRY v1.0.0**: 30+ ontology definitions with JSON-LD schemas
+- **runtime-agentic-backend-architecture v1.0**: Agent workflow patterns, state management
+- **PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0**: Universal agent specification standard
 
 ---
 
