@@ -1472,6 +1472,12 @@ This updated MVP To-Do Plan integrates **22 PF-Core modules** with the **BAIV in
 **PBS:** Breaks down product into 5 major components (Integration, Foundation, Agents, Dashboard, Deployment)  
 **WBS:** Provides detailed work breakdown with durations, dependencies, and deliverables
 
+### PBS Scope & Context Summary
+
+The **Product Breakdown Structure (PBS)** for the BAIV MVP establishes a hierarchical decomposition of deliverable-oriented components that collectively realize the AI Visibility Platform vision. The PBS scope encompasses **5 Level-1 components** (PF-Core Integration Layer, Foundation Services, Agent Services, Dashboard Services, Deployment & Operations) which further decompose into **20 Level-2 sub-components** and **80+ Level-3 work packages**. This structure ensures complete traceability from strategic product requirements (PRD Section 1) through tactical implementation tasks (WBS Section 3), enabling systematic delivery of all functional capabilities including Supabase-based authentication, 30+ ontology management, 3 core AI agents (Discovery, Citation Tester, Gap Analyzer), and a 5-Perspective Balanced Scorecard dashboard. Each PBS component maintains explicit dependencies, effort estimates, and integration points with PF-Core modules, forming a coherent architecture that supports the 6-week MVP timeline while ensuring alignment with non-functional requirements for performance (<2 sec response), security (SOC 2, GDPR), and scalability (100 concurrent users).
+
+The PBS architecture addresses the complete product lifecycle from foundational infrastructure through operational deployment, with particular emphasis on the **4 Integration Bridges** (Value Engineering, Security, Design, Agent Orchestration) that connect 22 PF-Core platform modules to BAIV instance-specific capabilities. Foundation Services (PBS 2.0) implement the Supabase backend architecture as corrected in v2.1.0, replacing the original DigitalOcean/Express specification with direct Supabase Client SDK integration, Supabase Auth for authentication, and RLS policies for multi-tenant isolation. Agent Services (PBS 3.0) deliver the core AI Visibility capabilities through three priority agents following the PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0, with full execution tracking and resource management. Dashboard Services (PBS 4.0) provide the user interface via React/TypeScript with 20+ reusable widgets specified in DASHBOARD_TEMPLATES.md v1.0.0, while Deployment & Operations (PBS 5.0) ensure production readiness through Supabase + frontend hosting, CI/CD pipelines, comprehensive monitoring, and complete documentation. This PBS structure enables parallel development tracks while maintaining clear integration checkpoints documented in the WBS dependency network.
+
 **Key Improvements over v1.0:**
 - ✅ Full PF-Core integration via 4 bridges (VE, Security, Design, Agent Orchestration)
 - ✅ Strategic alignment with VSOM and OKR frameworks
@@ -1504,7 +1510,323 @@ This updated MVP To-Do Plan integrates **22 PF-Core modules** with the **BAIV in
 
 ---
 
-## APPENDIX: v2.1.0 Architecture Corrections Summary
+## APPENDIX A: Reference Documents & Detailed Specifications
+
+This section provides a comprehensive catalog of all reference documents that elaborate on the PRD-PBS-WBS requirements defined in this plan. These documents provide detailed specifications, architecture patterns, and implementation guidance for each PBS component.
+
+### A.1 PF-Core Platform Integration Documents
+
+#### PFC-PFI-BAIV_MODULE_CATALOG.md v1.0.0
+**Purpose:** Complete inventory of 30+ PF-Core modules with BAIV instance mappings  
+**Location:** `1 Architecture/0.1 Solution architects/HLD-High-level/`  
+**Content:** 1,715 lines  
+**Elaborates on:** PBS 1.0 (PF-Core Integration Layer)  
+**Key Sections:**
+- 10 Value Engineering modules (VSOM, OKR, PMF, VE-Metrics/KPI Tree, Business Models)
+- 4 Security modules (Auth-Foundation, RBAC-Foundation, Multi-Tenant-Isolation, API-Key-Management)
+- 6 Design modules (Design-System, Component-Library, Figma-Bridge)
+- 2 CRM modules (Customer-Organization, Brand-Identity)
+- 2 Agent Core modules (Agent-Registry, Ontology-Registry)
+- 6 Agentic Builder modules (Program Manager, Platform Manager, Product Manager, Solution Architect, Solution Builder, Test Driven Design)
+- Module dependency graph
+- 3-phase implementation priorities
+
+#### PFC-PFI-BAIV_INTEGRATION_BRIDGES.md v1.0.0
+**Purpose:** 4 integration bridges connecting PF-Core to BAIV  
+**Location:** `1 Architecture/0.1 Solution architects/HLD-High-level/`  
+**Content:** 1,735 lines  
+**Elaborates on:** PBS 1.1-1.4 (All 4 Integration Bridges)  
+**Key Sections:**
+- Value Engineering Bridge (PBS 1.1): VSOM context, OKR integration, VE-Metrics/KPI Tree, Business Model config
+- Security Bridge (PBS 1.2): Supabase Auth, RBAC via RLS, tenant isolation, API key management
+- Design Bridge (PBS 1.3): Design tokens, component library, Figma integration
+- Agent Orchestration Bridge (PBS 1.4): Agent registry, ontology registry, execution framework, context propagation
+- 4-level config hierarchy (Platform → Instance → Tenant → User)
+- 6 mermaid architecture diagrams
+
+#### PFC-PFI-BAIV_AGENTIC_BUILDER_GUIDE.md v1.0.0
+**Purpose:** Documentation of 6-module meta-agent stack for building agents  
+**Location:** `1 Architecture/0.1 Solution architects/HLD-High-level/`  
+**Content:** 1,709 lines  
+**Elaborates on:** PBS 3.0 (Agent Services), WBS 3.1-3.4 (Agent development)  
+**Key Sections:**
+- 6 Agentic Builder modules (PFC-only)
+- Program Manager, Platform Manager, Product Manager
+- Solution Architect, Solution Builder, Test Driven Design
+- 7-phase agent build order
+- BAIV integration checklist
+
+#### PFC-PFI-BAIV_GAP_ANALYSIS_ARCHITECTURE.md v1.0.0
+**Purpose:** Dual-layer gap analysis (platform + product)  
+**Location:** `1 Architecture/0.1 Solution architects/HLD-High-level/`  
+**Content:** 1,194 lines  
+**Elaborates on:** PBS 3.4 (Gap Analyzer Agent)  
+**Key Sections:**
+- Platform-level gaps (PFC-SpecAgent-Gap-Analysis)
+- Product-level gaps (BAIV-Product-Gap-Analysis)
+- Gap Analysis Orchestrator pattern
+- Complete ontology specs for both layers
+
+#### PFC-PFI-BAIV_MANIFEST.md v1.1.0
+**Purpose:** Comprehensive manifest and traceability for all PFC-PFI-BAIV artifacts  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 830 lines  
+**Elaborates on:** All PBS components, complete document catalog  
+**Key Sections:**
+- 15 key artifacts across 3 implementation phases
+- Document distribution (Phase 1: 5 artifacts, 6,517 lines; Phase 2: 5 artifacts, 7,590 lines; Phase 3: 5 artifacts, 2,829 lines)
+- 4 dependency diagrams (document flow, module integration, timeline, agent dependencies)
+- Traceability matrix (PF-Core Module → BAIV Capability mapping)
+- Direct GitHub links to all documents
+
+### A.2 BAIV Instance-Specific Documents
+
+#### BAIV_AGENT_INVENTORY.md v1.0.0
+**Purpose:** Complete inventory of 16 primary BAIV agents  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 2,369 lines  
+**Elaborates on:** PBS 3.2-3.4 (Discovery Agent, Citation Tester, Gap Analyzer), all 16 agents  
+**Key Sections:**
+- 16 agents across 7 implementation phases
+- Phase 1: Discovery, ICP Discovery
+- Phase 2: Citation Tester, Query Expansion, Gap Analyzer, Turn Analysis, LLM Mentions, Attribution Metrics
+- Phase 3: Reddit Scraper, Bluesky Scraper, YouTube Analyzer
+- Phase 4: Blog Creator, Social Media Creator
+- Phase 5: Postiz Publisher
+- Phase 6: Hunter Lead Finder
+- Phase 7: Google AI Mode Tester
+- 6-week implementation roadmap
+- Agent orchestration patterns
+
+#### DASHBOARD_TEMPLATES.md v1.0.0
+**Purpose:** 5-Perspective Balanced Scorecard dashboard framework  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 1,225 lines  
+**Elaborates on:** PBS 4.0 (Dashboard Services), WBS 4.1-4.4  
+**Key Sections:**
+- Executive Overview (5 KPIs: AI Visibility Score, Citation Rate, Content Velocity, Gap Closure, Client Health)
+- 5-Perspective BSC: Financial, Customer, Process, Learning, Stakeholder
+- 20+ widget specifications (TypeScript interfaces): CitationRateCard, PlatformComparisonChart, RPITrendLine, GapPriorityList, TopicCoverageHeatmap, etc.
+- 12-column responsive grid layout
+- React + TypeScript component library
+- Real-time WebSocket updates
+- Design tokens: BAIV color palette, spacing scale, typography
+- Responsive breakpoints: mobile (320px), tablet (768px), desktop (1024px, 1440px)
+
+#### BAIV_ONTOLOGY_REGISTRY.md v1.0.0
+**Purpose:** Registry of 30+ BAIV ontologies with JSON-LD specs  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 1,544 lines  
+**Elaborates on:** PBS 2.4 (Ontology Service), WBS 2.4.1-2.4.4  
+**Key Sections:**
+- Discovery Ontologies (5): Client-Context, Discovery-Report, ICP-Profile
+- Analysis Ontologies (8): Citation-Test-Result, RPI-Score, Gap-Analysis
+- Content Ontologies (6): Blog-Post, Social-Post, FAQ-Page
+- Business Ontologies (6): AI-Visibility-Score, Financial-Metrics
+- Operational Ontologies (5): Publishing-Log, Reddit-Mention
+- Complete JSON-LD specifications for all ontologies
+- Agent binding mappings
+
+#### BAIV_SECURITY_IMPLEMENTATION.md v1.0.0
+**Purpose:** Security architecture, RBAC, and compliance  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 861 lines  
+**Elaborates on:** PBS 1.2 (Security Bridge), PBS 2.3 (Authentication Service)  
+**Key Sections:**
+- 5-layer defense-in-depth architecture
+- 4-tier RBAC (Admin, Manager, Analyst, Viewer)
+- 40+ granular permissions
+- Row-Level Security (RLS) implementation with Supabase
+- API key management (90/180 day rotation)
+- Encryption (AES-256 at rest, TLS 1.3 in transit)
+- GDPR compliance patterns
+- Comprehensive audit logging
+
+#### BAIV_COMPLIANCE_CHECKLIST.md v1.0.0
+**Purpose:** SOC 2, GDPR, ISO 27001 compliance checklist  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 747 lines  
+**Elaborates on:** PBS 5.3 (Monitoring & Logging), Non-functional requirements  
+**Key Sections:**
+- 85 compliance checkpoints total
+- SOC 2 Type II: 45 controls (9 Trust Services Criteria)
+- GDPR: 25 requirements (data protection + rights)
+- ISO 27001: 15 key controls (14 domains)
+- Operational compliance checklists
+- Audit preparation guide
+
+### A.3 Implementation & Deployment Documents
+
+#### BAIV_DATABASE_SCHEMA.sql v1.0.0
+**Purpose:** Simplified PostgreSQL schema with JSONB  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 395 lines  
+**Elaborates on:** PBS 2.1 (Database Layer), WBS 2.1.1-2.1.4  
+**Key Sections:**
+- 11 tables (simplified from original 25)
+- Core tables (5): tenants, users, roles, user_tenant_roles, api_keys
+- ontology_data table (all ontology instances as JSONB)
+- audits table (results in JSONB)
+- Agent/execution tables (3): agent_registry, agent_executions, audit_logs
+- RLS policies on 6 tenant-scoped tables
+- 4 roles + 16 agents seeded
+- Supabase-compatible schema (v2.1.0)
+
+#### BAIV_API_SPECIFICATION.yaml v1.0.0
+**Purpose:** OpenAPI 3.0.3 specification for BAIV MVP  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 621 lines  
+**Elaborates on:** PBS 2.2 (API Layer), PBS 2.4 (Ontology Service)  
+**Key Sections:**
+- 13 endpoints (minimal MVP set)
+- Auth (2): /auth/login, /auth/me (Supabase Auth integration)
+- Ontology (5): CRUD endpoints with single /ontology resource
+- Agents (3): /agents, /agents/{id}/execute, /agents/executions/{id}
+- Audits (3): /audits CRUD operations
+- JWT authentication via Supabase
+- All schemas leverage JSONB
+
+#### BAIV_DEPLOYMENT_GUIDE.md v1.0.0
+**Purpose:** Supabase + frontend hosting deployment guide  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 644 lines  
+**Elaborates on:** PBS 5.1 (Infrastructure Setup), WBS 5.1.1-5.1.4  
+**Key Sections:**
+- Supabase Backend setup (Database, Auth, Storage)
+- Frontend hosting options (Vercel, Netlify, DigitalOcean)
+- GitHub auto-deploy integration
+- Node.js/TypeScript or Python/FastAPI options
+- Environment variable setup (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
+- Custom domain configuration
+- Monitoring and cost breakdown (~$0-20/month MVP)
+
+#### BAIV_TESTING_STRATEGY.md v1.0.0
+**Purpose:** Pragmatic testing strategy (70% coverage)  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 576 lines  
+**Elaborates on:** PBS 5.3 (Testing), WBS 5.3, Section 6 (Testing & Validation Strategy)  
+**Key Sections:**
+- Inverted test pyramid: 50% integration, 20% unit, 30% manual
+- Integration test examples (Jest + supertest) with Supabase
+- Unit test examples (JWT, validation)
+- Manual testing checklist
+- 3 end-to-end scenarios
+- GitHub Actions CI/CD config
+- Test data fixtures
+- RLS policy testing patterns
+
+#### BAIV_MVP_ROADMAP.md v1.0.0
+**Purpose:** 6-week MVP implementation timeline  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 593 lines  
+**Elaborates on:** Section 4 (Week-by-Week Implementation Plan), WBS timeline  
+**Key Sections:**
+- Week 1: Database + API foundation
+- Week 2: Authentication + Ontology CRUD
+- Week 3: Agent registry + Discovery Agent
+- Week 4: Citation Tester + Gap Analyzer
+- Week 5: Dashboard + deployment
+- Week 6: Testing + launch
+- 3 sprints (Weeks 1-2, 3-4, 5-6)
+- Resource requirements (~$0-100/month)
+- Risk mitigation strategies
+
+### A.4 Architecture & Framework Documents
+
+#### ARCHITECTURE_MASTER.md v0.1.0
+**Purpose:** Complete system architecture with Supabase backend  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/BAIV-PRD-PBS-WBS-AI-Visibility/mil3-aivis-agents/`  
+**Elaborates on:** PBS 2.0 (Foundation Services), overall system architecture  
+**Key Sections:**
+- Frontend: React + Vite + TypeScript
+- Backend: Supabase (Auth, Database, Functions, Storage)
+- Dependencies: @supabase/supabase-js: 2.49.8, hono: 4.6.14
+- Component architecture
+- Data flow patterns
+
+#### runtime-agentic-backend-architecture.md v1.0
+**Purpose:** UI/UX state-driven agent workflows with Supabase  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/BAIV-PRD-PBS-WBS-AI-Visibility/mil3-aivis-agents/`  
+**Elaborates on:** PBS 3.0 (Agent Services), PBS 3.1 (Agent Infrastructure)  
+**Key Sections:**
+- Agentic API Gateway (FastAPI/Express)
+- Event Router patterns
+- Supabase Client (MCP Tools) integration
+- Supabase Backend (PostgreSQL, Realtime, Storage, Edge Functions)
+- Agent execution workflows
+- State management patterns
+
+#### PF-Core Agentic Framework Agent-PRD-14-Section Template v2.0.0
+**Purpose:** Universal agent specification standard  
+**Elaborates on:** PBS 3.2-3.4 (All agents), agent development standards  
+**Key Sections:**
+- P0.1: Identity (Agent name, version, purpose)
+- P0.2: Objectives (Goals, success criteria)
+- P0.3: Input (Input schemas, validation)
+- P0.4: Processing (Core logic, algorithms)
+- P0.5: Output (Output schemas, formats)
+- P0.6: Error Handling (Error types, recovery)
+- P0.7: Performance (SLAs, optimization)
+- P0.8: Security (Auth, data protection)
+- P0.9: Testing (Test strategy, coverage)
+- P0.10: Deployment (Deployment process)
+- P0.11: Monitoring (Metrics, alerts)
+- P0.12: Documentation (User guides, API docs)
+- P0.13: Versioning (Version control, changelog)
+- P0.14: Compliance (Regulatory requirements)
+
+### A.5 Audit & Correction Documents
+
+#### BAIV_ARCHITECTURE_AUDIT_v1.0.md
+**Purpose:** Architecture compliance audit report  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 671 lines  
+**Elaborates on:** v2.1.0 corrections, architecture validation  
+**Key Sections:**
+- Critical discrepancies identified (DigitalOcean → Supabase)
+- Database infrastructure discrepancies
+- Authentication architecture errors
+- Backend API misalignment
+- Deployment strategy conflicts
+- PF-Core integration gaps
+- Corrective actions required
+- Impact assessment (6 days saved, $60-300/year savings)
+
+#### BAIV_MVP_TODO_PLAN_v2.1.0_IMPLEMENTATION_PLAN_v1.1.0.md
+**Purpose:** Implementation plan for architecture audit corrections  
+**Location:** `4 PF-Instances/PF-Instance-BAIV/`  
+**Content:** 540 lines  
+**Elaborates on:** v2.1.0 implementation process, correction methodology  
+**Key Sections:**
+- 10 proposed changes (database, auth, API, deployment, etc.)
+- 7 implementation phases (~8 hours total)
+- Success criteria
+- Impact assessment
+- Implementation completion report
+
+### A.6 Document Usage Guide
+
+**For PBS Component Implementation:**
+1. Start with this document (BAIV_MVP_TODO_PLAN_v2.1.0.md) for overall structure
+2. Reference PFC-PFI-BAIV_INTEGRATION_BRIDGES.md for PF-Core module integration
+3. Use specific component documents:
+   - Database: BAIV_DATABASE_SCHEMA.sql
+   - Authentication: BAIV_SECURITY_IMPLEMENTATION.md
+   - Agents: BAIV_AGENT_INVENTORY.md + PF-Core Agent Template
+   - Dashboard: DASHBOARD_TEMPLATES.md
+   - Deployment: BAIV_DEPLOYMENT_GUIDE.md
+4. Validate against BAIV_ARCHITECTURE_AUDIT_v1.0.md for compliance
+5. Follow testing requirements in BAIV_TESTING_STRATEGY.md
+
+**Document Traceability:**
+- All documents maintain version numbers
+- Cross-references use document name + version
+- Changes tracked via Git commit history
+- Architecture corrections documented in audit reports
+
+---
+
+## APPENDIX B: v2.1.0 Architecture Corrections Summary
 
 **Version 2.1.0 Change Log** (January 1, 2026)
 
