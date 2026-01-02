@@ -270,15 +270,12 @@ stateDiagram-v2
     
     note right of Default
         Base state with no suffix
-    end note
     
     note right of Hover
         button/primary/hover
-    end note
     
     note right of Active
         button/primary/active
-    end note
 ```
 
 ---
