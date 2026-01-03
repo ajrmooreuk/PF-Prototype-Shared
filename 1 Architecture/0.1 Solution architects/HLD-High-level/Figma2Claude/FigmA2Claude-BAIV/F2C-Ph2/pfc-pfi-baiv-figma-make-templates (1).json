@@ -1,0 +1,1197 @@
+{
+  "$schema": "https://schema.org/ItemList",
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "PFC-PFI-BAIV Figma Make Templates",
+  "description": "Reusable template specifications for Figma Make AI generation, optimized for BAIV design system token application and Claude MCP extraction",
+  "version": "3.0.0",
+  "dateModified": "2025-01-03",
+  "numberOfItems": 8,
+  
+  "metadata": {
+    "purpose": "Generate consistent, token-compliant layouts in Figma Make",
+    "workflow": "Figma Make → MCP extraction → Claude code generation",
+    "tokenSystem": "BAIV 3-layer ontology (primitive → semantic → component)",
+    "outputFormat": "React/Next.js with shadcn/ui components",
+    "designFramework": "Mobile-first responsive design"
+  },
+
+  "templates": {
+    "01_hero_section": {
+      "@type": "CreativeWork",
+      "name": "Hero Section Template",
+      "identifier": "pfc-pfi-baiv-hero-001",
+      "category": "Landing Page Component",
+      "complexity": "medium",
+      
+      "description": "Full-width hero section with headline, subheadline, dual CTAs, and optional hero image/video",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a modern hero section with large headline, supporting text, and two CTA buttons. Use BAIV teal (#00A4BF) for primary CTA, BAIV orange (#E84E1C) for secondary CTA. Include placeholder for hero image on right side. Desktop: 1440px wide, 600px tall. Mobile: stack vertically.",
+        
+        "detailed": "Design a conversion-focused hero section following these specifications:\n\nLAYOUT:\n- Container: 1440px max-width, 600px height\n- Two-column grid: 60/40 split (content/image)\n- Padding: 80px horizontal, 120px vertical\n- Mobile: Single column, 40px padding\n\nTYPOGRAPHY:\n- H1: Titillium Web, 60px/68px, 700 weight, #171717\n- Subheadline: Open Sans, 20px/32px, 400 weight, #525252\n- Line length: max 600px\n\nCTAs:\n- Primary button: #00A4BF background, white text, 16px Open Sans 600\n- Secondary button: transparent with #E84E1C border, #E84E1C text\n- Button size: 48px height, 24px horizontal padding\n- Gap between buttons: 16px\n\nHERO IMAGE:\n- Aspect ratio: 16:9\n- Placeholder: gradient from #CCE8EE to #00A4BF\n- Border radius: 12px\n\nSPACING:\n- H1 to subheadline: 24px\n- Subheadline to CTAs: 32px\n- Elements align left on desktop, center on mobile",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "brand.secondary", "neutral.900", "neutral.600"],
+          "typography": ["heading.h1", "body.large", "button.medium"],
+          "spacing": ["spacing.6", "spacing.8", "spacing.10"],
+          "radius": ["radius.lg"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "section.hero-section",
+        "children": [
+          {
+            "element": "div.container",
+            "children": [
+              {
+                "element": "div.hero-content",
+                "children": [
+                  "h1.hero-headline",
+                  "p.hero-subheadline",
+                  {
+                    "element": "div.hero-cta-group",
+                    "children": [
+                      "button.btn-primary",
+                      "button.btn-secondary"
+                    ]
+                  }
+                ]
+              },
+              {
+                "element": "div.hero-media",
+                "children": ["img.hero-image"]
+              }
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "hero-section": "Root frame",
+        "container": "Max-width wrapper",
+        "hero-content": "Text content column",
+        "hero-headline": "H1 text layer",
+        "hero-subheadline": "Subheadline text layer",
+        "hero-cta-group": "Button container (auto-layout)",
+        "btn-primary": "Primary CTA button component",
+        "btn-secondary": "Secondary CTA button component",
+        "hero-media": "Image/media column",
+        "hero-image": "Hero image/placeholder"
+      },
+      
+      "mcpExtractionHints": {
+        "semanticMarkers": "Look for 'hero', 'cta', 'headline' in layer names",
+        "componentDetection": "Buttons should be auto-layout frames with text child",
+        "colorMapping": "#00A4BF → {colors.brand.primary}, #E84E1C → {colors.brand.secondary}",
+        "spacingUnits": "Convert px values to spacing tokens (4px base unit)"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Server Component (default)",
+        "imports": [
+          "import { Button } from '@/components/ui/button'",
+          "import Image from 'next/image'"
+        ],
+        "styling": "Tailwind CSS utility classes",
+        "responsive": "Mobile-first with md: and lg: breakpoints",
+        "accessibility": [
+          "Semantic HTML5 elements",
+          "Alt text for images",
+          "ARIA labels for CTAs",
+          "Focus visible states"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "Centered",
+          "description": "Center-aligned text with image below on all breakpoints"
+        },
+        {
+          "name": "Video Background",
+          "description": "Full-width video background with overlay and centered content"
+        },
+        {
+          "name": "Minimal",
+          "description": "Text-only hero with single CTA, no image"
+        },
+        {
+          "name": "Split",
+          "description": "50/50 split with alternating image/content sides"
+        }
+      ],
+      
+      "useCases": [
+        "SaaS landing pages",
+        "Product launch pages",
+        "Marketing campaign pages",
+        "Homepage above-fold content"
+      ]
+    },
+
+    "02_feature_grid": {
+      "@type": "CreativeWork",
+      "name": "Feature Grid Template",
+      "identifier": "pfc-pfi-baiv-features-002",
+      "category": "Content Section",
+      "complexity": "medium",
+      
+      "description": "Three-column grid showcasing product features with icons, headlines, and descriptions",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a 3-column feature grid. Each feature has: icon (64px circle with #00A4BF background), headline (Titillium Web 24px), and description (Open Sans 16px). Desktop: 3 columns, Tablet: 2 columns, Mobile: 1 column. Include 6 features total.",
+        
+        "detailed": "Design a features showcase section following these specifications:\n\nSECTION LAYOUT:\n- Section padding: 120px vertical, 80px horizontal\n- Section header: Centered, with H2 and optional subheadline\n- Grid below header: 48px gap\n\nGRID STRUCTURE:\n- Desktop (≥1024px): 3 columns, 32px gap\n- Tablet (768-1023px): 2 columns, 24px gap\n- Mobile (<768px): 1 column, 32px gap\n- 6 feature cards total\n\nFEATURE CARD:\n- Layout: Icon → Headline → Description (vertical stack)\n- Card padding: 32px\n- Background: white (#FFFFFF)\n- Border: 1px solid #E5E5E5\n- Border radius: 12px\n- Hover state: subtle shadow, border color #00A4BF\n\nICON:\n- Size: 64px × 64px\n- Background: #00A4BF\n- Icon color: white\n- Border radius: 50% (circle)\n- Margin bottom: 24px\n\nTYPOGRAPHY:\n- Headline: Titillium Web, 24px/32px, 600 weight, #171717\n- Description: Open Sans, 16px/28px, 400 weight, #525252\n- Headline to description gap: 12px\n\nSECTION HEADER:\n- H2: Titillium Web, 48px/56px, 700 weight, #171717\n- Subheadline: Open Sans, 18px/30px, 400 weight, #525252\n- Header to grid gap: 64px",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "neutral.50", "neutral.200", "neutral.900", "neutral.600"],
+          "typography": ["heading.h2", "heading.h4", "body.medium"],
+          "spacing": ["spacing.3", "spacing.6", "spacing.8", "spacing.12", "spacing.16"],
+          "radius": ["radius.lg", "radius.full"],
+          "shadows": ["shadow.sm", "shadow.md"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "section.features-section",
+        "children": [
+          {
+            "element": "div.container",
+            "children": [
+              {
+                "element": "div.section-header",
+                "children": [
+                  "h2.section-title",
+                  "p.section-subtitle"
+                ]
+              },
+              {
+                "element": "div.features-grid",
+                "children": [
+                  {
+                    "element": "div.feature-card",
+                    "repeat": 6,
+                    "children": [
+                      "div.feature-icon",
+                      "h3.feature-headline",
+                      "p.feature-description"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "features-section": "Root section frame",
+        "section-header": "Centered header group",
+        "section-title": "H2 text layer",
+        "section-subtitle": "Subheadline text layer",
+        "features-grid": "Auto-layout grid (wrap enabled)",
+        "feature-card": "Individual feature container (component instance)",
+        "feature-icon": "Icon placeholder/image",
+        "feature-headline": "H3 text layer",
+        "feature-description": "Body text layer"
+      },
+      
+      "mcpExtractionHints": {
+        "gridDetection": "Auto-layout with wrap enabled = CSS Grid",
+        "cardComponent": "Feature card should be extracted as reusable component",
+        "responsiveBreakpoints": "Desktop: grid-cols-3, Tablet: grid-cols-2, Mobile: grid-cols-1",
+        "iconHandling": "Replace icon placeholders with icon library (lucide-react recommended)"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Server Component with client feature cards",
+        "imports": [
+          "import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'",
+          "import { Icon } from 'lucide-react'"
+        ],
+        "dataStructure": "Array of feature objects with icon, title, description",
+        "styling": "Tailwind CSS Grid with responsive columns",
+        "accessibility": [
+          "Semantic headings hierarchy",
+          "Icon aria-labels",
+          "Keyboard navigable cards"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "4-Column",
+          "description": "Four columns on desktop for more compact feature lists"
+        },
+        {
+          "name": "With CTA",
+          "description": "Each card includes a 'Learn More' link"
+        },
+        {
+          "name": "Numbered",
+          "description": "Step numbers instead of icons for process/onboarding flows"
+        },
+        {
+          "name": "Alternating Colors",
+          "description": "Alternate card backgrounds (white, light teal) for visual rhythm"
+        }
+      ],
+      
+      "useCases": [
+        "Product features overview",
+        "Service offerings display",
+        "Benefits/advantages section",
+        "Process steps visualization",
+        "Team member grid"
+      ]
+    },
+
+    "03_cta_banner": {
+      "@type": "CreativeWork",
+      "name": "CTA Banner Template",
+      "identifier": "pfc-pfi-baiv-cta-003",
+      "category": "Conversion Component",
+      "complexity": "simple",
+      
+      "description": "Full-width call-to-action banner with headline, text, and prominent button",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a full-width CTA banner with gradient background (teal to dark teal). Center-aligned white text: headline (36px Titillium Web), supporting text (18px Open Sans), and orange CTA button. Desktop height: 400px.",
+        
+        "detailed": "Design a conversion-focused CTA banner following these specifications:\n\nBANNER LAYOUT:\n- Width: 100% viewport width\n- Height: 400px (desktop), 500px (mobile)\n- Background: Linear gradient from #00A4BF to #005260 (135deg angle)\n- Content: Centered vertically and horizontally\n- Max content width: 800px\n\nTYPOGRAPHY:\n- Headline: Titillium Web, 36px/44px, 700 weight, #FFFFFF\n- Supporting text: Open Sans, 18px/30px, 400 weight, rgba(255,255,255,0.9)\n- Text alignment: center\n\nCTA BUTTON:\n- Background: #E84E1C (orange)\n- Text: Open Sans, 16px, 600 weight, #FFFFFF\n- Size: 56px height, 32px horizontal padding\n- Border radius: 8px\n- Hover state: darken background to #C73E0C\n- Box shadow: 0 4px 12px rgba(232, 78, 28, 0.3)\n\nSPACING:\n- Headline to supporting text: 16px\n- Supporting text to button: 32px\n- Side padding: 40px (mobile), 80px (tablet+)\n\nACCESSIBILITY:\n- White text on gradient: AAA contrast compliance\n- Button: clear focus visible state with outline",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "brand.primaryDark", "brand.secondary", "neutral.50"],
+          "typography": ["heading.h2", "body.large", "button.large"],
+          "spacing": ["spacing.4", "spacing.8", "spacing.10"],
+          "radius": ["radius.md"],
+          "shadows": ["shadow.lg"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "section.cta-banner",
+        "children": [
+          {
+            "element": "div.cta-content",
+            "children": [
+              "h2.cta-headline",
+              "p.cta-text",
+              "button.cta-button"
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "cta-banner": "Root section with gradient fill",
+        "cta-content": "Centered content group (auto-layout vertical)",
+        "cta-headline": "H2 text layer (white)",
+        "cta-text": "Body text layer (white 90% opacity)",
+        "cta-button": "Button component instance"
+      },
+      
+      "mcpExtractionHints": {
+        "gradientConversion": "Extract gradient as Tailwind bg-gradient-to-br",
+        "buttonComponent": "Use shadcn Button with variant='secondary'",
+        "textContrast": "Ensure extracted colors maintain WCAG AAA compliance"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Server Component",
+        "imports": [
+          "import { Button } from '@/components/ui/button'",
+          "import Link from 'next/link'"
+        ],
+        "styling": "Tailwind CSS with custom gradient utilities",
+        "props": {
+          "headline": "string",
+          "text": "string",
+          "ctaText": "string",
+          "ctaHref": "string"
+        },
+        "accessibility": [
+          "Semantic section element",
+          "Descriptive button text",
+          "Focus visible states",
+          "Sufficient color contrast"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "Left-Aligned",
+          "description": "Content aligned left with image on right side"
+        },
+        {
+          "name": "Solid Background",
+          "description": "Use solid teal background instead of gradient"
+        },
+        {
+          "name": "Outlined Button",
+          "description": "White outlined button on gradient background"
+        },
+        {
+          "name": "Newsletter Signup",
+          "description": "Include email input field alongside button"
+        }
+      ],
+      
+      "useCases": [
+        "Newsletter subscription prompts",
+        "Product trial signups",
+        "Webinar registrations",
+        "Contact form redirects",
+        "App download prompts"
+      ]
+    },
+
+    "04_testimonial_carousel": {
+      "@type": "CreativeWork",
+      "name": "Testimonial Carousel Template",
+      "identifier": "pfc-pfi-baiv-testimonial-004",
+      "category": "Social Proof Component",
+      "complexity": "high",
+      
+      "description": "Interactive carousel displaying customer testimonials with photos, quotes, and attribution",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a testimonial carousel with 3 visible cards. Each card: customer photo (80px circle), quote text (Open Sans 18px italic), customer name (Titillium Web 16px bold), and company/role. Desktop: 3 cards, Tablet: 2 cards, Mobile: 1 card. Include navigation arrows and dots.",
+        
+        "detailed": "Design a testimonials carousel section following these specifications:\n\nSECTION LAYOUT:\n- Section padding: 120px vertical, 80px horizontal\n- Background: #FAFAFA (neutral-50)\n- Section header: Centered H2 above carousel\n- Max width: 1440px\n\nCAROUSEL CONTAINER:\n- Desktop: 3 testimonial cards visible\n- Tablet: 2 cards visible\n- Mobile: 1 card visible\n- Gap between cards: 24px\n- Overflow: hidden with smooth scroll\n\nTESTIMONIAL CARD:\n- Background: #FFFFFF\n- Padding: 40px\n- Border: 1px solid #E5E5E5\n- Border radius: 12px\n- Box shadow: 0 2px 8px rgba(0,0,0,0.06)\n- Hover state: elevate shadow to 0 8px 24px rgba(0,0,0,0.12)\n\nCARD CONTENT:\n- Photo: 80px circle at top center\n  - Border: 4px solid #00A4BF\n  - Margin bottom: 24px\n- Quote: Open Sans, 18px/32px, 400 weight, italic, #525252\n  - Quotation marks: styled with #00A4BF color\n  - Max height: 200px (approx 6-7 lines)\n- Attribution: below quote, 16px gap\n  - Name: Titillium Web, 16px/24px, 600 weight, #171717\n  - Role/Company: Open Sans, 14px/20px, 400 weight, #737373\n\nNAVIGATION:\n- Arrow buttons: 48px × 48px, circular\n  - Background: #FFFFFF with border\n  - Icon color: #00A4BF\n  - Position: centered vertically on sides\n- Dot indicators: below cards\n  - Inactive: #D4D4D4, 8px diameter\n  - Active: #00A4BF, 12px diameter\n  - Gap: 12px between dots\n\nSECTION HEADER:\n- H2: Titillium Web, 48px/56px, 700 weight, #171717\n- Header to carousel gap: 64px",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "neutral.50", "neutral.100", "neutral.200", "neutral.500", "neutral.900"],
+          "typography": ["heading.h2", "body.large", "body.small"],
+          "spacing": ["spacing.4", "spacing.6", "spacing.10", "spacing.16"],
+          "radius": ["radius.lg", "radius.full"],
+          "shadows": ["shadow.sm", "shadow.md", "shadow.lg"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "section.testimonials-section",
+        "children": [
+          {
+            "element": "div.container",
+            "children": [
+              "h2.section-title",
+              {
+                "element": "div.carousel-wrapper",
+                "children": [
+                  "button.carousel-prev",
+                  {
+                    "element": "div.carousel-track",
+                    "children": [
+                      {
+                        "element": "div.testimonial-card",
+                        "repeat": "dynamic",
+                        "children": [
+                          "img.customer-photo",
+                          "blockquote.quote-text",
+                          {
+                            "element": "div.attribution",
+                            "children": [
+                              "p.customer-name",
+                              "p.customer-role"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "button.carousel-next"
+                ]
+              },
+              "div.carousel-indicators"
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "testimonials-section": "Root section frame",
+        "section-title": "H2 text layer",
+        "carousel-wrapper": "Carousel container with navigation",
+        "carousel-prev": "Previous button component",
+        "carousel-next": "Next button component",
+        "carousel-track": "Scrollable card container (auto-layout horizontal)",
+        "testimonial-card": "Individual testimonial (component instance)",
+        "customer-photo": "Circular image with border",
+        "quote-text": "Blockquote text layer (italic)",
+        "attribution": "Name and role group",
+        "customer-name": "Bold name text",
+        "customer-role": "Role/company text",
+        "carousel-indicators": "Dot navigation group"
+      },
+      
+      "mcpExtractionHints": {
+        "carouselDetection": "Horizontal auto-layout with overflow = carousel track",
+        "componentInstance": "Testimonial card should be extracted as reusable component",
+        "interactivity": "Navigation requires client-side state management",
+        "imageOptimization": "Use Next.js Image component for customer photos"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Client Component (interactive)",
+        "imports": [
+          "'use client'",
+          "import { Card } from '@/components/ui/card'",
+          "import { Button } from '@/components/ui/button'",
+          "import { ChevronLeft, ChevronRight } from 'lucide-react'",
+          "import Image from 'next/image'",
+          "import { useState } from 'react'"
+        ],
+        "stateManagement": "useState for currentIndex",
+        "dataStructure": "Array of testimonial objects with photo, quote, name, role, company",
+        "libraries": "Consider embla-carousel-react or swiper for production",
+        "styling": "Tailwind CSS with smooth transitions",
+        "accessibility": [
+          "ARIA labels for navigation buttons",
+          "ARIA live region for announcing slide changes",
+          "Keyboard navigation support (arrow keys)",
+          "Semantic blockquote elements"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "Auto-Play",
+          "description": "Automatic rotation every 5 seconds with pause on hover"
+        },
+        {
+          "name": "Video Testimonials",
+          "description": "Include video player option alongside text quotes"
+        },
+        {
+          "name": "Star Ratings",
+          "description": "Add 5-star rating display above each quote"
+        },
+        {
+          "name": "Logo Grid",
+          "description": "Company logos displayed below carousel as social proof"
+        }
+      ],
+      
+      "useCases": [
+        "Customer success stories",
+        "Product reviews showcase",
+        "Case study highlights",
+        "Employee testimonials",
+        "Partner endorsements"
+      ]
+    },
+
+    "05_pricing_table": {
+      "@type": "CreativeWork",
+      "name": "Pricing Table Template",
+      "identifier": "pfc-pfi-baiv-pricing-005",
+      "category": "Conversion Component",
+      "complexity": "high",
+      
+      "description": "Three-tier pricing comparison table with feature lists, highlighted recommended plan, and CTAs",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a 3-column pricing table. Each column: plan name, price (large), billing period, feature list with checkmarks, and CTA button. Middle column (recommended) elevated with teal border and 'Popular' badge. Desktop: 3 columns, Mobile: stack vertically.",
+        
+        "detailed": "Design a pricing comparison table following these specifications:\n\nSECTION LAYOUT:\n- Section padding: 120px vertical, 80px horizontal\n- Section header: Centered with H2, optional subheadline\n- Pricing grid: 3 equal-width columns\n- Desktop: side-by-side, Tablet: side-by-side, Mobile: stacked\n\nPRICING CARD:\n- Background: #FFFFFF\n- Padding: 48px 32px\n- Border: 1px solid #E5E5E5\n- Border radius: 16px\n- Box shadow: 0 2px 8px rgba(0,0,0,0.06)\n\nRECOMMENDED CARD (middle):\n- Border: 2px solid #00A4BF\n- Transform: scale(1.05) on desktop\n- Z-index: elevated above other cards\n- Badge: 'Recommended' at top, #00A4BF background, white text\n\nCARD HEADER:\n- Plan name: Titillium Web, 24px/32px, 600 weight, #171717\n- Badge (if recommended): 12px above plan name\n  - Background: #00A4BF, padding: 4px 12px, radius: 16px\n  - Text: Open Sans, 12px, 600 weight, #FFFFFF, uppercase\n\nPRICING DISPLAY:\n- Currency + Price: Titillium Web, 48px/56px, 700 weight, #171717\n  - Currency symbol: 24px, aligned to top\n- Billing period: Open Sans, 14px/20px, 400 weight, #737373\n  - Below price, 8px gap\n\nFEATURE LIST:\n- Margin top: 32px\n- List items: Open Sans, 16px/28px, 400 weight, #525252\n- Checkmark icon: 20px, #10B981 (success green)\n- Gap between features: 12px\n- 5-7 features per plan\n\nCTA BUTTON:\n- Primary plan (recommended): #00A4BF background, white text\n- Other plans: transparent with #00A4BF border and text\n- Size: 48px height, full width\n- Margin top: 32px\n- Text: Open Sans, 16px, 600 weight\n\nSECTION HEADER:\n- H2: Titillium Web, 48px/56px, 700 weight, #171717\n- Subheadline: Open Sans, 18px/30px, 400 weight, #525252\n- Header to grid gap: 64px",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "status.success", "neutral.50", "neutral.200", "neutral.500", "neutral.700", "neutral.900"],
+          "typography": ["heading.h2", "heading.h3", "display.large", "body.medium"],
+          "spacing": ["spacing.2", "spacing.3", "spacing.4", "spacing.8", "spacing.12", "spacing.16"],
+          "radius": ["radius.lg", "radius.full"],
+          "shadows": ["shadow.sm", "shadow.lg"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "section.pricing-section",
+        "children": [
+          {
+            "element": "div.container",
+            "children": [
+              {
+                "element": "div.section-header",
+                "children": [
+                  "h2.section-title",
+                  "p.section-subtitle"
+                ]
+              },
+              {
+                "element": "div.pricing-grid",
+                "children": [
+                  {
+                    "element": "div.pricing-card",
+                    "repeat": 3,
+                    "variants": ["basic", "recommended", "enterprise"],
+                    "children": [
+                      "span.plan-badge",
+                      "h3.plan-name",
+                      {
+                        "element": "div.price-display",
+                        "children": [
+                          "span.currency",
+                          "span.price",
+                          "span.period"
+                        ]
+                      },
+                      {
+                        "element": "ul.feature-list",
+                        "children": [
+                          {
+                            "element": "li.feature-item",
+                            "repeat": "5-7",
+                            "children": [
+                              "svg.check-icon",
+                              "span.feature-text"
+                            ]
+                          }
+                        ]
+                      },
+                      "button.cta-button"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "pricing-section": "Root section frame",
+        "section-header": "Centered header group",
+        "section-title": "H2 text layer",
+        "section-subtitle": "Subheadline text layer",
+        "pricing-grid": "3-column grid container",
+        "pricing-card": "Individual plan card (component instance)",
+        "pricing-card--recommended": "Middle card with elevated styling",
+        "plan-badge": "Optional 'Popular'/'Recommended' badge",
+        "plan-name": "H3 plan name text",
+        "price-display": "Price number group",
+        "currency": "$ symbol text",
+        "price": "Large price number",
+        "period": "'/month' text",
+        "feature-list": "Vertical list of features",
+        "feature-item": "Single feature with checkmark",
+        "check-icon": "Checkmark SVG icon",
+        "feature-text": "Feature description text",
+        "cta-button": "Button component instance"
+      },
+      
+      "mcpExtractionHints": {
+        "gridLayout": "Use CSS Grid with equal columns (grid-cols-1 md:grid-cols-3)",
+        "cardVariants": "Extract styling differences between basic/recommended/enterprise",
+        "iconLibrary": "Use lucide-react Check icon for checkmarks",
+        "dataStructure": "Store plans as array of objects with name, price, features, recommended boolean"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Server Component with client toggle (annual/monthly)",
+        "imports": [
+          "import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'",
+          "import { Button } from '@/components/ui/button'",
+          "import { Check } from 'lucide-react'",
+          "import { Badge } from '@/components/ui/badge'"
+        ],
+        "dataStructure": "TypeScript interface for PricingPlan with features array",
+        "conditionalRendering": "Show/hide badge based on recommended property",
+        "styling": "Tailwind CSS with conditional classes for recommended card",
+        "accessibility": [
+          "Semantic heading hierarchy",
+          "List semantics for features",
+          "Clear button labels",
+          "Focus visible states"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "Annual/Monthly Toggle",
+          "description": "Toggle switch to show annual vs monthly pricing"
+        },
+        {
+          "name": "Feature Comparison",
+          "description": "Full comparison table with all features for all plans"
+        },
+        {
+          "name": "Usage-Based",
+          "description": "Slider to calculate price based on usage tier"
+        },
+        {
+          "name": "Add-Ons",
+          "description": "Optional add-ons checkboxes that update total price"
+        }
+      ],
+      
+      "useCases": [
+        "SaaS subscription pricing",
+        "Membership tiers",
+        "Service packages",
+        "Event ticket tiers",
+        "Product bundle options"
+      ]
+    },
+
+    "06_blog_card_grid": {
+      "@type": "CreativeWork",
+      "name": "Blog Card Grid Template",
+      "identifier": "pfc-pfi-baiv-blog-006",
+      "category": "Content Display",
+      "complexity": "medium",
+      
+      "description": "Responsive grid of blog post cards with featured images, titles, excerpts, and metadata",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a blog post grid with 3 columns. Each card: featured image (16:9), category badge, post title (Titillium Web 20px), excerpt (2 lines), author info (avatar + name), date, and 'Read More' link. Desktop: 3 columns, Tablet: 2 columns, Mobile: 1 column.",
+        
+        "detailed": "Design a blog content grid following these specifications:\n\nSECTION LAYOUT:\n- Section padding: 80px vertical, 80px horizontal\n- Section header: Optional H2 above grid\n- Grid layout: responsive columns\n- Desktop (≥1024px): 3 columns, 32px gap\n- Tablet (768-1023px): 2 columns, 24px gap\n- Mobile (<768px): 1 column, 24px gap\n\nBLOG CARD:\n- Background: #FFFFFF\n- Border: 1px solid #E5E5E5\n- Border radius: 12px\n- Box shadow: 0 2px 8px rgba(0,0,0,0.06)\n- Hover state: shadow elevates to 0 8px 24px rgba(0,0,0,0.12)\n- Transition: all 0.3s ease\n\nFEATURED IMAGE:\n- Aspect ratio: 16:9 (maintain on all screen sizes)\n- Border radius: 12px 12px 0 0 (top corners only)\n- Object fit: cover\n- Hover: slight scale (1.05) with overflow hidden\n\nCATEGORY BADGE:\n- Position: absolute, top-left over image (16px margin)\n- Background: rgba(0, 164, 191, 0.9) (semi-transparent teal)\n- Text: Open Sans, 12px, 600 weight, #FFFFFF, uppercase\n- Padding: 4px 12px\n- Border radius: 16px\n\nCARD CONTENT:\n- Padding: 24px\n- Layout: Title → Excerpt → Metadata (vertical stack)\n\nTITLE:\n- Typography: Titillium Web, 20px/28px, 600 weight, #171717\n- Max lines: 2 (truncate with ellipsis)\n- Margin bottom: 12px\n- Hover: color changes to #00A4BF\n\nEXCERPT:\n- Typography: Open Sans, 16px/24px, 400 weight, #525252\n- Max lines: 3 (truncate with ellipsis)\n- Margin bottom: 16px\n\nMETADATA:\n- Layout: horizontal flex, space between\n- Author section (left):\n  - Avatar: 32px circle\n  - Name: Open Sans, 14px, 500 weight, #171717\n  - Flex: avatar + name with 8px gap\n- Date (right):\n  - Typography: Open Sans, 14px, 400 weight, #737373\n  - Icon: calendar icon, 16px, #737373\n\nREAD MORE LINK:\n- Typography: Open Sans, 14px, 600 weight, #00A4BF\n- Position: below metadata, 16px margin top\n- Icon: arrow right, 16px\n- Hover: underline, icon translates 4px right",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "neutral.50", "neutral.200", "neutral.500", "neutral.700", "neutral.900"],
+          "typography": ["heading.h4", "body.medium", "body.small"],
+          "spacing": ["spacing.2", "spacing.3", "spacing.4", "spacing.6"],
+          "radius": ["radius.lg", "radius.full"],
+          "shadows": ["shadow.sm", "shadow.lg"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "section.blog-section",
+        "children": [
+          {
+            "element": "div.container",
+            "children": [
+              "h2.section-title",
+              {
+                "element": "div.blog-grid",
+                "children": [
+                  {
+                    "element": "article.blog-card",
+                    "repeat": "6-9",
+                    "children": [
+                      {
+                        "element": "div.card-image-wrapper",
+                        "children": [
+                          "img.featured-image",
+                          "span.category-badge"
+                        ]
+                      },
+                      {
+                        "element": "div.card-content",
+                        "children": [
+                          "h3.post-title",
+                          "p.post-excerpt",
+                          {
+                            "element": "div.post-metadata",
+                            "children": [
+                              {
+                                "element": "div.author-info",
+                                "children": [
+                                  "img.author-avatar",
+                                  "span.author-name"
+                                ]
+                              },
+                              {
+                                "element": "div.post-date",
+                                "children": [
+                                  "svg.calendar-icon",
+                                  "time.date-text"
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "element": "a.read-more-link",
+                            "children": [
+                              "span",
+                              "svg.arrow-icon"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "blog-section": "Root section frame",
+        "section-title": "Optional H2 text layer",
+        "blog-grid": "Auto-layout grid (responsive wrap)",
+        "blog-card": "Individual blog card (component instance)",
+        "card-image-wrapper": "Image container with overflow hidden",
+        "featured-image": "16:9 image",
+        "category-badge": "Absolute positioned badge",
+        "card-content": "Text content container (padding)",
+        "post-title": "H3 text layer (max 2 lines)",
+        "post-excerpt": "Body text layer (max 3 lines)",
+        "post-metadata": "Horizontal flex container",
+        "author-info": "Avatar + name group",
+        "author-avatar": "32px circle image",
+        "author-name": "Author name text",
+        "post-date": "Date display group",
+        "calendar-icon": "Calendar SVG icon",
+        "date-text": "Date text (semantic <time> element)",
+        "read-more-link": "Link with arrow icon"
+      },
+      
+      "mcpExtractionHints": {
+        "articleSemantics": "Use <article> element for each blog card",
+        "imageOptimization": "Next.js Image component with priority={false} for lazy loading",
+        "linkExtraction": "Extract 'Read More' as Next.js Link component",
+        "dateHandling": "Use <time> element with datetime attribute"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Server Component",
+        "imports": [
+          "import { Card, CardContent } from '@/components/ui/card'",
+          "import { Badge } from '@/components/ui/badge'",
+          "import Image from 'next/image'",
+          "import Link from 'next/link'",
+          "import { Calendar, ArrowRight } from 'lucide-react'"
+        ],
+        "dataStructure": "TypeScript interface for BlogPost with image, title, excerpt, author, date, category, slug",
+        "dataFetching": "async function to fetch blog posts from CMS or API",
+        "styling": "Tailwind CSS Grid with line-clamp utilities",
+        "accessibility": [
+          "Semantic article elements",
+          "Alt text for images",
+          "Descriptive link text",
+          "Time element with datetime attribute"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "Featured Post",
+          "description": "First card spans 2 columns with larger image"
+        },
+        {
+          "name": "List View",
+          "description": "Horizontal cards with image on left, content on right"
+        },
+        {
+          "name": "Masonry Grid",
+          "description": "Variable height cards in masonry layout"
+        },
+        {
+          "name": "With Filters",
+          "description": "Category filters above grid to show/hide posts"
+        }
+      ],
+      
+      "useCases": [
+        "Blog listing pages",
+        "News/articles grid",
+        "Case studies showcase",
+        "Resource library",
+        "Portfolio project grid"
+      ]
+    },
+
+    "07_footer_comprehensive": {
+      "@type": "CreativeWork",
+      "name": "Comprehensive Footer Template",
+      "identifier": "pfc-pfi-baiv-footer-007",
+      "category": "Navigation Component",
+      "complexity": "high",
+      
+      "description": "Multi-column site footer with navigation links, newsletter signup, social media icons, and legal links",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a comprehensive site footer with dark background (#262626). Top section: 4 columns (company info, navigation, resources, newsletter). Bottom section: copyright and legal links. Logo, social icons, and link lists included.",
+        
+        "detailed": "Design a comprehensive site footer following these specifications:\n\nFOOTER STRUCTURE:\n- Background: #262626 (neutral-800)\n- Two sections: Main content + Bottom bar\n- Max width: 1440px, centered\n\nMAIN FOOTER SECTION:\n- Padding: 80px vertical, 80px horizontal\n- Grid: 4 columns on desktop, 2 on tablet, 1 on mobile\n- Column gap: 48px\n- Responsive: stack columns on mobile with 40px gap\n\nCOLUMN 1: COMPANY INFO\n- Logo: BAIV logo (white version), 140px width\n- Tagline: Open Sans, 16px/28px, 400 weight, #A3A3A3\n- Social icons: 40px × 40px, circular\n  - Background: rgba(255,255,255,0.1)\n  - Icon color: #FFFFFF\n  - Hover: background #00A4BF\n  - Gap: 12px between icons\n  - Icons: LinkedIn, Twitter, GitHub, Email\n- Spacing: Logo → Tagline (16px), Tagline → Icons (24px)\n\nCOLUMNS 2-3: NAVIGATION LINKS\n- Column heading: Titillium Web, 16px/24px, 600 weight, #FFFFFF, uppercase\n- Link list: Open Sans, 16px/28px, 400 weight, #A3A3A3\n  - 5-7 links per column\n  - Gap: 12px between links\n  - Hover: color changes to #00A4BF, slight left indent (4px)\n- Heading to links gap: 20px\n\nCOLUMN 4: NEWSLETTER SIGNUP\n- Heading: Titillium Web, 16px/24px, 600 weight, #FFFFFF, uppercase\n- Description: Open Sans, 14px/24px, 400 weight, #A3A3A3\n- Email input:\n  - Background: rgba(255,255,255,0.05)\n  - Border: 1px solid rgba(255,255,255,0.1)\n  - Border radius: 8px\n  - Height: 48px\n  - Padding: 12px 16px\n  - Text: #FFFFFF\n  - Placeholder: #737373\n- Submit button:\n  - Background: #00A4BF\n  - Text: Open Sans, 14px, 600 weight, #FFFFFF\n  - Height: 48px\n  - Full width below input (8px gap)\n  - Hover: background #008A9F\n\nBOTTOM BAR:\n- Background: #171717 (neutral-900)\n- Padding: 24px vertical, 80px horizontal\n- Border top: 1px solid rgba(255,255,255,0.1)\n- Layout: horizontal flex, space between\n- Mobile: stack vertically, center align\n\nCOPYRIGHT:\n- Typography: Open Sans, 14px/20px, 400 weight, #737373\n- Format: '© 2025 BAIV. All rights reserved.'\n\nLEGAL LINKS:\n- Typography: Open Sans, 14px/20px, 400 weight, #A3A3A3\n- Links: Privacy Policy | Terms of Service | Cookie Policy\n- Separator: ' | ' with 12px padding\n- Hover: color #FFFFFF",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "brand.primaryHover", "neutral.400", "neutral.500", "neutral.700", "neutral.800", "neutral.900"],
+          "typography": ["body.medium", "body.small"],
+          "spacing": ["spacing.3", "spacing.4", "spacing.5", "spacing.6", "spacing.10", "spacing.20"],
+          "radius": ["radius.md", "radius.full"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "footer.site-footer",
+        "children": [
+          {
+            "element": "div.footer-main",
+            "children": [
+              {
+                "element": "div.footer-grid",
+                "children": [
+                  {
+                    "element": "div.footer-column.company-info",
+                    "children": [
+                      "img.footer-logo",
+                      "p.footer-tagline",
+                      {
+                        "element": "div.social-links",
+                        "children": [
+                          {"element": "a.social-link", "repeat": 4}
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "element": "div.footer-column.nav-links",
+                    "repeat": 2,
+                    "children": [
+                      "h4.footer-heading",
+                      {
+                        "element": "ul.footer-link-list",
+                        "children": [
+                          {"element": "li", "children": ["a.footer-link"], "repeat": "5-7"}
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "element": "div.footer-column.newsletter",
+                    "children": [
+                      "h4.footer-heading",
+                      "p.newsletter-description",
+                      {
+                        "element": "form.newsletter-form",
+                        "children": [
+                          "input.email-input",
+                          "button.submit-button"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "element": "div.footer-bottom",
+            "children": [
+              "p.copyright",
+              {
+                "element": "nav.legal-links",
+                "children": [
+                  "a.legal-link"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "site-footer": "Root footer element",
+        "footer-main": "Main footer section container",
+        "footer-grid": "4-column responsive grid",
+        "footer-column": "Individual column container",
+        "company-info": "Column 1 variant",
+        "nav-links": "Columns 2-3 variant",
+        "newsletter": "Column 4 variant",
+        "footer-logo": "BAIV logo image (white)",
+        "footer-tagline": "Company tagline text",
+        "social-links": "Social icon group (horizontal flex)",
+        "social-link": "Individual social icon link",
+        "footer-heading": "Column heading (uppercase)",
+        "footer-link-list": "Unordered list of links",
+        "footer-link": "Individual nav link",
+        "newsletter-description": "Newsletter description text",
+        "newsletter-form": "Email signup form",
+        "email-input": "Email input field",
+        "submit-button": "Submit button",
+        "footer-bottom": "Bottom bar section",
+        "copyright": "Copyright text",
+        "legal-links": "Legal links navigation",
+        "legal-link": "Individual legal link"
+      },
+      
+      "mcpExtractionHints": {
+        "semanticFooter": "Use <footer> element for accessibility",
+        "formHandling": "Newsletter form requires client-side state or server action",
+        "iconLibrary": "Use lucide-react for social icons (Linkedin, Twitter, Github, Mail)",
+        "linkStructure": "Extract navigation as structured data for easy content management"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Server Component with client newsletter form",
+        "imports": [
+          "import { Button } from '@/components/ui/button'",
+          "import { Input } from '@/components/ui/input'",
+          "import Link from 'next/link'",
+          "import Image from 'next/image'",
+          "import { Linkedin, Twitter, Github, Mail } from 'lucide-react'"
+        ],
+        "dataStructure": "Footer navigation structure as JSON config",
+        "formHandling": "Server action for newsletter signup",
+        "styling": "Tailwind CSS Grid with responsive columns",
+        "accessibility": [
+          "Semantic footer element",
+          "Nav element for link groups",
+          "Form labels (visually hidden if needed)",
+          "ARIA labels for social icons",
+          "Focus visible states on dark background"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "Minimal",
+          "description": "Single row with logo, links, and social icons only"
+        },
+        {
+          "name": "Mega Footer",
+          "description": "5-6 columns with expanded navigation and resources"
+        },
+        {
+          "name": "Centered",
+          "description": "Center-aligned content with stacked sections"
+        },
+        {
+          "name": "Light Theme",
+          "description": "Light background with dark text (inverse colors)"
+        }
+      ],
+      
+      "useCases": [
+        "Corporate websites",
+        "SaaS product sites",
+        "Marketing pages",
+        "Blog/content sites",
+        "E-commerce stores"
+      ]
+    },
+
+    "08_contact_form": {
+      "@type": "CreativeWork",
+      "name": "Contact Form Template",
+      "identifier": "pfc-pfi-baiv-contact-008",
+      "category": "Form Component",
+      "complexity": "high",
+      
+      "description": "Multi-field contact form with validation, textarea, and submit button",
+      
+      "figmaMakePrompt": {
+        "primary": "Create a contact form with fields: Name, Email, Phone (optional), Subject dropdown, Message textarea, and Submit button. Use BAIV design tokens. Include field labels, placeholders, and validation states (error, success).",
+        
+        "detailed": "Design a contact form following these specifications:\n\nFORM CONTAINER:\n- Max width: 600px\n- Background: #FFFFFF\n- Padding: 48px\n- Border: 1px solid #E5E5E5\n- Border radius: 16px\n- Box shadow: 0 4px 16px rgba(0,0,0,0.08)\n\nFORM HEADER:\n- Heading: Titillium Web, 32px/40px, 700 weight, #171717\n- Description: Open Sans, 16px/28px, 400 weight, #525252\n- Heading to description gap: 12px\n- Header to form gap: 32px\n\nFORM FIELDS:\n- Layout: vertical stack, 24px gap between fields\n- Each field: Label + Input group\n\nLABEL:\n- Typography: Open Sans, 14px/20px, 600 weight, #171717\n- Margin bottom: 8px\n- Required indicator: red asterisk (#DC2626)\n\nINPUT FIELDS (Text, Email, Phone):\n- Height: 48px\n- Padding: 12px 16px\n- Background: #FFFFFF\n- Border: 1px solid #D4D4D4\n- Border radius: 8px\n- Font: Open Sans, 16px, 400 weight, #171717\n- Placeholder: #A3A3A3\n\nSTATES:\n- Default: border #D4D4D4\n- Focus: border #00A4BF, box-shadow 0 0 0 3px rgba(0,164,191,0.1)\n- Error: border #DC2626, box-shadow 0 0 0 3px rgba(220,38,38,0.1)\n- Success: border #10B981\n- Disabled: background #F5F5F5, text #A3A3A3\n\nSUBJECT DROPDOWN:\n- Same styling as text inputs\n- Chevron icon: 20px, #737373, right-aligned\n- Options:\n  - General Inquiry\n  - Sales\n  - Support\n  - Partnership\n  - Press/Media\n\nMESSAGE TEXTAREA:\n- Min height: 160px (6-7 lines)\n- Resize: vertical only\n- Same border/padding styling as inputs\n- Font: Open Sans, 16px/28px, 400 weight\n\nERROR MESSAGE:\n- Typography: Open Sans, 14px/20px, 400 weight, #DC2626\n- Icon: alert circle, 16px, #DC2626\n- Margin top: 8px\n- Display: flex with icon left-aligned\n\nSUCCESS MESSAGE:\n- Typography: Open Sans, 14px/20px, 400 weight, #10B981\n- Icon: check circle, 16px, #10B981\n- Margin top: 8px\n\nSUBMIT BUTTON:\n- Background: #00A4BF\n- Text: Open Sans, 16px, 600 weight, #FFFFFF\n- Height: 56px\n- Full width\n- Border radius: 8px\n- Margin top: 8px (32px from last field)\n- Hover: background #008A9F\n- Active: background #005260\n- Disabled: background #D4D4D4, text #737373\n- Loading state: spinner icon with 'Sending...' text\n\nPRIVACY NOTE:\n- Typography: Open Sans, 12px/20px, 400 weight, #737373\n- Position: below submit button, 16px gap\n- Link color: #00A4BF\n- Example: 'By submitting, you agree to our Privacy Policy.'",
+        
+        "tokenReferences": {
+          "colors": ["brand.primary", "brand.primaryHover", "brand.primaryDark", "status.error", "status.success", "neutral.200", "neutral.300", "neutral.400", "neutral.500", "neutral.900"],
+          "typography": ["heading.h3", "body.medium", "body.small"],
+          "spacing": ["spacing.2", "spacing.3", "spacing.4", "spacing.6", "spacing.8", "spacing.12"],
+          "radius": ["radius.md", "radius.lg"],
+          "shadows": ["shadow.md"]
+        }
+      },
+      
+      "componentStructure": {
+        "root": "section.contact-section",
+        "children": [
+          {
+            "element": "div.form-container",
+            "children": [
+              {
+                "element": "div.form-header",
+                "children": [
+                  "h2.form-title",
+                  "p.form-description"
+                ]
+              },
+              {
+                "element": "form.contact-form",
+                "children": [
+                  {
+                    "element": "div.form-field",
+                    "repeat": 5,
+                    "children": [
+                      "label.field-label",
+                      "input.field-input | select.field-select | textarea.field-textarea",
+                      "p.field-error"
+                    ]
+                  },
+                  "button.submit-button",
+                  "p.privacy-note"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      
+      "layerNamingConvention": {
+        "contact-section": "Root section frame",
+        "form-container": "Centered form wrapper (card)",
+        "form-header": "Title and description group",
+        "form-title": "H2 text layer",
+        "form-description": "Description text layer",
+        "contact-form": "Form element group",
+        "form-field": "Individual field container",
+        "field-label": "Label text with required indicator",
+        "field-input": "Text/email/phone input",
+        "field-select": "Subject dropdown",
+        "field-textarea": "Message textarea",
+        "field-error": "Error message (hidden by default)",
+        "submit-button": "Submit button component",
+        "privacy-note": "Privacy policy text with link"
+      },
+      
+      "mcpExtractionHints": {
+        "formStructure": "Use semantic <form> element with proper field types",
+        "validation": "Extract required fields and implement client-side validation",
+        "stateManagement": "Form requires client component with useState for values/errors",
+        "errorHandling": "Map error states to field-specific error messages"
+      },
+      
+      "claudeCodeGeneration": {
+        "framework": "Next.js 14+ with TypeScript",
+        "componentType": "Client Component with form state",
+        "imports": [
+          "'use client'",
+          "import { Button } from '@/components/ui/button'",
+          "import { Input } from '@/components/ui/input'",
+          "import { Label } from '@/components/ui/label'",
+          "import { Textarea } from '@/components/ui/textarea'",
+          "import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'",
+          "import { useState } from 'react'",
+          "import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react'"
+        ],
+        "validation": "Zod schema for form validation with react-hook-form",
+        "stateManagement": "useState for form values, errors, submitting status",
+        "formHandling": "Server action for form submission (POST to API route)",
+        "styling": "shadcn/ui components with Tailwind overrides",
+        "accessibility": [
+          "Associated labels with htmlFor",
+          "ARIA invalid on error fields",
+          "ARIA describedby for error messages",
+          "Disabled state for submitting",
+          "Focus management on error"
+        ]
+      },
+      
+      "variantOptions": [
+        {
+          "name": "Multi-Step",
+          "description": "Break form into 2-3 steps with progress indicator"
+        },
+        {
+          "name": "File Upload",
+          "description": "Add file attachment field for documents/images"
+        },
+        {
+          "name": "Side-by-Side",
+          "description": "Form on left, contact info/map on right (50/50 split)"
+        },
+        {
+          "name": "Inline Validation",
+          "description": "Show success checkmarks as user completes valid fields"
+        }
+      ],
+      
+      "useCases": [
+        "General contact forms",
+        "Support request forms",
+        "Quote request forms",
+        "Partnership inquiry forms",
+        "Demo request forms"
+      ]
+    }
+  },
+
+  "promptGenerationGuidelines": {
+    "primaryPrompts": {
+      "purpose": "Quick, actionable prompts for rapid Figma Make generation",
+      "characteristics": [
+        "2-3 sentences maximum",
+        "Specific color values (HEX codes)",
+        "Key dimensions and layouts",
+        "Essential typography specs",
+        "Mobile/desktop layout differences"
+      ],
+      "when_to_use": "Initial design generation or quick iterations"
+    },
+    
+    "detailedPrompts": {
+      "purpose": "Comprehensive specifications for pixel-perfect results",
+      "characteristics": [
+        "Complete layout specifications with exact px values",
+        "All typographic details (font, size, weight, line-height)",
+        "All color specifications with HEX codes",
+        "Spacing/padding for all elements",
+        "All responsive breakpoints",
+        "Hover/focus/active states",
+        "Accessibility considerations"
+      ],
+      "when_to_use": "Production-ready designs or when precision is critical"
+    },
+    
+    "tokenReferences": {
+      "purpose": "Map generated designs back to BAIV design token system",
+      "format": "Object of token categories with dot-notation paths",
+      "usage": "Claude uses these to apply correct semantic tokens during code generation",
+      "example": {
+        "colors": ["brand.primary", "neutral.900"],
+        "typography": ["heading.h1", "body.medium"],
+        "spacing": ["spacing.6", "spacing.8"]
+      }
+    }
+  },
+
+  "mcpIntegration": {
+    "extractionWorkflow": [
+      "1. Figma Make generates layout from prompt",
+      "2. User shares Figma URL with Claude",
+      "3. Claude uses MCP to extract design context",
+      "4. Claude maps Figma layers to component structure",
+      "5. Claude applies BAIV tokens based on extracted values",
+      "6. Claude generates React/Next.js code with shadcn/ui"
+    ],
+    
+    "layerNamingImportance": "Consistent layer naming enables accurate component extraction. Use semantic names that match HTML elements (hero-section, cta-button, feature-card).",
+    
+    "componentDetection": "Auto-layout frames with specific naming patterns are automatically detected as reusable components.",
+    
+    "colorMapping": "MCP extracts HEX values, Claude maps to closest BAIV token (e.g., #00A4BF → brand.primary)."
+  },
+
+  "implementationNotes": {
+    "figmaMakeOptimization": [
+      "Start with primary prompt for speed",
+      "Use detailed prompt if primary result needs refinement",
+      "Always include responsive breakpoint specifications",
+      "Specify exact BAIV color HEX codes for accurate token mapping",
+      "Request proper layer naming in prompt for easier MCP extraction"
+    ],
+    
+    "claudeCodeGeneration": [
+      "Always use Next.js 14+ App Router conventions",
+      "Default to Server Components unless interactivity required",
+      "Use shadcn/ui components where possible for consistency",
+      "Apply Tailwind utility classes following mobile-first approach",
+      "Include proper TypeScript types for all components",
+      "Ensure WCAG AA accessibility minimum"
+    ],
+    
+    "tokenApplication": [
+      "Map all colors to BAIV design tokens (never hardcode HEX in final code)",
+      "Use spacing tokens (4px base unit) instead of arbitrary values",
+      "Apply typography tokens for consistent text styling",
+      "Reference radius tokens for border-radius values",
+      "Use shadow tokens for elevation consistency"
+    ]
+  }
+}
