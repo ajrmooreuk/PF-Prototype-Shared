@@ -1,0 +1,574 @@
+{
+  "$schema": "http://schema.org/CreativeWork",
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "PFC-PFI-BAIV Layout Templates",
+  "description": "Reusable layout templates for the BAIV design system. Defines common layout patterns, grid systems, and responsive behaviors that can be used across Figma Make AI-generated designs and Claude-generated code.",
+  "version": "3.0.0",
+  "dateModified": "2025-01-03",
+  "programmingLanguage": "JSON",
+  "runtimePlatform": "Web",
+  "targetProduct": {
+    "@type": "SoftwareApplication",
+    "name": "BAIV Design System",
+    "applicationCategory": "DesignTool"
+  },
+
+  "metadata": {
+    "purpose": "Standardized layout patterns for consistent UI structure",
+    "integration": "Works with ontology tokens for spacing, breakpoints, and sizing",
+    "usage": "Reference in Figma Make prompts and Claude code generation",
+    "responsive": "Mobile-first approach with breakpoint-specific overrides"
+  },
+
+  "layoutPrimitives": {
+    "container": {
+      "@type": "LayoutPattern",
+      "description": "Main content container with max-width and horizontal centering",
+      "variants": {
+        "full": {
+          "maxWidth": "100%",
+          "padding": {
+            "mobile": { "alias": "ontology.tokens.spacing.4" },
+            "tablet": { "alias": "ontology.tokens.spacing.6" },
+            "desktop": { "alias": "ontology.tokens.spacing.8" }
+          },
+          "margin": "0 auto"
+        },
+        "narrow": {
+          "maxWidth": "640px",
+          "padding": {
+            "mobile": { "alias": "ontology.tokens.spacing.4" },
+            "tablet": { "alias": "ontology.tokens.spacing.6" },
+            "desktop": { "alias": "ontology.tokens.spacing.8" }
+          },
+          "margin": "0 auto",
+          "useCase": "Blog posts, articles, forms"
+        },
+        "standard": {
+          "maxWidth": "1024px",
+          "padding": {
+            "mobile": { "alias": "ontology.tokens.spacing.4" },
+            "tablet": { "alias": "ontology.tokens.spacing.6" },
+            "desktop": { "alias": "ontology.tokens.spacing.8" }
+          },
+          "margin": "0 auto",
+          "useCase": "Default content width"
+        },
+        "wide": {
+          "maxWidth": "1280px",
+          "padding": {
+            "mobile": { "alias": "ontology.tokens.spacing.4" },
+            "tablet": { "alias": "ontology.tokens.spacing.6" },
+            "desktop": { "alias": "ontology.tokens.spacing.8" }
+          },
+          "margin": "0 auto",
+          "useCase": "Dashboards, data tables"
+        }
+      }
+    },
+
+    "stack": {
+      "@type": "LayoutPattern",
+      "description": "Vertical stacking of elements with consistent gaps",
+      "properties": {
+        "direction": "vertical",
+        "gap": {
+          "tight": { "alias": "ontology.tokens.spacing.2" },
+          "default": { "alias": "ontology.tokens.spacing.4" },
+          "relaxed": { "alias": "ontology.tokens.spacing.6" },
+          "loose": { "alias": "ontology.tokens.spacing.8" }
+        },
+        "alignment": ["start", "center", "end", "stretch"]
+      },
+      "useCase": "Form fields, card content, section stacking"
+    },
+
+    "inline": {
+      "@type": "LayoutPattern",
+      "description": "Horizontal inline layout with wrapping",
+      "properties": {
+        "direction": "horizontal",
+        "wrap": true,
+        "gap": {
+          "tight": { "alias": "ontology.tokens.spacing.2" },
+          "default": { "alias": "ontology.tokens.spacing.4" },
+          "relaxed": { "alias": "ontology.tokens.spacing.6" }
+        },
+        "alignment": {
+          "horizontal": ["start", "center", "end", "space-between", "space-around"],
+          "vertical": ["start", "center", "end", "baseline"]
+        }
+      },
+      "useCase": "Button groups, tags, breadcrumbs"
+    },
+
+    "grid": {
+      "@type": "LayoutPattern",
+      "description": "Responsive grid system with column-based layouts",
+      "variants": {
+        "responsive": {
+          "columns": {
+            "mobile": 1,
+            "tablet": 2,
+            "desktop": 3,
+            "wide": 4
+          },
+          "gap": {
+            "mobile": { "alias": "ontology.tokens.spacing.4" },
+            "tablet": { "alias": "ontology.tokens.spacing.6" },
+            "desktop": { "alias": "ontology.tokens.spacing.8" }
+          }
+        },
+        "fixed": {
+          "columns": 12,
+          "gap": { "alias": "ontology.tokens.spacing.6" },
+          "columnWidth": "auto"
+        },
+        "masonry": {
+          "columns": {
+            "mobile": 1,
+            "tablet": 2,
+            "desktop": 3
+          },
+          "gap": { "alias": "ontology.tokens.spacing.6" },
+          "autoFlow": "dense"
+        }
+      }
+    },
+
+    "sidebar": {
+      "@type": "LayoutPattern",
+      "description": "Sidebar layout with main content area",
+      "variants": {
+        "left": {
+          "sidebarWidth": {
+            "mobile": "100%",
+            "tablet": "256px",
+            "desktop": "280px"
+          },
+          "sidebarPosition": "left",
+          "gap": { "alias": "ontology.tokens.spacing.6" },
+          "responsive": {
+            "mobile": "stacked",
+            "tablet": "side-by-side"
+          }
+        },
+        "right": {
+          "sidebarWidth": {
+            "mobile": "100%",
+            "tablet": "256px",
+            "desktop": "280px"
+          },
+          "sidebarPosition": "right",
+          "gap": { "alias": "ontology.tokens.spacing.6" },
+          "responsive": {
+            "mobile": "stacked",
+            "tablet": "side-by-side"
+          }
+        }
+      }
+    }
+  },
+
+  "pageLayouts": {
+    "landing": {
+      "@type": "PageLayout",
+      "description": "Landing page with hero, features, and CTA sections",
+      "structure": [
+        {
+          "section": "hero",
+          "layout": "container.standard",
+          "padding": {
+            "top": { "alias": "ontology.tokens.spacing.16" },
+            "bottom": { "alias": "ontology.tokens.spacing.16" }
+          },
+          "content": {
+            "type": "stack",
+            "gap": "loose",
+            "alignment": "center",
+            "elements": ["heading", "subheading", "cta-buttons"]
+          }
+        },
+        {
+          "section": "features",
+          "layout": "container.standard",
+          "padding": {
+            "top": { "alias": "ontology.tokens.spacing.12" },
+            "bottom": { "alias": "ontology.tokens.spacing.12" }
+          },
+          "content": {
+            "type": "grid.responsive",
+            "elements": ["feature-card", "feature-card", "feature-card"]
+          }
+        },
+        {
+          "section": "cta",
+          "layout": "container.narrow",
+          "padding": {
+            "top": { "alias": "ontology.tokens.spacing.12" },
+            "bottom": { "alias": "ontology.tokens.spacing.16" }
+          },
+          "content": {
+            "type": "stack",
+            "gap": "default",
+            "alignment": "center",
+            "elements": ["heading", "description", "cta-button"]
+          }
+        }
+      ]
+    },
+
+    "dashboard": {
+      "@type": "PageLayout",
+      "description": "Dashboard layout with sidebar navigation and content grid",
+      "structure": [
+        {
+          "section": "header",
+          "layout": "container.full",
+          "height": "64px",
+          "sticky": true,
+          "content": {
+            "type": "inline",
+            "gap": "default",
+            "alignment": {
+              "horizontal": "space-between",
+              "vertical": "center"
+            },
+            "elements": ["logo", "navigation", "user-menu"]
+          }
+        },
+        {
+          "section": "main",
+          "layout": "sidebar.left",
+          "content": {
+            "sidebar": {
+              "type": "stack",
+              "gap": "tight",
+              "elements": ["nav-items"]
+            },
+            "main": {
+              "type": "stack",
+              "gap": "relaxed",
+              "elements": [
+                {
+                  "section": "metrics",
+                  "type": "grid.responsive",
+                  "columns": { "desktop": 4, "tablet": 2, "mobile": 1 },
+                  "elements": ["metric-card", "metric-card", "metric-card", "metric-card"]
+                },
+                {
+                  "section": "charts",
+                  "type": "grid.responsive",
+                  "columns": { "desktop": 2, "tablet": 1, "mobile": 1 },
+                  "elements": ["chart-card", "chart-card"]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+    "article": {
+      "@type": "PageLayout",
+      "description": "Article/blog post layout with narrow content column",
+      "structure": [
+        {
+          "section": "header",
+          "layout": "container.narrow",
+          "padding": {
+            "top": { "alias": "ontology.tokens.spacing.12" },
+            "bottom": { "alias": "ontology.tokens.spacing.8" }
+          },
+          "content": {
+            "type": "stack",
+            "gap": "default",
+            "elements": ["category-tag", "title", "meta-info", "featured-image"]
+          }
+        },
+        {
+          "section": "content",
+          "layout": "container.narrow",
+          "padding": {
+            "top": { "alias": "ontology.tokens.spacing.6" },
+            "bottom": { "alias": "ontology.tokens.spacing.12" }
+          },
+          "content": {
+            "type": "stack",
+            "gap": "relaxed",
+            "elements": ["prose-content"]
+          }
+        },
+        {
+          "section": "related",
+          "layout": "container.standard",
+          "padding": {
+            "top": { "alias": "ontology.tokens.spacing.12" },
+            "bottom": { "alias": "ontology.tokens.spacing.12" }
+          },
+          "content": {
+            "type": "grid.responsive",
+            "columns": { "desktop": 3, "tablet": 2, "mobile": 1 },
+            "elements": ["article-card", "article-card", "article-card"]
+          }
+        }
+      ]
+    },
+
+    "form": {
+      "@type": "PageLayout",
+      "description": "Form layout with centered narrow container",
+      "structure": [
+        {
+          "section": "form-container",
+          "layout": "container.narrow",
+          "padding": {
+            "top": { "alias": "ontology.tokens.spacing.12" },
+            "bottom": { "alias": "ontology.tokens.spacing.12" }
+          },
+          "content": {
+            "type": "stack",
+            "gap": "loose",
+            "elements": [
+              {
+                "type": "stack",
+                "gap": "tight",
+                "elements": ["form-title", "form-description"]
+              },
+              {
+                "type": "stack",
+                "gap": "default",
+                "elements": ["form-fields"]
+              },
+              {
+                "type": "inline",
+                "gap": "default",
+                "alignment": { "horizontal": "end" },
+                "elements": ["cancel-button", "submit-button"]
+              }
+            ]
+          }
+        }
+      ]
+    },
+
+    "ecommerce": {
+      "@type": "PageLayout",
+      "description": "E-commerce product grid with filters sidebar",
+      "structure": [
+        {
+          "section": "header",
+          "layout": "container.wide",
+          "content": {
+            "type": "inline",
+            "gap": "default",
+            "alignment": {
+              "horizontal": "space-between",
+              "vertical": "center"
+            },
+            "elements": ["breadcrumb", "sort-dropdown"]
+          }
+        },
+        {
+          "section": "main",
+          "layout": "sidebar.left",
+          "content": {
+            "sidebar": {
+              "type": "stack",
+              "gap": "relaxed",
+              "elements": ["filter-groups"]
+            },
+            "main": {
+              "type": "grid.responsive",
+              "columns": { "desktop": 4, "tablet": 3, "mobile": 2 },
+              "elements": ["product-card"]
+            }
+          }
+        }
+      ]
+    }
+  },
+
+  "componentLayouts": {
+    "card": {
+      "@type": "ComponentLayout",
+      "description": "Card component internal layout",
+      "variants": {
+        "default": {
+          "padding": { "alias": "ontology.tokens.spacing.6" },
+          "gap": { "alias": "ontology.tokens.spacing.4" },
+          "layout": "stack"
+        },
+        "compact": {
+          "padding": { "alias": "ontology.tokens.spacing.4" },
+          "gap": { "alias": "ontology.tokens.spacing.2" },
+          "layout": "stack"
+        },
+        "horizontal": {
+          "padding": { "alias": "ontology.tokens.spacing.6" },
+          "gap": { "alias": "ontology.tokens.spacing.6" },
+          "layout": "inline",
+          "imageWidth": {
+            "mobile": "100%",
+            "tablet": "40%",
+            "desktop": "33%"
+          }
+        }
+      }
+    },
+
+    "modal": {
+      "@type": "ComponentLayout",
+      "description": "Modal dialog layout",
+      "structure": {
+        "maxWidth": "600px",
+        "padding": { "alias": "ontology.tokens.spacing.6" },
+        "sections": [
+          {
+            "section": "header",
+            "layout": "inline",
+            "alignment": {
+              "horizontal": "space-between",
+              "vertical": "center"
+            },
+            "paddingBottom": { "alias": "ontology.tokens.spacing.4" },
+            "borderBottom": "1px solid",
+            "elements": ["title", "close-button"]
+          },
+          {
+            "section": "body",
+            "layout": "stack",
+            "gap": "default",
+            "padding": {
+              "top": { "alias": "ontology.tokens.spacing.6" },
+              "bottom": { "alias": "ontology.tokens.spacing.6" }
+            },
+            "elements": ["content"]
+          },
+          {
+            "section": "footer",
+            "layout": "inline",
+            "gap": "default",
+            "alignment": {
+              "horizontal": "end"
+            },
+            "paddingTop": { "alias": "ontology.tokens.spacing.4" },
+            "borderTop": "1px solid",
+            "elements": ["cancel-button", "confirm-button"]
+          }
+        ]
+      }
+    },
+
+    "navigationBar": {
+      "@type": "ComponentLayout",
+      "description": "Navigation bar layout",
+      "structure": {
+        "height": "64px",
+        "padding": {
+          "horizontal": { "alias": "ontology.tokens.spacing.6" }
+        },
+        "layout": "inline",
+        "alignment": {
+          "horizontal": "space-between",
+          "vertical": "center"
+        },
+        "sections": [
+          {
+            "section": "left",
+            "layout": "inline",
+            "gap": "relaxed",
+            "elements": ["logo", "nav-links"]
+          },
+          {
+            "section": "right",
+            "layout": "inline",
+            "gap": "default",
+            "elements": ["search", "notifications", "user-avatar"]
+          }
+        ]
+      }
+    }
+  },
+
+  "responsiveBehaviors": {
+    "stackToInline": {
+      "description": "Stack vertically on mobile, inline horizontally on desktop",
+      "mobile": "stack",
+      "tablet": "inline",
+      "desktop": "inline"
+    },
+    "collapseToHamburger": {
+      "description": "Full navigation on desktop, hamburger menu on mobile",
+      "mobile": "hamburger",
+      "tablet": "hamburger",
+      "desktop": "full"
+    },
+    "reduceColumns": {
+      "description": "Reduce grid columns on smaller screens",
+      "mobile": 1,
+      "tablet": 2,
+      "desktop": 3,
+      "wide": 4
+    },
+    "hideSidebar": {
+      "description": "Hide sidebar on mobile, show on tablet+",
+      "mobile": "hidden",
+      "tablet": "visible",
+      "desktop": "visible"
+    }
+  },
+
+  "layoutRules": {
+    "spacing": {
+      "sectionGap": {
+        "mobile": { "alias": "ontology.tokens.spacing.8" },
+        "desktop": { "alias": "ontology.tokens.spacing.12" }
+      },
+      "containerPadding": {
+        "mobile": { "alias": "ontology.tokens.spacing.4" },
+        "tablet": { "alias": "ontology.tokens.spacing.6" },
+        "desktop": { "alias": "ontology.tokens.spacing.8" }
+      },
+      "componentGap": {
+        "tight": { "alias": "ontology.tokens.spacing.2" },
+        "default": { "alias": "ontology.tokens.spacing.4" },
+        "relaxed": { "alias": "ontology.tokens.spacing.6" },
+        "loose": { "alias": "ontology.tokens.spacing.8" }
+      }
+    },
+    "alignment": {
+      "textAlign": {
+        "hero": "center",
+        "content": "left",
+        "footer": "center"
+      },
+      "contentAlign": {
+        "narrow": "center",
+        "standard": "left",
+        "wide": "left"
+      }
+    },
+    "breakpoints": {
+      "mobile": { "max": "639px" },
+      "tablet": { "min": "640px", "max": "1023px" },
+      "desktop": { "min": "1024px", "max": "1279px" },
+      "wide": { "min": "1280px" }
+    }
+  },
+
+  "figmaMakePrompts": {
+    "layoutInstructions": "Use auto-layout for all containers. Set appropriate constraints for responsive behavior. Follow spacing tokens from ontology.",
+    "namingConvention": "Name layers as [layout-type]/[variant] (e.g., Container/Standard, Grid/Responsive)",
+    "responsiveApproach": "Design for desktop first, but ensure mobile responsiveness with appropriate constraints"
+  },
+
+  "codeGenerationRules": {
+    "framework": "Next.js 14+ with App Router",
+    "layoutComponents": "Use flexbox and CSS Grid, avoid absolute positioning",
+    "responsive": "Mobile-first media queries, breakpoints from ontology",
+    "spacing": "Always use spacing tokens, never hard-coded values",
+    "accessibility": "Semantic HTML, proper heading hierarchy, skip links for navigation"
+  }
+}

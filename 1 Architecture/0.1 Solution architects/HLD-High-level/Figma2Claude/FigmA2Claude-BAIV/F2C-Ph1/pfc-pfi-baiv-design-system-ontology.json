@@ -1,0 +1,464 @@
+{
+  "$schema": "http://schema.org/DefinedTermSet",
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "PFC-PFI-BAIV Design System Ontology",
+  "description": "Comprehensive design token ontology for the BAIV design system, spanning primitive tokens through semantic aliasing to component specifications. Supports Figma Make AI-generated layouts, MCP extraction, and Claude-generated React/Next.js code.",
+  "version": "3.0.0",
+  "dateModified": "2025-01-03",
+  "publisher": {
+    "@type": "Organization",
+    "name": "PFC-PFI",
+    "description": "Be AI Visible Design System"
+  },
+  "inLanguage": "en-US",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+
+  "metadata": {
+    "taxonomy": "3-layer token system",
+    "layers": {
+      "primitive": "Raw design values (colors, sizes, etc.)",
+      "semantic": "Context-based aliases (primary, secondary, etc.)",
+      "component": "Specific component applications (button-bg, card-border, etc.)"
+    },
+    "namingConvention": "kebab-case with dot notation for hierarchy",
+    "figmaIntegration": "Direct mapping to Figma variables and collections",
+    "codeOutput": "CSS variables, Tailwind config, shadcn/ui themes"
+  },
+
+  "tokens": {
+    "colors": {
+      "primitive": {
+        "brand": {
+          "@type": "ColorPalette",
+          "primary": {
+            "value": "#00A4BF",
+            "name": "BAIV Teal",
+            "description": "Primary brand color - trust, clarity, innovation",
+            "wcag": {
+              "aa": true,
+              "aaa": false,
+              "contrastRatio": 4.52
+            }
+          },
+          "secondary": {
+            "value": "#E84E1C",
+            "name": "BAIV Orange",
+            "description": "Secondary brand color - energy, action, warmth",
+            "wcag": {
+              "aa": true,
+              "aaa": false,
+              "contrastRatio": 4.21
+            }
+          },
+          "accent": {
+            "value": "#CEC528",
+            "name": "BAIV Gold",
+            "description": "Accent color - highlight, premium, attention",
+            "wcag": {
+              "aa": true,
+              "aaa": false,
+              "contrastRatio": 4.89
+            }
+          }
+        },
+        "neutral": {
+          "@type": "ColorPalette",
+          "50": { "value": "#FAFAFA", "description": "Lightest neutral" },
+          "100": { "value": "#F5F5F5", "description": "Very light neutral" },
+          "200": { "value": "#E5E5E5", "description": "Light neutral" },
+          "300": { "value": "#D4D4D4", "description": "Medium-light neutral" },
+          "400": { "value": "#A3A3A3", "description": "Medium neutral" },
+          "500": { "value": "#737373", "description": "Medium-dark neutral" },
+          "600": { "value": "#525252", "description": "Dark neutral" },
+          "700": { "value": "#404040", "description": "Very dark neutral" },
+          "800": { "value": "#262626", "description": "Nearly black" },
+          "900": { "value": "#171717", "description": "Darkest neutral" }
+        },
+        "status": {
+          "@type": "ColorPalette",
+          "success": {
+            "value": "#10B981",
+            "name": "Success Green",
+            "description": "Positive actions, confirmations, success states"
+          },
+          "warning": {
+            "value": "#F59E0B",
+            "name": "Warning Amber",
+            "description": "Caution, alerts, important notices"
+          },
+          "error": {
+            "value": "#EF4444",
+            "name": "Error Red",
+            "description": "Errors, destructive actions, critical alerts"
+          },
+          "info": {
+            "value": "#3B82F6",
+            "name": "Info Blue",
+            "description": "Informational messages, guidance, tips"
+          }
+        },
+        "semantic": {
+          "@type": "ColorPalette",
+          "white": { "value": "#FFFFFF", "description": "Pure white" },
+          "black": { "value": "#000000", "description": "Pure black" }
+        }
+      },
+      "semantic": {
+        "primary": {
+          "default": { "alias": "primitive.brand.primary", "description": "Primary interactive elements" },
+          "hover": { "value": "#008DA3", "description": "Primary hover state (10% darker)" },
+          "active": { "value": "#007A8F", "description": "Primary active state (15% darker)" },
+          "disabled": { "value": "#80D2DF", "description": "Primary disabled state (50% opacity)" }
+        },
+        "secondary": {
+          "default": { "alias": "primitive.brand.secondary", "description": "Secondary interactive elements" },
+          "hover": { "value": "#D14418", "description": "Secondary hover state (10% darker)" },
+          "active": { "value": "#BA3D15", "description": "Secondary active state (15% darker)" },
+          "disabled": { "value": "#F4A78E", "description": "Secondary disabled state (50% opacity)" }
+        },
+        "accent": {
+          "default": { "alias": "primitive.brand.accent", "description": "Accent highlights" },
+          "hover": { "value": "#B8B124", "description": "Accent hover state (10% darker)" },
+          "active": { "value": "#A39E20", "description": "Accent active state (15% darker)" },
+          "disabled": { "value": "#E7E294", "description": "Accent disabled state (50% opacity)" }
+        },
+        "text": {
+          "primary": { "alias": "primitive.neutral.900", "description": "Primary text color" },
+          "secondary": { "alias": "primitive.neutral.600", "description": "Secondary text color" },
+          "tertiary": { "alias": "primitive.neutral.500", "description": "Tertiary text color" },
+          "disabled": { "alias": "primitive.neutral.400", "description": "Disabled text color" },
+          "inverse": { "alias": "primitive.semantic.white", "description": "Text on dark backgrounds" }
+        },
+        "background": {
+          "primary": { "alias": "primitive.semantic.white", "description": "Primary background" },
+          "secondary": { "alias": "primitive.neutral.50", "description": "Secondary background" },
+          "tertiary": { "alias": "primitive.neutral.100", "description": "Tertiary background" },
+          "inverse": { "alias": "primitive.neutral.900", "description": "Dark background" }
+        },
+        "border": {
+          "default": { "alias": "primitive.neutral.200", "description": "Default border color" },
+          "hover": { "alias": "primitive.neutral.300", "description": "Border hover state" },
+          "focus": { "alias": "primitive.brand.primary", "description": "Border focus state" },
+          "error": { "alias": "primitive.status.error", "description": "Error border color" }
+        }
+      },
+      "component": {
+        "button": {
+          "primary": {
+            "bg": { "alias": "semantic.primary.default" },
+            "bgHover": { "alias": "semantic.primary.hover" },
+            "bgActive": { "alias": "semantic.primary.active" },
+            "bgDisabled": { "alias": "semantic.primary.disabled" },
+            "text": { "alias": "semantic.text.inverse" },
+            "border": { "value": "transparent" }
+          },
+          "secondary": {
+            "bg": { "alias": "semantic.secondary.default" },
+            "bgHover": { "alias": "semantic.secondary.hover" },
+            "bgActive": { "alias": "semantic.secondary.active" },
+            "bgDisabled": { "alias": "semantic.secondary.disabled" },
+            "text": { "alias": "semantic.text.inverse" },
+            "border": { "value": "transparent" }
+          },
+          "outline": {
+            "bg": { "value": "transparent" },
+            "bgHover": { "alias": "semantic.background.secondary" },
+            "bgActive": { "alias": "semantic.background.tertiary" },
+            "text": { "alias": "semantic.primary.default" },
+            "textHover": { "alias": "semantic.primary.hover" },
+            "border": { "alias": "semantic.border.default" },
+            "borderHover": { "alias": "semantic.border.hover" }
+          },
+          "ghost": {
+            "bg": { "value": "transparent" },
+            "bgHover": { "alias": "semantic.background.secondary" },
+            "bgActive": { "alias": "semantic.background.tertiary" },
+            "text": { "alias": "semantic.text.primary" },
+            "border": { "value": "transparent" }
+          },
+          "destructive": {
+            "bg": { "alias": "primitive.status.error" },
+            "bgHover": { "value": "#DC2626" },
+            "bgActive": { "value": "#B91C1C" },
+            "text": { "alias": "semantic.text.inverse" },
+            "border": { "value": "transparent" }
+          }
+        },
+        "card": {
+          "default": {
+            "bg": { "alias": "semantic.background.primary" },
+            "border": { "alias": "semantic.border.default" },
+            "text": { "alias": "semantic.text.primary" }
+          },
+          "elevated": {
+            "bg": { "alias": "semantic.background.primary" },
+            "border": { "value": "transparent" },
+            "shadow": { "alias": "primitive.shadow.md" },
+            "text": { "alias": "semantic.text.primary" }
+          },
+          "outlined": {
+            "bg": { "value": "transparent" },
+            "border": { "alias": "semantic.border.default" },
+            "text": { "alias": "semantic.text.primary" }
+          }
+        },
+        "input": {
+          "default": {
+            "bg": { "alias": "semantic.background.primary" },
+            "border": { "alias": "semantic.border.default" },
+            "borderHover": { "alias": "semantic.border.hover" },
+            "borderFocus": { "alias": "semantic.border.focus" },
+            "borderError": { "alias": "semantic.border.error" },
+            "text": { "alias": "semantic.text.primary" },
+            "placeholder": { "alias": "semantic.text.tertiary" }
+          }
+        }
+      }
+    },
+
+    "typography": {
+      "fontFamily": {
+        "heading": {
+          "value": "'Titillium Web', sans-serif",
+          "description": "Headings, titles, navigation - modern, geometric, strong"
+        },
+        "body": {
+          "value": "'Open Sans', sans-serif",
+          "description": "Body text, descriptions, UI labels - readable, friendly, neutral"
+        },
+        "mono": {
+          "value": "'JetBrains Mono', monospace",
+          "description": "Code, technical content, data display"
+        }
+      },
+      "fontSize": {
+        "xs": { "value": "12px", "lineHeight": "16px", "rem": "0.75rem" },
+        "sm": { "value": "14px", "lineHeight": "20px", "rem": "0.875rem" },
+        "base": { "value": "16px", "lineHeight": "24px", "rem": "1rem" },
+        "lg": { "value": "18px", "lineHeight": "28px", "rem": "1.125rem" },
+        "xl": { "value": "20px", "lineHeight": "28px", "rem": "1.25rem" },
+        "2xl": { "value": "24px", "lineHeight": "32px", "rem": "1.5rem" },
+        "3xl": { "value": "30px", "lineHeight": "36px", "rem": "1.875rem" },
+        "4xl": { "value": "36px", "lineHeight": "40px", "rem": "2.25rem" },
+        "5xl": { "value": "48px", "lineHeight": "48px", "rem": "3rem" },
+        "6xl": { "value": "60px", "lineHeight": "60px", "rem": "3.75rem" },
+        "7xl": { "value": "72px", "lineHeight": "72px", "rem": "4.5rem" }
+      },
+      "fontWeight": {
+        "light": { "value": "300", "description": "Light weight" },
+        "regular": { "value": "400", "description": "Normal/regular weight" },
+        "medium": { "value": "500", "description": "Medium weight" },
+        "semibold": { "value": "600", "description": "Semi-bold weight" },
+        "bold": { "value": "700", "description": "Bold weight" },
+        "extrabold": { "value": "800", "description": "Extra-bold weight" }
+      },
+      "letterSpacing": {
+        "tighter": { "value": "-0.05em", "description": "Tighter tracking" },
+        "tight": { "value": "-0.025em", "description": "Tight tracking" },
+        "normal": { "value": "0", "description": "Normal tracking" },
+        "wide": { "value": "0.025em", "description": "Wide tracking" },
+        "wider": { "value": "0.05em", "description": "Wider tracking" },
+        "widest": { "value": "0.1em", "description": "Widest tracking" }
+      }
+    },
+
+    "spacing": {
+      "0": { "value": "0px", "rem": "0rem" },
+      "1": { "value": "4px", "rem": "0.25rem" },
+      "2": { "value": "8px", "rem": "0.5rem" },
+      "3": { "value": "12px", "rem": "0.75rem" },
+      "4": { "value": "16px", "rem": "1rem" },
+      "5": { "value": "20px", "rem": "1.25rem" },
+      "6": { "value": "24px", "rem": "1.5rem" },
+      "8": { "value": "32px", "rem": "2rem" },
+      "10": { "value": "40px", "rem": "2.5rem" },
+      "12": { "value": "48px", "rem": "3rem" },
+      "16": { "value": "64px", "rem": "4rem" },
+      "20": { "value": "80px", "rem": "5rem" },
+      "24": { "value": "96px", "rem": "6rem" },
+      "32": { "value": "128px", "rem": "8rem" },
+      "40": { "value": "160px", "rem": "10rem" },
+      "48": { "value": "192px", "rem": "12rem" },
+      "56": { "value": "224px", "rem": "14rem" },
+      "64": { "value": "256px", "rem": "16rem" }
+    },
+
+    "borderRadius": {
+      "none": { "value": "0px", "description": "No rounding" },
+      "sm": { "value": "2px", "rem": "0.125rem", "description": "Small radius" },
+      "base": { "value": "4px", "rem": "0.25rem", "description": "Default radius" },
+      "md": { "value": "6px", "rem": "0.375rem", "description": "Medium radius" },
+      "lg": { "value": "8px", "rem": "0.5rem", "description": "Large radius" },
+      "xl": { "value": "12px", "rem": "0.75rem", "description": "Extra-large radius" },
+      "2xl": { "value": "16px", "rem": "1rem", "description": "2X large radius" },
+      "full": { "value": "9999px", "description": "Fully rounded" }
+    },
+
+    "shadow": {
+      "primitive": {
+        "sm": {
+          "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "description": "Small shadow - subtle lift"
+        },
+        "base": {
+          "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "description": "Base shadow - standard elevation"
+        },
+        "md": {
+          "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "description": "Medium shadow - moderate elevation"
+        },
+        "lg": {
+          "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "description": "Large shadow - significant elevation"
+        },
+        "xl": {
+          "value": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "description": "Extra-large shadow - high elevation"
+        },
+        "2xl": {
+          "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "description": "2X large shadow - maximum elevation"
+        }
+      }
+    },
+
+    "breakpoints": {
+      "sm": { "value": "640px", "description": "Small devices (landscape phones)" },
+      "md": { "value": "768px", "description": "Medium devices (tablets)" },
+      "lg": { "value": "1024px", "description": "Large devices (desktops)" },
+      "xl": { "value": "1280px", "description": "Extra-large devices (large desktops)" },
+      "2xl": { "value": "1536px", "description": "2X large devices (larger desktops)" }
+    },
+
+    "zIndex": {
+      "base": { "value": "0", "description": "Base layer" },
+      "dropdown": { "value": "1000", "description": "Dropdown menus" },
+      "sticky": { "value": "1020", "description": "Sticky elements" },
+      "fixed": { "value": "1030", "description": "Fixed elements" },
+      "modalBackdrop": { "value": "1040", "description": "Modal backdrop" },
+      "modal": { "value": "1050", "description": "Modal dialogs" },
+      "popover": { "value": "1060", "description": "Popovers" },
+      "tooltip": { "value": "1070", "description": "Tooltips" }
+    }
+  },
+
+  "components": {
+    "button": {
+      "@type": "ComponentSpecification",
+      "description": "Interactive button component with multiple variants and sizes",
+      "variants": ["primary", "secondary", "outline", "ghost", "destructive"],
+      "sizes": {
+        "sm": {
+          "height": 32,
+          "paddingX": 12,
+          "paddingY": 6,
+          "fontSize": { "alias": "tokens.typography.fontSize.sm" },
+          "borderRadius": { "alias": "tokens.borderRadius.base" }
+        },
+        "md": {
+          "height": 40,
+          "paddingX": 16,
+          "paddingY": 8,
+          "fontSize": { "alias": "tokens.typography.fontSize.base" },
+          "borderRadius": { "alias": "tokens.borderRadius.md" }
+        },
+        "lg": {
+          "height": 48,
+          "paddingX": 24,
+          "paddingY": 12,
+          "fontSize": { "alias": "tokens.typography.fontSize.lg" },
+          "borderRadius": { "alias": "tokens.borderRadius.lg" }
+        }
+      },
+      "states": ["default", "hover", "active", "focus", "disabled"],
+      "accessibility": {
+        "minTouchTarget": "44px",
+        "keyboardNavigable": true,
+        "ariaLabel": "required"
+      }
+    },
+    "card": {
+      "@type": "ComponentSpecification",
+      "description": "Container component for grouping related content",
+      "variants": ["default", "elevated", "outlined"],
+      "padding": {
+        "sm": { "alias": "tokens.spacing.4" },
+        "md": { "alias": "tokens.spacing.6" },
+        "lg": { "alias": "tokens.spacing.8" }
+      },
+      "borderRadius": { "alias": "tokens.borderRadius.lg" },
+      "borderWidth": "1px"
+    },
+    "input": {
+      "@type": "ComponentSpecification",
+      "description": "Form input component for user data entry",
+      "height": {
+        "sm": 32,
+        "md": 40,
+        "lg": 48
+      },
+      "paddingX": {
+        "sm": 12,
+        "md": 16,
+        "lg": 20
+      },
+      "fontSize": {
+        "sm": { "alias": "tokens.typography.fontSize.sm" },
+        "md": { "alias": "tokens.typography.fontSize.base" },
+        "lg": { "alias": "tokens.typography.fontSize.lg" }
+      },
+      "borderRadius": { "alias": "tokens.borderRadius.md" },
+      "borderWidth": "1px",
+      "states": ["default", "hover", "focus", "error", "disabled"]
+    }
+  },
+
+  "namingConventions": {
+    "tokens": {
+      "format": "kebab-case",
+      "hierarchy": "dot.notation.path",
+      "example": "tokens.colors.semantic.primary.default"
+    },
+    "figmaVariables": {
+      "collections": "PascalCase",
+      "modes": "PascalCase",
+      "variables": "kebab-case with / separators",
+      "example": "semantic/primary/default"
+    },
+    "cssVariables": {
+      "prefix": "--baiv-",
+      "format": "kebab-case",
+      "example": "--baiv-color-primary-default"
+    },
+    "tailwind": {
+      "format": "kebab-case",
+      "example": "bg-primary hover:bg-primary-hover"
+    }
+  },
+
+  "generationRules": {
+    "figmaMakePrompts": {
+      "colorReferences": "Always use BAIV brand colors: Primary #00A4BF, Secondary #E84E1C, Accent #CEC528",
+      "typography": "Use Titillium Web for headings, Open Sans for body text",
+      "spacing": "Follow 4px base grid, use spacing tokens (4, 8, 12, 16, 24, 32, 48, 64)",
+      "borderRadius": "Default to 6px (md), 8px (lg) for cards, 4px (base) for inputs",
+      "shadows": "Use md shadow for cards, lg for modals, sm for subtle elevation"
+    },
+    "claudeCodeGeneration": {
+      "framework": "Next.js 14+ with App Router",
+      "styling": "Tailwind CSS with shadcn/ui components",
+      "tokenImport": "Import from @/lib/design-tokens",
+      "componentStructure": "Atomic design - atoms, molecules, organisms",
+      "typeScript": "Strict mode, full type coverage",
+      "accessibility": "WCAG 2.1 AA minimum, semantic HTML, ARIA labels"
+    },
+    "mcpExtraction": {
+      "layerNaming": "Follow convention: [component-type]/[variant]/[size]",
+      "autoLayout": "Always use Figma auto-layout for responsive components",
+      "constraints": "Set appropriate constraints for responsive behavior",
+      "components": "Convert repeated elements to Figma components"
+    }
+  }
+}

@@ -1,0 +1,466 @@
+{
+  "$schema": "http://schema.org/SoftwareSourceCode",
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "PFC-PFI-BAIV shadcn/ui Mappings",
+  "description": "Complete mapping between BAIV design system tokens and shadcn/ui component system. Enables automated theming and component generation with design system compliance.",
+  "version": "3.0.0",
+  "dateModified": "2025-01-03",
+  "programmingLanguage": "TypeScript",
+  "runtimePlatform": ["Next.js", "React"],
+  "targetProduct": {
+    "@type": "SoftwareApplication",
+    "name": "shadcn/ui",
+    "url": "https://ui.shadcn.com"
+  },
+
+  "metadata": {
+    "purpose": "Bridge BAIV design tokens to shadcn/ui theme configuration",
+    "shadcnVersion": "latest",
+    "integration": "Direct CSS variable mapping + component props",
+    "automation": "Generate shadcn theme from ontology tokens"
+  },
+
+  "themeMapping": {
+    "cssVariables": {
+      "light": {
+        "background": {
+          "shadcn": "--background",
+          "baiv": "tokens.colors.semantic.background.primary",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "foreground": {
+          "shadcn": "--foreground",
+          "baiv": "tokens.colors.semantic.text.primary",
+          "value": "#171717",
+          "hsl": "0 0% 9%"
+        },
+        "card": {
+          "shadcn": "--card",
+          "baiv": "tokens.colors.semantic.background.primary",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "card-foreground": {
+          "shadcn": "--card-foreground",
+          "baiv": "tokens.colors.semantic.text.primary",
+          "value": "#171717",
+          "hsl": "0 0% 9%"
+        },
+        "popover": {
+          "shadcn": "--popover",
+          "baiv": "tokens.colors.semantic.background.primary",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "popover-foreground": {
+          "shadcn": "--popover-foreground",
+          "baiv": "tokens.colors.semantic.text.primary",
+          "value": "#171717",
+          "hsl": "0 0% 9%"
+        },
+        "primary": {
+          "shadcn": "--primary",
+          "baiv": "tokens.colors.primitive.brand.primary",
+          "value": "#00A4BF",
+          "hsl": "188 100% 37%"
+        },
+        "primary-foreground": {
+          "shadcn": "--primary-foreground",
+          "baiv": "tokens.colors.semantic.text.inverse",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "secondary": {
+          "shadcn": "--secondary",
+          "baiv": "tokens.colors.primitive.brand.secondary",
+          "value": "#E84E1C",
+          "hsl": "14 82% 51%"
+        },
+        "secondary-foreground": {
+          "shadcn": "--secondary-foreground",
+          "baiv": "tokens.colors.semantic.text.inverse",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "muted": {
+          "shadcn": "--muted",
+          "baiv": "tokens.colors.semantic.background.secondary",
+          "value": "#FAFAFA",
+          "hsl": "0 0% 98%"
+        },
+        "muted-foreground": {
+          "shadcn": "--muted-foreground",
+          "baiv": "tokens.colors.semantic.text.secondary",
+          "value": "#525252",
+          "hsl": "0 0% 32%"
+        },
+        "accent": {
+          "shadcn": "--accent",
+          "baiv": "tokens.colors.primitive.brand.accent",
+          "value": "#CEC528",
+          "hsl": "56 67% 48%"
+        },
+        "accent-foreground": {
+          "shadcn": "--accent-foreground",
+          "baiv": "tokens.colors.semantic.text.primary",
+          "value": "#171717",
+          "hsl": "0 0% 9%"
+        },
+        "destructive": {
+          "shadcn": "--destructive",
+          "baiv": "tokens.colors.primitive.status.error",
+          "value": "#EF4444",
+          "hsl": "0 84% 60%"
+        },
+        "destructive-foreground": {
+          "shadcn": "--destructive-foreground",
+          "baiv": "tokens.colors.semantic.text.inverse",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "border": {
+          "shadcn": "--border",
+          "baiv": "tokens.colors.semantic.border.default",
+          "value": "#E5E5E5",
+          "hsl": "0 0% 90%"
+        },
+        "input": {
+          "shadcn": "--input",
+          "baiv": "tokens.colors.semantic.border.default",
+          "value": "#E5E5E5",
+          "hsl": "0 0% 90%"
+        },
+        "ring": {
+          "shadcn": "--ring",
+          "baiv": "tokens.colors.semantic.border.focus",
+          "value": "#00A4BF",
+          "hsl": "188 100% 37%"
+        },
+        "chart-1": {
+          "shadcn": "--chart-1",
+          "baiv": "tokens.colors.primitive.brand.primary",
+          "value": "#00A4BF",
+          "hsl": "188 100% 37%"
+        },
+        "chart-2": {
+          "shadcn": "--chart-2",
+          "baiv": "tokens.colors.primitive.brand.secondary",
+          "value": "#E84E1C",
+          "hsl": "14 82% 51%"
+        },
+        "chart-3": {
+          "shadcn": "--chart-3",
+          "baiv": "tokens.colors.primitive.brand.accent",
+          "value": "#CEC528",
+          "hsl": "56 67% 48%"
+        },
+        "chart-4": {
+          "shadcn": "--chart-4",
+          "baiv": "tokens.colors.primitive.status.info",
+          "value": "#3B82F6",
+          "hsl": "221 83% 60%"
+        },
+        "chart-5": {
+          "shadcn": "--chart-5",
+          "baiv": "tokens.colors.primitive.status.success",
+          "value": "#10B981",
+          "hsl": "160 84% 39%"
+        }
+      },
+      "dark": {
+        "background": {
+          "shadcn": "--background",
+          "baiv": "tokens.colors.primitive.neutral.900",
+          "value": "#171717",
+          "hsl": "0 0% 9%"
+        },
+        "foreground": {
+          "shadcn": "--foreground",
+          "baiv": "tokens.colors.semantic.white",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "card": {
+          "shadcn": "--card",
+          "baiv": "tokens.colors.primitive.neutral.800",
+          "value": "#262626",
+          "hsl": "0 0% 15%"
+        },
+        "card-foreground": {
+          "shadcn": "--card-foreground",
+          "baiv": "tokens.colors.semantic.white",
+          "value": "#FFFFFF",
+          "hsl": "0 0% 100%"
+        },
+        "primary": {
+          "shadcn": "--primary",
+          "baiv": "tokens.colors.primitive.brand.primary",
+          "value": "#00A4BF",
+          "hsl": "188 100% 37%"
+        },
+        "secondary": {
+          "shadcn": "--secondary",
+          "baiv": "tokens.colors.primitive.brand.secondary",
+          "value": "#E84E1C",
+          "hsl": "14 82% 51%"
+        },
+        "muted": {
+          "shadcn": "--muted",
+          "baiv": "tokens.colors.primitive.neutral.700",
+          "value": "#404040",
+          "hsl": "0 0% 25%"
+        },
+        "border": {
+          "shadcn": "--border",
+          "baiv": "tokens.colors.primitive.neutral.700",
+          "value": "#404040",
+          "hsl": "0 0% 25%"
+        }
+      }
+    },
+
+    "typography": {
+      "fontFamily": {
+        "sans": {
+          "shadcn": "fontFamily.sans",
+          "baiv": "tokens.typography.fontFamily.body",
+          "value": "'Open Sans', sans-serif"
+        },
+        "heading": {
+          "shadcn": "fontFamily.heading",
+          "baiv": "tokens.typography.fontFamily.heading",
+          "value": "'Titillium Web', sans-serif"
+        },
+        "mono": {
+          "shadcn": "fontFamily.mono",
+          "baiv": "tokens.typography.fontFamily.mono",
+          "value": "'JetBrains Mono', monospace"
+        }
+      },
+      "fontSize": {
+        "xs": {
+          "shadcn": "text-xs",
+          "baiv": "tokens.typography.fontSize.xs",
+          "value": "0.75rem"
+        },
+        "sm": {
+          "shadcn": "text-sm",
+          "baiv": "tokens.typography.fontSize.sm",
+          "value": "0.875rem"
+        },
+        "base": {
+          "shadcn": "text-base",
+          "baiv": "tokens.typography.fontSize.base",
+          "value": "1rem"
+        },
+        "lg": {
+          "shadcn": "text-lg",
+          "baiv": "tokens.typography.fontSize.lg",
+          "value": "1.125rem"
+        }
+      }
+    },
+
+    "spacing": {
+      "borderRadius": {
+        "sm": {
+          "shadcn": "rounded-sm",
+          "baiv": "tokens.borderRadius.sm",
+          "value": "0.125rem"
+        },
+        "md": {
+          "shadcn": "rounded-md",
+          "baiv": "tokens.borderRadius.md",
+          "value": "0.375rem"
+        },
+        "lg": {
+          "shadcn": "rounded-lg",
+          "baiv": "tokens.borderRadius.lg",
+          "value": "0.5rem"
+        }
+      }
+    }
+  },
+
+  "componentMappings": {
+    "button": {
+      "variants": {
+        "default": {
+          "baivEquivalent": "component.button.primary",
+          "cssClasses": "bg-primary text-primary-foreground hover:bg-primary/90",
+          "tokenMapping": {
+            "background": "tokens.colors.component.button.primary.bg",
+            "text": "tokens.colors.component.button.primary.text",
+            "hover": "tokens.colors.component.button.primary.bgHover"
+          }
+        },
+        "secondary": {
+          "baivEquivalent": "component.button.secondary",
+          "cssClasses": "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "tokenMapping": {
+            "background": "tokens.colors.component.button.secondary.bg",
+            "text": "tokens.colors.component.button.secondary.text"
+          }
+        },
+        "destructive": {
+          "baivEquivalent": "component.button.destructive",
+          "cssClasses": "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "tokenMapping": {
+            "background": "tokens.colors.component.button.destructive.bg",
+            "text": "tokens.colors.component.button.destructive.text"
+          }
+        },
+        "outline": {
+          "baivEquivalent": "component.button.outline",
+          "cssClasses": "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "tokenMapping": {
+            "border": "tokens.colors.component.button.outline.border",
+            "background": "tokens.colors.component.button.outline.bg",
+            "text": "tokens.colors.component.button.outline.text"
+          }
+        },
+        "ghost": {
+          "baivEquivalent": "component.button.ghost",
+          "cssClasses": "hover:bg-accent hover:text-accent-foreground",
+          "tokenMapping": {
+            "background": "tokens.colors.component.button.ghost.bg",
+            "hover": "tokens.colors.component.button.ghost.bgHover"
+          }
+        }
+      },
+      "sizes": {
+        "sm": {
+          "baivEquivalent": "components.button.sizes.sm",
+          "height": "32px",
+          "padding": "0 12px",
+          "fontSize": "0.875rem"
+        },
+        "default": {
+          "baivEquivalent": "components.button.sizes.md",
+          "height": "40px",
+          "padding": "0 16px",
+          "fontSize": "1rem"
+        },
+        "lg": {
+          "baivEquivalent": "components.button.sizes.lg",
+          "height": "48px",
+          "padding": "0 24px",
+          "fontSize": "1.125rem"
+        }
+      }
+    },
+
+    "card": {
+      "default": {
+        "baivEquivalent": "component.card.default",
+        "cssClasses": "rounded-lg border bg-card text-card-foreground shadow-sm",
+        "tokenMapping": {
+          "background": "tokens.colors.component.card.default.bg",
+          "border": "tokens.colors.component.card.default.border",
+          "borderRadius": "tokens.borderRadius.lg",
+          "shadow": "tokens.shadow.primitive.sm"
+        }
+      }
+    },
+
+    "input": {
+      "default": {
+        "baivEquivalent": "component.input.default",
+        "cssClasses": "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2",
+        "tokenMapping": {
+          "height": "40px",
+          "borderRadius": "tokens.borderRadius.md",
+          "border": "tokens.colors.component.input.default.border",
+          "background": "tokens.colors.component.input.default.bg",
+          "padding": "tokens.spacing.3"
+        }
+      }
+    },
+
+    "badge": {
+      "variants": {
+        "default": {
+          "cssClasses": "bg-primary text-primary-foreground hover:bg-primary/80",
+          "tokenMapping": {
+            "background": "tokens.colors.primitive.brand.primary",
+            "text": "tokens.colors.semantic.text.inverse"
+          }
+        },
+        "secondary": {
+          "cssClasses": "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "tokenMapping": {
+            "background": "tokens.colors.primitive.brand.secondary",
+            "text": "tokens.colors.semantic.text.inverse"
+          }
+        }
+      }
+    },
+
+    "alert": {
+      "variants": {
+        "default": {
+          "cssClasses": "bg-background text-foreground",
+          "tokenMapping": {
+            "background": "tokens.colors.semantic.background.primary",
+            "border": "tokens.colors.semantic.border.default"
+          }
+        },
+        "destructive": {
+          "cssClasses": "border-destructive/50 text-destructive",
+          "tokenMapping": {
+            "border": "tokens.colors.primitive.status.error",
+            "text": "tokens.colors.primitive.status.error"
+          }
+        }
+      }
+    }
+  },
+
+  "generationRules": {
+    "cssVariableGeneration": {
+      "format": "HSL",
+      "prefix": "",
+      "darkMode": "class",
+      "example": "--primary: 188 100% 37%;"
+    },
+    "tailwindConfig": {
+      "extend": {
+        "colors": "Map BAIV tokens to Tailwind color palette",
+        "fontFamily": "Import BAIV font families",
+        "borderRadius": "Use BAIV border radius values",
+        "boxShadow": "Map BAIV shadow tokens"
+      }
+    },
+    "componentGeneration": {
+      "framework": "React + TypeScript",
+      "styling": "Tailwind CSS classes",
+      "variants": "Use cva (class-variance-authority)",
+      "accessibility": "Include ARIA attributes"
+    }
+  },
+
+  "integrationWorkflow": {
+    "step1": {
+      "name": "Generate CSS Variables",
+      "action": "Convert BAIV tokens to shadcn CSS variables",
+      "output": "globals.css with :root and .dark definitions"
+    },
+    "step2": {
+      "name": "Configure Tailwind",
+      "action": "Extend Tailwind config with BAIV tokens",
+      "output": "tailwind.config.ts"
+    },
+    "step3": {
+      "name": "Install shadcn Components",
+      "action": "Run npx shadcn@latest add [component]",
+      "note": "Components auto-use BAIV theme"
+    },
+    "step4": {
+      "name": "Customize Components",
+      "action": "Adjust component variants to match BAIV specs",
+      "output": "Modified component files in /components/ui/"
+    }
+  }
+}

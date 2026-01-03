@@ -1,0 +1,179 @@
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#00A4BF','primaryTextColor':'#fff','primaryBorderColor':'#008DA3','lineColor':'#E84E1C','secondaryColor':'#CEC528','tertiaryColor':'#F5F5F5'}}}%%
+
+graph TB
+    subgraph Ontology["🎯 BAIV Design System Ontology"]
+        direction TB
+        
+        subgraph Layers["Three-Layer Token System"]
+            direction LR
+            P[Primitive<br/>Raw Values]
+            S[Semantic<br/>Context]
+            C[Component<br/>Application]
+            
+            P -->|aliases| S
+            S -->|aliases| C
+        end
+        
+        subgraph Colors["🎨 Color Tokens"]
+            direction TB
+            
+            subgraph PrimColors["Primitive Colors"]
+                PB[Brand<br/>#00A4BF #E84E1C #CEC528]
+                PN[Neutral<br/>50-900]
+                PS[Status<br/>success warning error info]
+                PW[Semantic<br/>white black]
+            end
+            
+            subgraph SemColors["Semantic Colors"]
+                SP[primary<br/>default hover active disabled]
+                SS[secondary<br/>default hover active disabled]
+                ST[text<br/>primary secondary tertiary inverse]
+                SB[background<br/>primary secondary tertiary inverse]
+                SBorder[border<br/>default hover focus error]
+            end
+            
+            subgraph CompColors["Component Colors"]
+                CB[button<br/>primary secondary outline ghost destructive]
+                CC[card<br/>default elevated outlined]
+                CI[input<br/>default states]
+            end
+            
+            PB --> SP
+            PB --> SS
+            PN --> ST
+            PN --> SB
+            PN --> SBorder
+            PS --> SBorder
+            
+            SP --> CB
+            SS --> CB
+            ST --> CB
+            SB --> CC
+            SBorder --> CC
+            SBorder --> CI
+        end
+        
+        subgraph Typography["✍️ Typography Tokens"]
+            direction TB
+            
+            FF[Font Family<br/>heading body mono]
+            FS[Font Size<br/>xs sm base lg xl 2xl-7xl]
+            FW[Font Weight<br/>300-800]
+            LS[Letter Spacing<br/>tighter tight normal wide wider widest]
+            LH[Line Height<br/>matched to size]
+            
+            FF --> CompTypo
+            FS --> CompTypo
+            FW --> CompTypo
+            LS --> CompTypo
+            LH --> CompTypo
+        end
+        
+        subgraph Spacing["📏 Spacing Tokens"]
+            direction LR
+            SP0[0-6<br/>0-24px]
+            SP1[8-12<br/>32-48px]
+            SP2[16-64<br/>64-256px]
+            
+            SP0 --> CompSpacing
+            SP1 --> CompSpacing
+            SP2 --> CompSpacing
+        end
+        
+        subgraph Other["🔧 Other Tokens"]
+            direction LR
+            BR[Border Radius<br/>none sm base md lg xl 2xl full]
+            SH[Shadows<br/>sm base md lg xl 2xl]
+            BP[Breakpoints<br/>sm md lg xl 2xl]
+            ZI[Z-Index<br/>base dropdown sticky fixed modal popover tooltip]
+        end
+        
+        subgraph Components["🧩 Component Specifications"]
+            direction TB
+            
+            CompButton[Button Component<br/>variants: 5<br/>sizes: sm md lg<br/>states: 5]
+            CompCard[Card Component<br/>variants: 3<br/>padding: sm md lg]
+            CompInput[Input Component<br/>sizes: sm md lg<br/>states: 5]
+            CompTypo[Typography System<br/>heading body mono]
+            CompSpacing[Spacing System<br/>4px base grid]
+            
+            CB --> CompButton
+            CC --> CompCard
+            CI --> CompInput
+        end
+        
+        Layers --> Colors
+        Layers --> Typography
+        Layers --> Spacing
+        Layers --> Other
+        Colors --> Components
+        Typography --> Components
+        Spacing --> Components
+        Other --> Components
+    end
+    
+    subgraph Integration["🔌 Integration Points"]
+        direction LR
+        
+        FM[Figma Make<br/>AI Generation]
+        MCP[MCP<br/>Design Extraction]
+        Claude[Claude<br/>Code Generation]
+        Figma[Figma<br/>Variables]
+        Shadcn[shadcn/ui<br/>Components]
+        Tailwind[Tailwind CSS<br/>Theme]
+        
+        Ontology --> FM
+        Ontology --> Figma
+        Figma --> MCP
+        MCP --> Claude
+        Ontology --> Claude
+        Claude --> Shadcn
+        Ontology --> Tailwind
+    end
+    
+    subgraph Workflow["⚡ Automated Workflow"]
+        direction LR
+        
+        Design[Designer<br/>Creates in Figma Make]
+        Extract[MCP<br/>Extracts Design Context]
+        Generate[Claude<br/>Generates Code]
+        Deploy[Production<br/>Next.js + shadcn]
+        
+        Design --> Extract
+        Extract --> Generate
+        Generate --> Deploy
+        
+        Ontology -.token values.-> Design
+        Ontology -.token mappings.-> Extract
+        Ontology -.component specs.-> Generate
+    end
+    
+    subgraph Governance["📋 Generation Rules"]
+        direction TB
+        
+        GR1[Naming Conventions<br/>kebab-case dot.notation /slashes]
+        GR2[Figma Make Prompts<br/>Always include brand colors]
+        GR3[Code Generation<br/>Next.js + TypeScript + Tailwind]
+        GR4[MCP Extraction<br/>Layer naming: type/variant/size]
+        GR5[Validation<br/>WCAG AA compliance]
+        
+        Ontology --> GR1
+        Ontology --> GR2
+        Ontology --> GR3
+        Ontology --> GR4
+        Ontology --> GR5
+    end
+    
+    classDef primitive fill:#00A4BF,stroke:#008DA3,stroke-width:2px,color:#fff
+    classDef semantic fill:#E84E1C,stroke:#D14418,stroke-width:2px,color:#fff
+    classDef component fill:#CEC528,stroke:#B8B124,stroke-width:2px,color:#000
+    classDef integration fill:#10B981,stroke:#059669,stroke-width:2px,color:#fff
+    classDef workflow fill:#3B82F6,stroke:#2563EB,stroke-width:2px,color:#fff
+    classDef governance fill:#8B5CF6,stroke:#7C3AED,stroke-width:2px,color:#fff
+    
+    class P,PrimColors,PB,PN,PS,PW primitive
+    class S,SemColors,SP,SS,ST,SB,SBorder semantic
+    class C,CompColors,CB,CC,CI,Components,CompButton,CompCard,CompInput,CompTypo,CompSpacing component
+    class Integration,FM,MCP,Claude,Figma,Shadcn,Tailwind integration
+    class Workflow,Design,Extract,Generate,Deploy workflow
+    class Governance,GR1,GR2,GR3,GR4,GR5 governance

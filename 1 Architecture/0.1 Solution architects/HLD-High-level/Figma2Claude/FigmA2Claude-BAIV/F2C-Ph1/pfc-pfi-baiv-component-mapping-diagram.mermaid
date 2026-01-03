@@ -1,0 +1,96 @@
+graph TB
+    subgraph BAIV["🎨 BAIV Design System"]
+        direction TB
+        
+        subgraph Tokens["Design Tokens"]
+            Brand[Brand Colors<br/>#00A4BF #E84E1C #CEC528]
+            Neutral[Neutral Scale<br/>50-900]
+            Status[Status Colors<br/>success warning error]
+            Typo[Typography<br/>Titillium Open Sans]
+            Space[Spacing<br/>4px grid]
+        end
+        
+        subgraph Components["Component Specs"]
+            BButton[Button<br/>5 variants, 3 sizes]
+            BCard[Card<br/>3 variants]
+            BInput[Input<br/>states]
+            BBadge[Badge<br/>variants]
+        end
+        
+        Tokens --> Components
+    end
+    
+    subgraph Conversion["🔄 Conversion Layer"]
+        direction TB
+        
+        HexHSL[HEX → HSL<br/>Color Conversion]
+        Mapping[Token Mapping<br/>BAIV → shadcn]
+        CSS[CSS Variables<br/>Generation]
+        
+        HexHSL --> Mapping
+        Mapping --> CSS
+    end
+    
+    subgraph Shadcn["✨ shadcn/ui"]
+        direction TB
+        
+        subgraph CSSVars["CSS Variables"]
+            Primary[--primary<br/>188 100% 37%]
+            Secondary[--secondary<br/>14 82% 51%]
+            Destructive[--destructive<br/>error red]
+            Border[--border<br/>neutral 200]
+        end
+        
+        subgraph SComponents["Components"]
+            SButton[Button Component<br/>cva variants]
+            SCard[Card Component<br/>composition]
+            SInput[Input Component<br/>form element]
+            SBadge[Badge Component<br/>labels]
+        end
+        
+        CSSVars --> SComponents
+    end
+    
+    subgraph Output["💻 Final Output"]
+        direction LR
+        
+        React[React + TypeScript<br/>Components]
+        Tailwind[Tailwind CSS<br/>Utility Classes]
+        NextJS[Next.js App<br/>Production Ready]
+        
+        React --> Tailwind
+        Tailwind --> NextJS
+    end
+    
+    BAIV --> Conversion
+    Conversion --> Shadcn
+    Shadcn --> Output
+    
+    subgraph Mappings["📊 Key Mappings"]
+        direction TB
+        
+        M1[Button Primary → default variant]
+        M2[Button Secondary → secondary variant]
+        M3[Button Destructive → destructive variant]
+        M4[Button Outline → outline variant]
+        M5[Button Ghost → ghost variant]
+        M6[Card Default → Card component]
+        M7[Brand Primary → --primary]
+        M8[Brand Secondary → --secondary]
+        M9[Status Error → --destructive]
+    end
+    
+    Components -.mapping.-> Mappings
+    Mappings -.applies to.-> SComponents
+    
+    classDef baiv fill:#00A4BF,stroke:#008DA3,stroke-width:2px,color:#fff
+    classDef conversion fill:#CEC528,stroke:#B8B124,stroke-width:2px,color:#000
+    classDef shadcn fill:#E84E1C,stroke:#D14418,stroke-width:2px,color:#fff
+    classDef output fill:#10B981,stroke:#059669,stroke-width:2px,color:#fff
+    classDef mapping fill:#3B82F6,stroke:#2563EB,stroke-width:2px,color:#fff
+    
+    class Brand,Neutral,Status,BButton,BCard,BInput,BBadge baiv
+    class HexHSL,Mapping,CSS conversion
+    class Primary,Secondary,Destructive,Border,SButton,SCard,SInput,SBadge shadcn
+    class React,Tailwind,NextJS output
+    class M1,M2,M3,M4,M5,M6,M7,M8,M9 mapping
