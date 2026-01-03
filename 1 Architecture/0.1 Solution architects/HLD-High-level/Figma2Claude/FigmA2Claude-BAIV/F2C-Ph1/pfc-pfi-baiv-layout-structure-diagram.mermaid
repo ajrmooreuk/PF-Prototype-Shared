@@ -1,0 +1,70 @@
+graph TB
+    subgraph LayoutSystem["📐 BAIV Layout System"]
+        direction TB
+        
+        subgraph Primitives["Layout Primitives"]
+            direction LR
+            Container[Container<br/>full narrow standard wide]
+            Stack[Stack<br/>tight default relaxed loose]
+            Inline[Inline<br/>horizontal wrapping]
+            Grid[Grid<br/>responsive fixed masonry]
+            Sidebar[Sidebar<br/>left right]
+        end
+        
+        subgraph PageLayouts["Page Layouts"]
+            direction TB
+            
+            Landing[Landing Page<br/>hero → features → cta]
+            Dashboard[Dashboard<br/>header + sidebar + content]
+            Article[Article<br/>narrow content + related]
+            Form[Form<br/>centered narrow]
+            Ecommerce[E-commerce<br/>filters + product grid]
+        end
+        
+        subgraph ComponentLayouts["Component Layouts"]
+            direction LR
+            Card[Card<br/>default compact horizontal]
+            Modal[Modal<br/>header body footer]
+            NavBar[Navigation Bar<br/>logo nav user]
+        end
+        
+        subgraph Responsive["Responsive Behaviors"]
+            direction TB
+            StackInline[Stack → Inline<br/>vertical mobile, horizontal desktop]
+            Hamburger[Collapse → Hamburger<br/>full nav desktop, menu mobile]
+            ReduceCols[Reduce Columns<br/>1 → 2 → 3 → 4]
+            HideSidebar[Hide Sidebar<br/>hidden mobile, visible tablet+]
+        end
+        
+        Primitives --> PageLayouts
+        Primitives --> ComponentLayouts
+        Responsive --> PageLayouts
+        Responsive --> ComponentLayouts
+    end
+    
+    subgraph Tokens["Design Tokens (from Ontology)"]
+        direction LR
+        Spacing[Spacing<br/>4px base grid]
+        Breakpoints[Breakpoints<br/>sm md lg xl 2xl]
+        Colors[Colors<br/>background border]
+    end
+    
+    subgraph CodeOutput["Code Generation"]
+        direction LR
+        React[React Components<br/>Next.js App Router]
+        Tailwind[Tailwind Classes<br/>responsive utilities]
+        Semantic[Semantic HTML<br/>main nav aside article]
+    end
+    
+    Tokens --> LayoutSystem
+    LayoutSystem --> CodeOutput
+    
+    classDef primitive fill:#00A4BF,stroke:#008DA3,stroke-width:2px,color:#fff
+    classDef page fill:#E84E1C,stroke:#D14418,stroke-width:2px,color:#fff
+    classDef component fill:#CEC528,stroke:#B8B124,stroke-width:2px,color:#000
+    classDef responsive fill:#10B981,stroke:#059669,stroke-width:2px,color:#fff
+    
+    class Container,Stack,Inline,Grid,Sidebar primitive
+    class Landing,Dashboard,Article,Form,Ecommerce page
+    class Card,Modal,NavBar component
+    class StackInline,Hamburger,ReduceCols,HideSidebar responsive
