@@ -1,0 +1,334 @@
+```mermaid
+---
+title: PFC-PFI-BAIV v3.0 Ph3 - Claude MCP Automation Workflows
+---
+
+graph TB
+    subgraph "TIER 1: Conversational (claude.ai)"
+        A1[User Shares Figma URL] --> B1[Claude: get_design_context]
+        B1 --> C1[Extract: Colors, Typography, Layout]
+        C1 --> D1[Map to BAIV Tokens]
+        D1 --> E1[Generate React Component]
+        E1 --> F1[Return Code to User]
+        
+        A2[User Describes Component] --> B2[Reference Phase 2 Templates]
+        B2 --> C2[Apply BAIV Patterns]
+        C2 --> E1
+    end
+
+    subgraph "TIER 2: MCP-Powered (Multi-Component)"
+        G1[Figma Page URL] --> H1[get_metadata: Page Structure]
+        H1 --> I1{Multiple Sections?}
+        I1 -->|Yes| J1[For Each Section]
+        J1 --> K1[get_design_context]
+        K1 --> L1[get_variable_defs]
+        L1 --> M1[Generate Section Component]
+        M1 --> N1[Create Page File]
+        N1 --> O1[Compose All Sections]
+        
+        I1 -->|No| K1
+    end
+
+    subgraph "TIER 3: Agent SDK (Production)"
+        P1[App Specification] --> Q1[Initialize Next.js Project]
+        Q1 --> R1[Install Dependencies]
+        R1 --> S1[Apply BAIV Configuration]
+        S1 --> T1{Page List}
+        T1 --> U1[Generate Each Page]
+        U1 --> V1[Create Navigation]
+        V1 --> W1[Setup Authentication]
+        W1 --> X1[Deploy to Vercel]
+    end
+
+    subgraph "Design Token Sync"
+        Y1[Ontology JSON Updated] --> Z1[Detect Changed Tokens]
+        Z1 --> AA1[Scan Codebase]
+        AA1 --> AB1[Find Token References]
+        AB1 --> AC1[Update Components]
+        AC1 --> AD1[Update CSS Variables]
+        AD1 --> AE1[Generate Report]
+    end
+
+    subgraph "Component Library Sync"
+        AF1[Figma Library Updated] --> AG1[get_metadata: All Components]
+        AG1 --> AH1[get_code_connect_map]
+        AH1 --> AI1{Mapping Exists?}
+        AI1 -->|No| AJ1[Generate New Component]
+        AJ1 --> AK1[add_code_connect_map]
+        AI1 -->|Yes| AL1[Check for Changes]
+        AL1 --> AM1{Design Changed?}
+        AM1 -->|Yes| AN1[Regenerate Component]
+        AM1 -->|No| AO1[Skip]
+    end
+
+    style A1 fill:#00A4BF,stroke:#006B7D,color:#fff
+    style A2 fill:#00A4BF,stroke:#006B7D,color:#fff
+    style G1 fill:#E84E1C,stroke:#B03C15,color:#fff
+    style P1 fill:#CEC528,stroke:#9A951F,color:#000
+    style Y1 fill:#8B5CF6,stroke:#6D28D9,color:#fff
+    style AF1 fill:#10B981,stroke:#059669,color:#fff
+```
+
+```mermaid
+---
+title: MCP Tool Call Sequences
+---
+
+sequenceDiagram
+    participant U as User
+    participant C as Claude
+    participant F as Figma MCP
+    participant B as BAIV Ontology
+    participant O as Output
+
+    Note over U,O: Workflow 1: Single Component from Figma
+    
+    U->>C: Share Figma URL
+    C->>F: get_design_context(fileKey, nodeId)
+    F-->>C: Design data (HTML, colors, spacing)
+    C->>B: Load token mappings
+    B-->>C: BAIV token definitions
+    C->>C: Map Figma colors to tokens
+    Note over C: #00A4BF → var(--baiv-primary-500)
+    C->>O: Generate React component
+    O-->>U: Production-ready .tsx file
+
+    Note over U,O: Workflow 2: Full Page Extraction
+    
+    U->>C: Share Figma page URL
+    C->>F: get_metadata(fileKey, pageNodeId)
+    F-->>C: Page structure (5 sections)
+    
+    loop For each section
+        C->>F: get_design_context(fileKey, sectionId)
+        F-->>C: Section design data
+        C->>B: Map to BAIV tokens
+        B-->>C: Token references
+        C->>O: Generate section component
+    end
+    
+    C->>F: get_variable_defs(fileKey, pageId)
+    F-->>C: Figma variable definitions
+    C->>B: Map Figma vars → BAIV tokens
+    C->>O: Generate page.tsx (imports all sections)
+    O-->>U: Complete page + components
+
+    Note over U,O: Workflow 3: Component Library Sync
+    
+    U->>C: Sync Figma library
+    C->>F: get_metadata(libraryFileKey, "0:1")
+    F-->>C: List of 20 components
+    
+    loop For each component
+        C->>F: get_code_connect_map(fileKey, componentId)
+        F-->>C: Existing code mapping (or null)
+        
+        alt No mapping exists
+            C->>F: get_design_context(fileKey, componentId)
+            F-->>C: Component design
+            C->>O: Generate new component
+            C->>F: add_code_connect_map(fileKey, componentId, path)
+        else Mapping exists
+            C->>F: get_design_context(fileKey, componentId)
+            F-->>C: Current design
+            C->>C: Compare with existing code
+            alt Design changed
+                C->>O: Regenerate component
+            else No changes
+                C->>C: Skip (component up to date)
+            end
+        end
+    end
+    
+    O-->>U: Updated component library
+
+    Note over U,O: Workflow 4: Design Token Update
+    
+    U->>C: Token changed (primary: #00A4BF → #0095B3)
+    C->>B: Update ontology JSON
+    C->>C: Scan codebase for old values
+    C->>O: Replace hardcoded #00A4BF
+    C->>O: Update CSS variables
+    C->>O: Regenerate any affected components
+    O-->>U: Report: 47 files updated
+```
+
+```mermaid
+---
+title: Agent SDK Multi-Page Application Workflow
+---
+
+flowchart TD
+    A[User: Create SaaS App] --> B[Agent: Initialize Next.js]
+    B --> C[Install Dependencies]
+    C --> D[Apply BAIV Theme Config]
+    D --> E{Page List}
+    
+    E --> F1[Generate Landing Page]
+    E --> F2[Generate Dashboard]
+    E --> F3[Generate Settings]
+    E --> F4[Generate Admin Panel]
+    
+    F1 --> G1[Use Phase 2 Template: landing_page]
+    F2 --> G2[Use Phase 2 Template: dashboard]
+    F3 --> G3[Use Phase 2 Template: settings_page]
+    F4 --> G4[Use Phase 2 Template: admin_panel]
+    
+    G1 --> H1[Apply BAIV Tokens]
+    G2 --> H2[Apply BAIV Tokens]
+    G3 --> H3[Apply BAIV Tokens]
+    G4 --> H4[Apply BAIV Tokens]
+    
+    H1 --> I[Generate app/page.tsx]
+    H2 --> J[Generate app/dashboard/page.tsx]
+    H3 --> K[Generate app/settings/page.tsx]
+    H4 --> L[Generate app/admin/page.tsx]
+    
+    I --> M[Create Navigation]
+    J --> M
+    K --> M
+    L --> M
+    
+    M --> N[Setup Clerk Auth]
+    N --> O[Configure Middleware]
+    O --> P[Deploy to Vercel]
+    P --> Q[Production URL]
+    
+    style A fill:#00A4BF,color:#fff
+    style B fill:#E84E1C,color:#fff
+    style D fill:#CEC528,color:#000
+    style Q fill:#10B981,color:#fff
+```
+
+```mermaid
+---
+title: BAIV Token Mapping Process
+---
+
+graph LR
+    A[Figma Design] --> B{Has Figma Variables?}
+    
+    B -->|Yes| C[get_variable_defs]
+    C --> D[Extract Variable Names]
+    D --> E{Match to BAIV?}
+    E -->|Direct Match| F[primary/500 → baiv-primary-500]
+    E -->|No Match| G[Map by Value]
+    
+    B -->|No| H[Extract Raw Colors]
+    H --> G[Map HEX to Tokens]
+    
+    G --> I{Color Lookup}
+    I -->|#00A4BF| J[var--baiv-primary-500]
+    I -->|#E84E1C| K[var--baiv-secondary-500]
+    I -->|#CEC528| L[var--baiv-accent-500]
+    I -->|#18181B| M[var--baiv-neutral-900]
+    
+    F --> N[Generate Component Code]
+    J --> N
+    K --> N
+    L --> N
+    M --> N
+    
+    N --> O[Validate Token Usage]
+    O --> P{All Colors Mapped?}
+    P -->|Yes| Q[✅ Production Ready]
+    P -->|No| R[⚠️ Hardcoded Values Remain]
+    R --> S[Manual Review Required]
+    
+    style A fill:#00A4BF,color:#fff
+    style Q fill:#10B981,color:#fff
+    style R fill:#F59E0B,color:#000
+```
+
+```mermaid
+---
+title: Component Variant Generation
+---
+
+stateDiagram-v2
+    [*] --> BaseRequest: User requests variants
+    
+    BaseRequest --> DefineVariants: Specify variant configs
+    DefineVariants --> GenerateBase: Create base component
+    
+    GenerateBase --> ApplyVariant1: Apply "conservative" config
+    GenerateBase --> ApplyVariant2: Apply "energetic" config
+    GenerateBase --> ApplyVariant3: Apply "premium" config
+    
+    ApplyVariant1 --> TokenMap1: Map to neutral tokens
+    ApplyVariant2 --> TokenMap2: Map to primary/secondary
+    ApplyVariant3 --> TokenMap3: Map to accent tokens
+    
+    TokenMap1 --> GenerateCode
+    TokenMap2 --> GenerateCode
+    TokenMap3 --> GenerateCode
+    
+    GenerateCode --> CreateVariantProp: Add TypeScript union
+    CreateVariantProp --> OutputComponent: Single component file
+    
+    OutputComponent --> [*]
+    
+    note right of DefineVariants
+        Variant config:
+        - colors: string[]
+        - typography: style
+        - spacing: scale
+        - animations: boolean
+    end note
+    
+    note right of CreateVariantProp
+        type Variant = 
+          'conservative' | 
+          'energetic' | 
+          'premium'
+    end note
+```
+
+```mermaid
+---
+title: Error Handling & Recovery
+---
+
+graph TB
+    A[Claude Workflow] --> B{MCP Call}
+    B -->|Success| C[Process Response]
+    B -->|Error| D{Error Type}
+    
+    D -->|Auth Error| E[Check Figma Permissions]
+    E --> F[Request Access]
+    F --> B
+    
+    D -->|Not Found| G[Validate Node ID]
+    G --> H[Try get_metadata First]
+    H --> B
+    
+    D -->|Rate Limit| I[Wait & Retry]
+    I --> J[Exponential Backoff]
+    J --> B
+    
+    D -->|Network Error| K[Retry with Timeout]
+    K --> B
+    
+    C --> L{Validation}
+    L -->|Pass| M[Generate Code]
+    L -->|Fail| N{Validation Error}
+    
+    N -->|Missing Tokens| O[Load BAIV Ontology]
+    O --> C
+    
+    N -->|Invalid Structure| P[Request Detailed Spec]
+    P --> Q[User Clarifies]
+    Q --> C
+    
+    N -->|Color Mismatch| R[Re-map to Tokens]
+    R --> C
+    
+    M --> S[Output to User]
+    
+    style D fill:#F59E0B,color:#000
+    style E fill:#EF4444,color:#fff
+    style G fill:#F59E0B,color:#000
+    style I fill:#F59E0B,color:#000
+    style K fill:#F59E0B,color:#000
+    style S fill:#10B981,color:#fff
+```

@@ -1,0 +1,665 @@
+{
+  "$schema": "http://schema.org/Action",
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "PFC-PFI-BAIV Claude Automation Workflows",
+  "description": "Executable workflow definitions for automating BAIV design-to-code generation using Claude MCP, API, and Agent SDK. Includes prompt templates, tool call sequences, and validation rules.",
+  "version": "3.0.0-ph3",
+  "dateModified": "2025-01-03",
+  "author": {
+    "@type": "Organization",
+    "name": "PFC-PFI BAIV Design System"
+  },
+
+  "workflows": {
+    "tier1_conversational": {
+      "single_component_from_figma": {
+        "@type": "HowTo",
+        "name": "Generate Single Component from Figma URL",
+        "description": "Extract Figma design and generate React component with BAIV tokens",
+        "estimatedTime": "PT3M",
+        "tool": "claude.ai",
+        
+        "steps": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Receive Figma URL",
+            "text": "User shares Figma design URL",
+            "example": "https://figma.com/design/abc123/Hero-Section?node-id=10-50"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Extract Design Context",
+            "text": "Use MCP to get design details",
+            "toolCall": {
+              "tool": "Figma:get_design_context",
+              "parameters": {
+                "fileKey": "abc123",
+                "nodeId": "10:50"
+              }
+            }
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Map to BAIV Tokens",
+            "text": "Convert extracted colors/typography to BAIV token references",
+            "mapping": {
+              "#00A4BF": "var(--baiv-primary-500)",
+              "#E84E1C": "var(--baiv-secondary-500)",
+              "Titillium Web 24px 700": "font-baiv-display text-2xl font-bold"
+            }
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Generate Component Code",
+            "text": "Output production-ready React/TypeScript component",
+            "template": "react_component_with_baiv_tokens"
+          }
+        ],
+
+        "prompt_template": "Generate a {{COMPONENT_TYPE}} component from this Figma design:\n\n{{FIGMA_URL}}\n\nRequirements:\n- Use BAIV design tokens from Phase 1 ontology\n- Follow component patterns from Phase 2 specifications\n- TypeScript strict mode\n- Next.js 14+ App Router compatible\n- Include responsive variants (mobile-first)\n- WCAG AA minimum accessibility\n\nDeliverables:\n1. Component file: components/{{COMPONENT_NAME}}.tsx\n2. Props interface with JSDoc\n3. Usage example\n4. Variant specifications if applicable",
+
+        "validation": {
+          "required_imports": [
+            "@/components/ui/*",
+            "@/components/layout/*"
+          ],
+          "token_usage": {
+            "colors": "Must use var(--baiv-*) variables",
+            "spacing": "Must use Tailwind utilities (p-*, m-*, gap-*)",
+            "typography": "Must use font-baiv-* classes"
+          },
+          "typescript": {
+            "strict_mode": true,
+            "no_any": true,
+            "props_interface_required": true
+          }
+        }
+      },
+
+      "component_from_description": {
+        "@type": "HowTo",
+        "name": "Generate Component from Text Description",
+        "description": "Create component without Figma, using Phase 2 patterns",
+        "estimatedTime": "PT2M",
+        
+        "prompt_template": "Create a {{COMPONENT_TYPE}} component with the following specifications:\n\n{{DESCRIPTION}}\n\nDesign System:\n- Use BAIV color palette (Primary #00A4BF, Secondary #E84E1C, Accent #CEC528)\n- Typography: Titillium Web (headings), Open Sans (body)\n- Spacing: 4px base grid (use 8, 16, 24, 32, 48px)\n- Size variants: sm (32px), md (40px), lg (48px)\n\nReference:\n- Phase 1 ontology for tokens\n- Phase 2 component specifications for patterns\n- shadcn/ui as base where applicable\n\nGenerate:\n1. Full component code\n2. Storybook story (optional)\n3. Unit tests (optional)",
+
+        "examples": [
+          {
+            "input": {
+              "component_type": "StatsCard",
+              "description": "Dashboard card showing: large metric value (48px bold), label below, trend indicator with up/down arrow and percentage, color-coded (teal=positive, orange=negative)"
+            },
+            "output_preview": "components/stats-card.tsx with variant system for trend direction"
+          },
+          {
+            "input": {
+              "component_type": "NewsletterForm",
+              "description": "Email capture form with: heading, subheading, email input, submit button, privacy notice below, inline layout on desktop, stacked on mobile"
+            },
+            "output_preview": "components/newsletter-form.tsx with responsive grid layout"
+          }
+        ]
+      },
+
+      "multi_variant_generation": {
+        "@type": "HowTo",
+        "name": "Generate Multiple Component Variants",
+        "description": "Create A/B test variants or themed versions of a component",
+        "estimatedTime": "PT5M",
+        
+        "prompt_template": "Generate {{VARIANT_COUNT}} variants of a {{COMPONENT_TYPE}}:\n\n{{#each variants}}\n{{@index}}. {{name}}: {{description}}\n{{/each}}\n\nApproach:\n1. Create base component with shared logic\n2. Use variant prop to switch between styles\n3. Apply different BAIV token combinations per variant\n\nDeliverables:\n- Single component file with variant system\n- Type-safe variant prop (TypeScript union)\n- Storybook stories showing all variants",
+
+        "example": {
+          "component_type": "PricingCard",
+          "variants": [
+            {
+              "name": "basic",
+              "description": "Minimal gray theme, standard features",
+              "tokens": {
+                "border": "baiv-neutral-300",
+                "background": "white",
+                "highlight": null
+              }
+            },
+            {
+              "name": "pro",
+              "description": "Teal theme, highlighted with ring, featured badge",
+              "tokens": {
+                "border": "baiv-primary-500",
+                "background": "baiv-primary-50",
+                "highlight": "ring-2 ring-baiv-primary-500"
+              }
+            },
+            {
+              "name": "enterprise",
+              "description": "Gold/premium theme, luxury feel",
+              "tokens": {
+                "border": "baiv-accent-500",
+                "background": "baiv-accent-50",
+                "highlight": "shadow-lg"
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    "tier2_mcp_powered": {
+      "full_page_extraction": {
+        "@type": "HowTo",
+        "name": "Extract Complete Page from Figma",
+        "description": "Multi-section page extraction with component breakdown",
+        "estimatedTime": "PT8M",
+        
+        "steps": [
+          {
+            "name": "Get Page Hierarchy",
+            "toolCall": "Figma:get_metadata",
+            "purpose": "Understand page structure and section count"
+          },
+          {
+            "name": "Extract Each Section",
+            "toolCall": "Figma:get_design_context",
+            "purpose": "Get detailed design for each frame",
+            "iterations": "For each child frame"
+          },
+          {
+            "name": "Get Design Tokens",
+            "toolCall": "Figma:get_variable_defs",
+            "purpose": "Map Figma variables to BAIV tokens"
+          },
+          {
+            "name": "Generate Component Files",
+            "action": "Create separate .tsx file per section",
+            "naming": "components/sections/{{section-name}}.tsx"
+          },
+          {
+            "name": "Create Page File",
+            "action": "Compose all sections into app/[route]/page.tsx",
+            "pattern": "Import all sections, render in sequence"
+          }
+        ],
+
+        "tool_sequence": [
+          {
+            "order": 1,
+            "tool": "Figma:get_metadata",
+            "parameters": {
+              "fileKey": "{{FILE_KEY}}",
+              "nodeId": "{{PAGE_NODE_ID}}"
+            },
+            "extract": "children[].id, children[].name",
+            "store_as": "section_list"
+          },
+          {
+            "order": 2,
+            "tool": "Figma:get_design_context",
+            "parameters": {
+              "fileKey": "{{FILE_KEY}}",
+              "nodeId": "{{SECTION_ID}}"
+            },
+            "iterate": "For each section in section_list",
+            "extract": "code, metadata.colors, metadata.spacing"
+          },
+          {
+            "order": 3,
+            "tool": "Figma:get_variable_defs",
+            "parameters": {
+              "fileKey": "{{FILE_KEY}}",
+              "nodeId": "{{PAGE_NODE_ID}}"
+            },
+            "extract": "variable definitions",
+            "map_to": "BAIV tokens via color matching"
+          }
+        ],
+
+        "output_structure": {
+          "app_route": "app/(marketing)/page.tsx",
+          "sections": [
+            "components/sections/hero-section.tsx",
+            "components/sections/feature-grid.tsx",
+            "components/sections/testimonial-carousel.tsx",
+            "components/sections/cta-banner.tsx",
+            "components/sections/footer.tsx"
+          ],
+          "shared": "components/layout/container.tsx (if needed)"
+        }
+      },
+
+      "component_library_sync": {
+        "@type": "HowTo",
+        "name": "Sync Figma Component Library to React",
+        "description": "Batch extract and generate all library components",
+        "estimatedTime": "PT15M",
+        
+        "process": [
+          {
+            "step": "Get Library Page",
+            "tool": "Figma:get_metadata",
+            "nodeId": "0:1",
+            "purpose": "List all master components"
+          },
+          {
+            "step": "Check Existing Mappings",
+            "tool": "Figma:get_code_connect_map",
+            "purpose": "Identify which components already have code"
+          },
+          {
+            "step": "Generate New Components",
+            "condition": "If no code mapping exists",
+            "tool": "Figma:get_design_context",
+            "output": "New component file"
+          },
+          {
+            "step": "Update Changed Components",
+            "condition": "If mapping exists but design changed",
+            "action": "Regenerate and diff with existing code"
+          },
+          {
+            "step": "Create Code Connect Links",
+            "tool": "Figma:add_code_connect_map",
+            "purpose": "Establish Figma ↔ React connections"
+          }
+        ],
+
+        "batch_processing": {
+          "parallel": true,
+          "max_concurrent": 5,
+          "rate_limit": "10 components per minute",
+          "error_handling": "Continue on failure, report at end"
+        }
+      },
+
+      "design_system_update_propagation": {
+        "@type": "HowTo",
+        "name": "Propagate Design Token Changes",
+        "description": "Update all components when BAIV tokens change",
+        "estimatedTime": "PT10M",
+        
+        "trigger": "Change in pfc-pfi-baiv-design-system-ontology.json",
+        
+        "steps": [
+          {
+            "name": "Detect Token Changes",
+            "action": "Diff old vs new ontology JSON",
+            "output": "List of changed tokens with old/new values"
+          },
+          {
+            "name": "Scan Codebase",
+            "action": "Find all references to changed tokens",
+            "pattern": "Grep for var(--baiv-{{TOKEN_NAME}})",
+            "also_check": "Hardcoded hex values (anti-pattern)"
+          },
+          {
+            "name": "Update Files",
+            "action": "Replace old token references",
+            "method": "AST transformation (preferred) or regex (simple cases)"
+          },
+          {
+            "name": "Update CSS Variables",
+            "files": ["app/globals.css", "tailwind.config.ts"],
+            "action": "Sync with new ontology values"
+          },
+          {
+            "name": "Validation",
+            "checks": [
+              "All files compile",
+              "No hardcoded values remain",
+              "Visual regression tests pass"
+            ]
+          },
+          {
+            "name": "Generate Report",
+            "output": {
+              "files_modified": "count",
+              "tokens_updated": "list",
+              "breaking_changes": "list if any"
+            }
+          }
+        ]
+      }
+    },
+
+    "tier3_agent_sdk": {
+      "full_application_bootstrap": {
+        "@type": "HowTo",
+        "name": "Generate Complete Application",
+        "description": "Multi-page application with authentication, dashboard, settings",
+        "estimatedTime": "PT20M",
+        
+        "agent_workflow": {
+          "initialization": {
+            "commands": [
+              "npx create-next-app@latest {{APP_NAME}} --typescript --tailwind --app",
+              "cd {{APP_NAME}}",
+              "npx shadcn@latest init -y"
+            ],
+            "dependencies": [
+              "@clerk/nextjs",
+              "recharts",
+              "lucide-react",
+              "@tanstack/react-query",
+              "zod",
+              "react-hook-form"
+            ]
+          },
+          
+          "configuration": {
+            "apply_baiv_theme": {
+              "source": "phase1/pfc-pfi-baiv-shadcn-mappings.json",
+              "target": "components.json, tailwind.config.ts, app/globals.css"
+            },
+            "setup_auth": {
+              "provider": "Clerk",
+              "pages": ["sign-in", "sign-up"]
+            }
+          },
+
+          "page_generation": {
+            "pages": [
+              {
+                "route": "/",
+                "template": "landing_page",
+                "sections": ["hero", "features", "pricing", "cta", "footer"]
+              },
+              {
+                "route": "/dashboard",
+                "template": "dashboard",
+                "sections": ["stats_grid", "charts", "recent_activity"]
+              },
+              {
+                "route": "/settings",
+                "template": "settings_page",
+                "sections": ["profile", "preferences", "billing"]
+              },
+              {
+                "route": "/admin",
+                "template": "admin_panel",
+                "protected": true,
+                "sections": ["user_management", "analytics", "system_config"]
+              }
+            ],
+            
+            "for_each_page": {
+              "generate": "app/{{route}}/page.tsx",
+              "use_template": "phase2/pfc-pfi-baiv-figma-make-templates.json",
+              "apply_tokens": "phase1/pfc-pfi-baiv-design-system-ontology.json"
+            }
+          },
+
+          "deployment": {
+            "platform": "Vercel",
+            "commands": [
+              "vercel link",
+              "vercel env add CLERK_SECRET_KEY",
+              "vercel --prod"
+            ]
+          }
+        },
+
+        "deliverables": {
+          "codebase": "Full Next.js application",
+          "pages": "4-6 fully functional pages",
+          "components": "20-30 BAIV components",
+          "deployment": "Production URL on Vercel",
+          "documentation": "README with setup instructions"
+        }
+      },
+
+      "ab_test_variant_deployment": {
+        "@type": "HowTo",
+        "name": "Deploy Multiple Page Variants for A/B Testing",
+        "description": "Generate and deploy 3 variants of landing page hero",
+        "estimatedTime": "PT12M",
+        
+        "variant_definitions": {
+          "conservative": {
+            "colors": ["neutral-900", "neutral-600"],
+            "typography": "standard",
+            "cta": "subtle",
+            "animations": false
+          },
+          "energetic": {
+            "colors": ["primary-600", "secondary-600"],
+            "typography": "bold",
+            "cta": "prominent",
+            "animations": true
+          },
+          "premium": {
+            "colors": ["neutral-900", "accent-600"],
+            "typography": "display",
+            "cta": "luxury",
+            "texture": "gradient"
+          }
+        },
+
+        "generation_process": {
+          "base_component": "Generate base hero structure",
+          "apply_variants": "Create 3 variant files with different configs",
+          "create_router": "AB test router component with cookie-based switching",
+          "implement_tracking": "Analytics events for each variant"
+        },
+
+        "deployment": {
+          "feature_flags": true,
+          "distribution": [33, 33, 34],
+          "analytics": "Track conversions by variant"
+        }
+      },
+
+      "progressive_web_app": {
+        "@type": "HowTo",
+        "name": "Generate PWA with Offline Support",
+        "description": "Next.js app with service worker, offline pages, push notifications",
+        "estimatedTime": "PT25M",
+        
+        "features": [
+          "Service worker for offline caching",
+          "Offline fallback pages",
+          "Push notification setup",
+          "Install prompt",
+          "App manifest with BAIV branding"
+        ],
+
+        "baiv_integration": {
+          "splash_screen": "Use BAIV primary color as background",
+          "app_icon": "Generate from BAIV logo",
+          "theme_color": "#00A4BF (BAIV primary)",
+          "offline_page": "Branded offline experience"
+        }
+      }
+    }
+  },
+
+  "prompt_templates": {
+    "single_component": {
+      "structure": "Generate a {{COMPONENT_TYPE}} component using BAIV design system.\n\nDesign source: {{FIGMA_URL or DESCRIPTION}}\n\nRequirements:\n- Use BAIV color tokens from pfc-pfi-baiv-design-system-ontology.json\n- Follow component patterns from pfc-pfi-baiv-component-specifications.md\n- TypeScript strict mode\n- Next.js 14+ App Router compatible\n- Include responsive variants\n- WCAG AA minimum\n\nDeliver:\n1. Full component code (components/{{COMPONENT_NAME}}.tsx)\n2. Usage example\n3. Props documentation",
+      
+      "variables": {
+        "COMPONENT_TYPE": "Type of component (Button, Card, Hero, etc.)",
+        "FIGMA_URL": "Optional Figma design URL",
+        "DESCRIPTION": "Text description if no Figma URL",
+        "COMPONENT_NAME": "kebab-case file name"
+      }
+    },
+
+    "page_from_figma": {
+      "structure": "Extract and generate Next.js page from Figma design.\n\nFigma URL: {{FIGMA_URL}}\nPage type: {{PAGE_TYPE}}\n\nProcess:\n1. Use MCP to extract design context\n2. Identify all sections/components\n3. Map colors to BAIV tokens\n4. Generate page.tsx and component files\n5. Apply responsive patterns from Phase 2\n\nDeliver:\n- app/{{ROUTE}}/page.tsx\n- Individual component files\n- Layout wrapper if needed\n- README with component tree",
+      
+      "variables": {
+        "FIGMA_URL": "Full Figma design URL",
+        "PAGE_TYPE": "Landing, Dashboard, Article, Form, etc.",
+        "ROUTE": "Next.js app route"
+      }
+    },
+
+    "design_system_update": {
+      "structure": "Update all components to use new BAIV token values.\n\nChanges:\n{{#each changes}}\n- {{token}}: {{oldValue}} → {{newValue}}\n{{/each}}\n\nTasks:\n1. Update pfc-pfi-baiv-design-system-ontology.json\n2. Find all hardcoded values in codebase\n3. Replace with token variables\n4. Update CSS variables\n5. Test in Storybook/dev server\n6. Generate change report\n\nDeliver:\n- Updated ontology JSON\n- List of files modified\n- Before/after screenshots (if UI changed)",
+      
+      "variables": {
+        "changes": "Array of {token, oldValue, newValue} objects"
+      }
+    }
+  },
+
+  "tool_call_sequences": {
+    "extract_full_page": [
+      {
+        "tool": "Figma:get_metadata",
+        "params": { "fileKey": "{{FILE_KEY}}", "nodeId": "{{PAGE_ID}}" },
+        "output": "section_list"
+      },
+      {
+        "tool": "Figma:get_design_context",
+        "params": { "fileKey": "{{FILE_KEY}}", "nodeId": "{{SECTION_ID}}" },
+        "iterate": "section_list",
+        "output": "section_designs[]"
+      },
+      {
+        "tool": "Figma:get_variable_defs",
+        "params": { "fileKey": "{{FILE_KEY}}", "nodeId": "{{PAGE_ID}}" },
+        "output": "figma_tokens"
+      }
+    ],
+
+    "sync_component_library": [
+      {
+        "tool": "Figma:get_metadata",
+        "params": { "fileKey": "{{LIB_FILE_KEY}}", "nodeId": "0:1" },
+        "output": "component_list"
+      },
+      {
+        "tool": "Figma:get_code_connect_map",
+        "params": { "fileKey": "{{LIB_FILE_KEY}}", "nodeId": "{{COMPONENT_ID}}" },
+        "iterate": "component_list",
+        "output": "existing_mappings[]"
+      },
+      {
+        "tool": "Figma:get_design_context",
+        "params": { "fileKey": "{{LIB_FILE_KEY}}", "nodeId": "{{COMPONENT_ID}}" },
+        "condition": "!existing_mappings[component_id]",
+        "output": "new_component_design"
+      },
+      {
+        "tool": "Figma:add_code_connect_map",
+        "params": {
+          "fileKey": "{{LIB_FILE_KEY}}",
+          "nodeId": "{{COMPONENT_ID}}",
+          "componentName": "{{COMPONENT_NAME}}",
+          "source": "components/ui/{{COMPONENT_NAME}}.tsx",
+          "label": "React"
+        },
+        "condition": "after component generated"
+      }
+    ]
+  },
+
+  "validation_rules": {
+    "generated_code": {
+      "imports": {
+        "required": [
+          "@/components/ui/*",
+          "@/components/layout/*"
+        ],
+        "icons": "lucide-react (not hardcoded SVG)",
+        "types": "Component prop interfaces"
+      },
+      
+      "styling": {
+        "colors": "Must use var(--baiv-*) tokens",
+        "spacing": "Tailwind utilities only (px-*, py-*, gap-*)",
+        "typography": "font-baiv-* classes",
+        "responsive": "sm:, md:, lg:, xl: breakpoints"
+      },
+      
+      "structure": {
+        "semantic_html": "section, article, header (not div soup)",
+        "heading_hierarchy": "h1 → h2 → h3 (no skipping)",
+        "aria_labels": "Required for interactive elements",
+        "alt_text": "Required for images"
+      },
+      
+      "typescript": {
+        "strict_mode": true,
+        "no_any": true,
+        "props_interface": "Required with JSDoc",
+        "children_typed": "React.ReactNode when applicable"
+      }
+    }
+  },
+
+  "error_handling": {
+    "mcp_extraction_fails": {
+      "symptoms": "Figma:get_design_context returns error/empty",
+      "solutions": [
+        "Verify Figma URL format",
+        "Check file permissions",
+        "Validate nodeId exists",
+        "Try get_metadata first"
+      ]
+    },
+    
+    "missing_baiv_tokens": {
+      "symptoms": "Generated code has hardcoded hex values",
+      "solutions": [
+        "Explicitly include ontology JSON in prompt",
+        "Add 'Map all colors to BAIV tokens' instruction",
+        "Provide token reference object in template"
+      ]
+    },
+    
+    "layout_mismatch": {
+      "symptoms": "Component doesn't match Figma design",
+      "solutions": [
+        "Use get_design_context with full hierarchy",
+        "Request specific layer naming in Figma",
+        "Provide detailed spacing specs in prompt"
+      ]
+    }
+  },
+
+  "performance_metrics": {
+    "speed_comparison": {
+      "manual_development": {
+        "design_to_figma": "PT30M",
+        "figma_to_code": "PT45M",
+        "code_review": "PT30M",
+        "total": "PT1H45M"
+      },
+      "baiv_tier1": {
+        "figma_make_prompt": "PT2M",
+        "claude_generation": "PT3M",
+        "review": "PT5M",
+        "total": "PT10M",
+        "improvement": "90% faster"
+      },
+      "baiv_tier3": {
+        "full_page": "PT5M",
+        "multi_page_app": "PT15M",
+        "total": "PT15M",
+        "improvement": "86% faster"
+      }
+    },
+    
+    "quality_metrics": {
+      "design_system_compliance": {
+        "manual": "60-70%",
+        "baiv": "95-100%"
+      },
+      "accessibility": {
+        "manual": "Often forgotten",
+        "baiv": "WCAG AA enforced by default"
+      },
+      "responsiveness": {
+        "manual": "Requires explicit work",
+        "baiv": "Built into all templates"
+      }
+    }
+  }
+}

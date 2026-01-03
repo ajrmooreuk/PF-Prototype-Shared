@@ -1,0 +1,328 @@
+```mermaid
+---
+title: PFC-PFI-BAIV v3.0 Ph3 - Multi-Page Application Architecture
+---
+
+graph TB
+    subgraph "ROUTE GROUPS"
+        A1["(marketing)/"] --> B1[layout.tsx<br/>MarketingNav + Footer]
+        A2["(dashboard)/"] --> B2[layout.tsx<br/>Sidebar + Header]
+        A3["(auth)/"] --> B3[layout.tsx<br/>Centered Container]
+        A4["(admin)/"] --> B4[layout.tsx<br/>Admin Sidebar]
+    end
+
+    subgraph "MARKETING PAGES"
+        B1 --> C1["/page.tsx<br/>Landing Page"]
+        B1 --> C2["/features/page.tsx"]
+        B1 --> C3["/pricing/page.tsx"]
+        B1 --> C4["/blog/page.tsx"]
+        B1 --> C5["/blog/[slug]/page.tsx"]
+        B1 --> C6["/contact/page.tsx"]
+    end
+
+    subgraph "DASHBOARD PAGES"
+        B2 --> D1["/dashboard/page.tsx"]
+        B2 --> D2["/projects/page.tsx"]
+        B2 --> D3["/projects/[id]/page.tsx"]
+        B2 --> D4["/analytics/page.tsx"]
+        B2 --> D5["/settings/page.tsx"]
+    end
+
+    subgraph "AUTH PAGES"
+        B3 --> E1["/sign-in/page.tsx"]
+        B3 --> E2["/sign-up/page.tsx"]
+        B3 --> E3["/forgot-password/page.tsx"]
+    end
+
+    subgraph "SHARED COMPONENTS"
+        F1[UI Primitives<br/>Button, Card, Input]
+        F2[Layout Components<br/>Container, Section]
+        F3[Section Components<br/>Hero, Features, etc.]
+        F4[Domain Components<br/>StatsCard, DataTable]
+    end
+
+    C1 -.uses.-> F3
+    C1 -.uses.-> F2
+    D1 -.uses.-> F4
+    D1 -.uses.-> F1
+    
+    style A1 fill:#00A4BF,color:#fff
+    style A2 fill:#E84E1C,color:#fff
+    style A3 fill:#CEC528,color:#000
+    style A4 fill:#8B5CF6,color:#fff
+```
+
+```mermaid
+---
+title: Page Composition Pattern
+---
+
+graph LR
+    A[Page Request] --> B{Route Group?}
+    
+    B -->|Marketing| C[Marketing Layout]
+    B -->|Dashboard| D[Dashboard Layout]
+    B -->|Auth| E[Auth Layout]
+    
+    C --> F[MarketingNav]
+    C --> G[Page Content]
+    C --> H[Footer]
+    
+    D --> I[Sidebar]
+    D --> J[Header]
+    D --> K[Page Content]
+    
+    E --> L[Logo]
+    E --> M[Page Content]
+    
+    G --> N[Section 1: Hero]
+    G --> O[Section 2: Features]
+    G --> P[Section 3: CTA]
+    
+    K --> Q[PageHeader]
+    K --> R[StatsGrid]
+    K --> S[DataTable]
+    
+    M --> T[AuthCard]
+    
+    N -.composed from.-> U[Phase 2 Template]
+    O -.composed from.-> U
+    P -.composed from.-> U
+    
+    style A fill:#00A4BF,color:#fff
+    style U fill:#10B981,color:#fff
+```
+
+```mermaid
+---
+title: Data Flow in Multi-Page Application
+---
+
+sequenceDiagram
+    participant User
+    participant Route as Next.js Route
+    participant Layout as Layout Component
+    participant Page as Page Component
+    participant Server as Server Actions
+    participant DB as Database/API
+
+    User->>Route: Navigate to /dashboard
+    Route->>Layout: Load (dashboard) layout
+    Layout->>Layout: Render Sidebar + Header
+    Layout->>Page: Render page content
+    
+    alt Protected Route
+        Page->>Server: auth() check
+        Server-->>Page: userId or redirect
+        
+        alt Authenticated
+            Page->>DB: Fetch user data
+            DB-->>Page: Return data
+            Page->>Page: Render with data
+        else Not Authenticated
+            Page->>Route: redirect('/sign-in')
+        end
+    else Public Route
+        Page->>DB: Fetch public data (optional)
+        DB-->>Page: Return data
+        Page->>Page: Render with data
+    end
+    
+    Page-->>Layout: Child content
+    Layout-->>Route: Complete page
+    Route-->>User: Rendered page
+```
+
+```mermaid
+---
+title: Component Reusability Across Pages
+---
+
+graph TD
+    A[HeroSection Component] --> B1[Landing Page]
+    A --> B2[Feature Page]
+    A --> B3[Product Page]
+    
+    C[FeatureGrid Component] --> B1
+    C --> B2
+    C --> D1[About Page]
+    
+    E[CTABanner Component] --> B1
+    E --> B2
+    E --> B3
+    E --> D1
+    E --> D2[Pricing Page]
+    
+    F[Footer Component] --> B1
+    F --> B2
+    F --> B3
+    F --> D1
+    F --> D2
+    F --> D3[Blog Page]
+    
+    G[StatsCard Component] --> H1[Dashboard Page]
+    G --> H2[Analytics Page]
+    G --> H3[Admin Page]
+    
+    I[DataTable Component] --> H1
+    I --> J1[Projects Page]
+    I --> J2[Users Page]
+    I --> H3
+    
+    style A fill:#00A4BF,color:#fff
+    style C fill:#00A4BF,color:#fff
+    style E fill:#00A4BF,color:#fff
+    style F fill:#00A4BF,color:#fff
+    style G fill:#E84E1C,color:#fff
+    style I fill:#E84E1C,color:#fff
+```
+
+```mermaid
+---
+title: Navigation Hierarchy
+---
+
+graph TB
+    A[Root Layout] --> B[Route Groups]
+    
+    B --> C1["(marketing)"]
+    B --> C2["(dashboard)"]
+    B --> C3["(auth)"]
+    
+    C1 --> D1[Marketing Nav]
+    D1 --> E1[Home]
+    D1 --> E2[Features]
+    D1 --> E3[Pricing]
+    D1 --> E4[Blog]
+    D1 --> E5[Contact]
+    
+    C2 --> D2[Dashboard Sidebar]
+    D2 --> F1[Dashboard]
+    D2 --> F2[Projects]
+    F2 --> F2A[Project List]
+    F2 --> F2B[Project Detail]
+    D2 --> F3[Analytics]
+    D2 --> F4[Settings]
+    F4 --> F4A[Profile]
+    F4 --> F4B[Preferences]
+    F4 --> F4C[Billing]
+    
+    C3 --> D3[No Nav]
+    D3 --> G1[Sign In]
+    D3 --> G2[Sign Up]
+    D3 --> G3[Reset Password]
+    
+    style C1 fill:#00A4BF,color:#fff
+    style C2 fill:#E84E1C,color:#fff
+    style C3 fill:#CEC528,color:#000
+```
+
+```mermaid
+---
+title: Progressive Enhancement Strategy
+---
+
+stateDiagram-v2
+    [*] --> StaticGeneration: Build Time
+    StaticGeneration --> ServerRendered: Request Time
+    ServerRendered --> ClientHydrated: Browser Load
+    ClientHydrated --> Interactive: JavaScript Ready
+    
+    note right of StaticGeneration
+        - Pre-render marketing pages
+        - Generate blog posts
+        - Create product pages
+    end note
+    
+    note right of ServerRendered
+        - Fetch user-specific data
+        - Check authentication
+        - Load dynamic content
+    end note
+    
+    note right of ClientHydrated
+        - Attach event listeners
+        - Initialize client components
+        - Connect to real-time updates
+    end note
+    
+    note right of Interactive
+        - Form submissions
+        - Data mutations
+        - Optimistic updates
+    end note
+    
+    Interactive --> ServerRendered: Revalidation
+    ServerRendered --> ClientHydrated: Update
+```
+
+```mermaid
+---
+title: Application Scaling Path
+---
+
+graph LR
+    A[5 Pages<br/>Marketing Site] --> B[15 Pages<br/>+ Dashboard]
+    B --> C[30 Pages<br/>+ Admin Panel]
+    C --> D[50+ Pages<br/>Full Platform]
+    
+    A --> A1[File-based<br/>Structure]
+    B --> B1[Route Groups +<br/>Shared Components]
+    C --> C1[Feature-based<br/>Modules]
+    D --> D1[Micro-frontends<br/>+ Monorepo]
+    
+    A1 -.complexity.-> E1[Low]
+    B1 -.complexity.-> E2[Medium]
+    C1 -.complexity.-> E3[Medium-High]
+    D1 -.complexity.-> E4[High]
+    
+    style A fill:#10B981,color:#fff
+    style B fill:#00A4BF,color:#fff
+    style C fill:#E84E1C,color:#fff
+    style D fill:#8B5CF6,color:#fff
+```
+
+```mermaid
+---
+title: Error Handling & Loading States
+---
+
+flowchart TD
+    A[Page Request] --> B{Authentication?}
+    
+    B -->|Required| C{User Authenticated?}
+    B -->|Not Required| D[Load Page Data]
+    
+    C -->|Yes| D
+    C -->|No| E[Redirect to /sign-in]
+    
+    D --> F{Data Available?}
+    
+    F -->|Loading| G[Show Loading State]
+    G --> F
+    
+    F -->|Error| H[Show Error Boundary]
+    H --> I{Error Type?}
+    I -->|Network| J[Retry Button]
+    I -->|404| K[Not Found Page]
+    I -->|403| L[Unauthorized Page]
+    I -->|500| M[Server Error Page]
+    
+    F -->|Success| N[Render Page Content]
+    
+    N --> O[User Interaction]
+    O --> P{Client Action?}
+    
+    P -->|Form Submit| Q[Optimistic Update]
+    Q --> R[Server Mutation]
+    R --> S{Success?}
+    S -->|Yes| T[Revalidate Data]
+    S -->|No| U[Show Toast Error]
+    U --> V[Rollback Optimistic Update]
+    
+    P -->|Navigation| A
+    
+    style E fill:#F59E0B,color:#000
+    style H fill:#EF4444,color:#fff
+    style N fill:#10B981,color:#fff
+```

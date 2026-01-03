@@ -1,0 +1,725 @@
+{
+  "$schema": "http://schema.org/CreativeWork",
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "PFC-PFI-BAIV Multi-Page Composition Patterns",
+  "description": "Reusable page structure definitions for building multi-page applications with BAIV design system. Includes page types, section compositions, layout patterns, and code generation templates.",
+  "version": "3.0.0-ph3",
+  "dateModified": "2025-01-03",
+  "author": {
+    "@type": "Organization",
+    "name": "PFC-PFI BAIV Design System"
+  },
+  "programmingLanguage": "TypeScript",
+  "runtimePlatform": "Next.js 14+",
+
+  "page_types": {
+    "landing_page": {
+      "@type": "WebPage",
+      "name": "Landing Page",
+      "description": "Marketing homepage with hero, features, social proof, and conversion elements",
+      
+      "section_composition": [
+        {
+          "name": "hero",
+          "component": "HeroSection",
+          "template": "phase2:01_hero_section",
+          "required": true,
+          "props": {
+            "variant": "centered | split | video-bg",
+            "cta_count": 2
+          }
+        },
+        {
+          "name": "features",
+          "component": "FeatureGrid",
+          "template": "phase2:02_feature_grid",
+          "required": true,
+          "props": {
+            "columns": 3,
+            "icons": true
+          }
+        },
+        {
+          "name": "social_proof",
+          "component": "TestimonialCarousel",
+          "template": "phase2:04_testimonial_carousel",
+          "required": false,
+          "props": {
+            "autoplay": true
+          }
+        },
+        {
+          "name": "pricing",
+          "component": "PricingTable",
+          "template": "phase2:05_pricing_table",
+          "required": false,
+          "props": {
+            "tiers": 3,
+            "highlight_tier": "pro"
+          }
+        },
+        {
+          "name": "cta",
+          "component": "CTABanner",
+          "template": "phase2:03_cta_banner",
+          "required": true,
+          "props": {
+            "variant": "gradient"
+          }
+        },
+        {
+          "name": "footer",
+          "component": "FooterComprehensive",
+          "template": "phase2:07_comprehensive_footer",
+          "required": true
+        }
+      ],
+
+      "route_group": "(marketing)",
+      "layout": "marketing_layout",
+      
+      "code_template": {
+        "filename": "app/(marketing)/page.tsx",
+        "imports": [
+          "import { HeroSection } from '@/components/sections/hero-section';",
+          "import { FeatureGrid } from '@/components/sections/feature-grid';",
+          "import { TestimonialCarousel } from '@/components/sections/testimonial-carousel';",
+          "import { PricingTable } from '@/components/sections/pricing-table';",
+          "import { CTABanner } from '@/components/sections/cta-banner';",
+          "import { FooterComprehensive } from '@/components/sections/footer';"
+        ],
+        "structure": "export default function LandingPage() {\n  return (\n    <>\n      <HeroSection />\n      <FeatureGrid />\n      <TestimonialCarousel />\n      <PricingTable />\n      <CTABanner />\n      <FooterComprehensive />\n    </>\n  );\n}"
+      },
+
+      "generation_time": "PT8M",
+      "complexity": "medium"
+    },
+
+    "dashboard_page": {
+      "@type": "WebPage",
+      "name": "Dashboard Overview",
+      "description": "Application dashboard with stats, charts, and activity feed",
+      
+      "section_composition": [
+        {
+          "name": "page_header",
+          "component": "PageHeader",
+          "required": true,
+          "props": {
+            "title": "Dashboard",
+            "actions": ["filter", "export"]
+          }
+        },
+        {
+          "name": "stats_grid",
+          "component": "StatsGrid",
+          "required": true,
+          "props": {
+            "columns": 4,
+            "show_trends": true
+          }
+        },
+        {
+          "name": "charts_row",
+          "component": "ChartsRow",
+          "required": true,
+          "props": {
+            "charts": ["revenue_line", "conversions_bar"]
+          }
+        },
+        {
+          "name": "data_table",
+          "component": "DataTable",
+          "required": false,
+          "props": {
+            "sortable": true,
+            "filterable": true,
+            "paginated": true
+          }
+        },
+        {
+          "name": "recent_activity",
+          "component": "ActivityFeed",
+          "required": false,
+          "props": {
+            "max_items": 10
+          }
+        }
+      ],
+
+      "route_group": "(dashboard)",
+      "layout": "dashboard_layout",
+      "authentication_required": true,
+      
+      "code_template": {
+        "filename": "app/(dashboard)/dashboard/page.tsx",
+        "imports": [
+          "import { auth } from '@clerk/nextjs/server';",
+          "import { redirect } from 'next/navigation';",
+          "import { PageHeader } from '@/components/dashboard/page-header';",
+          "import { StatsGrid } from '@/components/dashboard/stats-grid';",
+          "import { ChartsRow } from '@/components/dashboard/charts-row';",
+          "import { ActivityFeed } from '@/components/dashboard/activity-feed';",
+          "import { getUserStats } from '@/lib/api';"
+        ],
+        "structure": "export default async function DashboardPage() {\n  const { userId } = await auth();\n  if (!userId) redirect('/sign-in');\n  \n  const stats = await getUserStats(userId);\n  \n  return (\n    <div className=\"space-y-8\">\n      <PageHeader title=\"Dashboard\" />\n      <StatsGrid data={stats} />\n      <ChartsRow />\n      <ActivityFeed userId={userId} />\n    </div>\n  );\n}"
+      },
+
+      "generation_time": "PT10M",
+      "complexity": "high"
+    },
+
+    "feature_showcase": {
+      "@type": "WebPage",
+      "name": "Feature Showcase Page",
+      "description": "Detailed feature breakdown with benefits and use cases",
+      
+      "section_composition": [
+        {
+          "name": "feature_hero",
+          "component": "FeatureHero",
+          "required": true,
+          "props": {
+            "has_video": false
+          }
+        },
+        {
+          "name": "feature_grid",
+          "component": "FeatureGrid",
+          "template": "phase2:02_feature_grid",
+          "required": true,
+          "props": {
+            "columns": 3,
+            "detailed": true
+          }
+        },
+        {
+          "name": "feature_details",
+          "component": "FeatureDetailCards",
+          "required": true,
+          "props": {
+            "alternating_layout": true
+          }
+        },
+        {
+          "name": "integrations",
+          "component": "IntegrationLogos",
+          "required": false
+        },
+        {
+          "name": "cta",
+          "component": "CTABanner",
+          "template": "phase2:03_cta_banner",
+          "required": true
+        }
+      ],
+
+      "route_group": "(marketing)",
+      "layout": "marketing_layout",
+      "generation_time": "PT7M"
+    },
+
+    "blog_index": {
+      "@type": "CollectionPage",
+      "name": "Blog Index",
+      "description": "Grid/list of blog posts with filtering and pagination",
+      
+      "section_composition": [
+        {
+          "name": "page_header",
+          "component": "BlogHeader",
+          "required": true
+        },
+        {
+          "name": "featured_post",
+          "component": "FeaturedPostCard",
+          "required": false
+        },
+        {
+          "name": "blog_grid",
+          "component": "BlogGrid",
+          "template": "phase2:06_blog_card_grid",
+          "required": true,
+          "props": {
+            "columns": 3,
+            "show_excerpt": true,
+            "show_author": true
+          }
+        },
+        {
+          "name": "pagination",
+          "component": "Pagination",
+          "required": true
+        },
+        {
+          "name": "newsletter_signup",
+          "component": "NewsletterForm",
+          "required": false
+        }
+      ],
+
+      "route_group": "(marketing)",
+      "layout": "marketing_layout",
+      "data_source": "content_api",
+      "generation_time": "PT6M"
+    },
+
+    "blog_article": {
+      "@type": "Article",
+      "name": "Blog Article Page",
+      "description": "Individual blog post with content, metadata, and related articles",
+      
+      "section_composition": [
+        {
+          "name": "article_header",
+          "component": "ArticleHeader",
+          "required": true,
+          "props": {
+            "show_author": true,
+            "show_date": true,
+            "show_read_time": true
+          }
+        },
+        {
+          "name": "article_content",
+          "component": "ArticleContent",
+          "required": true,
+          "props": {
+            "enable_toc": true,
+            "prose_styling": "baiv"
+          }
+        },
+        {
+          "name": "author_bio",
+          "component": "AuthorBio",
+          "required": false
+        },
+        {
+          "name": "related_articles",
+          "component": "RelatedArticles",
+          "required": true,
+          "props": {
+            "count": 3
+          }
+        },
+        {
+          "name": "comments",
+          "component": "CommentSection",
+          "required": false
+        }
+      ],
+
+      "route_group": "(marketing)",
+      "layout": "marketing_layout",
+      "dynamic_route": true,
+      "route_pattern": "/blog/[slug]",
+      "generation_time": "PT5M"
+    },
+
+    "pricing_page": {
+      "@type": "WebPage",
+      "name": "Pricing Page",
+      "description": "Pricing table with feature comparison and FAQ",
+      
+      "section_composition": [
+        {
+          "name": "pricing_header",
+          "component": "PricingHeader",
+          "required": true
+        },
+        {
+          "name": "pricing_table",
+          "component": "PricingTable",
+          "template": "phase2:05_pricing_table",
+          "required": true,
+          "props": {
+            "tiers": 3,
+            "billing_toggle": true,
+            "highlight_tier": "pro"
+          }
+        },
+        {
+          "name": "feature_comparison",
+          "component": "FeatureComparisonTable",
+          "required": false
+        },
+        {
+          "name": "pricing_faq",
+          "component": "FAQAccordion",
+          "required": true
+        },
+        {
+          "name": "cta",
+          "component": "CTABanner",
+          "template": "phase2:03_cta_banner",
+          "required": true
+        }
+      ],
+
+      "route_group": "(marketing)",
+      "layout": "marketing_layout",
+      "generation_time": "PT6M"
+    },
+
+    "contact_page": {
+      "@type": "ContactPage",
+      "name": "Contact Page",
+      "description": "Contact form with company information",
+      
+      "section_composition": [
+        {
+          "name": "contact_header",
+          "component": "ContactHeader",
+          "required": true
+        },
+        {
+          "name": "contact_form",
+          "component": "ContactForm",
+          "template": "phase2:08_contact_form",
+          "required": true,
+          "props": {
+            "fields": ["name", "email", "subject", "message"],
+            "validation": "zod"
+          }
+        },
+        {
+          "name": "contact_info",
+          "component": "ContactInfoCards",
+          "required": false,
+          "props": {
+            "show_email": true,
+            "show_phone": false,
+            "show_address": true
+          }
+        },
+        {
+          "name": "map",
+          "component": "MapEmbed",
+          "required": false
+        }
+      ],
+
+      "route_group": "(marketing)",
+      "layout": "marketing_layout",
+      "generation_time": "PT5M"
+    },
+
+    "settings_page": {
+      "@type": "WebPage",
+      "name": "User Settings",
+      "description": "Multi-tab settings page for user preferences",
+      
+      "section_composition": [
+        {
+          "name": "settings_nav",
+          "component": "SettingsTabs",
+          "required": true,
+          "props": {
+            "tabs": ["profile", "preferences", "security", "billing"]
+          }
+        },
+        {
+          "name": "settings_content",
+          "component": "SettingsContent",
+          "required": true,
+          "props": {
+            "tab_based": true
+          }
+        }
+      ],
+
+      "route_group": "(dashboard)",
+      "layout": "dashboard_layout",
+      "authentication_required": true,
+      "generation_time": "PT8M"
+    },
+
+    "data_grid_page": {
+      "@type": "WebPage",
+      "name": "Data Grid Page",
+      "description": "Table view with sorting, filtering, and actions",
+      
+      "section_composition": [
+        {
+          "name": "page_header",
+          "component": "PageHeader",
+          "required": true,
+          "props": {
+            "has_create_button": true
+          }
+        },
+        {
+          "name": "filters",
+          "component": "FilterBar",
+          "required": true
+        },
+        {
+          "name": "data_table",
+          "component": "DataTable",
+          "required": true,
+          "props": {
+            "sortable": true,
+            "filterable": true,
+            "selectable": true,
+            "actions": ["edit", "delete", "export"]
+          }
+        },
+        {
+          "name": "pagination",
+          "component": "Pagination",
+          "required": true
+        }
+      ],
+
+      "route_group": "(dashboard)",
+      "layout": "dashboard_layout",
+      "authentication_required": true,
+      "generation_time": "PT10M"
+    },
+
+    "authentication_page": {
+      "@type": "WebPage",
+      "name": "Authentication Page",
+      "description": "Login/signup form with minimal layout",
+      
+      "section_composition": [
+        {
+          "name": "auth_card",
+          "component": "AuthCard",
+          "required": true,
+          "props": {
+            "variant": "sign-in | sign-up",
+            "social_auth": true,
+            "oauth_providers": ["google", "github"]
+          }
+        }
+      ],
+
+      "route_group": "(auth)",
+      "layout": "auth_layout",
+      "authentication_required": false,
+      "generation_time": "PT4M"
+    }
+  },
+
+  "layout_patterns": {
+    "marketing_layout": {
+      "name": "Marketing Layout",
+      "description": "Standard marketing site layout with header and footer",
+      
+      "structure": {
+        "header": {
+          "component": "MarketingNav",
+          "sticky": true,
+          "props": {
+            "logo": true,
+            "nav_items": ["features", "pricing", "about", "blog"],
+            "cta_buttons": ["sign-in", "get-started"]
+          }
+        },
+        "main": "children",
+        "footer": {
+          "component": "FooterComprehensive",
+          "props": {
+            "columns": 4,
+            "newsletter_signup": true,
+            "social_links": true
+          }
+        }
+      },
+
+      "code_template": "// app/(marketing)/layout.tsx\nimport { MarketingNav } from '@/components/layout/marketing-nav';\nimport { FooterComprehensive } from '@/components/sections/footer';\n\nexport default function MarketingLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <>\n      <MarketingNav />\n      <main>{children}</main>\n      <FooterComprehensive />\n    </>\n  );\n}"
+    },
+
+    "dashboard_layout": {
+      "name": "Dashboard Layout",
+      "description": "Application layout with sidebar navigation",
+      
+      "structure": {
+        "sidebar": {
+          "component": "DashboardSidebar",
+          "width": "256px",
+          "props": {
+            "nav_items": [
+              { "label": "Dashboard", "icon": "LayoutDashboard", "href": "/dashboard" },
+              { "label": "Projects", "icon": "FolderKanban", "href": "/projects" },
+              { "label": "Analytics", "icon": "BarChart3", "href": "/analytics" },
+              { "label": "Settings", "icon": "Settings", "href": "/settings" }
+            ]
+          }
+        },
+        "header": {
+          "component": "DashboardHeader",
+          "props": {
+            "search": true,
+            "notifications": true,
+            "user_menu": true
+          }
+        },
+        "main": "children"
+      },
+
+      "code_template": "// app/(dashboard)/layout.tsx\nimport { DashboardSidebar } from '@/components/layout/dashboard-sidebar';\nimport { DashboardHeader } from '@/components/layout/dashboard-header';\n\nexport default function DashboardLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <div className=\"flex h-screen\">\n      <DashboardSidebar />\n      <div className=\"flex-1 flex flex-col overflow-hidden\">\n        <DashboardHeader />\n        <main className=\"flex-1 overflow-y-auto p-6\">\n          {children}\n        </main>\n      </div>\n    </div>\n  );\n}"
+    },
+
+    "auth_layout": {
+      "name": "Authentication Layout",
+      "description": "Minimal centered layout for auth pages",
+      
+      "structure": {
+        "main": "children (centered)"
+      },
+
+      "code_template": "// app/(auth)/layout.tsx\nimport { Logo } from '@/components/brand/logo';\n\nexport default function AuthLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <div className=\"min-h-screen flex flex-col items-center justify-center bg-baiv-neutral-50\">\n      <div className=\"mb-8\">\n        <Logo size=\"lg\" />\n      </div>\n      <main className=\"w-full max-w-md\">\n        {children}\n      </main>\n    </div>\n  );\n}"
+    }
+  },
+
+  "multi_page_applications": {
+    "marketing_website": {
+      "name": "Marketing Website",
+      "description": "5-10 page marketing site",
+      "estimated_pages": "5-10",
+      "generation_time": "PT20M",
+      
+      "pages": [
+        {
+          "route": "/",
+          "page_type": "landing_page",
+          "priority": "high"
+        },
+        {
+          "route": "/features",
+          "page_type": "feature_showcase",
+          "priority": "high"
+        },
+        {
+          "route": "/pricing",
+          "page_type": "pricing_page",
+          "priority": "high"
+        },
+        {
+          "route": "/blog",
+          "page_type": "blog_index",
+          "priority": "medium"
+        },
+        {
+          "route": "/blog/[slug]",
+          "page_type": "blog_article",
+          "priority": "medium",
+          "dynamic": true
+        },
+        {
+          "route": "/contact",
+          "page_type": "contact_page",
+          "priority": "medium"
+        },
+        {
+          "route": "/about",
+          "page_type": "custom",
+          "priority": "low"
+        }
+      ]
+    },
+
+    "saas_dashboard": {
+      "name": "SaaS Dashboard Application",
+      "description": "15-30 page application with authentication",
+      "estimated_pages": "15-30",
+      "generation_time": "PT45M",
+      
+      "pages": [
+        {
+          "route": "/sign-in",
+          "page_type": "authentication_page",
+          "route_group": "(auth)"
+        },
+        {
+          "route": "/sign-up",
+          "page_type": "authentication_page",
+          "route_group": "(auth)"
+        },
+        {
+          "route": "/dashboard",
+          "page_type": "dashboard_page",
+          "route_group": "(dashboard)",
+          "protected": true
+        },
+        {
+          "route": "/projects",
+          "page_type": "data_grid_page",
+          "route_group": "(dashboard)",
+          "protected": true
+        },
+        {
+          "route": "/projects/[id]",
+          "page_type": "custom",
+          "route_group": "(dashboard)",
+          "protected": true,
+          "dynamic": true
+        },
+        {
+          "route": "/analytics",
+          "page_type": "dashboard_page",
+          "route_group": "(dashboard)",
+          "protected": true
+        },
+        {
+          "route": "/settings",
+          "page_type": "settings_page",
+          "route_group": "(dashboard)",
+          "protected": true
+        }
+      ]
+    },
+
+    "ecommerce_platform": {
+      "name": "E-Commerce Platform",
+      "description": "30-50 page e-commerce site",
+      "estimated_pages": "30-50",
+      "generation_time": "PT60M",
+      
+      "pages": [
+        {
+          "route": "/",
+          "page_type": "landing_page",
+          "route_group": "(marketing)"
+        },
+        {
+          "route": "/products",
+          "page_type": "data_grid_page",
+          "route_group": "(shop)"
+        },
+        {
+          "route": "/products/[id]",
+          "page_type": "custom",
+          "route_group": "(shop)",
+          "dynamic": true
+        },
+        {
+          "route": "/cart",
+          "page_type": "custom",
+          "route_group": "(shop)"
+        },
+        {
+          "route": "/checkout",
+          "page_type": "custom",
+          "route_group": "(shop)",
+          "multi_step": true
+        }
+      ]
+    }
+  },
+
+  "code_generation_templates": {
+    "page_file": {
+      "description": "Template for generating page.tsx files",
+      "template": "{{#if server_component}}export default async function {{PageName}}Page() {{{else}}'use client';\n\nexport default function {{PageName}}Page() {{{/if}}\n  {{#if protected}}const { userId } = await auth();\n  if (!userId) redirect('/sign-in');\n  {{/if}}\n  \n  {{#if data_fetching}}const data = await {{fetchFunction}}({{fetchParams}});\n  {{/if}}\n  \n  return (\n    {{#if has_container}}<div className=\"{{containerClasses}}\">\n    {{/if}}{{#each sections}}<{{component}} {{#if props}}{{props}}{{/if}} />\n    {{/each}}{{#if has_container}}</div>{{/if}}\n  );\n}"
+    },
+
+    "layout_file": {
+      "description": "Template for generating layout.tsx files",
+      "template": "import { {{#each imports}}{{this}}{{#unless @last}}, {{/unless}}{{/each}} } from '{{importPath}}';\n\nexport default function {{LayoutName}}Layout({\n  children\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    {{layoutStructure}}\n  );\n}"
+    }
+  }
+}
