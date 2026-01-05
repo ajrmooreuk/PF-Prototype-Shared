@@ -1,32 +1,37 @@
 # BAIV MVP Week 1 Implementation Plan: Security-First Foundation
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Date:** January 5, 2026  
 **Duration:** Week 1 (5 days)  
-**Total Effort:** ~18-22 hours (distributed across 5 days)  
-**Scope:** Minimum Viable Security + PF-Core Integration Bridges  
+**Total Effort:** ~20-24 hours (distributed across 5 days)  
+**Scope:** Unified Security Foundation + User Role Management + Team UI  
 
 ## Document Control
 
 | Attribute | Value |
 |-----------|-------|
 | **Status** | 🟢 Active |
-| **Aligned With** | SECURITY_MULTIUSER_COMPRESSED_PLAN.md (Day 1-3) |
-| **Traces To** | BAIV_MVP_TODO_PLAN_v2.3.0.md WBS 1.0-2.2 |
-| **Prerequisite** | BAIV_DATABASE_SCHEMA.sql, Security templates ready |
-| **Goal** | Integration bridges configured, secure database operational, API foundation ready |
+| **Aligned With** | UNIFIED_SECURITY_FOUNDATION_MVP_v1.0.md |
+| **Traces To** | BAIV_MVP_TODO_PLAN_v2.4.0.md Week 1 (Lines 681-851) |
+| **Prerequisite** | BAIV_DATABASE_SCHEMA.sql, Security templates, ROLE_MANAGEMENT_MINI_PRD_v1.0.md |
+| **Goal** | Complete security foundation: Auth + RLS + RBAC + Multi-user + Team Management UI |
 
 ---
 
 ## Cross-Reference Traceability Matrix
 
-| This Plan | Security MVP Plan | MVP v2.3.4 WBS | Deliverable |
-|-----------|-------------------|----------------|-------------|
-| Day 1 Morning | N/A | WBS 1.1 (Lines 538-542) | VE Bridge configured |
-| Day 1 Afternoon | Day 1 (4-6 hrs) | WBS 1.2 (Lines 543-547) | Security modules active |
-| Day 2 | N/A | WBS 2.1 (Lines 559-563) | Database with RLS |
-| Day 3 | N/A | WBS 2.2 (Lines 564-568) | API Layer ready |
-| Day 4 | Day 2 (4-6 hrs) | N/A | Multi-user foundation |
-| Day 5 | Day 3 (2-4 hrs) | WBS 1.3 partial (Lines 548-552) | Design tokens + Polish |
+| This Plan | MVP v2.4.0 Reference | Source Document | Deliverable |
+|-----------|---------------------|-----------------|-------------|
+| Day 1 | Lines 687-721 | UNIFIED_SECURITY_FOUNDATION_MVP | Auth + RLS + Audit operational |
+| Day 2 | Lines 722-753 | UNIFIED_SECURITY_FOUNDATION_MVP | Multi-user collaboration features |
+| Day 3 | Lines 754-785 | ROLE_MANAGEMENT_MINI_PRD | Complete RBAC role management |
+| Day 4 | Lines 786-824 | ROLE_MANAGEMENT_MINI_PRD | Team Management UI + Testing |
+| Day 5 | Lines 825-840 | MVP v2.4.0 Week 1 | Buffer + Week 2 prep |
+
+**Key Addition in v2.4.0:**
+- **User Role Management** (Day 3): 4-tier roles (Owner, Admin, Analyst, Viewer)
+- **Team Management UI** (Day 4): InviteUserDialog, TeamSettingsPage, AcceptInvitationPage, RoleBadge
+- **6 API Endpoints**: Invite user, accept invitation, update role, remove user, list team, get invitation
+- **4 Database Functions**: invite_user_to_tenant(), accept_invitation(), update_user_role(), remove_user_from_tenant()
 
 ---
 
@@ -376,12 +381,13 @@
 
 ---
 
-## Day 3: Wednesday - API Layer Foundation (4 hours)
+## Day 3: Wednesday - User Role Management (5-6 hours)
 
-**WBS Reference:** 2.2 API Layer  
-**Architecture:** Direct Supabase Client SDK (no Express server)
+**MVP v2.4.0 Reference:** Lines 754-785  
+**Goal:** Complete RBAC role management operational  
+**Source:** ROLE_MANAGEMENT_MINI_PRD_v1.0.md
 
-### Task 2.2.1: Supabase Client SDK Integration (4 hours)
+### Task 3.1: User Invitations (2 hours)
 **WBS ID:** 2.2.1
 
 **Actions:**
