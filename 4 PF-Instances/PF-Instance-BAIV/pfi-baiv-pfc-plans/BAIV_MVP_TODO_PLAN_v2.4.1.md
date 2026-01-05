@@ -1,4 +1,4 @@
-# BAIV MVP To-Do Plan v2.4.0
+# BAIV MVP To-Do Plan v2.4.1
 
 **PFC-PFI-BAIV Integrated Implementation Plan**
 
