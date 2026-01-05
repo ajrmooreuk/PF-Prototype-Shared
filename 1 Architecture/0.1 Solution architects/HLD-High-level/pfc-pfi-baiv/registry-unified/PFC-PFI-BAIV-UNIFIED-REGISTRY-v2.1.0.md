@@ -1,15 +1,228 @@
-# PF-Core Unified OAA Registry Integration
+# PFC-PFI-BAIV Unified Registry
 
-**Extending OAA Registry v3.0 with Agent Registry & Claude Code SDK**
+**Comprehensive Artifact Management: Ontologies, Agents, APIs, UI/UX, Design Tokens, Database Schemas & Tools**
 
 | Attribute | Value |
 |-----------|-------|
-| **Document Version** | 2.0.0 |
-| **Date** | December 2025 |
+| **Document Version** | 2.1.0 |
+| **Date** | January 2026 |
 | **Classification** | Technical Architecture |
-| **Status** | APPROVED |
+| **Status** | IN DEVELOPMENT |
 | **Extends** | OAA Registry v3.0 |
-| **Integrates With** | OntologyLoader, OntologyNavigator, Claude Code SDK |
+| **Integrates With** | OntologyLoader, OntologyNavigator, Claude Code SDK, Figma Bridge |
+
+---
+
+## Overview: Unified OAA Registry
+
+### Purpose
+
+The **Unified OAA Registry** is a comprehensive change-controlled artifact management system that serves as the single source of truth for all platform components, ensuring consistency, traceability, and governance across the entire Platform Foundation (PF-Core) ecosystem. It provides:
+
+- **Centralized artifact management** for ontologies, agents, APIs, UI/UX components, and design tokens
+- **Version-controlled specifications** enabling reproducible builds and deployments
+- **Semantic relationships** between all platform artifacts for intelligent orchestration
+- **Change control mechanisms** with full audit trails and approval workflows
+- **Integration bridges** connecting design systems (Figma) to implementation (database schemas, APIs)
+
+### Scope
+
+The Unified OAA Registry encompasses the following domains:
+
+1. **Ontology Registry** - JSON-LD semantic definitions of business entities, relationships, and validation rules
+2. **Agent Registry** - AI agent specifications with ontology bindings, authority boundaries, and Claude Code SDK configurations
+3. **API Registry** - REST/GraphQL endpoint specifications with ontology alignments
+4. **UI/UX Registry** - Component specifications, layouts, interaction patterns, and accessibility requirements
+5. **Design Token Registry** - Design system tokens (spacing, colors, typography) with Figma bridge integration
+6. **Tool Registry** - MCP integrations, external services, and platform utilities
+7. **Capability Registry** - Reusable cross-agent functions and composition patterns
+8. **Database Schema Registry** - Supabase/PostgreSQL schema definitions aligned with ontologies
+
+### Context
+
+The registry operates within a multi-venture platform architecture:
+
+- **PF-Core** (Tier 1): Strategic platform-level capabilities and infrastructure
+- **BAIV** (Tier 2): Brand AI Visibility - content strategy and AI platform optimization
+- **W4M** (Tier 2): What's For Me - value engineering and program management
+- **AIR** (Tier 2): AI Readiness - maturity assessment and innovation tracking
+
+### Future Development Integration
+
+The registry is designed as a **living starting point** that will integrate with future platform capabilities:
+
+- **Value Engineer Agent** - Cost-benefit analysis, ROI tracking, and investment prioritization
+- **Context Engineer Agent** - Dynamic context management, semantic search, and knowledge graph navigation
+- **Ontology Evolution** - Registry supports ontology versioning and may be rebuilt/refactored as requirements evolve
+- **Platform Build Manager** - Automated deployment pipelines driven by registry specifications
+- **Program Manager** - Project tracking, dependency management, and milestone reporting
+
+### System Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph REGISTRY["🏛️ UNIFIED OAA REGISTRY<br/>Single Source of Truth"]
+        subgraph ONTOLOGIES["📚 Ontology Registry<br/>(JSON-LD Definitions)"]
+            ONT1[AI Visibility Ontology]
+            ONT2[Universal Brand Ontology]
+            ONT3[Customer Organization Ontology]
+            ONT4[Gap Analysis Ontology]
+            ONT5[CMO OKR Ontology]
+            ONT6[VSOM Ontology]
+        end
+        
+        subgraph AGENTS["🤖 Agent Registry<br/>(AI Specifications)"]
+            AGT1[Strategic Context Agent]
+            AGT2[Content Strategy Agent]
+            AGT3[Value Engineering Agent]
+            AGT4[Context Engineer Agent]
+            AGT5[Program Manager Agent]
+        end
+        
+        subgraph APIs["🔌 API Registry<br/>(Endpoint Specs)"]
+            API1[Graph Query API]
+            API2[Ontology Validation API]
+            API3[Agent Orchestration API]
+            API4[Reporting API]
+        end
+        
+        subgraph UIUX["🎨 UI/UX Registry<br/>(Component Specs)"]
+            UI1[Layout Templates]
+            UI2[Component Library]
+            UI3[Interaction Patterns]
+            UI4[Accessibility Rules]
+        end
+        
+        subgraph DESIGN["🎭 Design Token Registry<br/>(Design System)"]
+            DES1[Spacing Tokens]
+            DES2[Color Palette]
+            DES3[Typography Scale]
+            DES4[Component Padding]
+        end
+        
+        subgraph TOOLS["🛠️ Tool Registry<br/>(Integrations)"]
+            TOOL1[Figma Bridge MCP]
+            TOOL2[Supabase Client]
+            TOOL3[Claude API]
+            TOOL4[Web Search]
+        end
+        
+        subgraph SCHEMA["💾 Database Schema Registry<br/>(Data Models)"]
+            SCH1[Graph Tables]
+            SCH2[Tenant Tables]
+            SCH3[Registry Tables]
+            SCH4[Audit Tables]
+        end
+        
+        subgraph CAPS["⚙️ Capability Registry<br/>(Reusable Functions)"]
+            CAP1[Graph Traversal]
+            CAP2[Schema Validation]
+            CAP3[Token Conversion]
+        end
+    end
+    
+    subgraph EXTERNAL["🌐 External Systems"]
+        FIGMA[Figma<br/>Design Source]
+        CLAUDE[Claude AI<br/>Agent Runtime]
+        SUPABASE[Supabase<br/>Database]
+        GH[GitHub<br/>Version Control]
+    end
+    
+    subgraph RUNTIME["⚡ Runtime Layer"]
+        LOADER[UnifiedRegistryLoader<br/>Load & Validate]
+        FACTORY[AgentFactory<br/>Instantiate Agents]
+        VALIDATOR[OntologyValidator<br/>Enforce Rules]
+        BRIDGE[FigmaBridge<br/>Sync Designs]
+    end
+    
+    subgraph MGMT["👥 Management & Control"]
+        CHANGE[Change Control<br/>Approval Workflows]
+        VERSION[Version Management<br/>Semantic Versioning]
+        AUDIT[Audit Trail<br/>Full History]
+        DOCS[Documentation<br/>Auto-generated]
+    end
+    
+    %% Registry Internal Relationships
+    ONTOLOGIES -."defines entities".-> AGENTS
+    ONTOLOGIES -."validates".-> APIs
+    ONTOLOGIES -."structures".-> SCHEMA
+    AGENTS -."consume/produce".-> ONTOLOGIES
+    AGENTS -."require".-> TOOLS
+    AGENTS -."implement".-> CAPS
+    APIs -."query".-> SCHEMA
+    APIs -."return".-> ONTOLOGIES
+    UIUX -."use".-> DESIGN
+    UIUX -."call".-> APIs
+    DESIGN -."source from".-> TOOLS
+    TOOLS -."integrate".-> EXTERNAL
+    
+    %% External System Connections
+    FIGMA -->|"Design Tokens<br/>Components"| BRIDGE
+    BRIDGE -->|"Sync"| DESIGN
+    BRIDGE -->|"Sync"| UIUX
+    
+    GH -->|"Pull"| LOADER
+    LOADER -->|"Validate"| VALIDATOR
+    VALIDATOR -->|"Register"| REGISTRY
+    
+    FACTORY -->|"Load Specs"| AGENTS
+    FACTORY -->|"Bind Ontologies"| ONTOLOGIES
+    FACTORY -->|"Configure"| CLAUDE
+    CLAUDE -->|"Execute"| AGENTS
+    
+    AGENTS -->|"Query/Write"| SUPABASE
+    SCHEMA -->|"Define Structure"| SUPABASE
+    
+    %% Management Connections
+    CHANGE -."controls".-> REGISTRY
+    VERSION -."tracks".-> REGISTRY
+    AUDIT -."monitors".-> REGISTRY
+    DOCS -."generates from".-> REGISTRY
+    
+    %% Styling
+    classDef registryStyle fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef externalStyle fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef runtimeStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef mgmtStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    
+    class REGISTRY,ONTOLOGIES,AGENTS,APIs,UIUX,DESIGN,TOOLS,SCHEMA,CAPS registryStyle
+    class EXTERNAL,FIGMA,CLAUDE,SUPABASE,GH externalStyle
+    class RUNTIME,LOADER,FACTORY,VALIDATOR,BRIDGE runtimeStyle
+    class MGMT,CHANGE,VERSION,AUDIT,DOCS mgmtStyle
+```
+
+### Key Relationships
+
+#### Ontology → Agent Binding
+- Agents **CONSUME** ontologies (read entity instances)
+- Agents **PRODUCE** ontologies (write validated entity instances)
+- Agents **REQUIRE** ontologies (strategic context, read-only)
+- All agent outputs are **VALIDATED AGAINST** ontology schemas
+
+#### Design → Implementation Bridge
+- Figma designs → Design tokens → Component specifications → Database schemas
+- Spacing tokens → Padding rules → Layout containers → UI implementation
+- Design system tokens are version-controlled artifacts in the registry
+
+#### Change Control Flow
+1. Artifact proposed (ontology, agent, API, design token, schema)
+2. Specification written in JSON-LD format
+3. Validation against registry rules
+4. Review and approval workflow
+5. Version assignment (semantic versioning)
+6. Registration in unified registry
+7. Deployment to runtime systems
+8. Audit trail recorded
+
+### Registry as Change-Controlled Artifact
+
+The registry itself is a **change-controlled artifact** with:
+
+- **Version tracking**: All specifications include version numbers (e.g., v2.1.0)
+- **Change documentation**: Modifications tracked with reasons and approval records
+- **Entity responsibility**: Registry includes metadata about artifact owners and controllers
+- **TDD integration**: Test specifications registered alongside artifacts for CRUD operation validation
+- **Documentation requirements**: All changes include markdown documentation and mermaid diagrams
 
 ---
 
@@ -18,10 +231,15 @@
 This document defines the integration architecture that extends the **existing OAA Registry v3.0** to include:
 
 1. **Agent Registry** - Agent specifications with ontology bindings
-2. **Tool Registry** - MCP integrations and external services
+2. **Tool Registry** - MCP integrations and external services (including Figma bridge)
 3. **Capability Registry** - Reusable cross-agent functions
+4. **UI/UX Component Registry** - Design system and component specifications
+5. **Design Token Registry** - Design system tokens with Figma integration
+6. **Database Schema Registry** - Data models aligned with ontologies
 
 The integration builds upon the existing `OntologyLoader` and `OntologyNavigator` classes, adding semantic agent-ontology binding that enables intelligent orchestration through the knowledge graph. All agents are implemented using **Claude Code SDK** with template-based patterns.
+
+This registry serves as the foundation for future development including Value Engineer and Context Engineer agents, with full support for ontology evolution and platform build management.
 
 ---
 
