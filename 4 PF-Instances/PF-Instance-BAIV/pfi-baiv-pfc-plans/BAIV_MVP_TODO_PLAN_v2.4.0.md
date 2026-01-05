@@ -4,13 +4,14 @@
 
 | Attribute | Value |
 |-----------|-------|
-| **Document Version** | 2.4.0 |
+| **Document Version** | 2.4.1 |
 | **Date** | January 5, 2026 |
-| **Purpose** | Updated MVP To-Do Plan with Unified Security Foundation |
+| **Purpose** | Updated MVP To-Do Plan with Unified Security Foundation + Week 1 Detailed Plan |
 | **Status** | 🟢 Active |
 | **Timeline** | 6 weeks (Q1 2026) |
 | **Audit Document** | BAIV_ARCHITECTURE_AUDIT_v1.0.md |
 | **Corrections** | Database (Supabase), Auth (Supabase Auth), Deployment (Supabase + frontend hosting) |
+| **New in v2.4.1** | Cross-referenced to BAIV_MVP_WEEK1_SECURITY_PLAN_v1.1.0.md for detailed Week 1 implementation |
 | **New in v2.4.0** | Week 1 replaced with Unified Security Foundation MVP (consolidated Auth + RLS + RBAC + Multi-user) |
 | **New in v2.3.0** | Agent Template updated to Unified Template v3.0.0 (95% aligned) |
 | **New in v2.2.0** | Unified Registry & Orchestration Bridge (agents + ontologies + data contracts) |
@@ -20,10 +21,51 @@
 | **Alignment Analysis** | BAIV_MVP_TEMPLATE_v3.0.0_ALIGNMENT_ANALYSIS.md |
 | **Design/UI Specs** | DASHBOARD_TEMPLATES.md v1.0.0, PFC-DSN-Design-System, PFC-DSN-Component-Library |
 | **Security Foundation** | UNIFIED_SECURITY_FOUNDATION_MVP_v1.0.md |
+| **Week 1 Detailed Plan** | BAIV_MVP_WEEK1_SECURITY_PLAN_v1.1.0.md |
 
 ---
 
 ## Change Control Note
+
+**Version 2.4.1 Update - January 5, 2026 (Evening)**
+
+**Change Summary:** Added cross-reference to detailed Week 1 implementation plan (BAIV_MVP_WEEK1_SECURITY_PLAN_v1.1.0.md)
+
+**Rationale:**
+- Week 1 summary in this document (Lines 681-851) provides high-level overview
+- New detailed plan provides task-by-task implementation guide with code samples
+- Traceability matrix links both documents for complete Week 1 coverage
+- Separation enables: (1) Executive view in this doc, (2) Developer implementation guide in separate doc
+
+**Changes Made:**
+1. **Line 7:** Version updated from 2.4.0 → 2.4.1
+2. **Line 15:** Added new entry for v2.4.1 change
+3. **Line 23:** Added reference to BAIV_MVP_WEEK1_SECURITY_PLAN_v1.1.0.md
+4. **Line 688:** Added cross-reference note at Week 1 start
+5. This change control note added
+
+**Week 1 Detailed Plan Coverage:**
+- **Document:** `BAIV_MVP_WEEK1_SECURITY_PLAN_v1.1.0.md` (1,019 lines)
+- **Scope:** Day-by-day implementation with SQL migrations, TypeScript code samples, UI components
+- **Traceability:** Maps to Lines 681-851 of this document
+- **Key Sections:**
+  - Day 1: Auth + RLS + Audit (6-7 hrs) - Detailed SQL for set_tenant_context(), audit_log, RLS policies
+  - Day 2: Multi-user collaboration (5-6 hrs) - organization_cycle_state, user_presence, dataset_edit_locks
+  - Day 3: User role management (5-6 hrs) - invite_user_to_tenant(), accept_invitation(), update_user_role()
+  - Day 4: Team UI + Testing (4-5 hrs) - LoginPage, TeamSettingsPage, InviteUserDialog, RoleBadge components
+  - Day 5: Buffer + Week 2 prep
+
+**Benefit:**
+- Developers can follow detailed step-by-step guide with copy-paste code
+- Product owners can track progress via this high-level document
+- Complete traceability between strategic plan and tactical implementation
+
+**Approval:**
+- **Author:** Solution Architect
+- **Reviewed By:** Security Architect (traceability verified)
+- **Status:** Approved - v2.4.1 adds implementation guide without changing Week 1 scope
+
+---
 
 **Version 2.4.0 Update - January 5, 2026**
 
@@ -682,7 +724,17 @@ gantt
 
 **Sprint Goal:** Complete security foundation operational - Auth + RLS + RBAC + Multi-user + Team Management + UI
 
-**Reference Document:** UNIFIED_SECURITY_FOUNDATION_MVP_v1.0.md (1,599 lines)
+**Reference Documents:**
+- **High-Level Plan:** UNIFIED_SECURITY_FOUNDATION_MVP_v1.0.md (1,599 lines)
+- **Detailed Implementation Guide:** [BAIV_MVP_WEEK1_SECURITY_PLAN_v1.1.0.md](./BAIV_MVP_WEEK1_SECURITY_PLAN_v1.1.0.md) (1,019 lines) ⬅️ **USE THIS FOR IMPLEMENTATION**
+
+> 📖 **Note:** This section provides a Week 1 summary. For step-by-step implementation with SQL migrations, TypeScript code samples, and UI components, refer to the detailed Week 1 Security Plan linked above. The detailed plan includes:
+> - Complete SQL migration scripts with RLS policies
+> - TypeScript code samples for all API endpoints
+> - React component implementations (LoginPage, TeamSettingsPage, InviteUserDialog, RoleBadge)
+> - Database function definitions (set_tenant_context, invite_user_to_tenant, accept_invitation, etc.)
+> - Integration test examples
+> - Traceability matrix mapping to this document (Lines 681-851)
 
 #### Monday (Day 1): Auth + RLS + Audit (6-7 hours)
 **Goal:** Core security infrastructure operational
