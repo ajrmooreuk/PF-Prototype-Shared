@@ -1,0 +1,151 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Report",
+  "name": "BAIV Token Extraction Validation Report",
+  "dateCreated": "2026-01-15T15:04:03.114Z",
+  "about": {
+    "@type": "Dataset",
+    "name": "Token Extraction Validation",
+    "description": "Automated validation of Figma-to-JSON token extraction"
+  },
+  "abstract": {
+    "totalSourceTokens": 20,
+    "totalOutputTokens": 20,
+    "completeness": "100.00%",
+    "accuracy": "100.00%",
+    "status": "PASS"
+  },
+  "validation": {
+    "schemaCompliance": {
+      "schemaOrgCompliant": true,
+      "propertyValuesValid": true,
+      "categoriesComplete": false
+    },
+    "tokenComparison": {
+      "matched": 20,
+      "missing": 0,
+      "valueDiscrepancies": 0,
+      "extraTokens": 0
+    },
+    "auditTrailComplete": true
+  },
+  "details": {
+    "matchedTokens": [
+      {
+        "token": "var(--sds-size-radius-400)",
+        "value": "16",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-size-stroke-border)",
+        "value": "1",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-color-border-utilities-swatch)",
+        "value": "#0000003d",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-size-depth-0)",
+        "value": "0",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-color-black-100)",
+        "value": "#0c0c0d0d",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-size-depth-100)",
+        "value": "4",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-color-black-200)",
+        "value": "#0c0c0d1a",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-size-depth-025)",
+        "value": "1",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "Drop Shadow/200",
+        "value": "Effect(type: DROP_SHADOW, color: var(--sds-color-black-100), offset: (var(--sds-size-depth-0), var(--sds-size-depth-025)), radius: var(--sds-size-depth-100), spread: var(--sds-size-depth-0)); Effect(type: DROP_SHADOW, color: var(--sds-color-black-200), offset: (var(--sds-size-depth-0), var(--sds-size-depth-025)), radius: var(--sds-size-depth-100), spread: var(--sds-size-depth-0))",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-color-border-default-default)",
+        "value": "#d9d9d9",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "Text/Neutral/Primary",
+        "value": "#1d1a22",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-typography-scale-03)",
+        "value": "16",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-size-space-200)",
+        "value": "8",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-size-space-100)",
+        "value": "4",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "var(--sds-size-radius-200)",
+        "value": "8",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "Background/Neutral/Secondary",
+        "value": "#f7f6f8",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "Border/Neutral/Inverse/Primary",
+        "value": "#3a3445",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "Background/Neutral/Inverse/Teriary",
+        "value": "#574d69",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "Background/Neutral/Primary",
+        "value": "#ffffff",
+        "status": "VALIDATED"
+      },
+      {
+        "token": "Radius/XL",
+        "value": "24",
+        "status": "VALIDATED"
+      }
+    ],
+    "missingTokens": [],
+    "valueDiscrepancies": [],
+    "extraTokens": []
+  },
+  "recommendations": [
+    {
+      "priority": "INFO",
+      "status": "SUCCESS",
+      "message": "All tokens successfully extracted and validated",
+      "nextSteps": [
+        "Generate code outputs (CSS, SCSS, JS, Tailwind)",
+        "Integrate tokens into design system",
+        "Set up continuous validation pipeline"
+      ]
+    }
+  ]
+}

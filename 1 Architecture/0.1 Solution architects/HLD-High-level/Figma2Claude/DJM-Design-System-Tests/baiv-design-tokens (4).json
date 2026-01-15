@@ -1,0 +1,223 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "BAIV Design Variables v3",
+  "description": "Design token system extracted from Figma variables for BAIV platform",
+  "dateModified": "2026-01-15",
+  "about": {
+    "@type": "DefinedTermSet",
+    "name": "Design Token System",
+    "hasDefinedTerm": [
+      {
+        "@type": "DefinedTerm",
+        "termCode": "size-tokens",
+        "name": "Size Design Tokens",
+        "inDefinedTermSet": "BAIV Design System",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-radius-400)",
+            "name": "Border Radius 400",
+            "value": "16",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-radius-200)",
+            "name": "Border Radius 200",
+            "value": "8",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "Radius/XL",
+            "name": "Border Radius XL",
+            "value": "24",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-stroke-border)",
+            "name": "Stroke Border Width",
+            "value": "1",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-depth-0)",
+            "name": "Depth Level 0",
+            "value": "0",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-depth-100)",
+            "name": "Depth Level 100",
+            "value": "4",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-depth-025)",
+            "name": "Depth Level 025",
+            "value": "1",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-space-200)",
+            "name": "Spacing 200",
+            "value": "8",
+            "unitCode": "PX"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-size-space-100)",
+            "name": "Spacing 100",
+            "value": "4",
+            "unitCode": "PX"
+          }
+        ]
+      },
+      {
+        "@type": "DefinedTerm",
+        "termCode": "color-tokens",
+        "name": "Color Design Tokens",
+        "inDefinedTermSet": "BAIV Design System",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-color-border-utilities-swatch)",
+            "name": "Border Utilities Swatch",
+            "value": "#0000003d",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "RGB with Alpha",
+              "description": "Black with 24% opacity"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-color-black-100)",
+            "name": "Black 100",
+            "value": "#0c0c0d0d",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "RGB with Alpha",
+              "description": "Near-black with 5% opacity"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-color-black-200)",
+            "name": "Black 200",
+            "value": "#0c0c0d1a",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "RGB with Alpha",
+              "description": "Near-black with 10% opacity"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-color-border-default-default)",
+            "name": "Border Default",
+            "value": "#d9d9d9",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "Light Gray"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "Text/Neutral/Primary",
+            "name": "Text Neutral Primary",
+            "value": "#1d1a22",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "Dark Purple-Gray"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "Background/Neutral/Secondary",
+            "name": "Background Neutral Secondary",
+            "value": "#f7f6f8",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "Very Light Purple-Gray"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "Border/Neutral/Inverse/Primary",
+            "name": "Border Neutral Inverse Primary",
+            "value": "#3a3445",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "Dark Purple"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "Background/Neutral/Inverse/Teriary",
+            "name": "Background Neutral Inverse Tertiary",
+            "value": "#574d69",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "Medium Purple"
+            }
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "Background/Neutral/Primary",
+            "name": "Background Neutral Primary",
+            "value": "#ffffff",
+            "valueReference": {
+              "@type": "PropertyValue",
+              "name": "White"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "DefinedTerm",
+        "termCode": "typography-tokens",
+        "name": "Typography Design Tokens",
+        "inDefinedTermSet": "BAIV Design System",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "propertyID": "var(--sds-typography-scale-03)",
+            "name": "Typography Scale 03",
+            "value": "16",
+            "unitCode": "PX"
+          }
+        ]
+      },
+      {
+        "@type": "DefinedTerm",
+        "termCode": "effect-tokens",
+        "name": "Effect Design Tokens",
+        "inDefinedTermSet": "BAIV Design System",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "propertyID": "Drop Shadow/200",
+            "name": "Drop Shadow 200",
+            "value": "Effect(type: DROP_SHADOW, color: var(--sds-color-black-100), offset: (var(--sds-size-depth-0), var(--sds-size-depth-025)), radius: var(--sds-size-depth-100), spread: var(--sds-size-depth-0)); Effect(type: DROP_SHADOW, color: var(--sds-color-black-200), offset: (var(--sds-size-depth-0), var(--sds-size-depth-025)), radius: var(--sds-size-depth-100), spread: var(--sds-size-depth-0))",
+            "description": "Dual-layer drop shadow effect with two black opacity levels"
+          }
+        ]
+      }
+    ]
+  },
+  "keywords": [
+    "design tokens",
+    "design system",
+    "BAIV",
+    "variables",
+    "CSS custom properties",
+    "semantic design"
+  ]
+}
