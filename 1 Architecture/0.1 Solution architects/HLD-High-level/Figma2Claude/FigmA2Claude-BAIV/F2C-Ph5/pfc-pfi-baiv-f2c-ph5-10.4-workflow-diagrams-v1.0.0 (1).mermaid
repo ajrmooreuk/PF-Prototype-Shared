@@ -1,0 +1,155 @@
+# BAIV Workflow Diagrams
+**Version:** 1.0.0 | **Phase:** 5 | **Document:** 10.4 | **Date:** January 2026
+
+## Complete End-to-End Workflow
+
+```mermaid
+flowchart TB
+    Start[Product Idea] --> Design[Designer: Figma]
+    Design --> FigmaMake[Figma Make AI]
+    FigmaMake --> Tokens[Apply BAIV Tokens]
+    Tokens --> Handoff[Share Figma URL]
+    
+    Handoff --> Extract[Developer: MCP Extract]
+    Extract --> Context[design-context.json]
+    Context --> Claude[Claude AI Generate]
+    Claude --> Code[React/Next.js Code]
+    
+    Code --> Integrate[Integrate to Project]
+    Integrate --> Test[Test & Refine]
+    Test --> PR[Create Pull Request]
+    
+    PR --> CI[CI/CD Pipeline]
+    CI --> Checks{Automated Checks}
+    Checks -->|Pass| Preview[Vercel Preview]
+    Checks -->|Fail| Fix[Fix Issues]
+    Fix --> Test
+    
+    Preview --> Review[Team Review]
+    Review -->|Approved| Merge[Merge to Main]
+    Review -->|Changes| Test
+    
+    Merge --> Prod[Production Deploy]
+    Prod --> Monitor[Monitor & Iterate]
+    
+    style Start fill:#CEC528
+    style Design fill:#00A4BF
+    style Claude fill:#E84E1C
+    style Prod fill:#CEC528
+```
+
+## Designer Workflow
+
+```mermaid
+flowchart LR
+    A[Start] --> B[Open Figma]
+    B --> C[Use Figma Make]
+    C --> D[Generate Layout]
+    D --> E[Apply BAIV Tokens]
+    E --> F[Add Components]
+    F --> G[Create Variants]
+    G --> H[Test Responsive]
+    H --> I[Check Accessibility]
+    I --> J[Add Documentation]
+    J --> K[Share URL]
+    
+    style A fill:#CEC528
+    style E fill:#00A4BF
+    style K fill:#E84E1C
+```
+
+## Developer Workflow
+
+```mermaid
+flowchart LR
+    A[Receive Figma URL] --> B[MCP Extract]
+    B --> C[Upload to Claude]
+    C --> D[Generate Code]
+    D --> E[Add to Project]
+    E --> F[Test Locally]
+    F --> G{Quality Check}
+    G -->|Pass| H[Deploy Preview]
+    G -->|Fail| I[Refine]
+    I --> F
+    H --> J[Production]
+    
+    style A fill:#00A4BF
+    style D fill:#E84E1C
+    style J fill:#CEC528
+```
+
+## Three Automation Tiers
+
+```mermaid
+graph TB
+    subgraph Tier1[Tier 1: Conversational 10-15 min]
+        T1A[Single Component]
+        T1B[MCP Extract]
+        T1C[Claude Chat]
+        T1D[Copy Code]
+    end
+    
+    subgraph Tier2[Tier 2: MCP Multi-Page 25-35 min]
+        T2A[Full Page]
+        T2B[Batch Extract]
+        T2C[Claude Generate]
+        T2D[Complete Structure]
+    end
+    
+    subgraph Tier3[Tier 3: Agent SDK 60-90 min]
+        T3A[Full Application]
+        T3B[Agent Orchestration]
+        T3C[Automated Build]
+        T3D[Deployed App]
+    end
+    
+    style Tier1 fill:#00A4BF20
+    style Tier2 fill:#E84E1C20
+    style Tier3 fill:#CEC52820
+```
+
+## Token Resolution Flow
+
+```mermaid
+flowchart TB
+    A[Component Request] --> B{Token Type?}
+    B -->|Component| C[Button.primary.background]
+    B -->|Semantic| D[color.action.primary]
+    B -->|Primitive| E[color.baiv.teal.500]
+    
+    C --> D
+    D --> E
+    E --> F[#00A4BF]
+    
+    style A fill:#CEC528
+    style C fill:#00A4BF
+    style D fill:#E84E1C
+    style E fill:#CEC528
+    style F fill:#00A4BF
+```
+
+## CI/CD Pipeline
+
+```mermaid
+flowchart LR
+    A[Git Push] --> B[GitHub Actions]
+    B --> C{Lint}
+    C -->|Pass| D{Type Check}
+    C -->|Fail| Z[Fail Build]
+    D -->|Pass| E{Tests}
+    D -->|Fail| Z
+    E -->|Pass| F[Build]
+    E -->|Fail| Z
+    F --> G[Vercel Deploy]
+    G --> H[Preview URL]
+    H --> I{Review}
+    I -->|Approve| J[Merge to Main]
+    I -->|Reject| K[Fix & Push]
+    J --> L[Production Deploy]
+    
+    style A fill:#CEC528
+    style L fill:#00A4BF
+    style Z fill:#EF4444
+```
+
+*End of Workflow Diagrams*
